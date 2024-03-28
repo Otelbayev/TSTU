@@ -1,0 +1,23 @@
+.ant-popover-content{
+    width: 250px
+}
+
+.ant-popover-content button {
+    padding:0 15px;
+    height: 35px;
+    font-size: 16px;
+}
+
+.ant-popconfirm-title{
+    font-size: 24px;
+}
+
+.ant-popconfirm-description{
+    font-size: 18px;
+}
+
+.ant-popconfirm-message-icon svg{
+    width: 20px;
+    height: 20px;
+    margin-top:10px ;
+}

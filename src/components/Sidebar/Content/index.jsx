@@ -4,7 +4,7 @@ import icon from "../../../assets/icons/sidebar1.png";
 import { NavLink } from "react-router-dom";
 import { useLanguageContext } from "../../../context/LanguageContext";
 
-const Content = ({ hover, setHover, title, desc, data }) => {
+const Content = ({ hover, setHover, title, desc, data, id }) => {
   const { language } = useLanguageContext();
 
   const res = data?.filter((e) => e?.high_menu);
@@ -24,32 +24,46 @@ const Content = ({ hover, setHover, title, desc, data }) => {
         <div className="left__desc">{desc}</div>
       </div>
       <div className="right">
-        {res
-          .sort((a, b) => a?.high_menu - b?.high_menu)
-          .map((e) => {
-            return (
-              <div className="right__item">
-                <div className="right__title">{e.title}</div>
-                {res1
-                  .filter((item) => item?.parent_id === e?.id)
-                  .sort((a, b) => a?.position - b?.position)
-                  .map((item) => (
-                    <div key={item.id} className={"right__link"}>
-                      <NavLink to={`/${language}/page/${item.id}`}>
-                        {item.title}
-                      </NavLink>
-                    </div>
-                  ))}
-              </div>
-            );
-          })}
+        {res?.length ? (
+          res
+            .sort((a, b) => a?.high_menu - b?.high_menu)
+            .map((e) => {
+              return (
+                <div className="right__item">
+                  <div className="right__title">{e.title}</div>
+                  {res1
+                    .filter((item) => item?.parent_id === e?.id)
+                    .sort((a, b) => a?.position - b?.position)
+                    .map((item) => (
+                      <div key={item.id} className={"right__link"}>
+                        <NavLink to={`/${language}/page/${item.id}`}>
+                          {item.title}
+                        </NavLink>
+                      </div>
+                    ))}
+                </div>
+              );
+            })
+        ) : (
+          <div className="right__item">
+            {res1
+              .filter((item) => item?.parent_id === id)
+              .sort((a, b) => a?.position - b?.position)
+              .map((item) => (
+                <div key={item.id} className={"right__link"}>
+                  <NavLink to={`/${language}/page/${item.id}`}>
+                    {item.title}
+                  </NavLink>
+                </div>
+              ))}
+          </div>
+        )}
       </div>
     </Container>
   );
 };
 
 export default Content;
-
 
 <div class="container">
   <div class="item">
@@ -108,5 +122,4 @@ export default Content;
     <div className="item-link">link4</div>
     <div className="item-link">link5</div>
   </div>
-  
-</div>
+</div>;

@@ -6,7 +6,16 @@ import logo4 from "../../assets/icons/logo4.png";
 import menu from "../../assets/icons/menu1.svg";
 import search from "../../assets/icons/search.svg";
 import eye from "../../assets/icons/eye.svg";
-import { Menu as Dropdown } from "antd";
+import {
+  AppstoreOutlined,
+  ContainerOutlined,
+  DesktopOutlined,
+  MailOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  PieChartOutlined,
+} from "@ant-design/icons";
+import { Button, Menu as Antmenu } from "antd";
 import {
   Div,
   Img,
@@ -22,62 +31,71 @@ import {
   Language,
 } from "./style";
 import { Input, Lang } from "../Generics";
-import SearchBoxComp from "../SearchBox";
 import { useLanguageContext } from "../../context/LanguageContext";
 
-function getItem(label, key, children, type) {
-  return {
-    key,
-    children,
-    label,
-    type,
-  };
-}
 const items = [
-  getItem("Navigation One", "sub1", [
-    getItem("Option 1", "1"),
-    getItem("Option 2", "2"),
-    getItem("Option 3", "3"),
-    getItem("Option 4", "4"),
-  ]),
-  getItem("Navigation Two", "sub2", [
-    getItem("Option 5", "5"),
-    getItem("Option 6", "6"),
-    getItem("Submenu", "sub3", [
-      getItem("Option 7", "7"),
-      getItem("Option 8", "8"),
-    ]),
-  ]),
-  getItem("Navigation Three", "sub4", [
-    getItem("Option 9", "9"),
-    getItem("Option 10", "10"),
-    getItem("Option 11", "11"),
-    getItem("Option 12", "12"),
-  ]),
-  getItem(
-    <Input
-      type="text"
-      placeholder={"Qidiruv..."}
-      $padding={"5px 10px"}
-      $borderRadius={"3px"}
-    />
-  ),
+  {
+    key: "sub1",
+    label: "Navigation One",
+    icon: <MailOutlined />,
+    children: [
+      {
+        key: "5",
+        label: "Option 5",
+      },
+      {
+        key: "6",
+        label: "Option 6",
+      },
+      {
+        key: "7",
+        label: "Option 7",
+      },
+      {
+        key: "8",
+        label: "Option 8",
+      },
+    ],
+  },
+  {
+    key: "sub2",
+    label: "Navigation Two",
+    icon: <AppstoreOutlined />,
+    children: [
+      {
+        key: "9",
+        label: "Option 9",
+      },
+      {
+        key: "10",
+        label: "Option 10",
+      },
+      {
+        key: "sub3",
+        label: "Submenu",
+        children: [
+          {
+            key: "11",
+            label: "Option 11",
+          },
+          {
+            key: "12",
+            label: "Option 12",
+          },
+        ],
+      },
+    ],
+  },
 ];
-const rootSubmenuKeys = ["sub1", "sub2", "sub4"];
 
-const Header = (props) => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [openKeys, setOpenKeys] = useState([""]);
   const { language } = useLanguageContext();
 
-  const onOpenChange = (keys) => {
-    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-    if (latestOpenKey && rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-      setOpenKeys(keys);
-    } else {
-      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
-    }
+  const [collapsed, setCollapsed] = useState(false);
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
   };
 
   return (
@@ -113,54 +131,42 @@ const Header = (props) => {
                 </Div>
               </Left>
               <Right $isopen={isOpen.toString()}>
-                <Link
-                  target="_blank"
-                  to="https://student.tstu.uz/dashboard/login"
-                  className="mobile-none"
-                >
-                  Talaba
-                </Link>
-                <Link
-                  className="mobile-none"
-                  target="_blank"
-                  to="https://hemis.tstu.uz/dashboard/login"
-                >
-                  Xodim
-                </Link>
-                <Link className="mobile-none" to="/arm">
-                  Elektron kutubxona
-                </Link>
-                <Link className="mobile-none">Alumni</Link>
-                <Search
-                  className="mobile-none"
-                  onClick={() => setIsSearchOpen(!isSearchOpen)}
-                >
-                  <Icon loading="lazy" src={search} width={24} />
-                  <div>Qidiruv</div>
-                </Search>
-                <Link className="bvi-show mobile-none">
-                  <Icon loading="lazy" src={eye} width={27} />
-                </Link>
-                <Dropdown
-                  className="header-dropdown"
-                  mode="inline"
-                  openKeys={openKeys}
-                  onOpenChange={onOpenChange}
-                  onClick={() => setIsOpen(false)}
-                  items={items}
-                />
+                <div className="item-desktop">
+                  <Link
+                    target="_blank"
+                    to="https://student.tstu.uz/dashboard/login"
+                  >
+                    Talaba
+                  </Link>
+                  <Link
+                    target="_blank"
+                    to="https://hemis.tstu.uz/dashboard/login"
+                  >
+                    Xodim
+                  </Link>
+                  <Link to="/arm">Elektron kutubxona</Link>
+                  <Link>Alumni</Link>
+                  <Search onClick={() => setIsSearchOpen(!isSearchOpen)}>
+                    <Icon loading="lazy" src={search} width={24} />
+                    <div>Qidiruv</div>
+                  </Search>
+                  <Link className="bvi-show">
+                    <Icon loading="lazy" src={eye} width={27} />
+                  </Link>
+                </div>
+                <div className="item-mobile">
+                  <Antmenu
+                    mode="inline"
+                    theme="dark"  
+                    inlineCollapsed={collapsed}
+                    items={items}
+                  />
+                </div>
               </Right>
               <Language>
                 <Lang width={80} />
               </Language>
             </Wrapper>
-            <div style={{ position: "relative" }}>
-              {props.children}
-              <SearchBoxComp
-                $check={isSearchOpen.toString()}
-                $uni={props.$uni}
-              />
-            </div>
           </div>
         </div>
       </Container>

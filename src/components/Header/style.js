@@ -55,8 +55,13 @@ export const Img = styled.img`
 `;
 
 export const Right = styled.div`
-  ${flex};
-  gap: 30px;
+  .item-desktop {
+    ${flex};
+    gap: 20px;
+  }
+  .item-mobile {
+    display: none;
+  }
   .header-dropdown {
     display: none;
   }
@@ -66,17 +71,32 @@ export const Right = styled.div`
   @media screen and (max-width: 1000px) {
     transition: 0.5s;
     position: absolute;
-    z-index: 1;
-    flex-direction: column;
-    background: var(--bgSidebar);
+    z-index: -1;
     top: 112px;
     border-top: 1px solid #a6a6a6;
-    width: 100%;
-    left: 0;
-    align-items: flex-start;
-    gap: 20px;
+    background: var(--bgSidebar);
     transform: ${({ $isopen }) =>
       $isopen === "false" ? "translateY(-500px)" : "translateY(0)"};
+    left: 0;
+    width: 100%;
+    .item-desktop {
+      display: none;
+    }
+    .item-mobile {
+      display: block;
+
+      .ant-menu-sub,
+      .ant-menu-inline {
+        background: transparent !important;
+      }
+      .ant-menu-title-content {
+        font-size: 16px !important;
+      }
+      .ant-menu-submenu-title {
+        border-bottom: 1px solid gray;
+        border-radius: 0;
+      }
+    }
     .header-dropdown {
       display: block;
       width: 100%;
@@ -87,9 +107,6 @@ export const Right = styled.div`
         border-bottom: 1px solid #a6a6a6;
         border-radius: 0;
       }
-    }
-    .mobile-none {
-      display: none;
     }
   }
   @media screen and (max-width: 500px) {

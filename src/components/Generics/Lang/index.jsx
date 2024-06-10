@@ -34,6 +34,7 @@ const Lang = ({ mode }) => {
         value={language}
         onChange={handleLanguageChange}
         options={datas}
+        className="select"
       />
     </Container>
   );

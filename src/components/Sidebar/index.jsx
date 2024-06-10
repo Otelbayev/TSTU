@@ -33,25 +33,27 @@ export const UniversalSidebr = () => {
     <Wrapper data-aos="fade-down">
       <div className="top">
         <div className="top-menu">
-          {topData.map((item) => (
-            <Item
-              className="top-menu__item"
-              onMouseEnter={() => {
-                setId(item.id);
-                setHover(true);
-              }}
-              onMouseLeave={() => {
-                setHover(false);
-              }}
-              key={item.id}
-              $hover={id === item.id && hover}
-              $check={hover}
-              id={id}
-            >
-              {item.title}
-              {id === item.id && hover ? <Icons.Arrow /> : <Icons.Arrow1 />}
-            </Item>
-          ))}
+          {topData
+            .sort((a, b) => a.position - b.position)
+            .map((item) => (
+              <Item
+                className="top-menu__item"
+                onMouseEnter={() => {
+                  setId(item.id);
+                  setHover(true);
+                }}
+                onMouseLeave={() => {
+                  setHover(false);
+                }}
+                key={item.id}
+                $hover={id === item.id && hover}
+                $check={hover}
+                id={id}
+              >
+                {item.title}
+                {id === item.id && hover ? <Icons.Arrow /> : <Icons.Arrow1 />}
+              </Item>
+            ))}
         </div>
         <div className="top-right">
           <Lang />

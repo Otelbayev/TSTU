@@ -29,16 +29,27 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
             .sort((a, b) => a?.high_menu - b?.high_menu)
             .map((e) => {
               return (
-                <div className="right__item">
+                <div key={e.id} className="right__item">
                   <div className="right__title">{e.title}</div>
                   {res1
                     ?.filter((item) => item?.parent_id === e?.id)
                     ?.sort((a, b) => a?.position - b?.position)
                     ?.map((item) => (
                       <div key={item.id} className={"right__link"}>
-                        <NavLink to={`/${language}/page/${item.id}`}>
-                          {item.title}
-                        </NavLink>
+                        {e?.menu_type_?.title === "Link" ? (
+                          <NavLink
+                            to={`/${language}/${
+                              item?.menu_type_?.title?.toLowerCase() ||
+                              item?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
+                            }/${item.id}`}
+                          >
+                            {item.title}
+                          </NavLink>
+                        ) : (
+                          <NavLink to={item?.link_} target="_blank">
+                            {item.title}
+                          </NavLink>
+                        )}
                       </div>
                     ))}
                 </div>
@@ -64,62 +75,3 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
 };
 
 export default Content;
-
-<div class="container">
-  <div class="item">
-    <div class="item-title">Title</div>
-    <div className="item-link">link1</div>
-    <div className="item-link">link2</div>
-    <div className="item-link">link3</div>
-    <div className="item-link">link4</div>
-    <div className="item-link">link5</div>
-  </div>
-  <div class="item">
-    <div class="item-title">Title</div>
-    <div className="item-link">link1</div>
-    <div className="item-link">link2</div>
-    <div className="item-link">link3</div>
-    <div className="item-link">link4</div>
-    <div className="item-link">link5</div>
-  </div>
-  <div class="item">
-    <div class="item-title">Title</div>
-    <div className="item-link">link1</div>
-    <div className="item-link">link2</div>
-    <div className="item-link">link3</div>
-    <div className="item-link">link4</div>
-    <div className="item-link">link5</div>
-  </div>
-  <div class="item">
-    <div class="item-title">Title</div>
-    <div className="item-link">link1</div>
-    <div className="item-link">link2</div>
-    <div className="item-link">link3</div>
-    <div className="item-link">link4</div>
-    <div className="item-link">link5</div>
-  </div>
-  <div class="item">
-    <div class="item-title">Title</div>
-    <div className="item-link">link1</div>
-    <div className="item-link">link2</div>
-    <div className="item-link">link3</div>
-    <div className="item-link">link4</div>
-    <div className="item-link">link5</div>
-  </div>
-  <div class="item">
-    <div class="item-title">Title</div>
-    <div className="item-link">link1</div>
-    <div className="item-link">link2</div>
-    <div className="item-link">link3</div>
-    <div className="item-link">link4</div>
-    <div className="item-link">link5</div>
-  </div>
-  <div class="item">
-    <div class="item-title">Title</div>
-    <div className="item-link">link1</div>
-    <div className="item-link">link2</div>
-    <div className="item-link">link3</div>
-    <div className="item-link">link4</div>
-    <div className="item-link">link5</div>
-  </div>
-</div>;

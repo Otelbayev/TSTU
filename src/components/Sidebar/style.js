@@ -16,6 +16,7 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
+  margin-top: ${({ $uni }) => !$uni && "30px"};
   .top {
     display: flex;
     align-items: end;

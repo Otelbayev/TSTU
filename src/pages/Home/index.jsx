@@ -116,7 +116,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <Header />
+      <Header  />
       <Showcase />
 
       {/* <About className="root-container">

@@ -13,7 +13,7 @@ export const Container = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 50px;
+  height: ${({ $uni }) => ($uni ? "130px" : "60px")};
   padding: 7px 0;
   @media (max-width: 1000px) {
     height: auto;
@@ -30,7 +30,7 @@ export const Mobile = styled.div`
     position: absolute;
     top: 112px;
     z-index: 2;
-    border-top: 1px solid #a6a6a6;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     background: var(--bgSidebar);
     transform: ${({ $isopen }) =>
       $isopen === "false" ? "translateY(-1000px)" : "translateY(-500)"};
@@ -46,7 +46,7 @@ export const Mobile = styled.div`
       font-size: 14px !important;
     }
     .ant-menu-submenu-title {
-      border-bottom: 1px solid #a6a6a6;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 0;
     }
     .ant-menu-submenu-title .ant-menu-title-content {
@@ -201,5 +201,20 @@ export const Search = styled.div`
     @media screen and (max-width: 1100px) {
       font-size: 16px;
     }
+  }
+`;
+
+export const Desktop = styled.div`
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+`;
+
+export const Line = styled.div`
+  background: var(--titleLight);
+  height: 2px;
+  margin: 20px 0 10px;
+  @media (max-width: 1000px) {
+    display: none;
   }
 `;

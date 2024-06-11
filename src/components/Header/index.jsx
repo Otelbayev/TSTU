@@ -21,13 +21,16 @@ import {
   Search,
   Language,
   Mobile,
+  Line,
+  Desktop,
 } from "./style";
 import { Lang } from "../Generics";
 import { useLanguageContext } from "../../context/LanguageContext";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import Sidebar from "../Sidebar";
 
-const Header = () => {
+const Header = ({ uni }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { language } = useLanguageContext();
@@ -137,7 +140,7 @@ const Header = () => {
 
   return (
     <div style={{ position: "relative" }}>
-      <Container>
+      <Container $uni={uni}>
         <div className="root-container">
           <div className="root-wrapper">
             <Wrapper>
@@ -196,6 +199,10 @@ const Header = () => {
                 <Lang width={80} />
               </Language>
             </Wrapper>
+            <Desktop>
+              {uni && <Line />}
+              <Sidebar uni={uni} topData={topMenu} allData={data} />
+            </Desktop>
           </div>
         </div>
       </Container>

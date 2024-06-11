@@ -8,7 +8,7 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
   const { language } = useLanguageContext();
 
   const res = data?.filter((e) => e?.high_menu);
-  const res1 = data.filter((e) => !e.high_menu);
+  const res1 = data?.filter((e) => !e.high_menu);
 
   return (
     <Container
@@ -32,9 +32,9 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
                 <div className="right__item">
                   <div className="right__title">{e.title}</div>
                   {res1
-                    .filter((item) => item?.parent_id === e?.id)
-                    .sort((a, b) => a?.position - b?.position)
-                    .map((item) => (
+                    ?.filter((item) => item?.parent_id === e?.id)
+                    ?.sort((a, b) => a?.position - b?.position)
+                    ?.map((item) => (
                       <div key={item.id} className={"right__link"}>
                         <NavLink to={`/${language}/page/${item.id}`}>
                           {item.title}
@@ -47,9 +47,9 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
         ) : (
           <div className="right__item">
             {res1
-              .filter((item) => item?.parent_id === id)
-              .sort((a, b) => a?.position - b?.position)
-              .map((item) => (
+              ?.filter((item) => item?.parent_id === id)
+              ?.sort((a, b) => a?.position - b?.position)
+              ?.map((item) => (
                 <div key={item.id} className={"right__link"}>
                   <NavLink to={`/${language}/page/${item.id}`}>
                     {item.title}

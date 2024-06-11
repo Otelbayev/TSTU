@@ -30,48 +30,49 @@ import {
   Search,
   Language,
 } from "./style";
-import { Input, Lang } from "../Generics";
+import { Lang } from "../Generics";
 import { useLanguageContext } from "../../context/LanguageContext";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
-const items = [
-  {
-    key: "sub1",
-    label: "Navigation One",
-    children: [
-      {
-        key: "5",
-        label: "Option 5",
-      },
-      {
-        key: "6",
-        label: "Option 6",
-      },
-      {
-        key: "7",
-        label: "Option 7",
-      },
-      {
-        key: "8",
-        label: "Option 8",
-      },
-    ],
-  },
-  {
-    key: "sub2",
-    label: "Navigation Two",
-    children: [
-      {
-        key: "9",
-        label: "Option 9",
-      },
-      {
-        key: "10",
-        label: "Option 10",
-      },
-    ],
-  },
-];
+// const items = [
+//   {
+//     key: "sub1",
+//     label: "Navigation One",
+//     children: [
+//       {
+//         key: "5",
+//         label: "Option 5",
+//       },
+//       {
+//         key: "6",
+//         label: "Option 6",
+//       },
+//       {
+//         key: "7",
+//         label: "Option 7",
+//       },
+//       {
+//         key: "8",
+//         label: "Option 8",
+//       },
+//     ],
+//   },
+//   {
+//     key: "sub2",
+//     label: "Navigation Two",
+//     children: [
+//       {
+//         key: "9",
+//         label: "Option 9",
+//       },
+//       {
+//         key: "10",
+//         label: "Option 10",
+//       },
+//     ],
+//   },
+// ];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -96,13 +97,52 @@ const Header = () => {
     getData("true").then((res) => setTopMenu(res));
   }, [language]);
 
-  console.log(toi)
+  console.log(data);
 
-  const item = topMenu.map((item) => {
-    return data.filter((e) => e.top_menu === false && e.parent_id === item.id);
+  const items = topMenu.map((item) => {
+    return {
+      key: item.id,
+      label: item.title,
+      children: data
+        .filter((i) => i.parent_id === item.id)
+        .map((i) => {
+          return {
+            key: i.id,
+            label: i.high_menu ? (
+              i.title
+            ) : (
+              <NavLink
+                to={`/${language}/${
+                  i?.menu_type_?.title?.toLowerCase() ||
+                  i?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
+                }/${i.id}`}
+              >
+                {i.title}
+              </NavLink>
+            ),
+            children: i.high_menu
+              ? data
+                  .filter((f) => f.parent_id === i.id)
+                  .map((h) => {
+                    return {
+                      key: h.id,
+                      label: (
+                        <NavLink
+                          to={`/${language}/${
+                            h?.menu_type_?.title?.toLowerCase() ||
+                            h?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
+                          }/${h.id}`}
+                        >
+                          {h.title}
+                        </NavLink>
+                      ),
+                    };
+                  })
+              : null,
+          };
+        }),
+    };
   });
-
-  console.log(item);
 
   return (
     <div>

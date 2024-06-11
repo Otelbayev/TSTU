@@ -5,6 +5,7 @@ import { Content, Div, Icons } from "./style";
 import useAxios from "../../hooks/useAxios";
 import Cookies from "js-cookie";
 import { useLanguageContext } from "./../../context/LanguageContext/index";
+import axios from "axios";
 
 const SignIn = () => {
   const { loading, sendRequest } = useAxios();
@@ -13,6 +14,12 @@ const SignIn = () => {
   const pwRef = useRef(null);
   const navigate = useNavigate();
   const { language } = useLanguageContext();
+
+  const [capcha, setCapcha] = useState({});
+
+  const capchaRef = useRef();
+
+  const token = import.meta.env.VITE_CAPCHA_TOKEN;
 
   const checkToken = async () => {
     try {
@@ -30,9 +37,22 @@ const SignIn = () => {
     }
   };
 
+  const getCapchaNums = async () => {
+    const res = await axios.get("/api/captcha/getcaptchanumbers", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    res.status === 200 && setCapcha(res.data);
+  };
+
+  console.log(capcha);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     checkToken();
+    getCapchaNums();
   }, []);
 
   const onFormSubmit = async (e) => {
@@ -40,12 +60,16 @@ const SignIn = () => {
     const userData = {
       login: emailRef?.current?.value,
       password: pwRef?.current?.value,
+      captchaNumbersSumm: capchaRef?.current?.value,
     };
     try {
       const response = await sendRequest({
         method: "post",
         url: "/api/user/login",
         data: userData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (response.status === 200) {
         Cookies.set("_token", response.data.token);
@@ -85,6 +109,12 @@ const SignIn = () => {
                   ref={pwRef}
                   defaultValue={"123"}
                   $error={error.toString()}
+                />
+                <br />
+                <Content.Input
+                  type="text"
+                  ref={capchaRef}
+                  placeholder={`${capcha?.num1} + ${capcha?.num2}`}
                 />
                 <Content.Forgot>Forgot Password?</Content.Forgot>
               </Div>

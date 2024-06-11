@@ -77,6 +77,7 @@ export const Right = styled.div`
     background: var(--bgSidebar);
     transform: ${({ $isopen }) =>
       $isopen === "false" ? "translateY(-500px)" : "translateY(0)"};
+    visibility: ${({ $isopen }) => $isopen === "false" && "hidden"};
     left: 0;
     width: 100%;
     .item-desktop {
@@ -90,11 +91,20 @@ export const Right = styled.div`
         background: transparent !important;
       }
       .ant-menu-title-content {
-        font-size: 16px !important;
+        font-size: 14px !important;
       }
       .ant-menu-submenu-title {
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid #a6a6a6;
         border-radius: 0;
+      }
+      .ant-menu-submenu-title .ant-menu-title-content {
+        font-weight: 600;
+        color: #fff;
+      }
+      .ant-menu-item .ant-menu-title-content {
+        padding-left: 10px;
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.1);
       }
     }
     .header-dropdown {

@@ -15,9 +15,10 @@ export const Container = styled.div`
   }
   @media (max-width: 600px) {
     .select {
-      height: 30px !important;
-      width: 65px !important;
+      height: 27px !important;
+      width: 64px !important;
       font-size: 5px !important;
+      padding: 0 !important;
     }
     .ant-select-selection-item,
     .ant-select-item-option-content {

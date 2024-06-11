@@ -32,12 +32,12 @@ import {
 } from "./style";
 import { Input, Lang } from "../Generics";
 import { useLanguageContext } from "../../context/LanguageContext";
+import axios from "axios";
 
 const items = [
   {
     key: "sub1",
     label: "Navigation One",
-    icon: <MailOutlined />,
     children: [
       {
         key: "5",
@@ -60,7 +60,6 @@ const items = [
   {
     key: "sub2",
     label: "Navigation Two",
-    icon: <AppstoreOutlined />,
     children: [
       {
         key: "9",
@@ -69,20 +68,6 @@ const items = [
       {
         key: "10",
         label: "Option 10",
-      },
-      {
-        key: "sub3",
-        label: "Submenu",
-        children: [
-          {
-            key: "11",
-            label: "Option 11",
-          },
-          {
-            key: "12",
-            label: "Option 12",
-          },
-        ],
       },
     ],
   },
@@ -93,9 +78,12 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { language } = useLanguageContext();
 
-  const [collapsed, setCollapsed] = useState(false);
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
+  const getData = async () => {
+    const res = await axios.get(
+      language === "uz"
+        ? "/api/menu/sitegetallmenu?top_menu=false"
+        : `/api/menu/sitegetallmenutranslation?language_code=${language}&top_menu=false`
+    );
   };
 
   return (
@@ -157,8 +145,7 @@ const Header = () => {
                 <div className="item-mobile">
                   <Antmenu
                     mode="inline"
-                    theme="dark"  
-                    inlineCollapsed={collapsed}
+                    theme="dark"
                     items={items}
                   />
                 </div>

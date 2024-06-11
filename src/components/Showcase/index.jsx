@@ -11,8 +11,18 @@ const Showcase = () => {
       <Sidebar />
       <Img src={bg} />
       <Wrapper>
-        <Title data-aos="zoom-in" display="desktop" loading="lazy" src={title} />
-        <Title data-aos="zoom-in" display="mobile" loading="lazy" src={mobiletitle} />
+        <Title
+          data-aos="zoom-in"
+          display="desktop"
+          loading="lazy"
+          src={title}
+        />
+        <Title
+          data-aos="zoom-in"
+          display="mobile"
+          loading="lazy"
+          src={mobiletitle}
+        />
       </Wrapper>
     </Container>
   );

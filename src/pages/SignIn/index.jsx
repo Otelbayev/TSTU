@@ -47,8 +47,6 @@ const SignIn = () => {
     res.status === 200 && setCapcha(res.data);
   };
 
-  console.log(capcha);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     checkToken();

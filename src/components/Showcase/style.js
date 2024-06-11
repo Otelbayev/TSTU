@@ -21,6 +21,13 @@ export const Wrapper = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 110px;
+  h1 {
+    font-size: 60px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+    font-family: "Times New Roman", Times, serif;
+  }
   @media screen and (max-width: 900px) {
     padding: 0 70px;
   }

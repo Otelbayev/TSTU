@@ -6,16 +6,7 @@ import logo4 from "../../assets/icons/logo4.png";
 import menu from "../../assets/icons/menu1.svg";
 import search from "../../assets/icons/search.svg";
 import eye from "../../assets/icons/eye.svg";
-import {
-  AppstoreOutlined,
-  ContainerOutlined,
-  DesktopOutlined,
-  MailOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PieChartOutlined,
-} from "@ant-design/icons";
-import { Button, Menu as Antmenu } from "antd";
+import { Menu as Antmenu } from "antd";
 import {
   Div,
   Img,
@@ -29,50 +20,12 @@ import {
   Link,
   Search,
   Language,
+  Mobile,
 } from "./style";
 import { Lang } from "../Generics";
 import { useLanguageContext } from "../../context/LanguageContext";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-
-// const items = [
-//   {
-//     key: "sub1",
-//     label: "Navigation One",
-//     children: [
-//       {
-//         key: "5",
-//         label: "Option 5",
-//       },
-//       {
-//         key: "6",
-//         label: "Option 6",
-//       },
-//       {
-//         key: "7",
-//         label: "Option 7",
-//       },
-//       {
-//         key: "8",
-//         label: "Option 8",
-//       },
-//     ],
-//   },
-//   {
-//     key: "sub2",
-//     label: "Navigation Two",
-//     children: [
-//       {
-//         key: "9",
-//         label: "Option 9",
-//       },
-//       {
-//         key: "10",
-//         label: "Option 10",
-//       },
-//     ],
-//   },
-// ];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -96,8 +49,6 @@ const Header = () => {
     getData("false").then((res) => setData(res));
     getData("true").then((res) => setTopMenu(res));
   }, [language]);
-
-  console.log(data);
 
   const items = topMenu.map((item) => {
     return {
@@ -144,8 +95,48 @@ const Header = () => {
     };
   });
 
+  const getLevelKeys = (items1) => {
+    const key = {};
+    const func = (items2, level = 1) => {
+      items2.forEach((item) => {
+        if (item.key) {
+          key[item.key] = level;
+        }
+        if (item.children) {
+          func(item.children, level + 1);
+        }
+      });
+    };
+    func(items1);
+    return key;
+  };
+  const levelKeys = getLevelKeys(items);
+
+  const [stateOpenKeys, setStateOpenKeys] = useState([]);
+  const onOpenChange = (openKeys) => {
+    const currentOpenKey = openKeys.find(
+      (key) => stateOpenKeys.indexOf(key) === -1
+    );
+    // open
+    if (currentOpenKey !== undefined) {
+      const repeatIndex = openKeys
+        .filter((key) => key !== currentOpenKey)
+        .findIndex((key) => levelKeys[key] === levelKeys[currentOpenKey]);
+      setStateOpenKeys(
+        openKeys
+          // remove repeat key
+          .filter((_, index) => index !== repeatIndex)
+          // remove current level all child
+          .filter((key) => levelKeys[key] <= levelKeys[currentOpenKey])
+      );
+    } else {
+      // close
+      setStateOpenKeys(openKeys);
+    }
+  };
+
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <Container>
         <div className="root-container">
           <div className="root-wrapper">
@@ -176,7 +167,7 @@ const Header = () => {
                   </Link>
                 </Div>
               </Left>
-              <Right $isopen={isOpen.toString()}>
+              <Right>
                 <div className="item-desktop">
                   <Link
                     target="_blank"
@@ -200,9 +191,6 @@ const Header = () => {
                     <Icon loading="lazy" src={eye} width={27} />
                   </Link>
                 </div>
-                <div className="item-mobile">
-                  <Antmenu mode="inline" theme="dark" items={items} />
-                </div>
               </Right>
               <Language>
                 <Lang width={80} />
@@ -211,6 +199,15 @@ const Header = () => {
           </div>
         </div>
       </Container>
+      <Mobile $isopen={isOpen.toString()}>
+        <Antmenu
+          mode="inline"
+          openKeys={stateOpenKeys}
+          onOpenChange={onOpenChange}
+          theme="dark"
+          items={items}
+        />
+      </Mobile>
     </div>
   );
 };

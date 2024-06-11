@@ -8,11 +8,56 @@ const flex = css`
 
 export const Container = styled.div`
   background-color: var(--bgSidebar);
+  position: relative;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
   min-height: 50px;
   padding: 7px 0;
   @media (max-width: 1000px) {
     height: auto;
     padding: 11px 0;
+  }
+`;
+
+export const Mobile = styled.div`
+  display: none;
+
+  @media screen and (max-width: 1000px) {
+    display: block;
+    transition: 0.5s;
+    position: absolute;
+    top: 112px;
+    z-index: 2;
+    border-top: 1px solid #a6a6a6;
+    background: var(--bgSidebar);
+    transform: ${({ $isopen }) =>
+      $isopen === "false" ? "translateY(-1000px)" : "translateY(-500)"};
+    visibility: ${({ $isopen }) => $isopen === "false" && "hidden"};
+    left: 0;
+    width: 100%;
+
+    .ant-menu-sub,
+    .ant-menu-inline {
+      background: transparent !important;
+    }
+    .ant-menu-title-content {
+      font-size: 14px !important;
+    }
+    .ant-menu-submenu-title {
+      border-bottom: 1px solid #a6a6a6;
+      border-radius: 0;
+    }
+    .ant-menu-submenu-title .ant-menu-title-content {
+      font-weight: 600;
+      color: #fff;
+    }
+    .ant-menu-item .ant-menu-title-content {
+      padding-left: 10px;
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
   }
 `;
 
@@ -59,9 +104,7 @@ export const Right = styled.div`
     ${flex};
     gap: 20px;
   }
-  .item-mobile {
-    display: none;
-  }
+
   .header-dropdown {
     display: none;
   }
@@ -69,43 +112,8 @@ export const Right = styled.div`
     gap: 10px;
   }
   @media screen and (max-width: 1000px) {
-    transition: 0.5s;
-    position: absolute;
-    z-index: -1;
-    top: 112px;
-    border-top: 1px solid #a6a6a6;
-    background: var(--bgSidebar);
-    transform: ${({ $isopen }) =>
-      $isopen === "false" ? "translateY(-500px)" : "translateY(0)"};
-    visibility: ${({ $isopen }) => $isopen === "false" && "hidden"};
-    left: 0;
-    width: 100%;
     .item-desktop {
       display: none;
-    }
-    .item-mobile {
-      display: block;
-
-      .ant-menu-sub,
-      .ant-menu-inline {
-        background: transparent !important;
-      }
-      .ant-menu-title-content {
-        font-size: 14px !important;
-      }
-      .ant-menu-submenu-title {
-        border-bottom: 1px solid #a6a6a6;
-        border-radius: 0;
-      }
-      .ant-menu-submenu-title .ant-menu-title-content {
-        font-weight: 600;
-        color: #fff;
-      }
-      .ant-menu-item .ant-menu-title-content {
-        padding-left: 10px;
-        color: #fff;
-        background-color: rgba(255, 255, 255, 0.1);
-      }
     }
     .header-dropdown {
       display: block;

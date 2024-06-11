@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import logo1 from "../../assets/icons/logo1.png";
 import logo2 from "../../assets/icons/logo2.png";
 import logo3 from "../../assets/icons/logo3.png";
@@ -78,13 +78,31 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { language } = useLanguageContext();
 
-  const getData = async () => {
+  const [data, setData] = useState([]);
+  const [topMenu, setTopMenu] = useState([]);
+
+  const getData = async (value) => {
     const res = await axios.get(
       language === "uz"
-        ? "/api/menu/sitegetallmenu?top_menu=false"
-        : `/api/menu/sitegetallmenutranslation?language_code=${language}&top_menu=false`
+        ? `/api/menu/sitegetallmenu?top_menu=${value}`
+        : `/api/menu/sitegetallmenutranslation?language_code=${language}&top_menu=${value}`
     );
+
+    return res.data;
   };
+
+  useEffect(() => {
+    getData("false").then((res) => setData(res));
+    getData("true").then((res) => setTopMenu(res));
+  }, [language]);
+
+  console.log(toi)
+
+  const item = topMenu.map((item) => {
+    return data.filter((e) => e.top_menu === false && e.parent_id === item.id);
+  });
+
+  console.log(item);
 
   return (
     <div>
@@ -143,11 +161,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div className="item-mobile">
-                  <Antmenu
-                    mode="inline"
-                    theme="dark"
-                    items={items}
-                  />
+                  <Antmenu mode="inline" theme="dark" items={items} />
                 </div>
               </Right>
               <Language>

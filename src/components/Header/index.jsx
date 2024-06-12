@@ -308,7 +308,10 @@ const Header = ({ uni }) => {
                 <Menu
                   loading="lazy"
                   src={menu}
-                  onClick={() => setIsOpen(!isOpen)}
+                  onClick={() => {
+                    setIsOpen(!isOpen);
+                    setStateOpenKeys([]);
+                  }}
                 />
               </Menus>
               <Left>

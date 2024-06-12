@@ -10,7 +10,7 @@ export const Sidebar = ({ topData, allData, uni }) => {
   const res = topData?.find((e) => e?.id === id);
 
   return (
-    <Wrapper hover={hover} $uni={uni} data-aos="fade-down">
+    <Wrapper $hover={hover} $uni={uni} data-aos="fade-down">
       <div className="top">
         <div className="top-menu">
           {topData

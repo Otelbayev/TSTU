@@ -5,7 +5,7 @@ import earth from "../../assets/icons/earth.svg?react";
 import menu from "../../assets/icons/menu.svg?react";
 
 export const Wrapper = styled.div`
- 
+  height: 50px;
   margin-top: ${({ $uni }) => !$uni && "30px"};
   .top {
     display: flex;

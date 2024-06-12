@@ -17,7 +17,7 @@ const SignIn = () => {
 
   const [capcha, setCapcha] = useState({});
 
-  const capchaRef = useRef();
+  const [capchaText, setCapchaText] = useState("");
 
   const token = import.meta.env.VITE_CAPCHA_TOKEN;
 
@@ -50,15 +50,18 @@ const SignIn = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     checkToken();
-    getCapchaNums();
   }, []);
+
+  useEffect(() => {
+    getCapchaNums();
+  }, [error]);
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
     const userData = {
       login: emailRef?.current?.value,
       password: pwRef?.current?.value,
-      captchaNumbersSumm: capchaRef?.current?.value,
+      captchaNumbersSumm: capchaText,
     };
     try {
       const response = await sendRequest({
@@ -76,6 +79,7 @@ const SignIn = () => {
       }
     } catch (err) {
       setError(true);
+      setCapchaText("");
     }
   };
 
@@ -111,7 +115,8 @@ const SignIn = () => {
                 <br />
                 <Content.Input
                   type="text"
-                  ref={capchaRef}
+                  value={capchaText}
+                  onChange={(e) => setCapchaText(e.target.value)}
                   placeholder={`${capcha?.num1} + ${capcha?.num2}`}
                 />
                 <Content.Forgot>Forgot Password?</Content.Forgot>

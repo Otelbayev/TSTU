@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Wrapper, Icons, Item } from "./style";
+import { Wrapper, Icons, Item } from "./style";
 import { Lang } from "../Generics";
 import Content from "./Content";
 
@@ -10,7 +10,7 @@ export const Sidebar = ({ topData, allData, uni }) => {
   const res = topData?.find((e) => e?.id === id);
 
   return (
-    <Wrapper $uni={uni} data-aos="fade-down">
+    <Wrapper hover={hover} $uni={uni} data-aos="fade-down">
       <div className="top">
         <div className="top-menu">
           {topData

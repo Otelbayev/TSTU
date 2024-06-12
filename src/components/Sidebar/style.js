@@ -4,18 +4,8 @@ import arrowUp from "../../assets/icons/up.svg?react";
 import earth from "../../assets/icons/earth.svg?react";
 import menu from "../../assets/icons/menu.svg?react";
 
-export const Container = styled.div`
-  position: absolute;
-  top: 26px;
-  left: 0;
-  width: 100%;
-  z-index: 99;
-  @media (max-width: 1000px) {
-    display: none;
-  }
-`;
-
 export const Wrapper = styled.div`
+  border: 1px solid red;
   margin-top: ${({ $uni }) => !$uni && "30px"};
   .top {
     display: flex;

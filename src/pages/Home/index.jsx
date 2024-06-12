@@ -116,10 +116,9 @@ const HomePage = () => {
 
   return (
     <div>
-      <Header  />
+      <Header />
       <Showcase />
-
-      {/* <About className="root-container">
+      <About className="root-container">
         <div className="wrapper about" data-aos="fade-up">
           <div className="about__title">Transport universiteti haqida</div>
           <div className="about__desc">
@@ -584,8 +583,7 @@ const HomePage = () => {
           ))}
         </Slider>
       </Ramatov>
-
-      <Footer /> */}
+      <Footer />
     </div>
   );
 };

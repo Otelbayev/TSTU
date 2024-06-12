@@ -30,6 +30,158 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import Sidebar from "../Sidebar";
 
+const all = [
+  {
+    id: 154,
+    parent_id: 111,
+    title: "Sign in",
+    path: "signin",
+  },
+  {
+    id: 155,
+    parent_id: 111,
+    title: "Structure",
+    path: "structure",
+  },
+  {
+    id: 156,
+    parent_id: 111,
+    title: "Ilmiy markaz",
+    path: "scientific-center",
+  },
+  {
+    id: 157,
+    parent_id: 111,
+    title: "Tarix",
+    path: "history",
+  },
+  {
+    id: 158,
+    parent_id: 111,
+    title: "Sport",
+    path: "sport",
+  },
+  {
+    id: 159,
+    parent_id: 111,
+    title: "Qabul",
+    path: "admisson",
+  },
+  {
+    id: 160,
+    parent_id: 111,
+    title: "Markazlar",
+    path: "centers",
+  },
+  {
+    id: 161,
+    parent_id: 111,
+    title: "Faxriy",
+    path: "honorary",
+  },
+  {
+    id: 162,
+    parent_id: 111,
+    title: "Rektorat",
+    path: "rectorat",
+  },
+  {
+    id: 163,
+    parent_id: 111,
+    title: "Departments",
+    path: "departments",
+  },
+  {
+    id: 164,
+    parent_id: 111,
+    title: "Interaktive xizmatlar",
+    path: "interactive-services",
+  },
+  {
+    id: 165,
+    parent_id: 111,
+    title: "International",
+    path: "international",
+  },
+  {
+    id: 166,
+    parent_id: 111,
+    title: "Department",
+    path: "department",
+  },
+  {
+    id: 167,
+    parent_id: 111,
+    title: "Talaba hayoti",
+    path: "student-life",
+  },
+  {
+    id: 168,
+    parent_id: 111,
+    title: "Faq",
+    path: "faq",
+  },
+  {
+    id: 169,
+    parent_id: 111,
+    title: "Contact",
+    path: "contact",
+  },
+  {
+    id: 170,
+    parent_id: 111,
+    title: "Rektorga murojaat",
+    path: "rector",
+  },
+  {
+    id: 171,
+    parent_id: 111,
+    title: "Yangiliklar",
+    path: "news",
+  },
+  {
+    id: 173,
+    parent_id: 111,
+    title: "Fakultetlar",
+    path: "faculties",
+  },
+  {
+    id: 174,
+    parent_id: 111,
+    title: "Kafedra",
+    path: "faculties/faculty-0/kafedra-3",
+  },
+];
+
+const obj = {
+  id: 111,
+  parent_id: 0,
+  position: 1,
+  high_menu: null,
+  menu_type_: {
+    id: 1,
+    title: "Main",
+  },
+  title: "Asosiy",
+  description:
+    "Rasmiy veb-sayt, ommaviy axborot vositalari, telegramm-kanal, Facebook sahifalarini axborot bilan ta'minlashi hamda boshqa axborot manbalari bilan ishlab, shu jumladan, matbuot anjumanlari, brifing va press-turlarni tashkil qilish orqali universitet faoliyati haqidagi axborotlarni muntazam, to‘liq va o‘z vaqtida berib borishi kerak.",
+  icon_: null,
+  link_: null,
+  top_menu: true,
+  blog_: null,
+  page_: null,
+  departament_: {
+    id: 1,
+    title_short: null,
+    title: "Rektor",
+    parent_id: 0,
+    departament_type_: {
+      id: 1,
+      type: "Rektor",
+    },
+  },
+};
+
 const Header = ({ uni }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -53,11 +205,11 @@ const Header = ({ uni }) => {
     getData("true").then((res) => setTopMenu(res));
   }, [language]);
 
-  const items = topMenu.map((item) => {
+  const items = [obj, ...topMenu].map((item) => {
     return {
       key: item.id,
       label: item.title,
-      children: data
+      children: [...all, ...data]
         .filter((i) => i.parent_id === item.id)
         .map((i) => {
           return {
@@ -66,10 +218,15 @@ const Header = ({ uni }) => {
               i.title
             ) : (
               <NavLink
-                to={`/${language}/${
-                  i?.menu_type_?.title?.toLowerCase() ||
-                  i?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
-                }/${i.id}`}
+                onClick={() => setIsOpen(false)}
+                to={
+                  i.path
+                    ? `/${language}/${i.path}`
+                    : `/${language}/${
+                        i?.menu_type_?.title?.toLowerCase() ||
+                        i?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
+                      }/${i.id}`
+                }
               >
                 {i.title}
               </NavLink>
@@ -82,6 +239,7 @@ const Header = ({ uni }) => {
                       key: h.id,
                       label: (
                         <NavLink
+                          onClick={() => setIsOpen(false)}
                           to={`/${language}/${
                             h?.menu_type_?.title?.toLowerCase() ||
                             h?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
@@ -113,9 +271,11 @@ const Header = ({ uni }) => {
     func(items1);
     return key;
   };
+
   const levelKeys = getLevelKeys(items);
 
   const [stateOpenKeys, setStateOpenKeys] = useState([]);
+
   const onOpenChange = (openKeys) => {
     const currentOpenKey = openKeys.find(
       (key) => stateOpenKeys.indexOf(key) === -1
@@ -201,7 +361,11 @@ const Header = ({ uni }) => {
             </Wrapper>
             <Desktop>
               {uni && <Line />}
-              <Sidebar uni={uni} topData={topMenu} allData={data} />
+              <Sidebar
+                uni={uni}
+                topData={[obj, ...topMenu]}
+                allData={[...all, ...data]}
+              />
             </Desktop>
           </div>
         </div>

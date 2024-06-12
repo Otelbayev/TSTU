@@ -36,8 +36,9 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
                     ?.sort((a, b) => a?.position - b?.position)
                     ?.map((item) => (
                       <div key={item.id} className={"right__link"}>
-                        {e?.menu_type_?.title === "Link" ? (
+                        {e?.menu_type_?.title !== "Link" ? (
                           <NavLink
+                            onClick={() => setHover(false)}
                             to={`/${language}/${
                               item?.menu_type_?.title?.toLowerCase() ||
                               item?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
@@ -46,7 +47,11 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
                             {item.title}
                           </NavLink>
                         ) : (
-                          <NavLink to={item?.link_} target="_blank">
+                          <NavLink
+                            onClick={() => setHover(false)}
+                            to={item?.link_}
+                            target="_blank"
+                          >
                             {item.title}
                           </NavLink>
                         )}
@@ -62,7 +67,14 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
               ?.sort((a, b) => a?.position - b?.position)
               ?.map((item) => (
                 <div key={item.id} className={"right__link"}>
-                  <NavLink to={`/${language}/page/${item.id}`}>
+                  <NavLink
+                    onClick={() => setHover(false)}
+                    to={
+                      item?.path
+                        ? `/${language}/${item.path}`
+                        : `/${language}/page/${item.id}`
+                    }
+                  >
                     {item.title}
                   </NavLink>
                 </div>

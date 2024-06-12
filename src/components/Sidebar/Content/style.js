@@ -49,18 +49,19 @@ export const Container = styled.div`
       margin: 5px 0;
     }
     &__link {
-      transition: 0.3s;
-      border-radius: 2px;
-      padding: 0px 8px;
-      margin-left: 5px;
-      border-bottom: 1px solid #ededed;
       a {
+        display: block;
+        transition: 0.3s;
+        border-radius: 2px;
+        padding: 0px 8px;
+        margin-left: 5px;
+        border-bottom: 1px solid #ededed;
         font-weight: 600;
         font-size: 14px;
         color: #004e7d;
-      }
-      &:hover {
-        background-color: #ededed;
+        &:hover {
+          background-color: #ededed;
+        }
       }
     }
   }

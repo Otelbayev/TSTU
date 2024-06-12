@@ -103,6 +103,12 @@ const Sidebar = () => {
                 data={generics}
               />
               <li className="nav-item">
+                <NavLink to="interactive" className="nav-link">
+                  <i className="nav-icon fa fa-bomb" />
+                  <p>Interactive</p>
+                </NavLink>
+              </li>
+              <li className="nav-item">
                 <NavLink to="appeals" className="nav-link">
                   <i className="nav-icon fa fa-file-text" />
                   <p>Murojaatlar</p>

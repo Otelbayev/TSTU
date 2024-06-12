@@ -125,6 +125,10 @@ const File = lazy(() => import("../pages/Crud/File/Main"));
 const FileCreate = lazy(() => import("../pages/Crud/File/Create"));
 const FileEdit = lazy(() => import("../pages/Crud/File/Edit"));
 
+const Interactive = lazy(() => import("../pages/Interactive/Main"));
+const InteractiveCreate = lazy(() => import("../pages/Interactive/Create"));
+const InteractiveEdit = lazy(() => import("../pages/Interactive/Edit"));
+
 export const routes = [
   {
     id: useId(),
@@ -618,6 +622,25 @@ export const routes = [
     id: useId(),
     path: "/file/edit/:id",
     element: <FileEdit />,
+    isPrivate: true,
+  },
+  //Interactive
+  {
+    id: useId(),
+    path: "/interactive",
+    element: <Interactive />,
+    isPrivate: true,
+  },
+  {
+    id: useId(),
+    path: "/interactive/create",
+    element: <InteractiveCreate />,
+    isPrivate: true,
+  },
+  {
+    id: useId(),
+    path: "/interactive/edit/:id",
+    element: <InteractiveEdit />,
     isPrivate: true,
   },
 ];

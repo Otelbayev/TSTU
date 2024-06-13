@@ -115,7 +115,7 @@ const HomePage = () => {
   const [counterOn, setCounterOn] = useState(false);
 
   return (
-    <div>
+    <div style={{overflow:"hidden"}}> 
       <Header />
       <Showcase />
       <About className="root-container">

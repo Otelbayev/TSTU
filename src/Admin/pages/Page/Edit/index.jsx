@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   ChooseFile,
   Editor,
+  FileImg,
   Image,
   Input,
   Select,
@@ -142,16 +143,21 @@ const Edit = () => {
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
         />
+        <FileImg
+          className="form-group col-md-6"
+          lan={value}
+          editorRef={editorRef}
+        />
         <Input
           label="Position"
-          className="form-group col-md-4"
+          className="form-group col-md-6"
           value={position || ""}
           onChange={(e) => setPosition(e.target.value)}
           type="number"
         />
         <Select
           label="Favorite"
-          className="col-md-4"
+          className="col-md-3"
           options={[
             { value: 1, label: "true" },
             { value: 2, label: "false" },
@@ -162,7 +168,7 @@ const Edit = () => {
         {!isCreate && (
           <Select
             label="Status"
-            className="col-md-4"
+            className="col-md-3"
             options={statusData}
             value={status}
             onChange={(e) => setStatus(Number(e))}
@@ -170,10 +176,10 @@ const Edit = () => {
         )}
         <ChooseFile
           label="Image"
-          className="form-group col-md-4"
+          className="form-group col-md-3"
           onChange={(e) => setImg(e.target.files[0])}
         />
-        {!isCreate && <Image label="Image" className="col-md-4" img={img} />}
+        {!isCreate && <Image label="Image" className="col-md-3" img={img} />}
         <div className="form-group mt-3 col-md-12">
           <div className="col-sm-12">
             {isCreate ? (

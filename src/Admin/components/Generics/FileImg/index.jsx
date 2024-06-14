@@ -41,20 +41,19 @@ const FileImg = ({ className, lan, editorRef }) => {
         },
       });
       if (res.status === 200) {
-        message.success({
-          content: "File uploaded",
-          key: "updatable",
-          duration: 2,
-        });
-        setTitle("");
         fileRef.current.value = "";
-        console.log(res);
         $(editorRef.current).summernote(
           "code",
           `${$(editorRef.current).summernote("code")} 
           <a href="${res.data.url}">${title}</a>
           `
         );
+        setTitle("");
+        message.success({
+          content: "File uploaded",
+          key: "updatable",
+          duration: 2,
+        });
         setModal(false);
       } else {
         message.error({
@@ -64,6 +63,7 @@ const FileImg = ({ className, lan, editorRef }) => {
         });
       }
     } else {
+      console.log(selectData.find((e) => e.value === select));
       $(editorRef.current).summernote(
         "code",
         `${$(editorRef.current)?.summernote("code")} 
@@ -93,11 +93,43 @@ const FileImg = ({ className, lan, editorRef }) => {
       fileRef2.current.value = "";
       setModal2(false);
     } else {
-      $(editorRef.current).summernote(
-        "code",
-        `${$(editorRef.current)?.summernote("code")} 
-        <a href="qwerty">none</a>`
-      );
+      select2.length === 1
+        ? select2Data.forEach((el) => {
+            if (select2[0] === el.value) {
+              $(editorRef.current).summernote(
+                "code",
+                `${$(editorRef.current)?.summernote("code")} 
+              <img src="${el.url}" alt="${el.label}" />`
+              );
+            }
+          })
+        : $(editorRef.current).summernote(
+            "code",
+            `${$(editorRef.current)?.summernote("code")} 
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">    
+          ${select2Data
+            .filter((e) => select2.includes(e.value))
+            .map((el) => {
+              return `
+            <div class="carousel-item">
+            <img class="d-block w-100" src="https://news.ubc.ca/wp-content/uploads/2023/08/AdobeStock_559145847.jpeg" alt="${el.label}">
+          </div>
+            `;
+            })}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+            `
+          );
+
       setSelect2(null);
       setShow2(true);
       setModal2(false);
@@ -166,7 +198,7 @@ const FileImg = ({ className, lan, editorRef }) => {
   };
 
   const getData = async (value) => {
-    const res = await axios.get(`/api/files/selectgetallfiles/${value}`, {
+    const res = await axios.get(`/api/files/selectgetallfiles?image=${value}`, {
       headers: {
         Authorization: `Bearer ${Cookies.get("_token")}`,
       },
@@ -181,6 +213,7 @@ const FileImg = ({ className, lan, editorRef }) => {
         res.map((e) => ({
           value: e.id,
           label: e.title,
+          url: e.url,
         }))
       )
     );
@@ -192,6 +225,7 @@ const FileImg = ({ className, lan, editorRef }) => {
         res.map((e) => ({
           value: e.id,
           label: e.title,
+          url: e.url,
         }))
       )
     );
@@ -203,7 +237,7 @@ const FileImg = ({ className, lan, editorRef }) => {
       <div className="row">
         <div className="col-md-6">
           <button
-            className="btn btn-secondary w-100"
+            className="btn btn-secondary w-100 mb-3"
             type="button"
             onClick={() => setModal(true)}
           >
@@ -342,7 +376,7 @@ const FileImg = ({ className, lan, editorRef }) => {
                       <label className="col-sm-4 col-form-label">Image</label>
                       <div className="col-sm-12">
                         <img
-                          src
+                          src=""
                           id="imageold_uz_img"
                           style={{ width: "100%" }}
                         />

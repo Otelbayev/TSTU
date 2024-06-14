@@ -14,6 +14,16 @@ import {
 import Accardion from "../Accardion";
 import { NavLink } from "react-router-dom";
 import { useDepartmentContext } from "./../../context/DepartmentContext/index";
+import styled from "styled-components";
+import Cookies from "js-cookie";
+
+const Link = styled(NavLink)`
+  background: transparent !important;
+  box-shadow: none !important;
+  &:hover {
+    background: #ffffff1f !important;
+  }
+`;
 
 const Sidebar = () => {
   const { language } = useLanguageContext();
@@ -121,20 +131,20 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <a href={`/${language}`} className="nav-link">
+                <Link to={`/${language}`} className="nav-link">
                   <i className="nav-icon fas fa-globe" />
                   <p>На Сайт</p>
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
-                  href={`/${language}`}
+                <Link
+                  to={`/${language}`}
                   className="nav-link"
                   onClick={() => Cookies.remove("_token")}
                 >
                   <i className="nav-icon fas fa-power-off" />
                   <p>Выйти</p>
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>

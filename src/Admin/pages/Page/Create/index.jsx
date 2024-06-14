@@ -23,7 +23,7 @@ const Create = () => {
   const positionRef = useRef(null);
   const imgRef = useRef(null);
 
-  const [favorite, setFavorite] = useState(2);
+  const [favorite, setFavorite] = useState(false);
   const { language, options } = useLanguageContext();
 
   const id = options.find((option) => option.code === value)?.id;
@@ -45,7 +45,7 @@ const Create = () => {
     formData.append("text", editorCode || "");
     formData.append("img_up", img_up);
     formData.append("position", position);
-    formData.append("favorite", favorite === 1 ? "true" : "false");
+    formData.append("favorite", favorite);
 
     const res = await useCreate(
       value,
@@ -106,8 +106,8 @@ const Create = () => {
           label="Favorite"
           className="col-md-6"
           options={[
-            { value: 1, label: "true" },
-            { value: 2, label: "false" },
+            { value: true, label: "true" },
+            { value: false, label: "false" },
           ]}
           value={favorite}
           onChange={(e) => setFavorite(e)}

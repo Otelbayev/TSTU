@@ -51,6 +51,7 @@ import {
 import FacultetCart from "../../components/Faculties/FacultetCart";
 import { KafedraCart } from "../../components/Kafedra";
 import ScrollTrigger from "react-scroll-trigger";
+import Favorites from "../../components/News/Favorites";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -115,7 +116,7 @@ const HomePage = () => {
   const [counterOn, setCounterOn] = useState(false);
 
   return (
-    <div style={{overflow:"hidden"}}> 
+    <div style={{ overflow: "hidden" }}>
       <Header />
       <Showcase />
       <About className="root-container">
@@ -194,7 +195,9 @@ const HomePage = () => {
           <Title
             title={"Universitet yangiliklari"}
             button={"Barchasini ko‘rish"}
+            to="news"
           >
+            <Favorites />
             <div className="flex">
               <div className="flex__item1" data-aos="fade-right">
                 <LargeBanner

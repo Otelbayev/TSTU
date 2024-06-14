@@ -1,6 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import darkArrow from "../../../assets/icons/arrow-dark.svg?react";
 import lightArrow from "../../../assets/icons/arrow-light.svg?react";
+import { NavLink } from "react-router-dom";
 
 export const Light = styled(lightArrow)``;
 
@@ -37,7 +38,7 @@ export const Component = styled.div`
   }
 `;
 
-Content.Button = styled.button`
+Content.Button = styled(NavLink)`
   font-family: "Source Sans Pro", sans-serif;
   background: transparent;
   border: none;

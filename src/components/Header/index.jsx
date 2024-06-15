@@ -7,6 +7,12 @@ import menu from "../../assets/icons/menu1.svg";
 import search from "../../assets/icons/search.svg";
 import eye from "../../assets/icons/eye.svg";
 import { Menu as Antmenu } from "antd";
+import { Lang } from "../Generics";
+import { useLanguageContext } from "../../context/LanguageContext";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
+import Sidebar from "../Sidebar";
+import { useTranslation } from "react-i18next";
 import {
   Div,
   Img,
@@ -24,11 +30,6 @@ import {
   Line,
   Desktop,
 } from "./style";
-import { Lang } from "../Generics";
-import { useLanguageContext } from "../../context/LanguageContext";
-import axios from "axios";
-import { NavLink } from "react-router-dom";
-import Sidebar from "../Sidebar";
 
 const all = [
   {
@@ -187,6 +188,8 @@ const Header = ({ uni }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { language } = useLanguageContext();
 
+  const { t } = useTranslation();
+
   const [data, setData] = useState([]);
   const [topMenu, setTopMenu] = useState([]);
 
@@ -339,19 +342,19 @@ const Header = ({ uni }) => {
                     target="_blank"
                     to="https://student.tstu.uz/dashboard/login"
                   >
-                    Talaba
+                    {t("header.talaba")}
                   </Link>
                   <Link
                     target="_blank"
                     to="https://hemis.tstu.uz/dashboard/login"
                   >
-                    Xodim
+                    {t("header.xodim")}
                   </Link>
-                  <Link to="/arm">Elektron kutubxona</Link>
-                  <Link>Alumni</Link>
+                  <Link to="/arm">{t("header.kutubxona")}</Link>
+                  <Link>{t("header.alumni")}</Link>
                   <Search onClick={() => setIsSearchOpen(!isSearchOpen)}>
                     <Icon loading="lazy" src={search} width={24} />
-                    <div>Qidiruv</div>
+                    <div>{t("header.qidiruv")}</div>
                   </Search>
                   <Link className="bvi-show">
                     <Icon loading="lazy" src={eye} width={27} />

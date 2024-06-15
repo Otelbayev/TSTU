@@ -1,0 +1,34 @@
+{
+  "header": {
+    "talaba": "Student",
+    "xodim": "Staff",
+    "kutubxona": "Electronic Library",
+    "alumni": "Alumni",
+    "qidiruv": "Search"
+  },
+
+  "footer": {
+    "title": "Transport University",
+    "desc": "Students are our main strength. Therefore, if we want to introduce something new at our university, we always consult with them.",
+    "loc": "1 Temiryolchilar Street, Mirobod District, Tashkent",
+    "take": "Take location",
+    "about": {
+      "title": "About Us",
+      "home": "Home",
+      "biz": "About Us",
+      "talim": "Education",
+      "bitirvchi": "Graduate",
+      "manaviyat": "Spirituality",
+      "qabul": "Admission Commission"
+    },
+    "links": {
+      "title": "Links",
+      "xoldim": "Hemis Staff",
+      "talaba": "Hemis Student",
+      "kutubxona": "Library",
+      "mail": "Corp Mail",
+      "jurnal": "TSTU Journal",
+      "moodle": "Moodle"
+    }
+  }
+}

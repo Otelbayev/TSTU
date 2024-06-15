@@ -8,6 +8,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Context from "./context";
 import { HelmetProvider } from "react-helmet-async";
+import "./i18n";
 
 AOS.init({
   duration: 800,

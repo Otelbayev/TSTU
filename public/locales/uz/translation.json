@@ -1,0 +1,33 @@
+{
+  "header": {
+    "talaba": "Talaba",
+    "xodim": "Xodim",
+    "kutubxona": "Elektron Kutubxona",
+    "alumni": "Alumni",
+    "qidiruv": "Qidiruv"
+  },
+  "footer": {
+    "title": "Transport Universiteti",
+    "desc": "Talaba - bizning asosiy kuchimiz. Shu bois universitetimizda biror yangilik qilmoqchi bо‘lsak, albatta, ular bilan fikrlashamiz kerak.",
+    "loc": "Toshkent shahar Mirobod tumani Temiryo‘lchilar ko‘chasi 1-uy",
+    "take": "Manzilni olish",
+    "about": {
+      "title": "Biz haqimizda",
+      "home": "Bosh sahifa",
+      "biz": "Biz haqimizda",
+      "talim": "Ta'lim",
+      "bitirvchi": "Bitiruvchi",
+      "manaviyat": "Manaviyat",
+      "qabul": "Qabul komissiyasi"
+    },
+    "links": {
+      "title": "Havolalar",
+      "xoldim": "Hemis Xodim",
+      "talaba": "Hemis talaba",
+      "kutubxona": "Kutubxona",
+      "mail": "Corp mail",
+      "jurnal": "Jurnal TSTU",
+      "moodle": "Moodle"
+    }
+  }
+}

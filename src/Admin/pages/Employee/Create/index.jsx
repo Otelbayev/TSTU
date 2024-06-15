@@ -187,33 +187,39 @@ const Create = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <Input
-          className="form-group col-md-3"
-          label={`JSHSHIR - ПИНФЛ (${value})`}
-          placeholder="123456789"
-          maxLength={14}
-          minLength={14}
-          value={jshir}
-          onChange={(e) => setJshir(e.target.value)}
-        />
-        <Input
-          className="form-group col-md-3"
-          label={`Passport - № (${value})`}
-          placeholder="AB"
-          maxLength={2}
-          minLength={2}
-          value={passportSerial}
-          onChange={(e) => setPassportSerial(e.target.value)}
-        />
-        <Input
-          className="form-group col-md-3"
-          label={`Passport - № (${value})`}
-          placeholder="1234567"
-          minLength={7}
-          maxLength={7}
-          value={passportNumber}
-          onChange={(e) => setPassportNumber(e.target.value)}
-        />
+        {value === "uz" && (
+          <Input
+            className="form-group col-md-3"
+            label={`JSHSHIR - ПИНФЛ (${value})`}
+            placeholder="123456789"
+            maxLength={14}
+            minLength={14}
+            value={jshir}
+            onChange={(e) => setJshir(e.target.value)}
+          />
+        )}
+        {value === "uz" && (
+          <Input
+            className="form-group col-md-3"
+            label={`Passport - № (${value})`}
+            placeholder="AB"
+            maxLength={2}
+            minLength={2}
+            value={passportSerial}
+            onChange={(e) => setPassportSerial(e.target.value)}
+          />
+        )}
+        {value === "uz" && (
+          <Input
+            className="form-group col-md-3"
+            label={`Passport - № (${value})`}
+            placeholder="1234567"
+            minLength={7}
+            maxLength={7}
+            value={passportNumber}
+            onChange={(e) => setPassportNumber(e.target.value)}
+          />
+        )}
         <Select
           label="Jinsi"
           className={"form-group col-md-3"}
@@ -244,11 +250,13 @@ const Create = () => {
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
-        <ChooseFile
-          className="form-group col-md-3"
-          label="Rasm"
-          onChange={(e) => setImg(e.target.files[0])}
-        />
+        {value === "uz" && (
+          <ChooseFile
+            className="form-group col-md-3"
+            label="Rasm"
+            onChange={(e) => setImg(e.target.files[0])}
+          />
+        )}
         <Input
           label={`Ilmiy daraja (${value})`}
           placeholder="type"

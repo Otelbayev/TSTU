@@ -136,16 +136,15 @@ export const T = styled.div`
 export const I = styled.img`
   width: 20px;
   height: 20px;
+  margin-right: 2px;
 `;
 
 export const Btn = styled.button`
-  display: inline-flex;
+  padding: 5px;
   align-items: center;
   background: transparent;
   border-radius: 4.017px;
   border: 0.803px solid var(--white);
-  width: 160px;
-  height: 30px;
   padding: 5px 30px 5px 12px;
   align-items: flex-start;
   gap: 10px;

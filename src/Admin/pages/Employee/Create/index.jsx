@@ -10,10 +10,12 @@ import LanguageSelect from "../../../components/Generics/LanguageSelect";
 import { useLanguageContext } from "../../../../context/LanguageContext";
 import { useDepartmentContext } from "../../../context/DepartmentContext";
 import { useGenderContext } from "../../../context/GenderContext";
-import { useCreate } from "./../../../hooks/useCreate";
 import { useNavigate } from "react-router-dom";
 import Wrapper from "../../../components/Wrapper";
 import { useEmployeeContext } from "../../../context/EmployeeContext";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { message } from "antd";
 
 const Create = () => {
   const [value, setValue] = useState("uz");
@@ -36,7 +38,7 @@ const Create = () => {
   const [departent, setDepartent] = useState(null);
   const [employee, setEmployee] = useState(null);
   const [biography, setBiography] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState("2000-01-01");
   const [degree, setDegree] = useState("");
   const [experience, setExperience] = useState("");
   const [tel1, setTel1] = useState("");
@@ -65,12 +67,27 @@ const Create = () => {
     formData.append("persons_.lastName", surname);
     formData.append("persons_.fathers_name", patronymic);
     formData.append("persons_.email", email);
-    formData.append("persons_.gender_id", gender);
+    if (value === "uz") {
+      formData.append("persons_.gender_id", gender);
+      formData.append("persons_.employee_type_id", employee);
+      formData.append("persons_.departament_id", departent);
+    } else {
+      formData.append(
+        "persons_.gender_id",
+        genderData.find((e) => e.value === gender)?.id
+      );
+      formData.append(
+        "persons_.employee_type_id",
+        employeeTypeData.find((e) => e.value === employee)?.id
+      );
+      formData.append(
+        "persons_.departament_id",
+        departmentOptions.find((e) => e.value === departent)?.id
+      );
+    }
     formData.append("persons_.pinfl", jshir);
     formData.append("persons_.passport_text", passportSerial);
     formData.append("persons_.passport_number", passportNumber);
-    formData.append("persons_.departament_id", departent);
-    formData.append("persons_.employee_type_id", employee);
     formData.append("biography_json", biography);
     formData.append("birthday", date);
     formData.append("degree", degree);
@@ -92,46 +109,85 @@ const Create = () => {
       $(portfolioRef.current).summernote("code")
     );
     formData.append("blog_json", $(blogRef.current).summernote("code"));
-    formData.append("img_up", img);
+    formData.append("img_up", img || null);
 
-    const res = await useCreate(
-      value,
-      "formData",
-      formData,
-      "/api/persondata/createpersondata",
-      "/api/persondata/createpersondatatranslation",
-      "persons_data_id",
-      [
-        {
-          persons_translation_: {
-            firstName: name,
-            lastName: surname,
-            fathers_name: patronymic,
-            gender_id: gender,
-            persons_id: employee,
+    if (value === "uz") {
+      try {
+        message.loading({ key: "msg", content: "Loading..." });
+        const res = await axios.post(
+          "/api/persondata/createpersondata",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("_token")}`,
+            },
+          }
+        );
+        if (res?.status === 200) {
+          message.success({ key: "msg", content: "Succesfully Created!" });
+          navigate(`/${language}/admin/employee`);
+        }
+      } catch (err) {
+        message.error({ key: "msg", content: "Something went wrong!" });
+      }
+    } else {
+      try {
+        message.loading({ key: "msg", content: "Loading..." });
+        const res1 = await axios.post(
+          "/api/persondata/createpersondata",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("_token")}`,
+            },
+          }
+        );
+        const res2 = await axios.post(
+          "/api/persondata/createpersondatatranslation",
+          {
+            persons_translation_: {
+              firstName: name,
+              lastName: surname,
+              fathers_name: patronymic,
+              gender_id: gender,
+              employee_type_translation_id: employee,
+              departament_translation_id: departent,
+            },
+            persons_data_id: res1?.data?.id,
+            biography_json: biography,
+            birthday: date,
+            degree: degree,
+            experience_year: experience,
+            phone_number1: tel1,
+            phone_number2: tel2,
+            orchid: orcid,
+            scopus_id: scopus,
+            address: address,
+            languages_uz: uzbek,
+            languages_en: ingiliz,
+            languages_ru: rus,
+            languages_any_title: other,
+            languages_any: other2,
+            experience_json: experience_json,
+            scientific_activity_json: scientific,
+            portfolio_json: $(portfolioRef.current).summernote("code"),
+            blog_json: $(blogRef.current).summernote("code"),
             language_id: id,
-            employee_type_translation_id: employee,
-            departament_translation_id: departent,
           },
-        },
-        { language_id: id },
-      ],
-      [
-        "persons_.firstName",
-        "persons_.lastName",
-        "persons_.fathers_name",
-        "persons_.gender_id",
-        "persons_.pinfl",
-        "persons_.passport_text",
-        "persons_.passport_number",
-        "persons_.employee_type_id",
-        "persons_.departament_id",
-        "img_up",
-      ],
-      415
-    );
-
-    res?.statusCode === 200 && navigate(`/${language}/admin/employee`);
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("_token")}`,
+            },
+          }
+        );
+        if (res2.status === 200) {
+          message.success({ key: "msg", content: "Succesfully Created!" });
+          navigate(`/${language}/admin/employee`);
+        }
+      } catch (err) {
+        message.error({ key: "msg", content: "Something went wrong!" });
+      }
+    }
   };
 
   useEffect(() => {
@@ -142,7 +198,7 @@ const Create = () => {
 
   useEffect(() => {
     setGender(genderData[0]?.value);
-  }, [genderData]);
+  }, [genderData]); 
 
   useEffect(() => {
     setDepartent(departmentOptions[1]?.value);
@@ -164,6 +220,7 @@ const Create = () => {
           placeholder="Ism"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          name="name"
         />
         <Input
           className="form-group col-md-4"
@@ -171,6 +228,7 @@ const Create = () => {
           placeholder="Familiya"
           value={surname}
           onChange={(e) => setSurname(e.target.value)}
+          name="surname"
         />
         <Input
           className="form-group col-md-4"
@@ -178,6 +236,7 @@ const Create = () => {
           placeholder="Otasining ismi"
           value={patronymic}
           onChange={(e) => setPatronymic(e.target.value)}
+          name="patronymic"
         />
         <Input
           className="form-group col-md-3"
@@ -186,6 +245,7 @@ const Create = () => {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          name="email"
         />
         {value === "uz" && (
           <Input
@@ -196,6 +256,7 @@ const Create = () => {
             minLength={14}
             value={jshir}
             onChange={(e) => setJshir(e.target.value)}
+            name="pinfl"
           />
         )}
         {value === "uz" && (

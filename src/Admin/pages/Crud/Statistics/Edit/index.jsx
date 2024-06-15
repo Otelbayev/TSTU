@@ -1,26 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Wrapper from "../../../../components/Wrapper";
 import LanguageSelect from "./../../../../components/Generics/LanguageSelect";
-import { ChooseFile, Image, Input } from "../../../../components/Generics";
+import {
+  ChooseFile,
+  Image,
+  Input,
+  Select,
+} from "../../../../components/Generics";
 import { useLanguageContext } from "../../../../../context/LanguageContext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEdit } from "./../../../../hooks/useEdit";
+import { useStatusContext } from "../../../../context/Status";
 
 const Edit = () => {
   const [value, setValue] = useState("uz");
   const [isCreate, setIsCreate] = useState(false);
-  const [transIdl, setTransId] = useState(null);
+  const [transId, setTransId] = useState(null);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [numbers, setNumbers] = useState("");
   const [icon, setIcon] = useState("");
+  const [status, setStatus] = useState(null);
 
   const { language, options } = useLanguageContext();
+  const { statusData, getStatus } = useStatusContext();
   const language_id = options.find((e) => e.code === value)?.id;
   const { id } = useParams();
+  const iconRef = useRef(null);
 
   const getData = async (value, id) => {
     const res = await axios.get(
@@ -38,12 +47,14 @@ const Edit = () => {
       setTransId(res?.data?.id);
       setTitle(res?.data?.title);
       setDescription(res?.data?.description);
+      setStatus(res.data?.status_?.id || res.data?.status_translation_?.id);
       setNumbers(res?.data?.numbers);
-      setIcon(res?.data?.icon?.url);
+      setIcon(res?.data?.icon_?.url);
       setIsCreate(false);
     } else {
       setIsCreate(true);
       setTransId(null);
+      setStatus(null);
       setTitle("");
       setDescription("");
       setNumbers("");
@@ -53,12 +64,41 @@ const Edit = () => {
 
   useEffect(() => {
     getData(value, id);
+    getStatus(value);
   }, [isCreate, value]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await useEdit(isCreate, value, "obj", id, transIdl, {});
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("numbers", numbers);
+    formData.append("icon_up", iconRef.current?.files[0] || icon);
+    formData.append("status_id", status);
+
+    const res = await useEdit(
+      isCreate,
+      value,
+      "formData",
+      id,
+      transId,
+      formData,
+      "/api/statisticalnumbers/updatestatisticalnumbers",
+      "/api/statisticalnumbers/updatestatisticalnumberstranslation",
+      [
+        { statistical_numbers_id: id },
+        { language_id },
+        { status_translation_id: status },
+      ],
+      ["status_id"],
+      "/api/statisticalnumbers/createstatisticalnumberstranslation",
+      [{ statistical_numbers_id: id }, { language_id }],
+      ["status_id"]
+    );
+
+    res.status === 200 && setIsCreate(false);
   };
 
   return (
@@ -68,25 +108,35 @@ const Edit = () => {
         <div className="row">
           <Input
             label="Title"
-            className="col-md-6"
+            className={!isCreate ? "col-md-4" : "col-md-6"}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <Input
             label="Description"
-            className="col-md-6"
+            className={!isCreate ? "col-md-4" : "col-md-6"}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
           <Input
             label="Numbers"
-            className="col-md-6"
+            className={!isCreate ? "col-md-4" : "col-md-6"}
             value={numbers}
             onChange={(e) => setNumbers(e.target.value)}
           />
+          {!isCreate && (
+            <Select
+              label="Status"
+              className="col-md-4"
+              value={status}
+              onChange={(e) => setStatus(e)}
+              options={statusData}
+            />
+          )}
           <ChooseFile
             label="Icon"
-            className={!isCreate ? "col-md-3" : "col-md-6"}
+            className={!isCreate ? "col-md-4" : "col-md-6"}
+            ref={iconRef}
           />
           {!isCreate && <Image img={icon} className="col-md-3" />}
           <div className="col-md-2 mt-3 ml-2">

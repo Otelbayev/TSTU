@@ -38,6 +38,7 @@ export const user = [
 ];
 
 export const generics = [
+  { id: 3, title: "Statistika", path: "statistics" },
   { id: 4, title: "File", path: "file" },
   { id: 5, title: "Til", path: "language" },
   { id: 6, title: "Token", path: "token" },

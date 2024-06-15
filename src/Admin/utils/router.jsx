@@ -129,6 +129,10 @@ const Interactive = lazy(() => import("../pages/Interactive/Main"));
 const InteractiveCreate = lazy(() => import("../pages/Interactive/Create"));
 const InteractiveEdit = lazy(() => import("../pages/Interactive/Edit"));
 
+const Statistics = lazy(() => import("../pages/Crud/Statistics/Main"));
+const StatisticsCreate = lazy(() => import("../pages/Crud/Statistics/Create"));
+const StatisticsEdit = lazy(() => import("../pages/Crud/Statistics/Edit"));
+
 export const routes = [
   {
     id: useId(),
@@ -641,6 +645,25 @@ export const routes = [
     id: useId(),
     path: "/interactive/edit/:id",
     element: <InteractiveEdit />,
+    isPrivate: true,
+  },
+  //Statistics
+  {
+    id: useId(),
+    path: "/statistics",
+    element: <Statistics />,
+    isPrivate: true,
+  },
+  {
+    id: useId(),
+    path: "/statistics/create",
+    element: <StatisticsCreate />,
+    isPrivate: true,
+  },
+  {
+    id: useId(),
+    path: "/statistics/edit/:id",
+    element: <StatisticsEdit />,
     isPrivate: true,
   },
 ];

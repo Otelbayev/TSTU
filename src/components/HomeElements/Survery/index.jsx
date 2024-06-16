@@ -4,8 +4,11 @@ import IlmiyMarkazCart from "../../IlmiyMarkazCart";
 import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
 import { DarkSection } from "./style";
+import { useTranslation } from "react-i18next";
 
 const Survery = () => {
+  const { t } = useTranslation();
+
   const [counterOn, setCounterOn] = useState(false);
   let ilm = [1, 2, 3, 4];
   return (
@@ -13,8 +16,8 @@ const Survery = () => {
       <div className="root-wrapper">
         <Title
           $type="dark"
-          title="Tadqiqotlar"
-          button="Barcha tadqiqotlarni ko‘rish"
+          title={t("survery.title")}
+          button={t("survery.btn")}
         >
           <div>
             <ScrollTrigger
@@ -64,11 +67,9 @@ const Survery = () => {
         </Title>
         <Title
           $type="dark"
-          title="Ilmiy markazlar"
-          button="Barcha ko‘rish"
-          subtitle={
-            "Kashfiyotlar qilish bizning dunyomiz, sog'ligimiz va intellektual hayotimiz uchun muhimdir"
-          }
+          title={t("centers.title")}
+          button={t("centers.btn")}
+          subtitle={t("centers.desc")}
         >
           <div className="markaz">
             {ilm.map((e) => (

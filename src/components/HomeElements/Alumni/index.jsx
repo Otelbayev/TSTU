@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import RamatovSlider from "../RamatovSlider";
 import { prop10 } from "../../../mock/homeProps";
 import ramatova from "../../../assets/images/ramatova.jpg";
+import { useTranslation } from "react-i18next";
 
 const ramatovSetting = {
   dots: false,
@@ -38,17 +39,16 @@ const ramatovSetting = {
 };
 
 const Alumni = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
       <div className="root-container">
         <div className="root-wrapper">
           <Title
-            title="Faxriy bitiruvchilar"
-            button="Barchasini ko‘rish"
-            subtitle="Bugungi kunda universitetning ko'plab bitiruvchilari O'zbekiston
-              vazirliklari, idoralari va qonun chiqaruvchi organlarida rahbarlik
-              lavozimlarini egallab,dunyoning yetakchi xalqaro tashkilotlari va
-              yirik kompaniyalarida muvaffaqiyatli faoliyat yuritmoqdalar"
+            title={t("alumni.title")}
+            button={t("alumni.btn")}
+            subtitle={t("alumni.desc")}
           />
         </div>
       </div>

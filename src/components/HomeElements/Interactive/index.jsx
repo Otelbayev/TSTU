@@ -6,15 +6,18 @@ import { NavLink } from "react-router-dom";
 import mackbook from "../../../assets/images/Macbook.png";
 import iMac from "../../../assets/images/iMac.png";
 import { prop6 } from "../../../mock/homeProps";
+import { useTranslation } from "react-i18next";
 
 const Interactive = () => {
+  const { t } = useTranslation();
   return (
     <DarkSection className="root-container">
       <div className="root-wrapper">
         <Title
           $type="dark"
-          title="Interaktiv xizmatlar"
-          button="Barchasini ko‘rish"
+          title={t("interactive.title")}
+          button={t("interactive.btn")}
+          to="interactive-services"
         >
           <InteraktiveCarts data-aos="fade-up">
             <div className="first">
@@ -24,7 +27,7 @@ const Interactive = () => {
                   to="/interactive-services"
                   className="first__left__title"
                 >
-                  Universitet interaktiv xizmatlaridan unumli foydalaning!
+                  {t("interactive.desc")}
                   <Icons.DarkArrow />
                 </NavLink>
               </div>

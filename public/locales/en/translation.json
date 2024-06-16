@@ -6,6 +6,49 @@
     "alumni": "Alumni",
     "qidiruv": "Search"
   },
+  "news": {
+    "title": "University News",
+    "btn": "View All"
+  },
+  "events": {
+    "title": "Upcoming Events",
+    "btn": "View All Events"
+  },
+  "interactive": {
+    "title": "Interactive Services",
+    "btn": "View All",
+    "desc": "Make effective use of the university's interactive services!"
+  },
+  "faculties": {
+    "title": "Faculties and Departments",
+    "btn": "View All"
+  },
+  "talim": {
+    "title": "Education",
+    "desc": "A thought that receives good education becomes as sharp as a dagger or diamond.",
+    "btn": "View All"
+  },
+  "honory": {
+    "title": "Honorary Professors"
+  },
+  "student": {
+    "title": "Student Life",
+    "desc": "The university provides many opportunities for students to spend their time meaningfully."
+  },
+  "survery": {
+    "title": "Research",
+    "btn": "View All Research"
+  },
+  "centers": {
+    "title": "Research Centers",
+    "desc": "Making discoveries is important for our world, health, and intellectual life.",
+    "btn": "View All"
+  },
+  "alumni": {
+    "title": "Honorary Alumni",
+    "desc": "Today, many university graduates hold leadership positions in Uzbekistan's ministries, agencies, and legislative bodies, and are successfully working in leading international organizations and large companies around the world.",
+    "btn": "View All"
+  },
   "about": {
     "title": "About Transport University",
     "desc": "The system for training highly qualified personnel for the republic's transport sector has been fundamentally improved based on advanced foreign experience and international standards, by widely introducing innovative teaching methods and modern pedagogical and information technologies into the educational process, as well as strengthening the material and technical base and increasing the scientific potential of sectoral educational institutions."

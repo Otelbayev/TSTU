@@ -5,15 +5,16 @@ import LargeBanner from "../LargeBanner";
 import { prop7, prop8, prop9 } from "../../../mock/homeProps";
 import filterSt from "../../../assets/images/filterSt.png";
 import jasco from "../../../assets/images/jasco.jpg";
+import { useTranslation } from "react-i18next";
 
 const Talaba = () => {
+  const { t } = useTranslation();
   return (
     <Container className="root-container">
       <div className="root-wrapper">
         <Title
-          title="Talabaning hayoti"
-          subtitle="Universitetda talabalar o'z vaqtlarini mazmunli o'tkazishlari
-          uchun ko'plab sharoitlar yaratilgan"
+          title={t("student.title")}
+          subtitle={t("student.desc")}
         >
           <Layout $type="talaba">
             <div className="grid">

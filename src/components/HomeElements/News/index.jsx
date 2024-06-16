@@ -4,16 +4,14 @@ import { Layout } from "./style";
 import { prop1, prop2 } from "../../../mock/homeProps";
 import LargeBanner from "../LargeBanner";
 import Cart from "../Cart";
+import { useTranslation } from "react-i18next";
 
 const News = () => {
+  const { t } = useTranslation();
   return (
     <Layout className="root-container">
       <div className="root-wrapper">
-        <Title
-          title={"Universitet yangiliklari"}
-          button={"Barchasini ko‘rish"}
-          to="news"
-        >
+        <Title title={t("news.title")} button={t("news.btn")} to="news">
           <div className="flex">
             <div className="flex__item1" data-aos="fade-right">
               <LargeBanner prop={prop1} />

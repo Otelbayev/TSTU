@@ -4,13 +4,20 @@ import { Title } from "../../Generics";
 import { Fac } from "../../../mock/homeProps";
 import KafedraCart from "../KafedraCart";
 import FacultetCart from "../FacultetCart";
+import { useTranslation } from "react-i18next";
 
 const Faculties = () => {
+  const { t } = useTranslation();
+
   const [id, setId] = useState(1);
   return (
     <Fakultetlar className="root-container">
       <div className="root-wrapper">
-        <Title title="Fakultet va kafedralar" button="Barchasini ko‘rish">
+        <Title
+          title={t("faculties.title")}
+          button={t("faculties.btn")}
+          to="faculties"
+        >
           <FakGrid>
             <div data-aos="fade-right" className="fak-left">
               <div className="fak-left__content">

@@ -4,16 +4,15 @@ import NewsItem from "../NewsItem";
 import { Title } from "../../Generics";
 import { Layout } from "./style";
 import { prop3, prop4, prop5 } from "../../../mock/homeProps";
+import { useTranslation } from "react-i18next";
 
 const Events = () => {
+  const { t } = useTranslation();
   let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <Layout className="root-container">
       <div className="root-wrapper">
-        <Title
-          title={"Kutilyotgan tadbirlar"}
-          button={"Barcha tadbirlarni ko‘rish "}
-        >
+        <Title title={t("events.title")} button={t("events.btn")} to="news">
           <div className="grid">
             <div className="grid__item first" data-aos="fade-right">
               <LargeBanner

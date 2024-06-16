@@ -2,13 +2,16 @@ import React from "react";
 import { Title } from "../../Generics";
 import { Container } from "./style";
 import prof from "../../../assets/images/prof.jpg";
+import { useTranslation } from "react-i18next";
 
 const Faxriy = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
       <div className="root-container">
         <div className="root-wrapper">
-          <Title title="Faxriy professor-o‘qituvchilar" />
+          <Title title={t("honory.title")} />
         </div>
       </div>
 

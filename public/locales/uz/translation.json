@@ -6,6 +6,49 @@
     "alumni": "Alumni",
     "qidiruv": "Qidiruv"
   },
+  "news": {
+    "title": "Universitet yangiliklari",
+    "btn": "Barchasini ko‘rish"
+  },
+  "events": {
+    "title": "Kutilyotgan tadbirlar",
+    "btn": "Barcha tadbirlarni ko‘rish"
+  },
+  "interactive": {
+    "title": "Interaktiv xizmatlar",
+    "btn": "Barchasini ko‘rish",
+    "desc": "Universitet interaktiv xizmatlaridan unumli foydalaning!"
+  },
+  "faculties": {
+    "title": "Fakultet va kafedralar",
+    "btn": "Barchasini ko‘rish"
+  },
+  "talim": {
+    "title": "Ta’lim",
+    "desc": "Fikr agar yaxshi tarbiyat topsa, Xanjar, olmosday bo’lur o’tkir.",
+    "btn": "Barchasini ko‘rish"
+  },
+  "honory": {
+    "title": "Faxriy professor-o‘qituvchilar"
+  },
+  "student": {
+    "title": "Talabaning hayoti",
+    "desc": "Universitetda talabalar o'z vaqtlarini mazmunli o'tkazishlari uchun ko'plab sharoitlar yaratilgan"
+  },
+  "survery": {
+    "title": "Tadqiqotlar",
+    "btn": "Barcha tadqiqotlarni ko‘rish"
+  },
+  "centers": {
+    "title": "Ilmiy markazlar",
+    "desc": "Kashfiyotlar qilish bizning dunyomiz, sog'ligimiz va intellektual hayotimiz uchun muhimdir",
+    "btn": "Barchasini ko‘rish"
+  },
+  "alumni": {
+    "title": "Faxriy bitiruvchilar",
+    "desc": "Bugungi kunda universitetning ko'plab bitiruvchilari O'zbekiston vazirliklari, idoralari va qonun chiqaruvchi organlarida rahbarlik lavozimlarini egallab,dunyoning yetakchi xalqaro tashkilotlari va yirik kompaniyalarida muvaffaqiyatli faoliyat yuritmoqdalar",
+    "btn": "Barchasini ko‘rish"
+  },
   "about": {
     "title": "Transport Universiteti haqida",
     "desc": " Respublika transport sohasi uchun yuqori malakali kadrlarni tayyorlash tizimini ilgʻor xorijiy tajriba va xalqaro standartlar asosida tubdan takomillashtirish, oʻquv jarayoniga oʻqitishning innovatsion shakl va metodlari hamda zamonaviy pedagogik va axborot texnologiyalarini keng joriy etish, shuningdek, tarmoq taʼlim muassasalarining moddiy-texnika bazasini mustahkamlash va ilmiy salohiyatini yanada oshirish maqsadida tashkil etilgan."

@@ -4,6 +4,7 @@ import { Title } from "../../Generics";
 import Slider from "react-slick";
 import KafedraCart from "../KafedraCart";
 import { sliderProp } from "../../../mock/homeProps";
+import { useTranslation } from "react-i18next";
 
 const settings = {
   dots: false,
@@ -28,15 +29,14 @@ const settings = {
 };
 
 const Talim = () => {
+  const { t } = useTranslation();
   return (
     <Container className="root-container">
       <div className="root-wrapper">
         <Title
-          title="Ta’lim"
-          subtitle={
-            "Fikr agar yaxshi tarbiyat topsa, Xanjar, olmosday bo’lur o’tkir."
-          }
-          button="Barchasini ko‘rish"
+          title={t("talim.title")}
+          subtitle={t("talim.desc")}
+          button={t("talim.btn")}
         >
           <div data-aos="fade-up">
             <Slider className="slider" {...settings}>

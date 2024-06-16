@@ -1,5 +1,8 @@
 import styled from "styled-components";
+import lightArrow from "../../../assets/icons/arrow-light.svg?react";
 
+export const Icons = styled.div``;
+Icons.LightArrow = styled(lightArrow)``;
 export const Large = styled.div`
   background: ${({ $img }) => `url(${$img})`};
   transition: 0.3s;

@@ -1,6 +1,5 @@
 import React from "react";
-import { Contianer } from "./style";
-import { Icons } from "../../pages/Home/style";
+import { Contianer, Icons } from "./style";
 import kafedra from "../../assets/images/kafedra.png";
 
 const IlmiyMarkazCart = ({ img, title, p, $border, onClick, dataAos }) => {

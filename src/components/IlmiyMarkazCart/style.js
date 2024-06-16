@@ -1,4 +1,7 @@
 import styled, { keyframes } from "styled-components";
+import lightArrow from "../../assets/icons/arrow-light.svg?react";
+export const Icons = styled.div``;
+Icons.LightArrow = styled(lightArrow)``;
 
 const anim = keyframes`
   from {

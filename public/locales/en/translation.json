@@ -6,7 +6,10 @@
     "alumni": "Alumni",
     "qidiruv": "Search"
   },
-
+  "about": {
+    "title": "About Transport University",
+    "desc": "The system for training highly qualified personnel for the republic's transport sector has been fundamentally improved based on advanced foreign experience and international standards, by widely introducing innovative teaching methods and modern pedagogical and information technologies into the educational process, as well as strengthening the material and technical base and increasing the scientific potential of sectoral educational institutions."
+  },
   "footer": {
     "title": "Transport University",
     "desc": "Students are our main strength. Therefore, if we want to introduce something new at our university, we always consult with them.",

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Icons } from "../Home/style";
 import { Content } from "./style";
 import { prop6 } from "../../mock/homeProps";
 import { InteractiveCart } from "../../components/HomeElements";

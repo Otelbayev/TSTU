@@ -3,14 +3,23 @@ import { Container } from "./style";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLanguageContext } from "../../../context/LanguageContext";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 
 const Lang = ({ mode }) => {
   const { setLanguage, language, code, options } = useLanguageContext();
+  const lanCookie = Cookies.get("i18next");
 
   const { i18n } = useTranslation();
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    if (lanCookie) {
+      setLanguage(lanCookie);
+    }
+  }, [lanCookie]);
 
   const handleLanguageChange = (value) => {
     setLanguage(value);

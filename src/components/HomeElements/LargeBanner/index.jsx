@@ -1,6 +1,5 @@
 import React from "react";
-import { Large } from "./style";
-import { Icons } from "../../../pages/Home/style";
+import { Large, Icons } from "./style";
 
 const LargeBanner = ({ prop, onClick }) => {
   return (

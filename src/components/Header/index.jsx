@@ -29,6 +29,7 @@ import {
   Mobile,
   Line,
   Desktop,
+  SearchBox,
 } from "./style";
 
 const all = [
@@ -283,23 +284,24 @@ const Header = ({ uni }) => {
     const currentOpenKey = openKeys.find(
       (key) => stateOpenKeys.indexOf(key) === -1
     );
-    // open
+
     if (currentOpenKey !== undefined) {
       const repeatIndex = openKeys
         .filter((key) => key !== currentOpenKey)
         .findIndex((key) => levelKeys[key] === levelKeys[currentOpenKey]);
       setStateOpenKeys(
         openKeys
-          // remove repeat key
           .filter((_, index) => index !== repeatIndex)
-          // remove current level all child
           .filter((key) => levelKeys[key] <= levelKeys[currentOpenKey])
       );
     } else {
-      // close
       setStateOpenKeys(openKeys);
     }
   };
+
+  useEffect(() => {
+    setIsSearchOpen(false);
+  }, [window.location.pathname]);
 
   return (
     <div style={{ position: "relative" }}>
@@ -375,6 +377,13 @@ const Header = ({ uni }) => {
             </Desktop>
           </div>
         </div>
+        <SearchBox $isopen={isSearchOpen.toString()}>
+          <div className="root-container">
+            <div className="root-wrapper">
+              <input type="text" placeholder={`${t("header.qidiruv")}...`} />
+            </div>
+          </div>
+        </SearchBox>
       </Container>
       <Mobile $isopen={isOpen.toString()}>
         <Antmenu

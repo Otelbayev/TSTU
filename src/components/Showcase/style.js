@@ -33,11 +33,16 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Title = styled.img`
-  max-width: 900px;
-  width: 100%;
-  display: ${({ display }) => (display === "desktop" ? "block" : "none")};
-  @media (max-width: 650px) {
-    display: ${({ display }) => (display === "mobile" ? "block" : "none")};
-  }
+// export const Title = styled.img`
+//   max-width: 900px;
+//   width: 100%;
+//   display: ${({ display }) => (display === "desktop" ? "block" : "none")};
+//   @media (max-width: 650px) {
+//     display: ${({ display }) => (display === "mobile" ? "block" : "none")};
+//   }
+// `;
+
+export const Title = styled.h1`
+  font-size: 75px !important;
+  letter-spacing: 2px;
 `;

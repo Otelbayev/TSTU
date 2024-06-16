@@ -74,15 +74,15 @@ const Create = () => {
     } else {
       formData.append(
         "persons_.gender_id",
-        genderData.find((e) => e.value === gender)?.id
+        genderData.find((e) => e.value === gender)?.parent
       );
       formData.append(
         "persons_.employee_type_id",
-        employeeTypeData.find((e) => e.value === employee)?.id
+        employeeTypeData.find((e) => e.value === employee)?.parent
       );
       formData.append(
         "persons_.departament_id",
-        departmentOptions.find((e) => e.value === departent)?.id
+        departmentOptions.find((e) => e.value === departent)?.parent
       );
     }
     formData.append("persons_.pinfl", jshir);
@@ -155,19 +155,19 @@ const Create = () => {
             },
             persons_data_id: res1?.data?.id,
             biography_json: biography,
-            birthday: date,
+            birthday: `${date}T00:31:01.134Z`,
             degree: degree,
-            experience_year: experience,
+            experience_year: 0,
             phone_number1: tel1,
             phone_number2: tel2,
             orchid: orcid,
             scopus_id: scopus,
             address: address,
-            languages_uz: uzbek,
-            languages_en: ingiliz,
-            languages_ru: rus,
+            languages_uz: 0,
+            languages_en: 0,
+            languages_ru: 0,
             languages_any_title: other,
-            languages_any: other2,
+            languages_any: 0,
             experience_json: experience_json,
             scientific_activity_json: scientific,
             portfolio_json: $(portfolioRef.current).summernote("code"),
@@ -198,7 +198,7 @@ const Create = () => {
 
   useEffect(() => {
     setGender(genderData[0]?.value);
-  }, [genderData]); 
+  }, [genderData]);
 
   useEffect(() => {
     setDepartent(departmentOptions[1]?.value);

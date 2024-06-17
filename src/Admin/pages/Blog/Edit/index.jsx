@@ -41,6 +41,8 @@ const Edit = () => {
   const [isCreate, setIsCreate] = useState(false);
   const [transId, setTransId] = useState(null);
   const [blogValue, setBlogValue] = useState(null);
+  const [date1, setDate1] = useState(null);
+  const [date2, setDate2] = useState(null);
 
   const getData = async (value) => {
     const res = await sendRequest({
@@ -70,6 +72,8 @@ const Edit = () => {
       console.log(res);
       setStatus(res?.data?.status_?.id || res?.data?.status_translation_?.id);
       setImg(res?.data?.img_?.url || res?.data?.img_translation_?.url);
+      setDate1(res.data?.event_date?.substring(0, 10));
+      setDate2(res.data?.event_end_date?.substring(0, 10));
     } else {
       setIsCreate(true);
       setTransId(null);
@@ -108,6 +112,8 @@ const Edit = () => {
     formData.append("favorite", favorite);
     formData.append("img_up", imgRef.current?.files[0] || null);
     formData.append("blog_category_id", blogValue);
+    formData.append("event_date", `${date1}T19:00:00Z` || null);
+    formData.append("event_end_date", `${date2}T19:00:00Z` || null);
 
     const res = await useEdit(
       isCreate,
@@ -148,45 +154,59 @@ const Edit = () => {
           <LanguageSelect onChange={(e) => setValue(e)} />
         </div>
         <TextArea
-          className="form-group col-md-6 card-header"
+          className="form-group col-md-4 card-header"
           label={`Title (${value})`}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <TextArea
-          className="form-group col-md-6 card-header"
+          className="form-group col-md-4 card-header"
           label={`Short Title (${value})`}
           value={short}
           onChange={(e) => setShort(e.target.value)}
+        />
+        <TextArea
+          className="form-group col-md-4 card-header"
+          label={`Description (${value})`}
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
         />
         <Editor
           className="form-group col-md-6 card-header"
           lan={value}
           ref={editorRef}
         />
-        <TextArea
-          className="form-group col-md-6 card-header"
-          label={`Description (${value})`}
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
+        <Input
+          label="Event date"
+          type="date"
+          className="form-group col-md-3 mt-4"
+          value={date1}
+          onChange={(e) => setDate1(e.target.value)}
+        />
+        <Input
+          label="Event end date"
+          type="date"
+          className="form-group col-md-3 mt-4"
+          value={date2}
+          onChange={(e) => setDate2(e.target.value)}
         />
         <Select
           label="Blog Ctegory"
-          className="col-md-4"
+          className={isCreate ? "form-group col-md-3" : "form-group col-md-4"}
           value={blogValue}
           onChange={(e) => setBlogValue(e)}
           options={blogCategoryOptions}
         />
         <Input
           label="Position"
-          className="form-group col-md-4"
+          className={isCreate ? "form-group col-md-3" : "form-group col-md-4"}
           value={position || ""}
           onChange={(e) => setPosition(e.target.value)}
           type="number"
         />
         <Select
           label="Favorite"
-          className="col-md-4"
+          className={isCreate ? "form-group col-md-3" : "form-group col-md-4"}
           options={[
             { value: true, label: "true" },
             { value: false, label: "false" },
@@ -205,7 +225,7 @@ const Edit = () => {
         )}
         <ChooseFile
           label="Image"
-          className="form-group col-md-4"
+          className={isCreate ? "form-group col-md-3" : "form-group col-md-4"}
           ref={imgRef}
         />
         {!isCreate && <Image label="Image" className="col-md-4" img={img} />}

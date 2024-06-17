@@ -24,6 +24,8 @@ const Create = () => {
   const descRef = useRef(null);
   const positionRef = useRef(null);
   const imgRef = useRef(null);
+  const date1Ref = useRef(null);
+  const date2Ref = useRef(null);
 
   const [favorite, setFavorite] = useState(2);
   const [blogValue, setBlogValue] = useState(null);
@@ -50,6 +52,8 @@ const Create = () => {
     formData.append("img_up", img_up);
     formData.append("position", position);
     formData.append("favorite", favorite === 1 ? true : false);
+    formData.append("event_date", date1Ref?.current?.value || null);
+    formData.append("event_end_date", date2Ref?.current?.value || null);
     if (value === "uz") {
       formData.append("blog_category_id", blogValue);
     } else {
@@ -90,24 +94,36 @@ const Create = () => {
           <LanguageSelect onChange={(e) => setValue(e)} />
         </div>
         <TextArea
-          className="form-group col-md-6 card-header"
+          className="form-group col-md-4 card-header"
           label={`Title (${value})`}
           ref={titleRef}
         />
         <TextArea
-          className="form-group col-md-6 card-header"
+          className="form-group col-md-4 card-header"
           label={`Short Title (${value})`}
           ref={shortRef}
+        />
+        <TextArea
+          className="form-group col-md-4 card-header"
+          label={`Description (${value})`}
+          ref={descRef}
         />
         <Editor
           className="form-group col-md-6 card-header"
           lan={value}
           ref={editorRef}
         />
-        <TextArea
-          className="form-group col-md-6 card-header"
-          label={`Description (${value})`}
-          ref={descRef}
+        <Input
+          label="Event data"
+          type="date"
+          className="form-group col-md-3 mt-4"
+          ref={date1Ref}
+        />
+        <Input
+          label="Event end data"
+          type="date"
+          className="form-group col-md-3 mt-4"
+          ref={date2Ref}
         />
         <FileImg
           className="form-group col-md-6"

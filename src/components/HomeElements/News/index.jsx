@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Title } from "../../Generics";
 import { Layout } from "./style";
 import { prop1, prop2 } from "../../../mock/homeProps";
@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const News = () => {
   const { t } = useTranslation();
+
   return (
     <Layout className="root-container">
       <div className="root-wrapper">

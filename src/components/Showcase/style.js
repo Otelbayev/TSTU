@@ -43,6 +43,6 @@ export const Wrapper = styled.div`
 // `;
 
 export const Title = styled.h1`
-  font-size: 75px !important;
+  font-size: 80px !important;
   letter-spacing: 2px;
 `;

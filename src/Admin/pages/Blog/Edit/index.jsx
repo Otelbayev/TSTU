@@ -69,11 +69,10 @@ const Edit = () => {
       );
       setPosition(res?.data?.position);
       setFavorite(res?.data?.favorite);
-      console.log(res);
       setStatus(res?.data?.status_?.id || res?.data?.status_translation_?.id);
       setImg(res?.data?.img_?.url || res?.data?.img_translation_?.url);
-      setDate1(res.data?.event_date?.substring(0, 10));
-      setDate2(res.data?.event_end_date?.substring(0, 10));
+      setDate1(res.data?.event_date.split("T")[0]);
+      setDate2(res.data?.event_end_date.split("T")[0]);
     } else {
       setIsCreate(true);
       setTransId(null);
@@ -112,8 +111,8 @@ const Edit = () => {
     formData.append("favorite", favorite);
     formData.append("img_up", imgRef.current?.files[0] || null);
     formData.append("blog_category_id", blogValue);
-    formData.append("event_date", `${date1}T19:00:00Z` || null);
-    formData.append("event_end_date", `${date2}T19:00:00Z` || null);
+    formData.append("event_date", date1 || "");
+    formData.append("event_end_date", date2 || "");
 
     const res = await useEdit(
       isCreate,
@@ -180,14 +179,14 @@ const Edit = () => {
           label="Event date"
           type="date"
           className="form-group col-md-3 mt-4"
-          value={date1}
+          value={date1 || null}
           onChange={(e) => setDate1(e.target.value)}
         />
         <Input
           label="Event end date"
           type="date"
           className="form-group col-md-3 mt-4"
-          value={date2}
+          value={date2 || null}
           onChange={(e) => setDate2(e.target.value)}
         />
         <Select

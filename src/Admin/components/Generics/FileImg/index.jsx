@@ -5,8 +5,12 @@ import ChooseFile from "../ChooseFile";
 import Select from "../Select";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useLanguageContext } from "./../../../../context/LanguageContext/index";
 
 const FileImg = ({ className, lan, editorRef }) => {
+  const { options } = useLanguageContext();
+  const language_id = options.find((e) => e.code === lan)?.id;
+
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
 
@@ -31,15 +35,25 @@ const FileImg = ({ className, lan, editorRef }) => {
       const formData = new FormData();
       formData.append("title", title);
       formData.append("url", fileRef?.current?.files[0]);
-      const res = await axios.post("/api/files/uploadfiles", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${Cookies.get("_token")}`,
-        },
-        params: {
-          title,
-        },
-      });
+      if (lan !== "uz") {
+        formData.append("language_id", language_id);
+        formData.append("files_id", "");
+      }
+      const res = await axios.post(
+        lan === "uz"
+          ? "/api/files/uploadfiles"
+          : "/api/files/uploadfilestranslation",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${Cookies.get("_token")}`,
+          },
+          params: {
+            title,
+          },
+        }
+      );
       if (res.status === 200) {
         fileRef.current.value = "";
         $(editorRef.current).summernote(
@@ -163,16 +177,25 @@ const FileImg = ({ className, lan, editorRef }) => {
       const formData = new FormData();
       formData.append("title", title2);
       formData.append("url", fileRef2?.current?.files[0]);
-
-      const res = await axios.post("/api/files/uploadfiles", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${Cookies.get("_token")}`,
-        },
-        params: {
-          title,
-        },
-      });
+      if (lan !== "uz") {
+        formData.append("language_id", language_id);
+        formData.append("files_id", "");
+      }
+      const res = await axios.post(
+        lan === "uz"
+          ? "/api/files/uploadfiles"
+          : "/api/files/uploadfilestranslation",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${Cookies.get("_token")}`,
+          },
+          params: {
+            title,
+          },
+        }
+      );
 
       if (res.status === 200) {
         message.success({
@@ -198,11 +221,16 @@ const FileImg = ({ className, lan, editorRef }) => {
   };
 
   const getData = async (value) => {
-    const res = await axios.get(`/api/files/selectgetallfiles?image=${value}`, {
-      headers: {
-        Authorization: `Bearer ${Cookies.get("_token")}`,
-      },
-    });
+    const res = await axios.get(
+      lan === "uz"
+        ? `/api/files/selectgetallfiles?image=${value}`
+        : `/api/files/selectgetallfilestranslation?image=${value}&language_code=${lan}`,
+      {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("_token")}`,
+        },
+      }
+    );
 
     return res.data;
   };
@@ -289,7 +317,7 @@ const FileImg = ({ className, lan, editorRef }) => {
             className={"col-md-12"}
             value={select}
             onChange={onSelectChange}
-            options={selectData}
+            options={[{ label: "other", value: "other" }, ...selectData]}
           />
         </div>
       </Modal>

@@ -9,7 +9,7 @@ const Icon = styled(darkArrow)`
   transform: translateY(4px);
 `;
 
-const Cart = ({ prop, onClick }) => {
+const Cart = ({ prop, onClick, item }) => {
   return (
     <Wrap>
       <Wrap.Img>
@@ -18,10 +18,10 @@ const Cart = ({ prop, onClick }) => {
       <Wrap.Content>
         <Wrap.Date>
           <span className="left">{prop?.left}</span>
-          <span className="date">{prop?.date}</span>
+          <span className="date">{item?.event_date?.split("T")[0]}</span>
         </Wrap.Date>
         <Wrap.Title onClick={onClick}>
-          {prop?.title} <Icon />
+          {item?.title} <Icon />
           <div className="bottom"></div>
         </Wrap.Title>
       </Wrap.Content>

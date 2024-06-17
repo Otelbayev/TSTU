@@ -5,7 +5,6 @@ import { prop1, prop2 } from "../../../mock/homeProps";
 import LargeBanner from "../LargeBanner";
 import Cart from "../Cart";
 import { useTranslation } from "react-i18next";
-import getArrowStyle from "antd/es/style/placementArrow";
 
 const News = ({ data }) => {
   const { t } = useTranslation();
@@ -39,30 +38,12 @@ const News = ({ data }) => {
                 key={item?.id}
               >
                 {index === 0 || index === 5 ? (
-                  <LargeBanner prop={prop1} />
+                  <LargeBanner item={item} prop={prop1} />
                 ) : (
-                  <Cart prop={prop2} />
+                  <Cart item={item} prop={prop2} />
                 )}
               </div>
             ))}
-            {/* <div className="flex__item1" data-aos="fade-right">
-              <LargeBanner prop={prop1} />
-            </div>
-            <div className="flex__item2" data-aos="fade-left">
-              <Cart prop={prop2} />
-            </div>
-            <div className="flex__item3" data-aos="fade-left">
-              <Cart prop={prop2} />
-            </div>
-            <div className="flex__item4" data-aos="fade-right">
-              <Cart prop={prop2} />
-            </div>
-            <div className="flex__item5" data-aos="fade-right">
-              <Cart prop={prop2} />
-            </div>
-            <div className="flex__item6" data-aos="fade-left">
-              <LargeBanner prop={prop1} />
-            </div> */}
           </div>
         </Title>
       </div>

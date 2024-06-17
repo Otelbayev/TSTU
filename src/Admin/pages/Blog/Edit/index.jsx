@@ -142,10 +142,6 @@ const Edit = () => {
     res?.status === 200 && setIsCreate(false);
   };
 
-  useEffect(() => {
-    !isCreate && setBlogValue(blogCategoryOptions[0]?.value);
-  }, [blogCategoryOptions]);
-
   return (
     <Wrapper title="Edit Blog">
       <form className="form-horizontal row" onSubmit={onHandleSubmit}>

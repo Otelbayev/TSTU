@@ -9,6 +9,8 @@ import { useTranslation } from "react-i18next";
 const News = ({ data }) => {
   const { t } = useTranslation();
 
+  console.log(data);
+
   const getAos = (index) => {
     switch (index) {
       case 0:

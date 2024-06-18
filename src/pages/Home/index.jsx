@@ -29,14 +29,15 @@ const HomePage = () => {
         : `/api/blogcontroller/sitegetallblogtranslation?language_code=${language}&favorite=true`
     );
     if (res.status === 200) {
-      console.log(res.data);
       setNews(
         res.data
           ?.filter(
             (item) =>
-              item?.blog_category_?.title === "yangilikar" ||
-              item?.blog_category_translation_?.title === "news" ||
-              item?.blog_category_translation_?.title === "новости"
+              item?.blog_category_?.title?.toLowerCase() === "yangiliklar" ||
+              item?.blog_category_translation_?.title?.toLowerCase() ===
+                "news" ||
+              item?.blog_category_translation_?.title?.toLowerCase() ===
+                "новости"
           )
           ?.sort((a, b) => a?.position - b?.position)
       );

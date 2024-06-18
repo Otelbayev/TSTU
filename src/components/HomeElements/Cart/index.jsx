@@ -21,7 +21,7 @@ const Cart = ({ prop, onClick, item }) => {
           <span className="date">{item?.event_date?.split("T")[0]}</span>
         </Wrap.Date>
         <Wrap.Title onClick={onClick}>
-          {item?.title} <Icon />
+          {item?.title}
           <div className="bottom"></div>
         </Wrap.Title>
       </Wrap.Content>

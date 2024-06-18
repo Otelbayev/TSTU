@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import icon from "../../../assets/icons/arrow-dark.svg";
 
 export const Wrap = styled.div`
   border-radius: 4px;
@@ -34,8 +35,6 @@ Wrap.Img = styled.div`
 Wrap.Content = styled.div`
   background: #fff;
   padding: 5px 18px;
-  display: flex;
-  flex-direction: column;
   @media (max-width: 650px) {
     padding: 20px;
   }
@@ -62,14 +61,13 @@ Wrap.Date = styled.div`
 `;
 
 Wrap.Title = styled.div`
-  color: var(--titleDark);
-  font-size: 17px;
-  font-style: normal;
+  color: #01426f;
   font-weight: 700;
-  line-height: 15px;
-  cursor: pointer;
-  margin-top: 10px;
-  @media (max-width: 650px) {
-    line-height: 5px;
+  font-size: 20px;
+  display: inline-block;
+  border: 1px solid red;
+  &::after {
+    content: url(${icon});
+    display: inline-block;
   }
 `;

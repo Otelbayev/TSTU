@@ -7,9 +7,11 @@ import mackbook from "../../../assets/images/Macbook.png";
 import iMac from "../../../assets/images/iMac.png";
 import { prop6 } from "../../../mock/homeProps";
 import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 const Interactive = () => {
   const { t } = useTranslation();
+  const { language } = useLanguageContext();
   return (
     <DarkSection className="root-container">
       <div className="root-wrapper">
@@ -24,7 +26,7 @@ const Interactive = () => {
               <div className="first__left">
                 <Icons.Int4 />
                 <NavLink
-                  to="/interactive-services"
+                  to={`${language}/interactive-services`}
                   className="first__left__title"
                 >
                   {t("interactive.desc")}

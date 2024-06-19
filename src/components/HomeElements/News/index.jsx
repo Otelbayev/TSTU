@@ -5,8 +5,10 @@ import { prop1, prop2 } from "../../../mock/homeProps";
 import LargeBanner from "../LargeBanner";
 import Cart from "../Cart";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
-const News = ({ data }) => {
+const News = ({ data, type }) => {
   const { t } = useTranslation();
 
   const getAos = (index) => {
@@ -26,10 +28,13 @@ const News = ({ data }) => {
     }
   };
 
+  const navigate = useNavigate();
+  const { language } = useLanguageContext();
+
   return (
     <Layout className="root-container">
       <div className="root-wrapper">
-        <Title title={t("news.title")} button={t("news.btn")} to="news">
+        <Title title={t("news.title")} button={t("news.btn")} to="blog">
           <div className="flex">
             {data?.slice(0, 6)?.map((item, index) => (
               <div
@@ -38,9 +43,18 @@ const News = ({ data }) => {
                 key={item?.id}
               >
                 {index === 0 || index === 5 ? (
-                  <LargeBanner item={item} prop={prop1} />
+                  <LargeBanner
+                    onClick={() => navigate(`/${language}/blog/${item?.id}`)}
+                    item={item}
+                    prop={prop1}
+                    type={type}
+                  />
                 ) : (
-                  <Cart item={item} prop={prop2} />
+                  <Cart
+                    item={item}
+                    prop={prop2}
+                    onClick={() => navigate(`/${language}/blog/${item?.id}`)}
+                  />
                 )}
               </div>
             ))}

@@ -3,20 +3,39 @@ import lightArrow from "../../../assets/icons/arrow-light.svg?react";
 
 export const Icons = styled.div``;
 Icons.LightArrow = styled(lightArrow)``;
+
 export const Large = styled.div`
   background: ${({ $img }) => `url(${$img})`};
   transition: 0.3s;
   border-radius: 4px;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: end;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  &:hover {
+    .bannner-title {
+      .bottom {
+        opacity: 1;
+      }
+    }
+    & > div {
+      height: 60%;
+      .bannner-desc {
+        display: block;
+      }
+    }
+  }
+
   & > div {
     transition: 0.3s;
-    height: 30%;
+    height: 45%;
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -33,10 +52,9 @@ export const Large = styled.div`
     );
     padding: 20px;
     gap: 5px;
-  }
-  &:hover {
-    & > div {
-      height: 100%;
+
+    .bannner-desc {
+      display: none;
     }
   }
 
@@ -50,7 +68,7 @@ export const Large = styled.div`
 Large.Date = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   padding-bottom: 5px;
   color: var(--titleLight);
   font-weight: 400;
@@ -79,6 +97,7 @@ Large.Title = styled.div`
   position: relative;
   z-index: 1;
   cursor: pointer;
+  display: inline-block;
   .bottom {
     transition: 0.3s;
     position: absolute;
@@ -89,11 +108,6 @@ Large.Title = styled.div`
     transform: skew(-30deg);
     z-index: -5;
     opacity: 0;
-  }
-  &:hover {
-    .bottom {
-      opacity: 1;
-    }
   }
 `;
 

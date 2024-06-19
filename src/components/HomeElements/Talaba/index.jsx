@@ -6,24 +6,38 @@ import { prop7, prop8, prop9 } from "../../../mock/homeProps";
 import filterSt from "../../../assets/images/filterSt.png";
 import jasco from "../../../assets/images/jasco.jpg";
 import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../../../context/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
-const Talaba = () => {
+const Talaba = ({ data }) => {
   const { t } = useTranslation();
+  const { language } = useLanguageContext();
+  const navigate = useNavigate();
+
   return (
     <Container className="root-container">
       <div className="root-wrapper">
-        <Title
-          title={t("student.title")}
-          subtitle={t("student.desc")}
-        >
+        <Title title={t("student.title")} subtitle={t("student.desc")}>
           <Layout $type="talaba">
             <div className="grid">
               <div className="grid__item" data-aos="fade-right">
-                <LargeBanner prop={prop7} />
-                <LargeBanner prop={prop8} />
+                <LargeBanner
+                  prop={prop7}
+                  item={data[0]}
+                  onClick={() => navigate(`/${language}/blog/${data[0]?.id}`)}
+                />
+                <LargeBanner
+                  prop={prop8}
+                  item={data[1]}
+                  onClick={() => navigate(`/${language}/blog/${data[1]?.id}`)}
+                />
               </div>
               <div data-aos="fade-up">
-                <LargeBanner prop={prop9} />
+                <LargeBanner
+                  prop={prop9}
+                  item={data[2]}
+                  onClick={() => navigate(`/${language}/blog/${data[2]?.id}`)}
+                />
               </div>
               <div className="grid__large" data-aos="fade-left">
                 <img

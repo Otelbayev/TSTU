@@ -12,8 +12,7 @@
     "btn": "View All"
   },
   "events": {
-    "title": "Upcoming Events",
-    "btn": "View All Events"
+    "title": "Upcoming Events"
   },
   "interactive": {
     "title": "Interactive Services",

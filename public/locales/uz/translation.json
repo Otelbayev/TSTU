@@ -12,8 +12,7 @@
     "btn": "Barchasini ko‘rish"
   },
   "events": {
-    "title": "Kutilyotgan tadbirlar",
-    "btn": "Barcha tadbirlarni ko‘rish"
+    "title": "Kutilyotgan tadbirlar"
   },
   "interactive": {
     "title": "Interaktiv xizmatlar",

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
+  cursor: pointer;
   border-radius: 4px;
   border: 1px solid var(--date);
   background: var(--titleLight);
-  height: 100%;
   @media (max-width: 650px) {
     display: flex;
     align-items: center;
@@ -61,15 +61,13 @@ Wrap.Date = styled.div`
   }
 `;
 
-Wrap.Title = styled.div`
+Wrap.Title = styled.span`
   color: var(--titleDark);
   font-size: 17px;
   font-style: normal;
   font-weight: 700;
-  line-height: 15px;
-  cursor: pointer;
-  margin-top: 10px;
-  @media (max-width: 650px) {
-    line-height: 5px;
+  padding: 10px 0;
+  .icon {
+    margin-left: 5px;
   }
 `;

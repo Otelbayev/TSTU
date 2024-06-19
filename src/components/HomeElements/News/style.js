@@ -5,7 +5,7 @@ export const Layout = styled.div`
   .flex {
     display: grid;
     margin: 20px 0;
-    grid-template-rows: 300px 300px;
+    grid-template-rows: auto;
     gap: 10px;
     &__item1 {
       grid-column: 1/3;

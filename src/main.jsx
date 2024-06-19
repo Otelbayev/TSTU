@@ -9,6 +9,7 @@ import "aos/dist/aos.css";
 import Context from "./context";
 import { HelmetProvider } from "react-helmet-async";
 import "./i18n";
+import "../public/fontawesome/css/all.min.css";
 
 AOS.init({
   duration: 800,

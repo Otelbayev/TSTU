@@ -6,7 +6,7 @@ const Contact = lazy(() => import("../pages/Contact"));
 const Faculties = lazy(() => import("../pages/Faculties"));
 const Faq = lazy(() => import("../pages/Faq"));
 const Honorary = lazy(() => import("../pages/Honorary"));
-const News = lazy(() => import("../pages/News"));
+const Blog = lazy(() => import("../pages/News"));
 const OurHistory = lazy(() => import("../pages/OurHistory"));
 const Rector = lazy(() => import("../pages/Rector"));
 const Scientific = lazy(() => import("../pages/Scientific"));
@@ -27,7 +27,7 @@ const Galereya = lazy(() => import("../pages/Galereya"));
 const Arm = lazy(() => import("../pages/Arm"));
 const Kafedra = lazy(() => import("../pages/Faculties/Kafedra"));
 const Department = lazy(() => import("../pages/Department"));
-const NewsId = lazy(() => import("../pages/News/NewsId"));
+const BlogId = lazy(() => import("../pages/News/NewsId"));
 const Announcement = lazy(() => import("../pages/Announcement"));
 const AnnouncementId = lazy(() =>
   import("../pages/Announcement/AnnouncementId")
@@ -197,14 +197,14 @@ export const noshowcase = [
   },
   {
     id: useId(),
-    path: "news",
-    element: <News />,
+    path: "blog",
+    element: <Blog />,
     isPrivate: false,
   },
   {
     id: useId(),
-    path: "news/:id",
-    element: <NewsId />,
+    path: "blog/:id",
+    element: <BlogId />,
     isPrivate: false,
   },
   {

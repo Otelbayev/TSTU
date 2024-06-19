@@ -77,7 +77,6 @@ const FileImg = ({ className, lan, editorRef }) => {
         });
       }
     } else {
-      console.log(selectData.find((e) => e.value === select));
       $(editorRef.current).summernote(
         "code",
         `${$(editorRef.current)?.summernote("code")} 

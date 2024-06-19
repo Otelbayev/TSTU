@@ -52,8 +52,8 @@ const Create = () => {
     formData.append("img_up", img_up);
     formData.append("position", position);
     formData.append("favorite", favorite === 1 ? true : false);
-    formData.append("event_date", date1Ref?.current?.value || null);
-    formData.append("event_end_date", date2Ref?.current?.value || null);
+    formData.append("event_date", date1Ref?.current?.value || "2000-01-01");
+    formData.append("event_end_date", date2Ref?.current?.value || "2000-01-01");
     if (value === "uz") {
       formData.append("blog_category_id", blogValue);
     } else {

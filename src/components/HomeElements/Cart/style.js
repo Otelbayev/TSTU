@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import icon from "../../../assets/icons/arrow-dark.svg";
 
 export const Wrap = styled.div`
   cursor: pointer;
@@ -34,8 +35,6 @@ Wrap.Img = styled.div`
 Wrap.Content = styled.div`
   background: #fff;
   padding: 5px 18px;
-  display: flex;
-  flex-direction: column;
   @media (max-width: 650px) {
     padding: 20px;
   }

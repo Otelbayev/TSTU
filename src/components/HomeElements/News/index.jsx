@@ -11,6 +11,8 @@ import { useLanguageContext } from "../../../context/LanguageContext";
 const News = ({ data, type }) => {
   const { t } = useTranslation();
 
+  console.log(data);
+
   const getAos = (index) => {
     switch (index) {
       case 0:

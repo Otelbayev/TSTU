@@ -1,17 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InteractiveCart from "../InteractiveCart";
 import { DarkSection, Icons, InteraktiveCarts } from "./style";
 import { Title } from "../../Generics";
 import { NavLink } from "react-router-dom";
 import mackbook from "../../../assets/images/Macbook.png";
 import iMac from "../../../assets/images/iMac.png";
-import { prop6 } from "../../../mock/homeProps";
 import { useTranslation } from "react-i18next";
 import { useLanguageContext } from "../../../context/LanguageContext";
+import axios from "axios";
 
 const Interactive = () => {
   const { t } = useTranslation();
   const { language } = useLanguageContext();
+  const [data, setData] = useState([]);
+
+  const getData = async () => {
+    const res = await axios.get(
+      language === "uz"
+        ? "/api/interactiveservices/sitegetallinteractiveservices"
+        : `/api/interactiveservices/sitegetallinteractiveservicestranslation?language_code=${language}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    res.status === 200 && setData(res.data);
+  };
+
+  useEffect(() => {
+    getData();
+  }, [language]);
+
   return (
     <DarkSection className="root-container">
       <div className="root-wrapper">
@@ -49,7 +69,7 @@ const Interactive = () => {
               </div>
             </div>
             <div className="second">
-              {prop6.map((e) => (
+              {data.slice(0, 4).map((e) => (
                 <InteractiveCart aos={"zoom-in"} key={e?.id} prop={e} />
               ))}
             </div>

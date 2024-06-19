@@ -2,18 +2,38 @@ import React, { useEffect } from "react";
 import { Content } from "./style";
 import { prop6 } from "../../mock/homeProps";
 import { InteractiveCart } from "../../components/HomeElements";
+import axios from "axios";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 const InteractiveServices = () => {
+  const { language } = useLanguageContext();
+  const [data, setData] = React.useState([]);
+  const getData = async () => {
+    const res = await axios.get(
+      language === "uz"
+        ? "/api/interactiveservices/sitegetallinteractiveservices"
+        : `/api/interactiveservices/sitegetallinteractiveservicestranslation?language_code=${language}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    res.status === 200 && setData(res.data);
+  };
+
+  useEffect(() => {
+    getData();
+  }, [language]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const data = [...prop6, ...prop6, ...prop6];
   return (
     <div className="root-container">
       <div className="root-wrapper">
         <Content>
-          {data.map((e, index) => (
-            <InteractiveCart key={index} prop={e} />
+          {data.map((e) => (
+            <InteractiveCart key={e.id} prop={e} />
           ))}
         </Content>
       </div>

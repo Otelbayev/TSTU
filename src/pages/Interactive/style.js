@@ -5,7 +5,6 @@ export const Content = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  cursor: pointer;
   @media (max-width: 1100px) {
     grid-template-columns: repeat(3, 1fr);
   }

@@ -1,13 +1,14 @@
 import React from "react";
-import { Icon, Wrap } from "./style";
+import { Wrap } from "./style";
 import { NavLink } from "react-router-dom";
+import intIcon1 from "../../../assets/icons/intIcon1.svg";
 
 const InteractiveCart = ({ prop }) => {
   return (
     <Wrap data-aos={"zoom-in"}>
-      <div>{prop?.icon}</div>
-      <NavLink className={"title"} to={prop?.link}>
-        {prop?.title} <Icon />
+      <img src={intIcon1} alt="" />
+      <NavLink className={"title"} to={`${prop?.url_}`} target="_blank">
+        {prop?.title} <i className="fa-solid fa-arrow-right"></i>
       </NavLink>
     </Wrap>
   );

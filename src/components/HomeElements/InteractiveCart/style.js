@@ -9,6 +9,10 @@ export const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   background: #ffff;
+  img {
+    width: 75px;
+    height: 75px;
+  }
   .title {
     color: var(--titleDark);
     text-decoration: none;
@@ -16,6 +20,9 @@ export const Wrap = styled.div`
     font-style: normal;
     font-weight: 600;
     line-height: 119%;
+    i{
+      font-size: 20px ;
+    }
   }
   @media (max-width: 650px) {
     flex-direction: row;

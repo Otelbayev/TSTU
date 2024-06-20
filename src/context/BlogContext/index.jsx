@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   createContext,
   useContext,
@@ -7,60 +6,81 @@ import {
   useCallback,
 } from "react";
 import { useLanguageContext } from "../LanguageContext";
+import axios from "axios";
 
 const FrontBlogContext = createContext();
 
 export const useFrontBlogContext = () => useContext(FrontBlogContext);
 
 const FrontBlogContextProvider = ({ children }) => {
+  const [news, setNews] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [student, setStudent] = useState([]);
+
   const { language } = useLanguageContext();
 
-  const [blogData, setBlogData] = useState({
-    news: [],
-    events: [],
-    student: [],
-  });
-  const [blogCategoryOptions, setBlogCategoryOptions] = useState([]);
+  const fetchUzBlogs = async (title) => {
+    const response = await axios.get(
+      `/api/blogcontroller/sitegetallblog?blog_category=${title}&favorite=true`
+    );
+    if (response.status === 200) {
+      return response.data;
+    }
+    return [];
+  };
 
-  const fetchBlogData = useCallback(
-    async (categoryTitle, stateKey) => {
-      const id = blogCategoryOptions.find((e) => e.title === categoryTitle)?.id;
-      const res = await axios.get(
-        language === "uz"
-          ? `/api/blogcontroller/sitegetallblog?blog_category=${categoryTitle}&favorite=true`
-          : `/api/blogcontroller/sitegetbyuzidblogtranslation/${id}?language_code=${language}`
-      );
-      if (res.status === 200) {
-        setBlogData((prevData) => ({
-          ...prevData,
-          [stateKey]: res.data,
-        }));
+  const fetchTranslatedBlogs = async (titleuz) => {
+    const categoryResponse = await axios.get(
+      "/api/blogcategorycontroller/sitegetallblogcategory"
+    );
+    if (categoryResponse.status === 200) {
+      const category = categoryResponse.data.find((e) => e.title === titleuz);
+      if (category) {
+        const translationResponse = await axios.get(
+          `/api/blogcategorycontroller/sitegetbyuzidblogcategorytranslation/${category.id}?language_code=${language}`
+        );
+        if (translationResponse.status === 200) {
+          const blogsResponse = await axios.get(
+            `/api/blogcontroller/sitegetallblogtranslation?blog_category=${translationResponse.data?.title}&favorite=true`
+          );
+          if (blogsResponse.status === 200) {
+            return blogsResponse.data;
+          }
+        }
+      }
+    }
+    return [];
+  };
+
+  const getBlogs = useCallback(
+    async (titleuz) => {
+      if (language === "uz") {
+        return await fetchUzBlogs(titleuz);
+      } else {
+        return await fetchTranslatedBlogs(titleuz);
       }
     },
-    [blogCategoryOptions, language]
+    [language]
   );
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const res = await fetch(
-        "/api/blogcategorycontroller/sitegetallblogcategory"
-      );
-      const data = await res.json();
-      setBlogCategoryOptions(data);
-    };
-    fetchCategories();
-  }, []);
+    const fetchAllBlogs = async () => {
+      const [newsData, eventsData, studentData] = await Promise.all([
+        getBlogs("yangiliklar"),
+        getBlogs("tadbirlar"),
+        getBlogs("talaba hayoti"),
+      ]);
 
-  useEffect(() => {
-    if (blogCategoryOptions.length > 0) {
-      fetchBlogData("yangilikar", "news");
-      fetchBlogData("tadbirlar", "events");
-      fetchBlogData("talaba hayoti", "student");
-    }
-  }, [language, blogCategoryOptions, fetchBlogData]);
+      setNews(newsData);
+      setEvents(eventsData);
+      setStudent(studentData);
+    };
+
+    fetchAllBlogs();
+  }, [getBlogs]);
 
   return (
-    <FrontBlogContext.Provider value={blogData}>
+    <FrontBlogContext.Provider value={{ news, events, student }}>
       {children}
     </FrontBlogContext.Provider>
   );

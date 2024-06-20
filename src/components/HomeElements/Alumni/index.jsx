@@ -49,6 +49,7 @@ const Alumni = () => {
             title={t("alumni.title")}
             button={t("alumni.btn")}
             subtitle={t("alumni.desc")}
+            to="honorary"
           />
         </div>
       </div>

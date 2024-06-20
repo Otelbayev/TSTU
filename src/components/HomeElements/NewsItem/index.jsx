@@ -4,7 +4,7 @@ import { getDate } from "./../../../utils/month";
 import { NavLink } from "react-router-dom";
 import { useLanguageContext } from "../../../context/LanguageContext";
 
-const NewsItem = ({ prop: { day, month, year, where, title, link }, item }) => {
+const NewsItem = ({ item }) => {
   const date = getDate(item?.event_date?.split("T")[0]);
   const date1 = date?.split(",")[0]?.split(" ");
   const { language } = useLanguageContext();
@@ -22,7 +22,7 @@ const NewsItem = ({ prop: { day, month, year, where, title, link }, item }) => {
           to={`/${language}/blog/${item?.id}`}
           className="item-right__link"
         >
-          Baatafsil
+          Batafsil
         </NavLink>
       </div>
     </News>

@@ -18,6 +18,7 @@ const Survery = () => {
           $type="dark"
           title={t("survery.title")}
           button={t("survery.btn")}
+          to="centers"
         >
           <div>
             <ScrollTrigger
@@ -70,13 +71,14 @@ const Survery = () => {
           title={t("centers.title")}
           button={t("centers.btn")}
           subtitle={t("centers.desc")}
+          to="centers"
         >
           <div className="markaz">
             {ilm.map((e) => (
               <IlmiyMarkazCart
                 dataAos={"zoom-in"}
                 key={e}
-                onClick={() => navigate(`/scientific-center/${e}`)}
+                to={`scientific-center/${e}`}
               />
             ))}
           </div>

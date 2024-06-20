@@ -22,13 +22,13 @@ const Events = ({ data, type }) => {
               <LargeBanner
                 prop={prop3}
                 onClick={() => navigate(`/${language}/blog/${data[0]?.id}`)}
-                item={data[0]}
+                item={data && data[0]}
                 type={type}
               />
               <LargeBanner
                 prop={prop3}
                 onClick={() => navigate(`/${language}/blog/${data[1]?.id}`)}
-                item={data[1]}
+                item={data && data[1]}
                 type={type}
               />
             </div>
@@ -36,7 +36,7 @@ const Events = ({ data, type }) => {
               <LargeBanner
                 prop={prop4}
                 onClick={() => navigate(`/${language}/blog/${data[2]?.id}`)}
-                item={data[2]}
+                item={data && data[2]}
                 type={type}
               />
             </div>

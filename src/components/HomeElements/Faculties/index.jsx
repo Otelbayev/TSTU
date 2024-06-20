@@ -9,11 +9,6 @@ import { useLanguageContext } from "../../../context/LanguageContext";
 
 const Faculties = () => {
   const { t } = useTranslation();
-
-  const navigate = useNavigate();
-  const { language } = useLanguageContext();
-
-  const [id, setId] = useState(1);
   return (
     <Fakultetlar className="root-container">
       <div className="root-wrapper">
@@ -25,14 +20,14 @@ const Faculties = () => {
           <FakGrid>
             <div data-aos="fade-right" className="fak-left">
               <div className="fak-left__content">
-                {fakultet?.map((e) => (
+                {/* {fakultet?.map((e) => (
                   <FacultetCart
                     key={e?.id}
                     id={id}
                     onClick={() => setId(e?.id)}
                     prop={e}
                   />
-                ))}
+                ))} */}
               </div>
             </div>
             <div data-aos="fade-left" className="wrap">
@@ -49,7 +44,7 @@ const Faculties = () => {
                     />
                   ))} */}
 
-                  {kafedra
+                  {/* {kafedra
                     ?.filter((e) => e?.parent_id === id)
                     ?.map((item) => (
                       <KafedraCart
@@ -57,7 +52,7 @@ const Faculties = () => {
                         key={item?.id}
                         prop={item}
                       />
-                    ))}
+                    ))} */}
                 </div>
               </div>
             </div>

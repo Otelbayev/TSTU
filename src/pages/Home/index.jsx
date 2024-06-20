@@ -19,20 +19,20 @@ import { useFrontBlogContext } from "../../context/BlogContext";
 const HomePage = () => {
   const { news, events, student } = useFrontBlogContext();
 
-  console.log(events);
+  console.log(news);
 
   return (
     <div style={{ overflow: "hidden" }}>
       <Header />
       <Showcase />
       <About />
-      <News data={[]} type="news" />
-      <Events data={[]} type="events" />
+      <News data={news} type="news" />
+      <Events data={events} type="events" />
       <Interactive />
       <Faculties />
       <Talim />
       <Faxriy />
-      <Talaba data={[]} type="student" />
+      <Talaba data={student} type="student" />
       <Survery />
       <Alumni />
       <Footer />

@@ -1,11 +1,19 @@
 import React from "react";
 import { Contianer, Icons } from "./style";
 import kafedra from "../../assets/images/kafedra.png";
+import { useNavigate } from "react-router-dom";
+import { useLanguageContext } from "../../context/LanguageContext";
 
-const IlmiyMarkazCart = ({ img, title, p, $border, onClick, dataAos }) => {
+const IlmiyMarkazCart = ({ img, title, p, $border, to, dataAos }) => {
+  const navigate = useNavigate();
+  const { language } = useLanguageContext();
   return (
-    <Contianer $border={$border} data-aos={dataAos}>
-      <div className="item" onClick={onClick}>
+    <Contianer
+      $border={$border}
+      data-aos={dataAos}
+      onClick={() => navigate(`/${language}/${to}`)}
+    >
+      <div className="item">
         <img loading="lazy" src={img || kafedra} alt="" className="item__img" />
         <div className="bottom-back">
           <div className="item__title">

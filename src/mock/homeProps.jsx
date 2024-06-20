@@ -129,7 +129,28 @@ export const Fac = [
     icon: facIcon,
     light: facIcon2,
     title: "Xalqaro ta’lim dasturlari fakulteti",
-    kafedra: [],
+    kafedra: [
+      {
+        id: 1,
+        name: "Shahar yo’llari va ko’chalari",
+        img: kaf,
+      },
+      {
+        id: 2,
+        name: "Avtomobil yo’llaridagi sun’iy inshoatlar",
+        img: kaf,
+      },
+      {
+        id: 3,
+        name: "Avtomobil yo’llarini qidiruv va loyihalash",
+        img: kaf,
+      },
+      {
+        id: 4,
+        name: "Avtomobil yo’llarini qurish va eksplutatsiya qilish",
+        img: kaf,
+      },
+    ],
   },
   {
     id: 2,

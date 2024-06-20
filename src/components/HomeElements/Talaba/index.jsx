@@ -23,19 +23,19 @@ const Talaba = ({ data }) => {
               <div className="grid__item" data-aos="fade-right">
                 <LargeBanner
                   prop={prop7}
-                  item={data[0]}
+                  item={data && data[0]}
                   onClick={() => navigate(`/${language}/blog/${data[0]?.id}`)}
                 />
                 <LargeBanner
                   prop={prop8}
-                  item={data[1]}
+                  item={data && data[1]}
                   onClick={() => navigate(`/${language}/blog/${data[1]?.id}`)}
                 />
               </div>
               <div data-aos="fade-up">
                 <LargeBanner
                   prop={prop9}
-                  item={data[2]}
+                  item={data && data[2]}
                   onClick={() => navigate(`/${language}/blog/${data[2]?.id}`)}
                 />
               </div>

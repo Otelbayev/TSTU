@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Content } from "../Scientific/ScientificId/style";
 import prof from "../../assets/images/noimg2.jpg";
 import Carousel from "../../components/Carousel";
 import { Button } from "../../components/Generics";
 
 const StudentLife = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="root-container">
       <div className="root-wrapper">

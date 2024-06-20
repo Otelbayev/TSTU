@@ -19,8 +19,6 @@ import { useFrontBlogContext } from "../../context/BlogContext";
 const HomePage = () => {
   const { news, events, student } = useFrontBlogContext();
 
-  console.log(news);
-
   return (
     <div style={{ overflow: "hidden" }}>
       <Header />

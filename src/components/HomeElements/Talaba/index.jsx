@@ -17,7 +17,12 @@ const Talaba = ({ data }) => {
   return (
     <Container className="root-container">
       <div className="root-wrapper">
-        <Title title={t("student.title")} subtitle={t("student.desc")}>
+        <Title
+          title={t("student.title")}
+          subtitle={t("student.desc")}
+          button={t("student.btn")}
+          to={"student-life"}
+        >
           <Layout $type="talaba">
             <div className="grid">
               <div className="grid__item" data-aos="fade-right">

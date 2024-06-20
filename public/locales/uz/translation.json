@@ -33,7 +33,8 @@
   },
   "student": {
     "title": "Talabaning hayoti",
-    "desc": "Universitetda talabalar o'z vaqtlarini mazmunli o'tkazishlari uchun ko'plab sharoitlar yaratilgan"
+    "desc": "Universitetda talabalar o'z vaqtlarini mazmunli o'tkazishlari uchun ko'plab sharoitlar yaratilgan",
+    "btn": "Barchasini ko‘rish"
   },
   "survery": {
     "title": "Tadqiqotlar",

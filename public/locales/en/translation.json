@@ -33,7 +33,8 @@
   },
   "student": {
     "title": "Student Life",
-    "desc": "The university provides many opportunities for students to spend their time meaningfully."
+    "desc": "The university provides many opportunities for students to spend their time meaningfully.",
+    "btn": "View All"
   },
   "survery": {
     "title": "Research",

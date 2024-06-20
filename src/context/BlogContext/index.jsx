@@ -19,17 +19,6 @@ const FrontBlogContextProvider = ({ children }) => {
 
   const { language } = useLanguageContext();
 
-  const getAllFavoriteBlogs = async () => {
-    const res = await axios.get(
-      language === "uz"
-        ? "/api/blogcontroller/sitegetallblog?favorite=true"
-        : `/api/blogcontroller/sitegetallblogtranslation?language_code=${language}&favorite=true`
-    );
-    if (res.status) {
-      setNews(res?.data?.sort((a, b) => a?.position - b?.position));
-    }
-  };
-
   const fetchUzBlogs = async (title) => {
     const response = await axios.get(
       `/api/blogcontroller/sitegetallblog?blog_category=${title}&favorite=true`

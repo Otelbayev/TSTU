@@ -17,8 +17,8 @@ const Interactive = () => {
   const getData = async () => {
     const res = await axios.get(
       language === "uz"
-        ? "/api/interactiveservices/sitegetallinteractiveservices"
-        : `/api/interactiveservices/sitegetallinteractiveservicestranslation?language_code=${language}`,
+        ? "/api/interactiveservices/sitegetallinteractiveservices?favorite=true"
+        : `/api/interactiveservices/sitegetallinteractiveservicestranslation?language_code=${language}&favorite=true`,
       {
         headers: {
           "Content-Type": "application/json",

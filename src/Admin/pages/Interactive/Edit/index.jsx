@@ -26,6 +26,7 @@ const Edit = () => {
   const [icon, setIcon] = useState(null);
   const [status, setStatus] = useState(null);
   const [transId, setTransId] = useState(null);
+  const [favorite, setFavorite] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +38,7 @@ const Edit = () => {
     formData.append("img_up", img);
     formData.append("icon_up", icon);
     formData.append("status_id", status);
+    formData.append("favorite", favorite);
 
     const res = await useEdit(
       isCreate,
@@ -80,6 +82,7 @@ const Edit = () => {
       setIcon(res.data?.icon_?.url);
       setStatus(res.data?.status_?.id || res.data?.status_translation_?.id);
       setTransId(res.data?.id);
+      setFavorite(res.data?.favorite);
     } else {
       setIsCreate(true);
       setTransId(null);
@@ -89,6 +92,7 @@ const Edit = () => {
       setUrl("");
       setIcon(null);
       setStatus(null);
+      setFavorite(false);
     }
   };
 
@@ -104,21 +108,31 @@ const Edit = () => {
         <div className="row">
           <Input
             label="Title"
-            className={isCreate ? "col-md-6" : "col-md-4"}
+            className={isCreate ? "col-md-4" : "col-md-3"}
             value={title || ""}
             onChange={(e) => setTitle(e.target.value)}
           />
           <Input
             label="Description"
-            className={isCreate ? "col-md-6" : "col-md-4"}
+            className={isCreate ? "col-md-4" : "col-md-3"}
             value={description || ""}
             onChange={(e) => setDescription(e.target.value)}
           />
           <Input
             label="Url"
-            className="col-md-4"
+            className={isCreate ? "col-md-4" : "col-md-3"}
             value={url || ""}
             onChange={(e) => setUrl(e.target.value)}
+          />
+          <Select
+            className={isCreate ? "col-md-4" : "col-md-3"}
+            label="Favorite"
+            value={favorite}
+            onChange={(e) => setFavorite(e)}
+            options={[
+              { value: true, label: "true" },
+              { value: false, label: "false" },
+            ]}
           />
           <ChooseFile
             label="Image"

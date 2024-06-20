@@ -11,7 +11,8 @@ const NewsItem = ({ item }) => {
   return (
     <News>
       <div className="item-left">
-        <div>{date1[1]}</div> <div className="dek">{date1[0]}</div>
+        <div>{date1?.length && date1[1]}</div>{" "}
+        <div className="dek">{date1?.length && date1[0]}</div>
       </div>
       <div className="item-center">
         <div className="item-center__title">{item?.title}</div>

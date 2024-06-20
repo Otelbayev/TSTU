@@ -31,21 +31,18 @@ const FrontBlogContextProvider = ({ children }) => {
 
   const fetchTranslatedBlogs = async (titleuz) => {
     const categoryResponse = await axios.get(
-      "/api/blogcategorycontroller/sitegetallblogcategory"
+      `/api/blogcategorycontroller/sitegetbytitleblogcategory/${titleuz}`
     );
     if (categoryResponse.status === 200) {
-      const category = categoryResponse.data.find((e) => e.title === titleuz);
-      if (category) {
-        const translationResponse = await axios.get(
-          `/api/blogcategorycontroller/sitegetbyuzidblogcategorytranslation/${category.id}?language_code=${language}`
+      const translationResponse = await axios.get(
+        `/api/blogcategorycontroller/sitegetbyuzidblogcategorytranslation/${categoryResponse.data?.id}?language_code=${language}`
+      );
+      if (translationResponse.status === 200) {
+        const blogsResponse = await axios.get(
+          `/api/blogcontroller/sitegetallblogtranslation?blog_category=${translationResponse.data?.title}&favorite=true`
         );
-        if (translationResponse.status === 200) {
-          const blogsResponse = await axios.get(
-            `/api/blogcontroller/sitegetallblogtranslation?blog_category=${translationResponse.data?.title}&favorite=true`
-          );
-          if (blogsResponse.status === 200) {
-            return blogsResponse.data;
-          }
+        if (blogsResponse.status === 200) {
+          return blogsResponse.data;
         }
       }
     }

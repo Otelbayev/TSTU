@@ -4,11 +4,11 @@ import { Title } from "../../Generics";
 import KafedraCart from "../KafedraCart";
 import FacultetCart from "../FacultetCart";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { useLanguageContext } from "../../../context/LanguageContext";
+import { useDepartmentContext } from "./../../../Admin/context/DepartmentContext/index";
 
 const Faculties = () => {
   const { t } = useTranslation();
+  const { faculties, kafedras } = useDepartmentContext();
   return (
     <Fakultetlar className="root-container">
       <div className="root-wrapper">
@@ -20,7 +20,7 @@ const Faculties = () => {
           <FakGrid>
             <div data-aos="fade-right" className="fak-left">
               <div className="fak-left__content">
-                {/* {fakultet?.map((e) => (
+                {/* {faculties?.map((e) => (
                   <FacultetCart
                     key={e?.id}
                     id={id}
@@ -44,7 +44,7 @@ const Faculties = () => {
                     />
                   ))} */}
 
-                  {/* {kafedra
+                  {/* {kafedras
                     ?.filter((e) => e?.parent_id === id)
                     ?.map((item) => (
                       <KafedraCart

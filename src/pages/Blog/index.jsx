@@ -205,7 +205,7 @@ const prop5 = [
   },
 ];
 
-const News = () => {
+const Blog = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -281,4 +281,4 @@ const News = () => {
   );
 };
 
-export default News;
+export default Blog;

@@ -5,11 +5,15 @@ import KafedraCart from "../KafedraCart";
 import FacultetCart from "../FacultetCart";
 import { useTranslation } from "react-i18next";
 import { useFrontDepartmentContext } from "../../../context/DepartmentContext";
+import { useNavigate } from "react-router-dom";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 const Faculties = () => {
   const { t } = useTranslation();
   const { faculties, kafedras } = useFrontDepartmentContext();
-  const [id, setId] = useState(faculties[0]?.id);
+  const [id, setId] = useState(faculties?.length ? faculties[0]?.id : 1);
+  const navigate = useNavigate();
+  const { language } = useLanguageContext();
   return (
     <Fakultetlar className="root-container">
       <div className="root-wrapper">
@@ -39,7 +43,9 @@ const Faculties = () => {
                     ?.filter((e) => e?.parent_id === id)
                     ?.map((item) => (
                       <KafedraCart
-                        onClick={() => navigate(`/faculties/${id}/${item?.id}`)}
+                        onClick={() =>
+                          navigate(`${language}/department/${item?.id}`)
+                        }
                         key={item?.id}
                         prop={item}
                       />

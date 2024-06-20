@@ -8,7 +8,7 @@ import { useId } from "../../../hooks/useId";
 import videoflag from "../../../assets/New/flags.png";
 import VideoCart from "../../../components/News/VideoCart";
 
-const NewsId = () => {
+const BlogID = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -133,4 +133,4 @@ const NewsId = () => {
   );
 };
 
-export default NewsId;
+export default BlogID;

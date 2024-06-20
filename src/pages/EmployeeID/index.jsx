@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "./style";
 
-const Employee = ({ img, fio, status, links }) => {
+const EmployeeID = ({ img, fio, status, links }) => {
   return (
     <Container>
       <div className="root-container">
@@ -660,4 +660,4 @@ const Employee = ({ img, fio, status, links }) => {
   );
 };
 
-export default Employee;
+export default EmployeeID;

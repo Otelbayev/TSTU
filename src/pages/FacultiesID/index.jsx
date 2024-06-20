@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import Header from "../../../components/Faculties/Header";
-import bg from "../../../assets/Faculties/bgFak.png";
-import Showcase from "../../../components/Faculties/Showcase";
-import IlmiyMarkazCart from "../../../components/IlmiyMarkazCart";
+import Header from "../../components/Faculties/Header";
+import bg from "../../assets/Faculties/bgFak.png";
+import Showcase from "../../components/Faculties/Showcase";
+import IlmiyMarkazCart from "../../components/IlmiyMarkazCart";
 import {
   IlmiyMarkaz,
   Kafedra,
@@ -14,21 +14,21 @@ import {
   Wrap,
 } from "./style";
 import { useNavigate } from "react-router-dom";
-import noimg1 from "../../../assets/images/noimg1.jpg";
-import noimg2 from "../../../assets/images/noimg2.jpg";
-import dekan from "../../../assets/Faculties/dekan.png";
-import DekanCart from "../../../components/Faculties/DekanCart";
-import kaf1 from "../../../assets/Faculties/kaf1.png";
-import kaf2 from "../../../assets/Faculties/kaf2.png";
-import kaf3 from "../../../assets/Faculties/kaf3.png";
-import Dekans from "../../../components/Faculties/Dekan";
-import Footer from "../../../components/Faculties/Footer";
-import FackBottom from "../../../components/Faculties/FakBottom";
-import { data, fakNewsData1, orinbosar, fakNewsData } from "../mock";
-import FakNews from "../../../components/Faculties/FakNews";
-import Yonalishlar from "../../../components/Faculties/Yonalishlar";
-import { Title } from "../../../components/Generics";
-const FacultiesId = () => {
+import noimg1 from "../../assets/images/noimg1.jpg";
+import noimg2 from "../../assets/images/noimg2.jpg";
+import dekan from "../../assets/Faculties/dekan.png";
+import DekanCart from "../../components/Faculties/DekanCart";
+import kaf1 from "../../assets/Faculties/kaf1.png";
+import kaf2 from "../../assets/Faculties/kaf2.png";
+import kaf3 from "../../assets/Faculties/kaf3.png";
+import Dekans from "../../components/Faculties/Dekan";
+import Footer from "../../components/Faculties/Footer";
+import FackBottom from "../../components/Faculties/FakBottom";
+import { data, fakNewsData1, orinbosar, fakNewsData } from "../Faculties/mock";
+import FakNews from "../../components/Faculties/FakNews";
+import Yonalishlar from "../../components/Faculties/Yonalishlar";
+import { Title } from "../../components/Generics";
+const FacultiesID = () => {
   const naviagte = useNavigate();
   const aboutRef = useRef();
   const talimRef = useRef();
@@ -274,4 +274,4 @@ const FacultiesId = () => {
   );
 };
 
-export default FacultiesId;
+export default FacultiesID;

@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 
-const StudentLife = () => {
+const History = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <div className="root-container">
       <div className="root-wrapper">
-        <h1>Student Life</h1>
+        <h1>History</h1>
       </div>
     </div>
   );
 };
 
-export default StudentLife;
+export default History;

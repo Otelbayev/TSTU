@@ -3,7 +3,7 @@ import useAxios from "../../hooks/useAxios";
 import { Container } from "./style";
 import { Facebook } from "react-content-loader";
 
-const Page = () => {
+const PageID = () => {
   const { sendRequest, loading } = useAxios();
   const [data, setData] = useState([]);
 
@@ -36,4 +36,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default PageID;

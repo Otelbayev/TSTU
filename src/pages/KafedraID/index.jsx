@@ -1,19 +1,19 @@
 import React, { useEffect, useRef } from "react";
-import bg from "../../../assets/Faculties/afrosiyob.jpg";
-import Header from "../../../components/Faculties/Header";
-import Showcase from "../../../components/Faculties/Showcase";
-import Dekans from "../../../components/Faculties/Dekan";
-import dekan from "../../../assets/Faculties/rustam.png";
+import bg from "../../assets/Faculties/afrosiyob.jpg";
+import Header from "../../components/Faculties/Header";
+import Showcase from "../../components/Faculties/Showcase";
+import Dekans from "../../components/Faculties/Dekan";
+import dekan from "../../assets/Faculties/rustam.png";
 import { Grid } from "./style";
-import DekanCart from "../../../components/Faculties/DekanCart";
-import Footer from "../../../components/Faculties/Footer";
-import FackBottom from "../../../components/Faculties/FakBottom";
-import { data as data1, kafData } from "../mock";
-import { Wrap, Yonalish } from "../FacultiesId/style";
-import Yonalishlar from "../../../components/Faculties/Yonalishlar";
-import { Title } from "../../../components/Generics";
+import DekanCart from "../../components/Faculties/DekanCart";
+import Footer from "../../components/Faculties/Footer";
+import FackBottom from "../../components/Faculties/FakBottom";
+import { data as data1, kafData } from "../Faculties/mock";
+import { Wrap, Yonalish } from "../FacultiesID/style";
+import Yonalishlar from "../../components/Faculties/Yonalishlar";
+import { Title } from "../../components/Generics";
 
-const Kafedra = () => {
+const KafedraID = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -123,4 +123,4 @@ const Kafedra = () => {
   );
 };
 
-export default Kafedra;
+export default KafedraID;

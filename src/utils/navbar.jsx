@@ -1,43 +1,46 @@
 import React, { lazy } from "react";
 import { useId } from "../hooks/useId";
 
-const Centers = lazy(() => import("../pages/Centers"));
+const Blog = lazy(() => import("../pages/Blog"));
+const BlogId = lazy(() => import("../pages/BlogID"));
+
+const Department = lazy(() => import("../pages/Department"));
+const DepartmentID = lazy(() => import("../pages/DepartmentID"));
+
+const PageID = lazy(() => import("../pages/PageID"));
+
+const EmployeeID = lazy(() => import("../pages/EmployeeID"));
+
+const FacultiesID = lazy(() => import("../pages/FacultiesID"));
+const KafedraID = lazy(() => import("../pages/KafedraID"));
+
 const Contact = lazy(() => import("../pages/Contact"));
-const Faculties = lazy(() => import("../pages/Faculties"));
 const Faq = lazy(() => import("../pages/Faq"));
-const Honorary = lazy(() => import("../pages/Honorary"));
-const Blog = lazy(() => import("../pages/News"));
-const OurHistory = lazy(() => import("../pages/OurHistory"));
-const Rector = lazy(() => import("../pages/Rector"));
-const Scientific = lazy(() => import("../pages/Scientific"));
-const Sport = lazy(() => import("../pages/Sport"));
-const Admisson = lazy(() => import("../pages/Admisson"));
-const ScientificId = lazy(() => import("../pages/Scientific/ScientificId"));
-const HonoraryId = lazy(() => import("../pages/Honorary/HonoraryId"));
-const CentersId = lazy(() => import("../pages/Centers/CenterId"));
+const Appeals = lazy(() => import("../pages/Rector"));
+const History = lazy(() => import("../pages/History"));
 const Rectorat = lazy(() => import("../pages/Rectorat"));
-const Departments = lazy(() => import("../pages/Departments"));
+
 const InteractiveServices = lazy(() => import("../pages/Interactive"));
+const Centers = lazy(() => import("../pages/Centers"));
+const Honorary = lazy(() => import("../pages/Honorary"));
+const Faculties = lazy(() => import("../pages/Faculties"));
+const Scientific = lazy(() => import("../pages/Scientific"));
 const SignUp = lazy(() => import("../pages/SignUp"));
 const SignIn = lazy(() => import("../pages/SignIn"));
-const FacultiesId = lazy(() => import("../pages/Faculties/FacultiesId"));
 const HomePage = lazy(() => import("../pages/Home"));
 const NotFound = lazy(() => import("../pages/404"));
 const Galereya = lazy(() => import("../pages/Galereya"));
 const Arm = lazy(() => import("../pages/Arm"));
-const Kafedra = lazy(() => import("../pages/Faculties/Kafedra"));
-const Department = lazy(() => import("../pages/Department"));
-const BlogId = lazy(() => import("../pages/News/NewsId"));
-const Announcement = lazy(() => import("../pages/Announcement"));
-const AnnouncementId = lazy(() =>
-  import("../pages/Announcement/AnnouncementId")
-);
-const Employee = lazy(() => import("../pages/Employee"));
 const StudentLife = lazy(() => import("../pages/StudentLife"));
 const Structure = lazy(() => import("../pages/Structure"));
-const Page = lazy(() => import("../pages/Page"));
 
 export const navbar = [
+  {
+    id: useId(),
+    path: "history",
+    element: <History />,
+    isPrivate: false,
+  },
   {
     id: useId(),
     path: "structure",
@@ -52,38 +55,8 @@ export const navbar = [
   },
   {
     id: useId(),
-    path: "scientific-center/:id",
-    element: <ScientificId />,
-    isPrivate: false,
-  },
-  {
-    id: useId(),
-    path: "history",
-    element: <OurHistory />,
-    isPrivate: false,
-  },
-  {
-    id: useId(),
-    path: "sport",
-    element: <Sport />,
-    isPrivate: false,
-  },
-  {
-    id: useId(),
-    path: "admisson",
-    element: <Admisson />,
-    isPrivate: false,
-  },
-  {
-    id: useId(),
     path: "centers",
     element: <Centers />,
-    isPrivate: false,
-  },
-  {
-    id: useId(),
-    path: "centers/:id",
-    element: <CentersId />,
     isPrivate: false,
   },
   {
@@ -94,32 +67,8 @@ export const navbar = [
   },
   {
     id: useId(),
-    path: "honorary/:id",
-    element: <HonoraryId />,
-    isPrivate: false,
-  },
-  {
-    id: useId(),
     path: "rectorat",
     element: <Rectorat />,
-    isPrivate: false,
-  },
-  {
-    id: useId(),
-    path: "departments",
-    element: <Departments />,
-    isPrivate: false,
-  },
-  {
-    id: useId(),
-    path: "interactive-services",
-    element: <InteractiveServices />,
-    isPrivate: false,
-  },
-  {
-    id: useId(),
-    path: "international",
-    element: <Department />,
     isPrivate: false,
   },
   {
@@ -130,8 +79,8 @@ export const navbar = [
   },
   {
     id: useId(),
-    path: "educational-department",
-    element: <Department />,
+    path: "interactive-services",
+    element: <InteractiveServices />,
     isPrivate: false,
   },
   {
@@ -141,8 +90,14 @@ export const navbar = [
   },
   {
     id: useId(),
+    path: "department/:id",
+    element: <DepartmentID />,
+    isPrivate: false,
+  },
+  {
+    id: useId(),
     path: "page/:id",
-    element: <Page />,
+    element: <PageID />,
   },
 ];
 
@@ -159,19 +114,19 @@ export const routes = [
   {
     id: useId(),
     path: "faculties/:id",
-    element: <FacultiesId />,
+    element: <FacultiesID />,
     isPrivate: false,
   },
   {
     id: useId(),
     path: "faculties/:id/:id",
-    element: <Kafedra />,
+    element: <KafedraID />,
     isPrivate: false,
   },
   {
     id: useId(),
-    path: "employee",
-    element: <Employee />,
+    path: "employee/:id",
+    element: <EmployeeID />,
     isPrivate: false,
   },
 ];
@@ -191,8 +146,8 @@ export const noshowcase = [
   },
   {
     id: useId(),
-    path: "rector",
-    element: <Rector />,
+    path: "appeals",
+    element: <Appeals />,
     isPrivate: false,
   },
   {
@@ -211,18 +166,6 @@ export const noshowcase = [
     id: useId(),
     path: "faculties",
     element: <Faculties />,
-    isPrivate: false,
-  },
-  {
-    id: useId(),
-    path: "announcement",
-    element: <Announcement />,
-    isPrivate: false,
-  },
-  {
-    id: useId(),
-    path: "announcement/:id",
-    element: <AnnouncementId />,
     isPrivate: false,
   },
   {

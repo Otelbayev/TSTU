@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import arrow from "../../../assets/icons/arrow-light.svg?react";
+import arrow from "../../assets/icons/arrow-light.svg?react";
 
 export const IlmiyMarkaz = styled.div`
   display: flex;
@@ -153,6 +153,6 @@ Yonalish.Title = styled.div`
 `;
 
 export const Wrap = styled.div`
-position: relative;
-padding-top:160px
-`
+  position: relative;
+  padding-top: 160px;
+`;

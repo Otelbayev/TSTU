@@ -76,12 +76,12 @@ const DepartmentCreate = () => {
       ["departament_type_id"]
     );
 
-    res.statusCode === 200 &&
-      navigate(
-        `/${language}/admin/department/${
-          departmentType.find((item) => item.value === type)?.path
-        }`
-      );
+    // res.statusCode === 200 &&
+    //   navigate(
+    //     `/${language}/admin/department/${
+    //       departmentType.find((item) => item.value === type)?.path
+    //     }`
+    //   );
   };
 
   useEffect(() => {

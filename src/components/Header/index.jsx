@@ -34,9 +34,15 @@ import {
 
 const all = [
   {
-    id: 154,
+    id: 153,
     parent_id: 111,
     title: "Sign in",
+    path: "signin",
+  },
+  {
+    id: 154,
+    parent_id: 111,
+    title: "Sign up",
     path: "signin",
   },
   {
@@ -56,18 +62,6 @@ const all = [
     parent_id: 111,
     title: "Tarix",
     path: "history",
-  },
-  {
-    id: 158,
-    parent_id: 111,
-    title: "Sport",
-    path: "sport",
-  },
-  {
-    id: 159,
-    parent_id: 111,
-    title: "Qabul",
-    path: "admisson",
   },
   {
     id: 160,
@@ -90,8 +84,8 @@ const all = [
   {
     id: 163,
     parent_id: 111,
-    title: "Departments",
-    path: "departments",
+    title: "Department",
+    path: "department",
   },
   {
     id: 164,
@@ -100,16 +94,10 @@ const all = [
     path: "interactive-services",
   },
   {
-    id: 165,
-    parent_id: 111,
-    title: "International",
-    path: "international",
-  },
-  {
     id: 166,
     parent_id: 111,
-    title: "Department",
-    path: "department",
+    title: "DepartmentID",
+    path: "department/10",
   },
   {
     id: 167,
@@ -133,13 +121,13 @@ const all = [
     id: 170,
     parent_id: 111,
     title: "Rektorga murojaat",
-    path: "rector",
+    path: "appeals",
   },
   {
     id: 171,
     parent_id: 111,
     title: "Yangiliklar",
-    path: "news",
+    path: "blog",
   },
   {
     id: 173,
@@ -152,6 +140,24 @@ const all = [
     parent_id: 111,
     title: "Kafedra",
     path: "faculties/faculty-0/kafedra-3",
+  },
+  {
+    id: 175,
+    parent_id: 111,
+    title: "Arm",
+    path: "arm",
+  },
+  {
+    id: 176,
+    parent_id: 111,
+    title: "galereya",
+    path: "galereya",
+  },
+  {
+    id: 177,
+    parent_id: 111,
+    title: "Xodim",
+    path: "employee/1",
   },
 ];
 

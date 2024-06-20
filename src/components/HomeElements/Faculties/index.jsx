@@ -4,11 +4,12 @@ import { Title } from "../../Generics";
 import KafedraCart from "../KafedraCart";
 import FacultetCart from "../FacultetCart";
 import { useTranslation } from "react-i18next";
-import { useDepartmentContext } from "./../../../Admin/context/DepartmentContext/index";
+import { useFrontDepartmentContext } from "../../../context/DepartmentContext";
 
 const Faculties = () => {
   const { t } = useTranslation();
-  const { faculties, kafedras } = useDepartmentContext();
+  const { faculties, kafedras } = useFrontDepartmentContext();
+  const [id, setId] = useState(faculties[0]?.id);
   return (
     <Fakultetlar className="root-container">
       <div className="root-wrapper">
@@ -20,31 +21,21 @@ const Faculties = () => {
           <FakGrid>
             <div data-aos="fade-right" className="fak-left">
               <div className="fak-left__content">
-                {/* {faculties?.map((e) => (
+                {faculties?.map((e) => (
                   <FacultetCart
                     key={e?.id}
                     id={id}
                     onClick={() => setId(e?.id)}
                     prop={e}
                   />
-                ))} */}
+                ))}
               </div>
             </div>
             <div data-aos="fade-left" className="wrap">
               <div className="fak-right">
                 <div className="fak-right__title">Kafedralar</div>
                 <div className="fak-right__cards">
-                  {/* {Fac.find((e) => e.id === id)?.kafedra?.map((e) => (
-                    <KafedraCart
-                      onClick={() =>
-                        navigate(`/${language}/faculties/${id}/${e.id}`)
-                      }
-                      key={e.id}
-                      prop={e}
-                    />
-                  ))} */}
-
-                  {/* {kafedras
+                  {kafedras
                     ?.filter((e) => e?.parent_id === id)
                     ?.map((item) => (
                       <KafedraCart
@@ -52,7 +43,7 @@ const Faculties = () => {
                         key={item?.id}
                         prop={item}
                       />
-                    ))} */}
+                    ))}
                 </div>
               </div>
             </div>

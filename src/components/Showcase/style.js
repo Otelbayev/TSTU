@@ -45,4 +45,12 @@ export const Wrapper = styled.div`
 export const Title = styled.h1`
   font-size: 80px !important;
   letter-spacing: 2px;
+  white-space: nowrap;
+  @media (max-width: 1000px) {
+    font-size: 60px !important;
+  }
+  @media (max-width: 700px) {
+    white-space: normal;
+    text-align: center;
+  }
 `;

@@ -16,7 +16,8 @@ export const useEdit = async (
   createApi,
   createAppend,
   deleteApi,
-  status
+  status,
+  isParam
 ) => {
   try {
     message.loading({ key: "key", content: "Loading!" });
@@ -26,7 +27,12 @@ export const useEdit = async (
         const param =
           type === "formData" ? Object.fromEntries(data.entries()) : data;
 
-        const res = await fetchRequest(`${url}/${id}`, data, "put", param);
+        const res = await fetchRequest(
+          `${url}/${id}`,
+          data,
+          "put",
+          isParam && param
+        );
         handleResponse(res);
         return res;
       } else {
@@ -55,14 +61,14 @@ export const useEdit = async (
             `${translationUrl}/${transId}`,
             obj,
             "put",
-            obj
+            isParam && obj
           );
         } else {
           res = await fetchRequest(
             `${translationUrl}/${transId}`,
             data,
             "put",
-            param
+            isParam && param
           );
         }
 

@@ -39,7 +39,7 @@ const FrontBlogContextProvider = ({ children }) => {
       );
       if (translationResponse.status === 200) {
         const blogsResponse = await axios.get(
-          `/api/blogcontroller/sitegetallblogtranslation?blog_category=${translationResponse.data?.title}&favorite=true`
+          `/api/blogcontroller/sitegetallblogtranslation?language_code=${language}&blog_category=${translationResponse.data?.title}&favorite=true`
         );
         if (blogsResponse.status === 200) {
           return blogsResponse.data;
@@ -63,9 +63,9 @@ const FrontBlogContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchAllBlogs = async () => {
       const [newsData, eventsData, studentData] = await Promise.all([
-        getBlogs("yangiliklar"),
-        getBlogs("tadbirlar"),
-        getBlogs("talaba hayoti"),
+        getBlogs("Yangiliklar"),
+        getBlogs("Tadbirlar"),
+        getBlogs("Talaba hayoti"),
       ]);
 
       setNews(newsData);

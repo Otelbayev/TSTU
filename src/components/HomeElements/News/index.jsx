@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Title } from "../../Generics";
 import { Layout } from "./style";
 import { prop1, prop2 } from "../../../mock/homeProps";
@@ -10,54 +10,34 @@ import { useLanguageContext } from "../../../context/LanguageContext";
 
 const News = ({ data, type }) => {
   const { t } = useTranslation();
-
-  const getAos = (index) => {
-    switch (index) {
-      case 0:
-        return "fade-right";
-      case 1:
-        return "fade-left";
-      case 2:
-        return "fade-left";
-      case 3:
-        return "fade-right";
-      case 4:
-        return "fade-right";
-      case 5:
-        return "fade-left";
-    }
-  };
-
   const navigate = useNavigate();
   const { language } = useLanguageContext();
+
+  const handleNavigation = (id) => {
+    navigate(`/${language}/blog/${id}`);
+  };
 
   return (
     <Layout className="root-container">
       <div className="root-wrapper">
         <Title title={t("news.title")} button={t("news.btn")} to="blog">
-          <div className="flex">
-            {data?.slice(0, 6)?.map((item, index) => (
-              <div
-                className={`flex__item${index + 1}`}
-                data-aos={getAos(index)}
-                key={item?.id}
-              >
-                {index === 0 || index === 5 ? (
-                  <LargeBanner
-                    onClick={() => navigate(`/${language}/blog/${item?.id}`)}
+          <div className="grid">
+            {data.slice(0, 6).map((item, index) => {
+              const Component = index === 0 || index === 5 ? LargeBanner : Cart;
+              const prop = index === 0 || index === 5 ? prop1 : prop2;
+              const gridClass = `grid__item${index + 1}`;
+
+              return (
+                <div className={gridClass} key={item?.item?.id}>
+                  <Component
                     item={item}
-                    prop={prop1}
+                    prop={prop}
                     type={type}
+                    onClick={() => handleNavigation(item?.item?.id)}
                   />
-                ) : (
-                  <Cart
-                    item={item}
-                    prop={prop2}
-                    onClick={() => navigate(`/${language}/blog/${item?.id}`)}
-                  />
-                )}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </Title>
       </div>
@@ -65,4 +45,4 @@ const News = ({ data, type }) => {
   );
 };
 
-export default News;
+export default memo(News);

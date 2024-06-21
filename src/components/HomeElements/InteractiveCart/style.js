@@ -20,8 +20,9 @@ export const Wrap = styled.div`
     font-style: normal;
     font-weight: 600;
     line-height: 119%;
-    i{
-      font-size: 20px ;
+    margin-top: 20px;
+    i {
+      font-size: 20px;
     }
   }
   @media (max-width: 650px) {

@@ -3,6 +3,7 @@ import icon from "../../../assets/icons/arrow-dark.svg";
 
 export const Wrap = styled.div`
   cursor: pointer;
+  height: 100%;
   border-radius: 4px;
   border: 1px solid var(--date);
   background: var(--titleLight);
@@ -37,6 +38,7 @@ Wrap.Content = styled.div`
   padding: 5px 18px;
   @media (max-width: 650px) {
     padding: 20px;
+    width: 55%;
   }
 `;
 

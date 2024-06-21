@@ -109,7 +109,7 @@ const DepartmentEdit = () => {
       setTitle(res.data?.title || "");
       setShort(res.data?.title_short || "");
       setDesc(res.data?.description || "");
-      setParent(res.data?.parent_id);
+      setParent(res.data?.parent_id || 0);
       setType(
         res.data?.departament_type_?.id ||
           res?.data?.departament_type_translation_?.id

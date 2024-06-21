@@ -27,7 +27,7 @@ const DepartmentProvider = ({ children }) => {
 
     if (res.status === 200) {
       setDepartmentOptions([
-        { value: "", label: "Departament", parent: null },
+        { value: 0, label: "Departament", parent: null },
         ...res.data
           .sort((a, b) => a.id - b.id)
           .map((e) => ({

@@ -42,7 +42,7 @@ const FrontDepartmentContxtProvider = ({ children }) => {
       );
       if (translationResponse.status === 200) {
         const departmentResponse = await axios.get(
-          `/api/departament/getalldepartamenttranslationtypesite/${translationResponse.data?.title}?language_code=${language}`
+          `/api/departament/getalldepartamenttranslationtypesite/${translationResponse.data?.type}?language_code=${language}`
         );
         if (departmentResponse.status === 200) {
           return departmentResponse.data;

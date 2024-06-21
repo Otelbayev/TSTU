@@ -58,6 +58,10 @@ export const Large = styled.div`
     }
   }
 
+  @media (max-width: 700px) {
+    min-height: 250px;
+  }
+
   @media (max-width: 600px) {
     & > div {
       padding: 8px;

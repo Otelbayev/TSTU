@@ -5,10 +5,11 @@ import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
 import { DarkSection } from "./style";
 import { useTranslation } from "react-i18next";
+import { useFrontDepartmentContext } from "../../../context/DepartmentContext";
 
 const Survery = () => {
   const { t } = useTranslation();
-
+  const { favoMarkaz } = useFrontDepartmentContext();
   const [counterOn, setCounterOn] = useState(false);
   let ilm = [1, 2, 3, 4];
   return (
@@ -18,7 +19,7 @@ const Survery = () => {
           $type="dark"
           title={t("survery.title")}
           button={t("survery.btn")}
-          to="centers"
+          to="scientific-center"
         >
           <div>
             <ScrollTrigger
@@ -71,14 +72,15 @@ const Survery = () => {
           title={t("centers.title")}
           button={t("centers.btn")}
           subtitle={t("centers.desc")}
-          to="centers"
+          to="scientific-center"
         >
           <div className="markaz">
-            {ilm.map((e) => (
+            {favoMarkaz.map((e) => (
               <IlmiyMarkazCart
                 dataAos={"zoom-in"}
-                key={e}
-                to={`scientific-center/${e}`}
+                key={e.id}
+                to={`department/${e?.id}`}
+                item={e}
               />
             ))}
           </div>

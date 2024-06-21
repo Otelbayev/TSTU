@@ -24,7 +24,7 @@ const InteractiveServices = lazy(() => import("../pages/Interactive"));
 const Centers = lazy(() => import("../pages/Centers"));
 const Honorary = lazy(() => import("../pages/Honorary"));
 const Faculties = lazy(() => import("../pages/Faculties"));
-const Scientific = lazy(() => import("../pages/Scientific"));
+const ScientificCenter = lazy(() => import("../pages/ScientificCenter"));
 const SignUp = lazy(() => import("../pages/SignUp"));
 const SignIn = lazy(() => import("../pages/SignIn"));
 const HomePage = lazy(() => import("../pages/Home"));
@@ -50,7 +50,7 @@ export const navbar = [
   {
     id: useId(),
     path: "scientific-center",
-    element: <Scientific />,
+    element: <ScientificCenter />,
     isPrivate: false,
   },
   {

@@ -18,6 +18,8 @@ const FrontDepartmentContxtProvider = ({ children }) => {
 
   const [faculties, setFaculties] = useState([]);
   const [kafedras, setKafedras] = useState([]);
+  const [markazlar, setMarkazlar] = useState([]);
+  const [favoMarkaz, setFavoMarkaz] = useState([]);
 
   const fetchUzDepartment = async (title) => {
     const res = await axios.get(
@@ -62,20 +64,29 @@ const FrontDepartmentContxtProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchAllDepartment = async () => {
-      const [first, second] = await Promise.all([
+      const [first, second, thrid] = await Promise.all([
         getDepartment("Fakultet"),
-        getDepartment("kafedra"),
+        getDepartment("Kafedra"),
+        getDepartment("Ilmiy markaz"),
       ]);
 
       setFaculties(first);
       setKafedras(second);
+      setMarkazlar(thrid);
+      setFavoMarkaz(
+        thrid
+          .filter((e) => e.favorite)
+          .sort((a, b) => a?.position - b?.position)
+      );
     };
 
     fetchAllDepartment();
   }, [getDepartment]);
 
   return (
-    <FrontDepartmentContxt.Provider value={{ faculties, kafedras }}>
+    <FrontDepartmentContxt.Provider
+      value={{ faculties, kafedras, markazlar, favoMarkaz }}
+    >
       {children}
     </FrontDepartmentContxt.Provider>
   );

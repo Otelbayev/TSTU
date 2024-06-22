@@ -21,7 +21,8 @@
   },
   "faculties": {
     "title": "Faculties and Departments",
-    "btn": "View All"
+    "btn": "View All",
+    "kafedra": "Departments"
   },
   "talim": {
     "title": "Education",
@@ -37,8 +38,14 @@
     "btn": "View All"
   },
   "survery": {
-    "title": "Research",
-    "btn": "View All Research"
+    "title": "Surveys",
+    "btn": "View All Surveys",
+    "1":"Sicentific centers",
+    "2":"Library",
+    "3":"Books",
+    "markaz": "Making discoveries is important for our world, health, and intellectual life.",
+    "kutubxona": "The library is a place where people read, learn, conduct research, and discover new ideas.",
+    "kitob": "A book is the best friend that expands a person's knowledge, enriches imagination, and enhances life."
   },
   "centers": {
     "title": "Research Centers",
@@ -52,7 +59,13 @@
   },
   "about": {
     "title": "About Transport University",
-    "desc": "The system for training highly qualified personnel for the republic's transport sector has been fundamentally improved based on advanced foreign experience and international standards, by widely introducing innovative teaching methods and modern pedagogical and information technologies into the educational process, as well as strengthening the material and technical base and increasing the scientific potential of sectoral educational institutions."
+    "desc": "The system for training highly qualified personnel for the republic's transport sector has been fundamentally improved based on advanced foreign experience and international standards, by widely introducing innovative teaching methods and modern pedagogical and information technologies into the educational process, as well as strengthening the material and technical base and increasing the scientific potential of sectoral educational institutions.",
+    "talaba": "Number of students",
+    "professor": "Professors",
+    "doktarant": "Doctorants",
+    "yonalish": "Specialities",
+    "qoshimcha": "Additional education",
+    "fakultet": "Faculties"
   },
   "footer": {
     "title": "Transport University",

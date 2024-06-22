@@ -215,11 +215,11 @@ const Header = ({ uni }) => {
     getData("true").then((res) => setTopMenu(res));
   }, [language]);
 
-  const items = [obj, ...topMenu].map((item) => {
+  const items = topMenu.map((item) => {
     return {
       key: item.id,
       label: item.title,
-      children: [...all, ...data]
+      children: data
         .filter((i) => i.parent_id === item.id)
         .map((i) => {
           return {
@@ -375,11 +375,7 @@ const Header = ({ uni }) => {
             </Wrapper>
             <Desktop>
               {uni && <Line />}
-              <Sidebar
-                uni={uni}
-                topData={[obj, ...topMenu]}
-                allData={[...all, ...data]}
-              />
+              <Sidebar uni={uni} topData={topMenu} allData={data} />
             </Desktop>
           </div>
         </div>

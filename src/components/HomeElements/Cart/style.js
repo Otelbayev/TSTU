@@ -4,6 +4,7 @@ import icon from "../../../assets/icons/arrow-dark.svg";
 export const Wrap = styled.div`
   cursor: pointer;
   height: 100%;
+  background: #fff;
   border-radius: 4px;
   border: 1px solid var(--date);
   background: var(--titleLight);

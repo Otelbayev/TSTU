@@ -16,6 +16,7 @@ const FrontBlogContextProvider = ({ children }) => {
   const [news, setNews] = useState([]);
   const [events, setEvents] = useState([]);
   const [student, setStudent] = useState([]);
+  const [talim, setTalim] = useState([]);
 
   const { language } = useLanguageContext();
 
@@ -62,22 +63,24 @@ const FrontBlogContextProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchAllBlogs = async () => {
-      const [newsData, eventsData, studentData] = await Promise.all([
+      const [newsData, eventsData, studentData, talimData] = await Promise.all([
         getBlogs("Yangiliklar"),
         getBlogs("Tadbirlar"),
         getBlogs("Talaba hayoti"),
+        getBlogs("Ta'lim"),
       ]);
 
       setNews(newsData);
       setEvents(eventsData);
       setStudent(studentData);
+      setTalim(talimData);
     };
 
     fetchAllBlogs();
   }, [getBlogs]);
 
   return (
-    <FrontBlogContext.Provider value={{ news, events, student }}>
+    <FrontBlogContext.Provider value={{ news, events, student, talim }}>
       {children}
     </FrontBlogContext.Provider>
   );

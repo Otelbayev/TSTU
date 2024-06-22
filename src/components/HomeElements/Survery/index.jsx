@@ -11,7 +11,7 @@ const Survery = () => {
   const { t } = useTranslation();
   const { favoMarkaz } = useFrontDepartmentContext();
   const [counterOn, setCounterOn] = useState(false);
-  let ilm = [1, 2, 3, 4];
+
   return (
     <DarkSection className="root-container">
       <div className="root-wrapper">
@@ -29,39 +29,38 @@ const Survery = () => {
               <div data-aos="fade-up" className="tadqiqot">
                 <div className="tadqiqot__item ">
                   <div className="mobile-flex">
-                    <div className="tadqiqot__item__title">Ilmiy markazlar</div>
+                    <div className="tadqiqot__item__title">
+                      {t("survery.1")}
+                    </div>
                     <div className="tadqiqot__item__count">
-                      {counterOn && <CountUp end={12} duration={2} />} ta
+                      {counterOn && <CountUp end={12} duration={2} />}
+                    </div>
+                  </div>
+                  <div className="tadqiqot__item__p">{t("survery.markaz")}</div>
+                </div>
+                <div className="tadqiqot__item ">
+                  <div className="mobile-flex">
+                    <div className="tadqiqot__item__title">
+                      {t("survery.2")}
+                    </div>
+                    <div className="tadqiqot__item__count">
+                      {counterOn && <CountUp end={12} duration={2} />}
                     </div>
                   </div>
                   <div className="tadqiqot__item__p">
-                    Lorem ipsum dolor sit amet consectetur. Odio mattis lorem
-                    adipiscing cursus in
+                    {t("survery.kutubxona")}
                   </div>
                 </div>
                 <div className="tadqiqot__item ">
                   <div className="mobile-flex">
-                    <div className="tadqiqot__item__title">Kutubxona</div>
+                    <div className="tadqiqot__item__title">
+                      {t("survery.3")}
+                    </div>
                     <div className="tadqiqot__item__count">
-                      {counterOn && <CountUp end={12} duration={2} />} ta
+                      {counterOn && <CountUp end={12} duration={2} />}
                     </div>
                   </div>
-                  <div className="tadqiqot__item__p">
-                    Lorem ipsum dolor sit amet consectetur. Odio mattis lorem
-                    adipiscing cursus in
-                  </div>
-                </div>
-                <div className="tadqiqot__item ">
-                  <div className="mobile-flex">
-                    <div className="tadqiqot__item__title">Kitoblar</div>
-                    <div className="tadqiqot__item__count">
-                      {counterOn && <CountUp end={12} duration={2} />} ta
-                    </div>
-                  </div>
-                  <div className="tadqiqot__item__p">
-                    Lorem ipsum dolor sit amet consectetur. Odio mattis lorem
-                    adipiscing cursus in
-                  </div>
+                  <div className="tadqiqot__item__p">{t("survery.kitob")}</div>
                 </div>
               </div>
             </ScrollTrigger>

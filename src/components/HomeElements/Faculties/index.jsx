@@ -37,7 +37,7 @@ const Faculties = () => {
             </div>
             <div data-aos="fade-left" className="wrap">
               <div className="fak-right">
-                <div className="fak-right__title">Kafedralar</div>
+                <div className="fak-right__title">{t("faculties.kafedra")}</div>
                 <div className="fak-right__cards">
                   {kafedras
                     ?.filter((e) => e?.parent_id === id)

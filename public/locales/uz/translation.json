@@ -21,7 +21,8 @@
   },
   "faculties": {
     "title": "Fakultet va kafedralar",
-    "btn": "Barchasini ko‘rish"
+    "btn": "Barchasini ko‘rish",
+    "kafedra": "Kafedralar"
   },
   "talim": {
     "title": "Ta’lim",
@@ -38,7 +39,13 @@
   },
   "survery": {
     "title": "Tadqiqotlar",
-    "btn": "Barcha tadqiqotlarni ko‘rish"
+    "btn": "Barcha tadqiqotlarni ko‘rish",
+    "1": "Ilmiy markazlar",
+    "2": "Kutubxona",
+    "3": "Kitoblar",
+    "markaz": "Kashfiyotlar qilish bizning dunyomiz, sog'ligimiz va intellektual hayotimiz uchun muhimdir",
+    "kutubxona": "Kutubxona o‘qish, o‘rganish, va tadqiqotlar olib boradigan, yangi g‘oyalarni kashf etadigan maskan.",
+    "kitob": "Kitob insonning bilimlarini kengaytiradigan, tasavvurini boyitadigan va hayotini boyitadigan eng yaxshi do‘stdir."
   },
   "centers": {
     "title": "Ilmiy markazlar",
@@ -52,7 +59,13 @@
   },
   "about": {
     "title": "Transport Universiteti haqida",
-    "desc": " Respublika transport sohasi uchun yuqori malakali kadrlarni tayyorlash tizimini ilgʻor xorijiy tajriba va xalqaro standartlar asosida tubdan takomillashtirish, oʻquv jarayoniga oʻqitishning innovatsion shakl va metodlari hamda zamonaviy pedagogik va axborot texnologiyalarini keng joriy etish, shuningdek, tarmoq taʼlim muassasalarining moddiy-texnika bazasini mustahkamlash va ilmiy salohiyatini yanada oshirish maqsadida tashkil etilgan."
+    "desc": " Respublika transport sohasi uchun yuqori malakali kadrlarni tayyorlash tizimini ilgʻor xorijiy tajriba va xalqaro standartlar asosida tubdan takomillashtirish, oʻquv jarayoniga oʻqitishning innovatsion shakl va metodlari hamda zamonaviy pedagogik va axborot texnologiyalarini keng joriy etish, shuningdek, tarmoq taʼlim muassasalarining moddiy-texnika bazasini mustahkamlash va ilmiy salohiyatini yanada oshirish maqsadida tashkil etilgan.",
+    "talaba": "Talabalar soni",
+    "professor": "Professorlar",
+    "doktarant": "Doktorantlar",
+    "yonalish": "Ta'lim yonalishlari",
+    "qoshimcha": "Qoshimcha ta'lim",
+    "fakultet": "Fakultetlar"
   },
   "footer": {
     "title": "Transport Universiteti",

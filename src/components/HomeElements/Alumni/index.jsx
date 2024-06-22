@@ -44,7 +44,7 @@ const Alumni = () => {
   return (
     <div>
       <div className="root-container">
-        <div className="root-wrapper">
+        <div className="root-wrapper mt-4 mb-4">
           <Title
             title={t("alumni.title")}
             button={t("alumni.btn")}

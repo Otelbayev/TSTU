@@ -8,8 +8,8 @@ const KafedraCart = ({ prop, dataAos, $slider, onClick }) => {
     <Content data-aos={dataAos} onClick={onClick} $slider={$slider}>
       <img src={kaf} alt="" className="img" />
       <div className="flex-name">
-        <NavLink className="name" to={prop?.path}>
-          {prop?.title} {prop?.arrow && prop.arrow}
+        <NavLink className="name">
+          {prop?.title} <i className="fa-solid fa-arrow-right"></i>
         </NavLink>
       </div>
     </Content>

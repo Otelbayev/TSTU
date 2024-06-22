@@ -5,6 +5,9 @@ import Slider from "react-slick";
 import KafedraCart from "../KafedraCart";
 import { sliderProp } from "../../../mock/homeProps";
 import { useTranslation } from "react-i18next";
+import { useFrontBlogContext } from "../../../context/BlogContext";
+import { useNavigate } from "react-router-dom";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 const settings = {
   dots: false,
@@ -30,6 +33,8 @@ const settings = {
 
 const Talim = () => {
   const { t } = useTranslation();
+  const { talim } = useFrontBlogContext();
+  const navigate = useNavigate();
   return (
     <Container className="root-container">
       <div className="root-wrapper">
@@ -40,9 +45,13 @@ const Talim = () => {
         >
           <div data-aos="fade-up">
             <Slider className="slider" {...settings}>
-              {sliderProp.map((e) => (
+              {talim?.map((e) => (
                 <div className="slider__item" key={e.id}>
-                  <KafedraCart $slider={"true"} prop={e} />
+                  <KafedraCart
+                    onClick={() => navigate(`blog/${e.id}`)}
+                    $slider={"true"}
+                    prop={e}
+                  />
                 </div>
               ))}
             </Slider>

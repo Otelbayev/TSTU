@@ -75,8 +75,8 @@ const FrontDepartmentContxtProvider = ({ children }) => {
       setMarkazlar(thrid);
       setFavoMarkaz(
         thrid
-          .filter((e) => e.favorite)
-          .sort((a, b) => a?.position - b?.position)
+          ?.filter((e) => e.favorite)
+          ?.sort((a, b) => a?.position - b?.position)
       );
     };
 

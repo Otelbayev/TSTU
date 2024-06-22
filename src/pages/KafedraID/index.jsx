@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import bg from "../../assets/Faculties/afrosiyob.jpg";
 import Header from "../../components/Faculties/Header";
 import Showcase from "../../components/Faculties/Showcase";
@@ -12,22 +12,44 @@ import { data as data1, kafData } from "../Faculties/mock";
 import { Wrap, Yonalish } from "../FacultiesID/style";
 import Yonalishlar from "../../components/Faculties/Yonalishlar";
 import { Title } from "../../components/Generics";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 const KafedraID = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const data = [
-    { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 2, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 3, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 4, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 5, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 6, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 7, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 8, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 9, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  ];
+
+  const [data, setData] = useState([]);
+
+  const { id } = useParams();
+  const { language } = useLanguageContext();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        language === "uz"
+          ? `/api/departament/sitegetbyiddepartament/${id}`
+          : `/api/departament/sitegetbyuziddepartamenttranslation/${id}?language_code=${language}`
+      );
+      res.status === 200 && setData(res.data);
+    };
+
+    fetchData();
+  }, [id]);
+
+  // const data = [
+  //   { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  //   { id: 2, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  //   { id: 3, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  //   { id: 4, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  //   { id: 5, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  //   { id: 6, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  //   { id: 7, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  //   { id: 8, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  //   { id: 9, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  // ];
   const aboutRef = useRef();
   const talimRef = useRef();
   const tadqiqotRef = useRef();
@@ -42,7 +64,7 @@ const KafedraID = () => {
       />
       <Showcase
         $bg={bg}
-        title={"Vagonlar va vagon xo’jaligi kafedrasi xush kelibsiz"}
+        title={`${data?.title} kafedrasiga xush kelibsiz!`}
         button={"kafedra haqida batafsil bilish"}
         onClick={() => aboutRef.current.scrollIntoView({ block: "nearest" })}
       ></Showcase>
@@ -64,32 +86,10 @@ const KafedraID = () => {
               button={"/"}
             />
             <Title title="Kafedra haqida" $border={"none"} />
-            <p ref={aboutRef}>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi
-              tempore accusamus, quae voluptatem nostrum porro possimus
-              repellendus eligendi vitae ipsam quas recusandae modi. Tempora,
-              provident maxime. Placeat dolore consectetur unde ratione tenetur
-              iste mollitia nemo molestiae! Labore similique hic praesentium
-              atque officiis beatae velit cupiditate ipsam incidunt nisi, minima
-              placeat eaque fuga est doloribus perferendis voluptatibus a nobis
-              eos consectetur, ad officia quasi sapiente omnis! Minima eum odio
-              cum? Atque doloremque nisi aut nemo? Porro pariatur ad iste,
-              mollitia nam debitis dolore laudantium incidunt nesciunt
-              voluptatem dolorem esse temporibus tempore quasi alias sit id
-              sunt, eius facilis voluptate magni quo? Eos dolore nobis quae quos
-              vero aliquid! Beatae repellendus, consequatur veritatis velit
-              ipsa, optio adipisci dolor error sed, odio nulla distinctio?
-              Quasi, expedita cumque repellendus iure dolores facilis. Sapiente
-              itaque aut sequi iusto eius possimus labore asperiores in,
-              obcaecati quis accusamus necessitatibus. Quod corrupti nam
-              architecto nisi? Officiis ex aspernatur, dolores eum eos quis ut
-              dignissimos maiores ipsam sed error. Tempora fugiat eum voluptate
-              excepturi exercitationem dignissimos ratione accusantium
-              architecto sequi culpa possimus, ex velit repellat repudiandae
-              expedita quasi qui eligendi facere debitis? Exercitationem minima
-              veritatis iste beatae quis neque error, consequuntur et aliquid
-              corporis provident excepturi ut. Voluptatem, incidunt!
-            </p>
+            <p
+              ref={aboutRef}
+              dangerouslySetInnerHTML={{ __html: data?.text }}
+            />
             <Title
               title="Kafedra professor o‘qtuvchilari tarkibi"
               $border={"none"}
@@ -108,11 +108,11 @@ const KafedraID = () => {
             <Yonalish ref={tadqiqotRef}>
               <Yonalish.Left data-aos="fade-right">
                 <Yonalish.Title>Bakalavr yo‘nalishlari</Yonalish.Title>
-                <Yonalishlar data={data} />
+                {/* <Yonalishlar data={data} /> */}
               </Yonalish.Left>
               <Yonalish.Right data-aos="fade-left">
                 <Yonalish.Title>Magistratura yo‘nalishlari</Yonalish.Title>
-                <Yonalishlar data={data} />
+                {/* <Yonalishlar data={data} /> */}
               </Yonalish.Right>
             </Yonalish>
           </Wrap>

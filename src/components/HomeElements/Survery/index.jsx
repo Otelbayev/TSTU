@@ -74,7 +74,7 @@ const Survery = () => {
           to="scientific-center"
         >
           <div className="markaz">
-            {favoMarkaz.map((e) => (
+            {favoMarkaz?.map((e) => (
               <IlmiyMarkazCart
                 dataAos={"zoom-in"}
                 key={e.id}

@@ -113,13 +113,13 @@ export const routes = [
   { id: useId(), path: "galereya", element: <Galereya />, isPrivate: false },
   {
     id: useId(),
-    path: "faculties/:id",
+    path: "facultet/:id",
     element: <FacultiesID />,
     isPrivate: false,
   },
   {
     id: useId(),
-    path: "faculties/:id/:id",
+    path: "kafedra/:id",
     element: <KafedraID />,
     isPrivate: false,
   },

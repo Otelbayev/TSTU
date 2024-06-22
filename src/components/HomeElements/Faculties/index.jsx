@@ -43,7 +43,9 @@ const Faculties = () => {
                     ?.filter((e) => e?.parent_id === id)
                     ?.map((item) => (
                       <KafedraCart
-                        onClick={() => navigate(`department/${item?.id}`)}
+                        onClick={() =>
+                          navigate(`/${language}/kafedra/${item?.id}`)
+                        }
                         key={item?.id}
                         prop={item}
                       />

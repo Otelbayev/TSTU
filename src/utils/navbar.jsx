@@ -164,7 +164,7 @@ export const noshowcase = [
   },
   {
     id: useId(),
-    path: "faculties",
+    path: "facultet",
     element: <Faculties />,
     isPrivate: false,
   },

@@ -31,7 +31,7 @@ const KafedraID = () => {
       const res = await axios.get(
         language === "uz"
           ? `/api/departament/sitegetbyiddepartament/${id}`
-          : `/api/departament/sitegetbyuziddepartamenttranslation/${id}?language_code=${language}`
+          : `/api/departament/sitegetbyiddepartamenttranslation/${id}`
       );
       res.status === 200 && setData(res.data);
     };

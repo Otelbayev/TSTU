@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../../components/Faculties/Header";
 import bg from "../../assets/Faculties/bgFak.png";
 import Showcase from "../../components/Faculties/Showcase";
@@ -13,7 +13,7 @@ import {
   Yonalish,
   Wrap,
 } from "./style";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import noimg1 from "../../assets/images/noimg1.jpg";
 import noimg2 from "../../assets/images/noimg2.jpg";
 import dekan from "../../assets/Faculties/dekan.png";
@@ -24,10 +24,17 @@ import kaf3 from "../../assets/Faculties/kaf3.png";
 import Dekans from "../../components/Faculties/Dekan";
 import Footer from "../../components/Faculties/Footer";
 import FackBottom from "../../components/Faculties/FakBottom";
-import { data, fakNewsData1, orinbosar, fakNewsData } from "../Faculties/mock";
+import {
+  data as bottomData,
+  fakNewsData1,
+  orinbosar,
+  fakNewsData,
+} from "../Faculties/mock";
 import FakNews from "../../components/Faculties/FakNews";
 import Yonalishlar from "../../components/Faculties/Yonalishlar";
 import { Title } from "../../components/Generics";
+import { useLanguageContext } from "../../context/LanguageContext";
+import axios from "axios";
 const FacultiesID = () => {
   const naviagte = useNavigate();
   const aboutRef = useRef();
@@ -49,6 +56,25 @@ const FacultiesID = () => {
     { id: 8, label: "60640102 Transport logistikasi (avtomobil transporti)" },
     { id: 9, label: "60640102 Transport logistikasi (avtomobil transporti)" },
   ];
+
+  const [data, setData] = useState([]);
+
+  const { id } = useParams();
+  const { language } = useLanguageContext();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        language === "uz"
+          ? `/api/departament/sitegetbyiddepartament/${id}`
+          : `/api/departament/sitegetbyiddepartamenttranslation/${id}`
+      );
+      res.status === 200 && setData(res.data);
+    };
+
+    fetchData();
+  }, [id]);
+
   return (
     <div style={{ overflow: "hidden" }}>
       <Header
@@ -61,14 +87,15 @@ const FacultiesID = () => {
       />
       <Showcase
         $bg={bg}
-        title={"Transport tizimlari boshqaruvi fakultetiga xush kelibsiz"}
+        title={`${data?.title} fakultetiga xush kelibsiz`}
         button={"Fakultet haqida batafsil bilish"}
         onClick={() => aboutRef.current.scrollIntoView({ block: "nearest" })}
       ></Showcase>
       <div className="root-container">
         <div className="root-wrapper">
           <Wrap>
-            <FackBottom data={data} />
+            <div dangerouslySetInnerHTML={{ __html: data?.text }} />
+            <FackBottom data={bottomData} />
             <Title title="Fakultet dekani." $border={"none"} />
             <Dekans
               img={dekan}

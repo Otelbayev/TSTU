@@ -20,7 +20,7 @@ const Faculties = () => {
         <Title
           title={t("faculties.title")}
           button={t("faculties.btn")}
-          to="faculties"
+          to="facultet"
         >
           <FakGrid>
             <div data-aos="fade-right" className="fak-left">

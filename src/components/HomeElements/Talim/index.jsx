@@ -35,6 +35,7 @@ const Talim = () => {
   const { t } = useTranslation();
   const { talim } = useFrontBlogContext();
   const navigate = useNavigate();
+  const { language } = useLanguageContext();
   return (
     <Container className="root-container">
       <div className="root-wrapper">
@@ -48,7 +49,7 @@ const Talim = () => {
               {talim?.map((e) => (
                 <div className="slider__item" key={e.id}>
                   <KafedraCart
-                    onClick={() => navigate(`blog/${e.id}`)}
+                    onClick={() => navigate(`/${language}/blog/${e.id}`)}
                     $slider={"true"}
                     prop={e}
                   />

@@ -105,5 +105,17 @@
       "link2": "Kafedralar",
       "link3": "Markazla"
     }
+  },
+  "kafedra": {
+    "btn": "Kafedra haqida batafsil bilish",
+    "about": "Kafedra haqida.",
+    "mudir": "Kafedra mudiri.",
+    "teachers": "Kafedra professor o‘qtuvchilari tarkibi.",
+    "bakalavr": "Bakalavr yo‘nalishlari",
+    "magistr": "Magistratura  yo‘nalishlari",
+    "links": {
+      "link1": "Kafedra haqida",
+      "link2": "Yo'nalishlar"
+    }
   }
 }

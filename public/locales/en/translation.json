@@ -105,5 +105,17 @@
       "link2": "Departments",
       "link3": "Centers"
     }
+  },
+  "kafedra": {
+    "btn": "Learn more about the department",
+    "about": "About the department.",
+    "mudir": "Head of the department.",
+    "teachers": "Faculty members of the department.",
+    "bakalavr": "Bachelor's programs",
+    "magistr": "Master's programs",
+    "links": {
+      "link1": "About the department",
+      "link2": "Programs"
+    }
   }
 }

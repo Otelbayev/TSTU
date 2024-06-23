@@ -4,17 +4,18 @@ import Header from "../../components/Faculties/Header";
 import Showcase from "../../components/Faculties/Showcase";
 import Dekans from "../../components/Faculties/Dekan";
 import dekan from "../../assets/Faculties/rustam.png";
-import { Grid } from "./style";
 import DekanCart from "../../components/Faculties/DekanCart";
 import Footer from "../../components/Footer";
 import FackBottom from "../../components/Faculties/FakBottom";
 import { data as data1, kafData } from "../Faculties/mock";
-import { Wrap, Yonalish } from "../FacultiesID/style";
+import { Orinbosar, Wrap, Yonalish } from "../FacultiesID/style";
 import Yonalishlar from "../../components/Faculties/Yonalishlar";
 import { Title } from "../../components/Generics";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useHandleScroll } from "../../hooks/useHandleScroll";
+import { useTranslation } from "react-i18next";
 
 const KafedraID = () => {
   useEffect(() => {
@@ -22,6 +23,8 @@ const KafedraID = () => {
   }, []);
 
   const [data, setData] = useState([]);
+
+  const { t } = useTranslation();
 
   const { id } = useParams();
   const { language } = useLanguageContext();
@@ -55,31 +58,43 @@ const KafedraID = () => {
     { id: 9, label: "60640102 Transport logistikasi (avtomobil transporti)" },
   ];
   const aboutRef = useRef();
-  const talimRef = useRef();
-  const tadqiqotRef = useRef();
+  const mudirRef = useRef();
+  const yonalishRef = useRef();
 
   const links = [
-    { title: "Kafedra haqida" },
-    { title: "Ta’lim" },
-    { title: "Tadqiqot" },
+    { title: t("kafedra.links.link1"), refs: aboutRef },
+    { title: t("kafedra.links.link2"), refs: yonalishRef },
   ];
+
+  const getTitle = (title, language) => {
+    const obj = {
+      uz: `${title} fakultetiga xush kelibsiz!`,
+      en: `Welcome to the Faculty of ${title}!`,
+      ru: `Добро пожаловать на факультет ${title}!`,
+    };
+
+    return obj[language];
+  };
 
   return (
     <div className="overflow-hidden">
       <Header links={links} />
       <Showcase
         bg={bg}
-        title={`${data?.title} kafedrasiga xush kelibsiz!`}
-        button={"Kafedra haqida batafsil"}
-        onClick={() => aboutRef.current?.scrollIntoView({ block: "nearest" })}
+        title={getTitle(data?.title, language)}
+        button={t("kafedra.btn")}
+        onClick={() => useHandleScroll(aboutRef)}
       ></Showcase>
 
       <div className="root-container">
         <div className="root-wrapper">
-          <p ref={aboutRef} dangerouslySetInnerHTML={{ __html: data?.text }} />
-          {/* <Wrap>
-            <FackBottom data={data1} />
-            <Title ref={talimRef} title="Kafedra mudiri" $border={"none"} />
+          <Wrap>
+            <Title ref={aboutRef} title={t("kafedra.about")} $border={"none"} />
+            <p
+              dangerouslySetInnerHTML={{ __html: data?.text }}
+              data-aos="fade-up"
+            />
+            <Title ref={mudirRef} title={t("kafedra.mudir")} $border={"none"} />
             <Dekans
               img={dekan}
               name={"Raximov Rustam Vyacheslavovich"}
@@ -92,12 +107,8 @@ const KafedraID = () => {
               ]}
               button={"/"}
             />
-           
-            <Title
-              title="Kafedra professor o‘qtuvchilari tarkibi"
-              $border={"none"}
-            />
-            <Grid>
+            <Title title={t("kafedra.teachers")} $border={"none"} />
+            <Orinbosar>
               {kafData.map(({ id, img, name, position, links }) => (
                 <DekanCart
                   key={id}
@@ -107,21 +118,21 @@ const KafedraID = () => {
                   links={links}
                 />
               ))}
-            </Grid>
-            <Yonalish ref={tadqiqotRef}>
+            </Orinbosar>
+            <Yonalish ref={yonalishRef}>
               <Yonalish.Left data-aos="fade-right">
-                <Yonalish.Title>Bakalavr yo‘nalishlari</Yonalish.Title>
+                <Yonalish.Title>{t("kafedra.bakalavr")}</Yonalish.Title>
                 <Yonalishlar data={data1} />
               </Yonalish.Left>
               <Yonalish.Right data-aos="fade-left">
-                <Yonalish.Title>Magistratura yo‘nalishlari</Yonalish.Title>
+                <Yonalish.Title>{t("kafedra.bakalavr")}</Yonalish.Title>
                 <Yonalishlar data={data1} />
               </Yonalish.Right>
             </Yonalish>
-          </Wrap> */}
+          </Wrap>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

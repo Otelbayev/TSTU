@@ -1,12 +1,11 @@
 import React from "react";
 import { Container, Content } from "./style";
 
-const Showcase = ({ $bg, title, button, children, onClick }) => {
+const Showcase = ({ bg, title, button, children, onClick }) => {
   return (
-    <Container>
-      <img src={$bg} alt="" />
+    <Container $bg={bg}>
       <div className="root-container">
-        <div className="root-wrapper" style={{ position: "relative" }}>
+        <div className="root-wrapper">
           <Content data-aos="zoom-in">
             <Content.Title>{title || "title"}</Content.Title>
             <Content.Btn onClick={onClick} type="primary">

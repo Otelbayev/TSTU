@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import bg from "../../assets/Faculties/afrosiyob.jpg";
+import bg from "../../assets/Faculties/bgFak2.jpeg";
 import Header from "../../components/Faculties/Header";
 import Showcase from "../../components/Faculties/Showcase";
 import Dekans from "../../components/Faculties/Dekan";
 import dekan from "../../assets/Faculties/rustam.png";
 import { Grid } from "./style";
 import DekanCart from "../../components/Faculties/DekanCart";
-import Footer from "../../components/Faculties/Footer";
+import Footer from "../../components/Footer";
 import FackBottom from "../../components/Faculties/FakBottom";
 import { data as data1, kafData } from "../Faculties/mock";
 import { Wrap, Yonalish } from "../FacultiesID/style";
@@ -39,17 +39,17 @@ const KafedraID = () => {
     fetchData();
   }, [id]);
 
-  // const data = [
-  //   { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  //   { id: 2, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  //   { id: 3, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  //   { id: 4, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  //   { id: 5, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  //   { id: 6, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  //   { id: 7, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  //   { id: 8, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  //   { id: 9, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  // ];
+  const data1 = [
+    { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+    { id: 2, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+    { id: 3, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+    { id: 4, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+    { id: 5, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+    { id: 6, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+    { id: 7, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+    { id: 8, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+    { id: 9, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  ];
   const aboutRef = useRef();
   const talimRef = useRef();
   const tadqiqotRef = useRef();
@@ -63,12 +63,12 @@ const KafedraID = () => {
         tadqiqotRef={tadqiqotRef}
       />
       <Showcase
-        $bg={bg}
+        bg={bg}
         title={`${data?.title} kafedrasiga xush kelibsiz!`}
-        button={"kafedra haqida batafsil bilish"}
+        button={"Kafedra haqida batafsil"}
         onClick={() => aboutRef.current.scrollIntoView({ block: "nearest" })}
       ></Showcase>
-      <div className="root-container">
+      {/* <div className="root-container">
         <div className="root-wrapper">
           <Wrap>
             <FackBottom data={data1} />
@@ -108,17 +108,17 @@ const KafedraID = () => {
             <Yonalish ref={tadqiqotRef}>
               <Yonalish.Left data-aos="fade-right">
                 <Yonalish.Title>Bakalavr yo‘nalishlari</Yonalish.Title>
-                {/* <Yonalishlar data={data} /> */}
+                <Yonalishlar data={data1} />
               </Yonalish.Left>
               <Yonalish.Right data-aos="fade-left">
                 <Yonalish.Title>Magistratura yo‘nalishlari</Yonalish.Title>
-                {/* <Yonalishlar data={data} /> */}
+                <Yonalishlar data={data1} />
               </Yonalish.Right>
             </Yonalish>
           </Wrap>
         </div>
-      </div>
-      <Footer />
+      </div> */}
+      {/* <Footer /> */}
     </div>
   );
 };

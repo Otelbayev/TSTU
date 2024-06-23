@@ -154,5 +154,5 @@ Yonalish.Title = styled.div`
 
 export const Wrap = styled.div`
   position: relative;
-  padding-top: 160px;
+  padding-top: 50px;
 `;

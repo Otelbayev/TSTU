@@ -6,11 +6,13 @@ import ScrollTrigger from "react-scroll-trigger";
 import { DarkSection } from "./style";
 import { useTranslation } from "react-i18next";
 import { useFrontDepartmentContext } from "../../../context/DepartmentContext";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 const Survery = () => {
   const { t } = useTranslation();
   const { favoMarkaz } = useFrontDepartmentContext();
   const [counterOn, setCounterOn] = useState(false);
+  const { language } = useLanguageContext();
 
   return (
     <DarkSection className="root-container">
@@ -78,7 +80,7 @@ const Survery = () => {
               <IlmiyMarkazCart
                 dataAos={"zoom-in"}
                 key={e.id}
-                to={`department/${e?.id}`}
+                to={`/${language}/department/${e?.id}`}
                 item={e}
               />
             ))}

@@ -14,8 +14,6 @@ import {
   Wrap,
 } from "./style";
 import { useNavigate, useParams } from "react-router-dom";
-import noimg1 from "../../assets/images/noimg1.jpg";
-import noimg2 from "../../assets/images/noimg2.jpg";
 import dekan from "../../assets/Faculties/dekan.png";
 import DekanCart from "../../components/Faculties/DekanCart";
 import kaf1 from "../../assets/Faculties/kaf1.png";
@@ -35,16 +33,19 @@ import Yonalishlar from "../../components/Faculties/Yonalishlar";
 import { Title } from "../../components/Generics";
 import { useLanguageContext } from "../../context/LanguageContext";
 import axios from "axios";
+import { useFrontDepartmentContext } from "./../../context/DepartmentContext/index";
 const FacultiesID = () => {
   const naviagte = useNavigate();
+
   const aboutRef = useRef();
   const talimRef = useRef();
   const kafedraRef = useRef();
   const tadqiqotRef = useRef();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const arr = [1, 2, 3, 4];
+
   const data1 = [
     { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
     { id: 2, label: "60640102 Transport logistikasi (avtomobil transporti)" },
@@ -61,6 +62,7 @@ const FacultiesID = () => {
 
   const { id } = useParams();
   const { language } = useLanguageContext();
+  const { favoMarkaz } = useFrontDepartmentContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,9 +83,8 @@ const FacultiesID = () => {
 
   const links = [
     { title: "Fakultet haqida" },
-    { title: "Ta’lim" },
     { title: "Kafedralar" },
-    { title: "Tadqiqot" },
+    { title: "Markazlar" },
   ];
 
   return (
@@ -91,15 +92,15 @@ const FacultiesID = () => {
       <Header links={links} />
       <Showcase
         bg={bg}
-        title={`${data?.title} fakultetiga xush kelibsiz`}
+        title={`${data?.title} fakultetiga xush kelibsiz!`}
         button={"Fakultet haqida batafsil bilish"}
         onClick={() => aboutRef.current.scrollIntoView({ block: "nearest" })}
       ></Showcase>
-      {/* <div className="root-container">
+      <div className="root-container">
         <div className="root-wrapper">
           <Wrap>
+            <Title title="Fakultet haqida." $border={"none"} />
             <div dangerouslySetInnerHTML={{ __html: data?.text }} />
-            <FackBottom data={bottomData} />
             <Title title="Fakultet dekani." $border={"none"} />
             <Dekans
               img={dekan}
@@ -156,43 +157,6 @@ const FacultiesID = () => {
                 <FakNews data={fakNewsData1} />
               </News.Right>
             </News>
-            <Title
-              title="Fakultet haqida ma’lumotdan va sertifikatlar"
-              $border={"none"}
-            />
-            <Malumot ref={aboutRef}>
-              <Malumot.Left data-aos="fade-right">
-                <Malumot.Img src={noimg2} $col={"1/3"} $row={"1/2"} />
-                <Malumot.Img src={noimg1} $col={"1/2"} $row={"2/3"} />
-                <Malumot.Img src={noimg1} $col={"2/3"} $row={"2/3"} />
-              </Malumot.Left>
-              <Malumot.Right data-aos="fade-left">
-                <Malumot.Div>
-                  <div className="title">Heading</div>
-                  <div className="p">
-                    There is a moment in the life of any aspiring astronomer
-                    that it is time to buy that first telescope. It’s exciting
-                    to think about setting up your own viewing.
-                  </div>
-                </Malumot.Div>
-                <Malumot.Div>
-                  <div className="title">Heading</div>
-                  <div className="p">
-                    There is a moment in the life of any aspiring astronomer
-                    that it is time to buy that first telescope. It’s exciting
-                    to think about setting up your own viewing.
-                  </div>
-                </Malumot.Div>
-                <Malumot.Div>
-                  <div className="title">Heading</div>
-                  <div className="p">
-                    There is a moment in the life of any aspiring astronomer
-                    that it is time to buy that first telescope. It’s exciting
-                    to think about setting up your own viewing.
-                  </div>
-                </Malumot.Div>
-              </Malumot.Right>
-            </Malumot>
             <Title title="Kafedralar" $border={"none"} />
             <KafedraWrap ref={kafedraRef}>
               <Kafedra>
@@ -205,7 +169,7 @@ const FacultiesID = () => {
                   $bg={kaf1}
                 >
                   <Kafedra.Content>
-                    Transport intellektual tizimlari muhandisligi{" "}
+                    Transport intellektual tizimlari muhandislig
                     <Kafedra.Arrow />
                   </Kafedra.Content>
                 </Kafedra.Item>
@@ -242,7 +206,7 @@ const FacultiesID = () => {
                   $bg={kaf1}
                 >
                   <Kafedra.Content>
-                    Transport intellektual tizimlari muhandisligi{" "}
+                    Transport intellektual tizimlari muhandislig
                     <Kafedra.Arrow />
                   </Kafedra.Content>
                 </Kafedra.Item>
@@ -257,7 +221,7 @@ const FacultiesID = () => {
                   $bg={kaf3}
                 >
                   <Kafedra.Content>
-                    Transport intellektual tizimlari muhandisligi{" "}
+                    Transport intellektual tizimlari muhandislig
                     <Kafedra.Arrow />
                   </Kafedra.Content>
                 </Kafedra.Item>
@@ -270,7 +234,7 @@ const FacultiesID = () => {
                   $bg={kaf3}
                 >
                   <Kafedra.Content>
-                    Transport intellektual tizimlari muhandisligi{" "}
+                    Transport intellektual tizimlari muhandislig
                     <Kafedra.Arrow />
                   </Kafedra.Content>
                 </Kafedra.Item>
@@ -278,12 +242,13 @@ const FacultiesID = () => {
             </KafedraWrap>
             <Title title="Ilmiy markazlar" $border={"none"} />
             <IlmiyMarkaz ref={tadqiqotRef}>
-              {arr.map((e) => (
+              {favoMarkaz?.map((e) => (
                 <IlmiyMarkazCart
-                  key={e}
-                  onClick={() => naviagte(`/scientific-center/${e}`)}
+                  key={e?.id}
+                  onClick={() => naviagte(`/${language}/department/${e?.id}`)}
                   $border={"#CECECE"}
                   dataAos="zoom-in"
+                  item={e}
                 />
               ))}
             </IlmiyMarkaz>
@@ -299,8 +264,8 @@ const FacultiesID = () => {
             </Yonalish>
           </Wrap>
         </div>
-      </div> */}
-      {/* <Footer /> */}
+      </div>
+      <Footer />
     </div>
   );
 };

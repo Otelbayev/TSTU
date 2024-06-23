@@ -2,10 +2,15 @@ import styled, { css } from "styled-components";
 import arrow from "../../assets/icons/arrow-light.svg?react";
 
 export const IlmiyMarkaz = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 13px;
-  height: 450px;
-  margin: 40px 0;
+  @media (max-width: 996px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 660px) {
+    grid-template-columns: 1fr;
+  }
 `;
 export const Malumot = styled.div`
   display: flex;
@@ -46,29 +51,43 @@ Malumot.Div = styled.div`
   }
 `;
 export const Orinbosar = styled.div`
-  display: flex;
-  align-items: start;
-  justify-content: space-around;
+  display: grid;
+  row-gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
   padding: 50px 0;
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 export const KafedraWrap = styled.div`
   padding: 30px 0;
+  @media (max-width: 800px) {
+    padding: 0;
+  }
 `;
 
 export const Kafedra = styled.div`
   display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   margin: 10px 0;
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 `;
 Kafedra.Item = styled.div`
-  grid-column: ${({ $col }) => $col};
-  grid-row: ${({ $row }) => $row};
   width: 100%;
-  height: 100%;
   background: ${({ $bg }) => `url(${$bg})`};
   background-repeat: no-repeat;
-  height: ${({ height }) => `${height}px`};
+  min-height: 300px;
+  height: ${({ height }) => (height ? `${height}px` : "100%")};
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -135,14 +154,26 @@ export const Yonalish = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 50px;
+  @media (max-width: 825px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    justify-content: flex-start;
+  }
 `;
 
 Yonalish.Left = styled.div`
   width: 50%;
+  @media (max-width: 825px) {
+    width: 100%;
+  }
 `;
 
 Yonalish.Right = styled.div`
   width: 50%;
+  @media (max-width: 825px) {
+    width: 100%;
+  }
 `;
 
 Yonalish.Title = styled.div`
@@ -150,9 +181,17 @@ Yonalish.Title = styled.div`
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
+  @media (max-width: 825px) {
+    font-size: 20px;
+  }
 `;
 
 export const Wrap = styled.div`
   position: relative;
   padding-top: 50px;
+  @media (max-width: 700px) {
+    .text {
+      font-size: 14px;
+    }
+  }
 `;

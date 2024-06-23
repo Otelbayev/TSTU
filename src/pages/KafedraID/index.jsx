@@ -65,7 +65,7 @@ const KafedraID = () => {
   ];
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Header links={links} />
       <Showcase
         bg={bg}

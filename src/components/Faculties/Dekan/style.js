@@ -8,6 +8,17 @@ export const Dekan = styled.div`
   display: flex;
   gap: 40px;
   padding: 50px 0;
+  @media (max-width: 1000px) {
+    padding: 30px 0;
+  }
+  @media (max-width: 776px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  @media (max-width: 500px) {
+    padding: 0 10px;
+  }
 `;
 Dekan.Left = styled.div``;
 Dekan.Right = styled.div``;
@@ -16,6 +27,16 @@ Dekan.Img = styled.img`
   height: 500px;
   border-radius: 22px;
   border: 1px solid #cecece;
+  @media (max-width: 1000px) {
+    height: 350px;
+  }
+  @media (max-width: 776px) {
+    width: 300px;
+  }
+  @media (max-width: 500px) {
+    width: 250px;
+    height: 250px;
+  }
 `;
 Dekan.Name = styled.div`
   color: #1c1c1c;
@@ -24,6 +45,9 @@ Dekan.Name = styled.div`
   font-weight: 700;
   line-height: 48px;
   margin-bottom: 18px;
+  @media (max-width: 1000px) {
+    font-size: 25px;
+  }
 `;
 Dekan.Btn = styled(Button)`
   padding: 7px 40px;
@@ -32,6 +56,9 @@ Dekan.Btn = styled(Button)`
   font-style: normal;
   font-weight: 500;
   line-height: 26px;
+  @media (max-width: 1000px) {
+    font-size: 16px;
+  }
 `;
 Dekan.Contact = styled.div`
   display: flex;
@@ -45,11 +72,14 @@ Dekan.Contact = styled.div`
     font-style: normal;
     font-weight: 500;
     width: 200px;
+    @media (max-width: 1000px) {
+      font-size: 14px;
+    }
   }
 `;
 Dekan.Ul = styled.ul`
   margin: 16px 0;
-  transform: translateX(20px);
+  transform: translateX(10px);
   /* width: 90%; */
 `;
 Dekan.Li = styled.li`
@@ -60,6 +90,12 @@ Dekan.Li = styled.li`
   font-weight: 400;
   line-height: 30px; /* 150% */
   letter-spacing: -0.3px;
+  @media (max-width: 1000px) {
+    font-size: 16px;
+  }
+  @media (max-width: 500px) {
+    font-size: 14px;
+  }
 `;
 Dekan.User = styled(user)``;
 Dekan.Phone = styled(phone)``;

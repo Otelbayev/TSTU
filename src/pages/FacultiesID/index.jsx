@@ -34,6 +34,19 @@ import { Title } from "../../components/Generics";
 import { useLanguageContext } from "../../context/LanguageContext";
 import axios from "axios";
 import { useFrontDepartmentContext } from "./../../context/DepartmentContext/index";
+
+const data1 = [
+  { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  { id: 2, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  { id: 3, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  { id: 4, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  { id: 5, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  { id: 6, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  { id: 7, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  { id: 8, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+  { id: 9, label: "60640102 Transport logistikasi (avtomobil transporti)" },
+];
+
 const FacultiesID = () => {
   const naviagte = useNavigate();
 
@@ -43,33 +56,23 @@ const FacultiesID = () => {
   const tadqiqotRef = useRef();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }, []);
-
-  const data1 = [
-    { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 2, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 3, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 4, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 5, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 6, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 7, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 8, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 9, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  ];
 
   const [data, setData] = useState([]);
 
   const { id } = useParams();
   const { language } = useLanguageContext();
-  const { favoMarkaz } = useFrontDepartmentContext();
+  const { favoMarkaz, kafedras } = useFrontDepartmentContext();
+
+  const kafedraData = kafedras?.filter((e) => e?.parent_id == id);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
         language === "uz"
           ? `/api/departament/sitegetbyiddepartament/${id}`
-          : `/api/departament/sitegetbyiddepartamenttranslation/${id}`
+          : `/api/departament/sitegetbyuziddepartamenttranslation/${id}?language_code=${language}`
       );
       if (res.status === 200) {
         setData(res.data);
@@ -88,7 +91,7 @@ const FacultiesID = () => {
   ];
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Header links={links} />
       <Showcase
         bg={bg}
@@ -100,7 +103,11 @@ const FacultiesID = () => {
         <div className="root-wrapper">
           <Wrap>
             <Title title="Fakultet haqida." $border={"none"} />
-            <div dangerouslySetInnerHTML={{ __html: data?.text }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: data?.text }}
+              data-aos="fade-up"
+              className="text"
+            />
             <Title title="Fakultet dekani." $border={"none"} />
             <Dekans
               img={dekan}
@@ -112,7 +119,6 @@ const FacultiesID = () => {
                 "1976-1981 yy. – Toshkent temir yо‘l muhandislari instituti talabasi",
                 "1987-1990 yy. – Moskva temir yо‘l muhandislari instituti aspiranti.",
               ]}
-              button={"/"}
             />
             <Title
               ref={aboutRef}
@@ -130,8 +136,8 @@ const FacultiesID = () => {
                 />
               ))}
             </Orinbosar>
-            <Title title="Fakultet e’lon va  yangiliklari" $border={"none"} />
-            <News ref={talimRef}>
+            {/* <Title title="Fakultet e’lon va  yangiliklari" $border={"none"} /> */}
+            {/* <News ref={talimRef}>
               <News.Left data-aos="fade-right">
                 <FakNews data={fakNewsData} />
                 <FakNews data={fakNewsData} />
@@ -156,88 +162,23 @@ const FacultiesID = () => {
                 <FakNews data={fakNewsData1} />
                 <FakNews data={fakNewsData1} />
               </News.Right>
-            </News>
+            </News> */}
             <Title title="Kafedralar" $border={"none"} />
             <KafedraWrap ref={kafedraRef}>
               <Kafedra>
-                <Kafedra.Item
-                  data-aos="zoom-in"
-                  onClick={() => naviagte(`kafedra-1`)}
-                  height={350}
-                  $col={"1/2"}
-                  $row={"1/3"}
-                  $bg={kaf1}
-                >
-                  <Kafedra.Content>
-                    Transport intellektual tizimlari muhandislig
-                    <Kafedra.Arrow />
-                  </Kafedra.Content>
-                </Kafedra.Item>
-                <Kafedra.Item
-                  data-aos="zoom-in"
-                  onClick={() => naviagte(`kafedra-2`)}
-                  height={170}
-                  $col={"2/3"}
-                  $row={"1/2"}
-                  $bg={kaf2}
-                >
-                  <Kafedra.Content>
-                    Transport logistikasi <Kafedra.Arrow />
-                  </Kafedra.Content>
-                </Kafedra.Item>
-                <Kafedra.Item
-                  data-aos="zoom-in"
-                  onClick={() => naviagte(`kafedra-3`)}
-                  height={170}
-                  $col={"2/3"}
-                  $row={"2/3"}
-                  $bg={kaf3}
-                >
-                  <Kafedra.Content>
-                    Yo'l harakatini tashkil etish <Kafedra.Arrow />
-                  </Kafedra.Content>
-                </Kafedra.Item>
-                <Kafedra.Item
-                  data-aos="zoom-in"
-                  onClick={() => naviagte(`kafedra-4`)}
-                  height={350}
-                  $col={"3/4"}
-                  $row={"1/3"}
-                  $bg={kaf1}
-                >
-                  <Kafedra.Content>
-                    Transport intellektual tizimlari muhandislig
-                    <Kafedra.Arrow />
-                  </Kafedra.Content>
-                </Kafedra.Item>
-              </Kafedra>
-              <Kafedra>
-                <Kafedra.Item
-                  data-aos="zoom-in"
-                  onClick={() => naviagte(`kafedra-5`)}
-                  height={254}
-                  $col={"1/2"}
-                  $row={"1/2"}
-                  $bg={kaf3}
-                >
-                  <Kafedra.Content>
-                    Transport intellektual tizimlari muhandislig
-                    <Kafedra.Arrow />
-                  </Kafedra.Content>
-                </Kafedra.Item>
-                <Kafedra.Item
-                  data-aos="zoom-in"
-                  onClick={() => naviagte(`kafedra-6`)}
-                  height={254}
-                  $col={"2/3"}
-                  $row={"1/2"}
-                  $bg={kaf3}
-                >
-                  <Kafedra.Content>
-                    Transport intellektual tizimlari muhandislig
-                    <Kafedra.Arrow />
-                  </Kafedra.Content>
-                </Kafedra.Item>
+                {kafedras?.map((e) => (
+                  <Kafedra.Item
+                    data-aos="zoom-in"
+                    onClick={() => naviagte(`/${language}/kafedra/${e.id}`)}
+                    $bg={kaf1}
+                    key={e.id}
+                  >
+                    <Kafedra.Content>
+                      {e?.title}
+                      <Kafedra.Arrow />
+                    </Kafedra.Content>
+                  </Kafedra.Item>
+                ))}
               </Kafedra>
             </KafedraWrap>
             <Title title="Ilmiy markazlar" $border={"none"} />
@@ -245,7 +186,7 @@ const FacultiesID = () => {
               {favoMarkaz?.map((e) => (
                 <IlmiyMarkazCart
                   key={e?.id}
-                  onClick={() => naviagte(`/${language}/department/${e?.id}`)}
+                  to={`department/${e?.id}`}
                   $border={"#CECECE"}
                   dataAos="zoom-in"
                   item={e}

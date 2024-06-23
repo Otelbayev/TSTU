@@ -34,7 +34,7 @@ Content.Title = styled.div`
   font-weight: 700;
   line-height: normal;
   @media (max-width: 700px) {
-    font-size: 36px;
+    font-size: 30px;
   }
 `;
 

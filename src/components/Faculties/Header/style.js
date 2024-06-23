@@ -99,6 +99,12 @@ export const Content = styled.div`
       }
     }
   }
+  @media (max-width: 500px) {
+    .logo {
+      width: 140px;
+      height: 40px;
+    }
+  }
 `;
 
 export const Link = styled.div`

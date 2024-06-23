@@ -137,6 +137,10 @@ export const I = styled.img`
   width: 20px;
   height: 20px;
   margin-right: 2px;
+  @media (max-width: 850px) {
+    width: 15px;
+    height: 15px;
+  }
 `;
 
 export const Btn = styled.button`
@@ -145,17 +149,16 @@ export const Btn = styled.button`
   background: transparent;
   border-radius: 4.017px;
   border: 0.803px solid var(--white);
-  padding: 5px 30px 5px 12px;
-  align-items: flex-start;
-  gap: 10px;
   white-space: nowrap;
-  flex-shrink: 0;
 
   color: var(--white);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  @media (max-width: 850px) {
+    font-size: 12px;
+  }
 
   cursor: pointer;
 `;

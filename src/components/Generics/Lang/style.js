@@ -15,14 +15,16 @@ export const Container = styled.div`
   }
   @media (max-width: 600px) {
     .select {
-      height: 35px !important;
-      width: 70px !important;
+      height: 30px !important;
+      width: 63px !important;
       font-size: 5px !important;
       padding: 0 !important;
     }
     .ant-select-selection-item,
     .ant-select-item-option-content {
-      font-size: 12px !important;
+      font-size: 10px !important;
+      height: 100% !important;
+      padding: 0 !important;
     }
   }
 `;

@@ -4,7 +4,7 @@ import kafedra from "../../assets/images/kafedra.png";
 import { useNavigate } from "react-router-dom";
 import { useLanguageContext } from "../../context/LanguageContext";
 
-const IlmiyMarkazCart = ({ $border, to, item, dataAos, borderHover }) => {
+const IlmiyMarkazCart = ({ $border, to, item, dataAos, style }) => {
   const navigate = useNavigate();
   const { language } = useLanguageContext();
   return (
@@ -12,6 +12,7 @@ const IlmiyMarkazCart = ({ $border, to, item, dataAos, borderHover }) => {
       $border={$border}
       data-aos={dataAos}
       onClick={() => navigate(`/${language}/${to}`)}
+      style={style}
     >
       <div className="item">
         <img

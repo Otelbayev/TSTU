@@ -47,7 +47,7 @@ export const Content = styled.div`
     .right {
       .ul {
         transition: 0.3s;
-        position: absolute;
+        position: fixed;
         transform: ${({ $isOpen }) =>
           $isOpen ? "translateX(0)" : "translateX(-100%)"};
         top: 0;
@@ -88,7 +88,7 @@ export const Content = styled.div`
       .bg {
         display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
         content: "";
-        position: absolute;
+        position: fixed;
         z-index: 1;
         cursor: pointer;
         top: 0;

@@ -34,6 +34,8 @@ import { Title } from "../../components/Generics";
 import { useLanguageContext } from "../../context/LanguageContext";
 import axios from "axios";
 import { useFrontDepartmentContext } from "./../../context/DepartmentContext/index";
+import { useTranslation } from "react-i18next";
+import { useHandleScroll } from "../../hooks/useHandleScroll";
 
 const data1 = [
   { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
@@ -51,15 +53,16 @@ const FacultiesID = () => {
   const naviagte = useNavigate();
 
   const aboutRef = useRef();
-  const talimRef = useRef();
   const kafedraRef = useRef();
-  const tadqiqotRef = useRef();
+  const centerRef = useRef();
 
   useEffect(() => {
-    // window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, []);
 
   const [data, setData] = useState([]);
+
+  const { t } = useTranslation();
 
   const { id } = useParams();
   const { language } = useLanguageContext();
@@ -85,30 +88,43 @@ const FacultiesID = () => {
   }, [id, language]);
 
   const links = [
-    { title: "Fakultet haqida" },
-    { title: "Kafedralar" },
-    { title: "Markazlar" },
+    { title: t("facultet.links.link1"), refs: aboutRef },
+    { title: t("facultet.links.link2"), refs: kafedraRef },
+    { title: t("facultet.links.link3"), refs: centerRef },
   ];
+
+  const getTitle = (title, language) => {
+    const obj = {
+      uz: `${title} fakultetiga xush kelibsiz!`,
+      en: `Welcome to the Faculty of ${title}!`,
+      ru: `Добро пожаловать на факультет ${title}!`,
+    };
+
+    return obj[language];
+  };
+
 
   return (
     <div className="overflow-hidden">
       <Header links={links} />
       <Showcase
         bg={bg}
-        title={`${data?.title} fakultetiga xush kelibsiz!`}
-        button={"Fakultet haqida batafsil bilish"}
-        onClick={() => aboutRef.current.scrollIntoView({ block: "nearest" })}
+        title={getTitle(data?.title, language)}
+        button={t("facultet.btn")}
+        onClick={() => useHandleScroll(aboutRef)}
       ></Showcase>
       <div className="root-container">
         <div className="root-wrapper">
           <Wrap>
-            <Title title="Fakultet haqida." $border={"none"} />
-            <div
-              dangerouslySetInnerHTML={{ __html: data?.text }}
-              data-aos="fade-up"
-              className="text"
-            />
-            <Title title="Fakultet dekani." $border={"none"} />
+            <div ref={aboutRef}>
+              <Title title={t("facultet.about")} $border={"none"} />
+              <div
+                dangerouslySetInnerHTML={{ __html: data?.text }}
+                data-aos="fade-up"
+                className="text"
+              />
+            </div>
+            <Title title={t("facultet.dekan")} $border={"none"} />
             <Dekans
               img={dekan}
               name={"Rasulov Marufdjan Xalikovich"}
@@ -120,11 +136,7 @@ const FacultiesID = () => {
                 "1987-1990 yy. – Moskva temir yо‘l muhandislari instituti aspiranti.",
               ]}
             />
-            <Title
-              ref={aboutRef}
-              title="Fakultet dekani o‘rinbosarlari"
-              $border={"none"}
-            />
+            <Title title={t("facultet.orin")} $border={"none"} />
             <Orinbosar>
               {orinbosar.map(({ id, name, position, links, img }) => (
                 <DekanCart
@@ -163,43 +175,47 @@ const FacultiesID = () => {
                 <FakNews data={fakNewsData1} />
               </News.Right>
             </News> */}
-            <Title title="Kafedralar" $border={"none"} />
-            <KafedraWrap ref={kafedraRef}>
-              <Kafedra>
-                {kafedras?.map((e) => (
-                  <Kafedra.Item
-                    data-aos="zoom-in"
-                    onClick={() => naviagte(`/${language}/kafedra/${e.id}`)}
-                    $bg={kaf1}
-                    key={e.id}
-                  >
-                    <Kafedra.Content>
-                      {e?.title}
-                      <Kafedra.Arrow />
-                    </Kafedra.Content>
-                  </Kafedra.Item>
+            <div ref={kafedraRef}>
+              <Title title={t("facultet.kafedra")} $border={"none"} />
+              <KafedraWrap>
+                <Kafedra>
+                  {kafedras?.map((e) => (
+                    <Kafedra.Item
+                      data-aos="zoom-in"
+                      onClick={() => naviagte(`/${language}/kafedra/${e.id}`)}
+                      $bg={kaf1}
+                      key={e.id}
+                    >
+                      <Kafedra.Content>
+                        {e?.title}
+                        <Kafedra.Arrow />
+                      </Kafedra.Content>
+                    </Kafedra.Item>
+                  ))}
+                </Kafedra>
+              </KafedraWrap>
+            </div>
+            <div ref={centerRef}>
+              <Title title={t("facultet.markaz")} $border={"none"} />
+              <IlmiyMarkaz>
+                {favoMarkaz?.map((e) => (
+                  <IlmiyMarkazCart
+                    key={e?.id}
+                    to={`department/${e?.id}`}
+                    $border={"#CECECE"}
+                    dataAos="zoom-in"
+                    item={e}
+                  />
                 ))}
-              </Kafedra>
-            </KafedraWrap>
-            <Title title="Ilmiy markazlar" $border={"none"} />
-            <IlmiyMarkaz ref={tadqiqotRef}>
-              {favoMarkaz?.map((e) => (
-                <IlmiyMarkazCart
-                  key={e?.id}
-                  to={`department/${e?.id}`}
-                  $border={"#CECECE"}
-                  dataAos="zoom-in"
-                  item={e}
-                />
-              ))}
-            </IlmiyMarkaz>
+              </IlmiyMarkaz>
+            </div>
             <Yonalish>
               <Yonalish.Left data-aos="fade-right">
-                <Yonalish.Title>Bakalavr yo‘nalishlari</Yonalish.Title>
+                <Yonalish.Title>{t("facultet.bakalavr")}</Yonalish.Title>
                 <Yonalishlar data={data1} />
               </Yonalish.Left>
               <Yonalish.Right data-aos="fade-left">
-                <Yonalish.Title>Magistratura yo‘nalishlari</Yonalish.Title>
+                <Yonalish.Title>{t("facultet.magistr")}</Yonalish.Title>
                 <Yonalishlar data={data1} />
               </Yonalish.Right>
             </Yonalish>

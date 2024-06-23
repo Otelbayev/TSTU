@@ -90,5 +90,20 @@
       "jurnal": "Jurnal TSTU",
       "moodle": "Moodle"
     }
+  },
+  "facultet": {
+    "btn": "Fakultet haqida batafsil bilish",
+    "about": "Fakultet haqida.",
+    "dekan": "Fakultet dekani.",
+    "orin": "Fakultet dekani o‘rinbosarlari",
+    "kafedra": "Kafedralar",
+    "markaz": "Ilmiy markazlar",
+    "bakalavr": "Bakalavr yo‘nalishlari",
+    "magistr": "Magistratura  yo‘nalishlari",
+    "links": {
+      "link1": "Fakultet haqida",
+      "link2": "Kafedralar",
+      "link3": "Markazla"
+    }
   }
 }

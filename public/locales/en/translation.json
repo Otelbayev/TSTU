@@ -40,9 +40,9 @@
   "survery": {
     "title": "Surveys",
     "btn": "View All Surveys",
-    "1":"Sicentific centers",
-    "2":"Library",
-    "3":"Books",
+    "1": "Sicentific centers",
+    "2": "Library",
+    "3": "Books",
     "markaz": "Making discoveries is important for our world, health, and intellectual life.",
     "kutubxona": "The library is a place where people read, learn, conduct research, and discover new ideas.",
     "kitob": "A book is the best friend that expands a person's knowledge, enriches imagination, and enhances life."
@@ -89,6 +89,21 @@
       "mail": "Corp Mail",
       "jurnal": "TSTU Journal",
       "moodle": "Moodle"
+    }
+  },
+  "facultet": {
+    "btn": "Learn more about the Faculty",
+    "about": "About the Faculty.",
+    "dekan": "Faculty Dean.",
+    "orin": "Deputy Deans of the Faculty",
+    "kafedra": "Departments",
+    "markaz": "Research Centers",
+    "bakalavr": "Undergraduate Programs",
+    "magistr": "Master's Programs",
+    "links": {
+      "link1": "About the Faculty",
+      "link2": "Departments",
+      "link3": "Centers"
     }
   }
 }

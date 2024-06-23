@@ -7,6 +7,7 @@ import { useLanguageContext } from "../../../context/LanguageContext";
 import menu from "../../../assets/icons/menu1.svg";
 import { SearchBox } from "../../Header/style";
 import { useTranslation } from "react-i18next";
+import { useHandleScroll } from "../../../hooks/useHandleScroll";
 
 const Header = ({ links }) => {
   const { language } = useLanguageContext();
@@ -28,12 +29,26 @@ const Header = ({ links }) => {
               {links?.map((e, index) =>
                 index === 0 ? (
                   <li className="first">
-                    <Link>{e?.title}</Link>
-                    <i className="fa fa-x" onClick={() => setIsOpen(false)}></i>
+                    <Link onClick={() => useHandleScroll(e?.refs)}>
+                      {e?.title}
+                    </Link>
+                    <i
+                      className="fa fa-x"
+                      onClick={() => {
+                        setIsOpen(false);
+                      }}
+                    ></i>
                   </li>
                 ) : (
                   <li>
-                    <Link onClick={() => setIsOpen(false)}>{e?.title}</Link>
+                    <Link
+                      onClick={() => {
+                        setIsOpen(false);
+                        useHandleScroll(e?.refs);
+                      }}
+                    >
+                      {e?.title}
+                    </Link>
                   </li>
                 )
               )}

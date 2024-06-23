@@ -22,7 +22,7 @@ import kaf1 from "../../assets/Faculties/kaf1.png";
 import kaf2 from "../../assets/Faculties/kaf2.png";
 import kaf3 from "../../assets/Faculties/kaf3.png";
 import Dekans from "../../components/Faculties/Dekan";
-import Footer from "../../components/Faculties/Footer";
+import Footer from "../../components/Footer";
 import FackBottom from "../../components/Faculties/FakBottom";
 import {
   data as bottomData,
@@ -69,29 +69,33 @@ const FacultiesID = () => {
           ? `/api/departament/sitegetbyiddepartament/${id}`
           : `/api/departament/sitegetbyiddepartamenttranslation/${id}`
       );
-      res.status === 200 && setData(res.data);
+      if (res.status === 200) {
+        setData(res.data);
+      } else {
+        setData([]);
+      }
     };
 
     fetchData();
-  }, [id]);
+  }, [id, language]);
+
+  const links = [
+    { title: "Fakultet haqida" },
+    { title: "Ta’lim" },
+    { title: "Kafedralar" },
+    { title: "Tadqiqot" },
+  ];
 
   return (
-    <div style={{ overflow: "hidden" }}>
-      <Header
-        name="Fakultet"
-        aboutRef={aboutRef}
-        talimRef={talimRef}
-        kafedraRef={kafedraRef}
-        tadqiqotRef={tadqiqotRef}
-        kafedra={true}
-      />
+    <div>
+      <Header links={links} />
       <Showcase
-        $bg={bg}
+        bg={bg}
         title={`${data?.title} fakultetiga xush kelibsiz`}
         button={"Fakultet haqida batafsil bilish"}
         onClick={() => aboutRef.current.scrollIntoView({ block: "nearest" })}
       ></Showcase>
-      <div className="root-container">
+      {/* <div className="root-container">
         <div className="root-wrapper">
           <Wrap>
             <div dangerouslySetInnerHTML={{ __html: data?.text }} />
@@ -295,8 +299,8 @@ const FacultiesID = () => {
             </Yonalish>
           </Wrap>
         </div>
-      </div>
-      <Footer />
+      </div> */}
+      {/* <Footer /> */}
     </div>
   );
 };

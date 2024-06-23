@@ -31,13 +31,17 @@ const KafedraID = () => {
       const res = await axios.get(
         language === "uz"
           ? `/api/departament/sitegetbyiddepartament/${id}`
-          : `/api/departament/sitegetbyiddepartamenttranslation/${id}`
+          : `/api/departament/sitegetbyuziddepartamenttranslation/${id}?language_code=${language}`
       );
-      res.status === 200 && setData(res.data);
+      if (res.status === 200) {
+        setData(res.data);
+      } else {
+        setData([]);
+      }
     };
 
     fetchData();
-  }, [id]);
+  }, [id, language]);
 
   const data1 = [
     { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
@@ -53,24 +57,27 @@ const KafedraID = () => {
   const aboutRef = useRef();
   const talimRef = useRef();
   const tadqiqotRef = useRef();
+
+  const links = [
+    { title: "Kafedra haqida" },
+    { title: "Ta’lim" },
+    { title: "Tadqiqot" },
+  ];
+
   return (
-    <div style={{ overflow: "hidden" }}>
-      <Header
-        name="Kafedra"
-        aboutRef={aboutRef}
-        talimRef={talimRef}
-        kafedra={false}
-        tadqiqotRef={tadqiqotRef}
-      />
+    <div>
+      <Header links={links} />
       <Showcase
         bg={bg}
         title={`${data?.title} kafedrasiga xush kelibsiz!`}
         button={"Kafedra haqida batafsil"}
-        onClick={() => aboutRef.current.scrollIntoView({ block: "nearest" })}
+        onClick={() => aboutRef.current?.scrollIntoView({ block: "nearest" })}
       ></Showcase>
-      {/* <div className="root-container">
+
+      <div className="root-container">
         <div className="root-wrapper">
-          <Wrap>
+          <p ref={aboutRef} dangerouslySetInnerHTML={{ __html: data?.text }} />
+          {/* <Wrap>
             <FackBottom data={data1} />
             <Title ref={talimRef} title="Kafedra mudiri" $border={"none"} />
             <Dekans
@@ -85,11 +92,7 @@ const KafedraID = () => {
               ]}
               button={"/"}
             />
-            <Title title="Kafedra haqida" $border={"none"} />
-            <p
-              ref={aboutRef}
-              dangerouslySetInnerHTML={{ __html: data?.text }}
-            />
+           
             <Title
               title="Kafedra professor o‘qtuvchilari tarkibi"
               $border={"none"}
@@ -115,9 +118,9 @@ const KafedraID = () => {
                 <Yonalishlar data={data1} />
               </Yonalish.Right>
             </Yonalish>
-          </Wrap>
+          </Wrap> */}
         </div>
-      </div> */}
+      </div>
       {/* <Footer /> */}
     </div>
   );

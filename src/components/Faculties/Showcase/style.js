@@ -10,7 +10,16 @@ export const Container = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const Content = styled.div`
@@ -24,6 +33,9 @@ Content.Title = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  @media (max-width: 700px) {
+    font-size: 36px;
+  }
 `;
 
 Content.Btn = styled(Button)`
@@ -33,5 +45,10 @@ Content.Btn = styled(Button)`
   font-style: normal;
   font-weight: 600;
   color: var(--white);
-  margin-top: 50px;
+  margin-top: 40px;
+  @media (max-width: 700px) {
+    font-size: 16px;
+    padding: 4px 10px;
+    margin-top: 20px;
+  }
 `;

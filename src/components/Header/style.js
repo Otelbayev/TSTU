@@ -223,7 +223,7 @@ export const SearchBox = styled.div`
   position: absolute;
   left: 0;
   width: 100%;
-  z-index: -1;
+  z-index: ${({ zIndex }) => (zIndex ? zIndex : -1)};
   transition: 0.5s;
   transform: ${({ $isopen }) =>
     $isopen === "true" ? "translateY(20px)" : "translateY(-200px)"};
@@ -235,6 +235,6 @@ export const SearchBox = styled.div`
     border: 1px solid var(--titleDark);
   }
   @media (max-width: 1000px) {
-    display: none;  
+    display: none;
   }
 `;

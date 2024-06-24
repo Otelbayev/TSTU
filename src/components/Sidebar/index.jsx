@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Wrapper, Icons, Item } from "./style";
 import { Lang } from "../Generics";
 import Content from "./Content";
+import { useNavigate } from "react-router-dom";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 export const Sidebar = ({ topData, allData, uni }) => {
   const [hover, setHover] = useState(false);
@@ -9,29 +11,65 @@ export const Sidebar = ({ topData, allData, uni }) => {
 
   const res = topData?.find((e) => e?.id === id);
 
+  const { language } = useLanguageContext();
+
+  const navigate = useNavigate();
+
   return (
     <Wrapper $hover={hover} $uni={uni} data-aos="fade-down">
       <div className="top">
         <div className="top-menu">
-          {topData
+          {[
+            {
+              id: 0,
+              title: "Yangiliklar",
+              parent_id: 0,
+              position: 1,
+              top_menu: true,
+              link: "blog",
+            },
+            {
+              id: 0,
+              title: "E’lonlar",
+              parent_id: 0,
+              position: 1,
+              top_menu: true,
+              link: "blog",
+            },
+            ...topData,
+          ]
             ?.sort((a, b) => a.position - b.position)
             ?.map((item) => (
               <Item
                 className="top-menu__item"
                 onMouseEnter={() => {
-                  setId(item.id);
-                  setHover(true);
+                  if (!item?.link) {
+                    setId(item.id);
+                    setHover(true);
+                  }
                 }}
                 onMouseLeave={() => {
                   setHover(false);
+                }}
+                onClick={() => {
+                  if (item?.link) {
+                    navigate(`/${language}/${item?.link}`);
+                  }
                 }}
                 key={item.id}
                 $hover={id === item.id && hover}
                 $check={hover}
                 id={id}
+                link={item?.link}
               >
                 {item.title}
-                {id === item.id && hover ? <Icons.Arrow /> : <Icons.Arrow1 />}
+                {!item?.link ? (
+                  id === item.id && hover ? (
+                    <Icons.Arrow />
+                  ) : (
+                    <Icons.Arrow1 />
+                  )
+                ) : null}
               </Item>
             ))}
         </div>

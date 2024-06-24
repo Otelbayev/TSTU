@@ -41,7 +41,7 @@ const InteractiveServices = () => {
         <div className="root-wrapper">
           <Content>
             {data.map((e) => (
-              <InteractiveCart key={e.id} prop={e} />
+              <InteractiveCart key={e.id} prop={e} no="no baby" />
             ))}
           </Content>
         </div>

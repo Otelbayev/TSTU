@@ -9,6 +9,8 @@ const Div = styled.div`
   place-items: center;
   background-color: var(--darkBg);
   img {
+    width: 154px;
+    height: 40px;
   }
 `;
 const Loading = () => {

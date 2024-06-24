@@ -24,7 +24,7 @@ export const Item = styled.div`
   background-color: ${({ $hover }) => ($hover ? "#fff" : "")};
   display: flex;
   gap: 5px;
-  font-size: 14px;
+  font-size: 18.15px;
   font-family: "Source Sans Pro";
   font-weight: 600;
   align-items: center;

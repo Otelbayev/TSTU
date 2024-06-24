@@ -12,8 +12,6 @@ import { useLanguageContext } from "../../context/LanguageContext";
 import { useParams } from "react-router-dom";
 import { getDate } from "../../utils/month";
 import { useFrontBlogContext } from "../../context/BlogContext";
-import img from "../../../../TSTUUzSolution-master/file-uploads/attached/images/d4df505a-880f-4719-802d-a5bf0e5257eb.jpg";
-// file-uploads/attached/images\04e87807-fb9a-45d3-a1a3-9c69e4017eb8.jpg
 
 const BlogID = () => {
   const { id } = useParams();
@@ -42,16 +40,11 @@ const BlogID = () => {
 
     fetchData();
   }, [id, language]);
-
-  const path = `../../../../TSTUUzSolution-master/${data?.img_?.url}`;
-
-  console.log(path);
   return (
     <div className="root-container">
       <div className="root-wrapper">
         <Container>
           <div className="title">{data?.title}</div>
-          <img src={path} alt="vsvsvd" />
           <div className="news-date">
             <span>
               {getDate(data?.event_date?.split("T")[0])} -{" "}

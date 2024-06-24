@@ -20,7 +20,11 @@ Content.Title = styled.div`
   font-weight: 700;
   line-height: 46.8px;
   color: ${(props) =>
-    props.$type === "dark" ? "var(--titleLight)" : "var(--titleDark)"};
+    props.$type === "dark"
+      ? "var(--titleLight)"
+      : props.$type === "light"
+      ? "var(--titleDark)"
+      : "#202020"};
   padding-left: ${({ $border }) => ($border === "none" ? 0 : "10px")};
   border-left: ${({ $type, $border }) =>
     $type === "dark"
@@ -38,7 +42,7 @@ export const Component = styled.div`
   }
 `;
 
-Content.Button = styled(NavLink)`
+Content.Button = styled("button")`
   font-family: "Source Sans Pro", sans-serif;
   background: transparent;
   border: none;
@@ -53,8 +57,12 @@ Content.Button = styled(NavLink)`
   display: ${({ display }) => (display === "bottom" ? "none" : "flex")};
   align-items: center;
   gap: 1px;
-  color: ${({ $type }) =>
-    $type === "dark" ? "var(--titleLight)" : "var(--titleDark)"};
+  color: ${(props) =>
+    props.$type === "dark"
+      ? "var(--titleLight)"
+      : props.$type === "light"
+      ? "var(--titleDark)"
+      : "#202020"};
   .abs {
     position: absolute;
     right: 0;

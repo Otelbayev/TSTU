@@ -21,6 +21,7 @@ const Faculties = () => {
           title={t("faculties.title")}
           button={t("faculties.btn")}
           to="facultet"
+          $type={"light"}
         >
           <FakGrid>
             <div data-aos="fade-right" className="fak-left">

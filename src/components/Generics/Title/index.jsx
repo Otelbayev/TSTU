@@ -1,6 +1,7 @@
 import React from "react";
 import { Content, Light, Component } from "./style";
 import { useLanguageContext } from "../../../context/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 const Title = React.forwardRef(
   (
@@ -8,6 +9,7 @@ const Title = React.forwardRef(
     ref
   ) => {
     const { language } = useLanguageContext();
+    const navigate = useNavigate();
 
     return (
       <div ref={ref}>
@@ -23,7 +25,7 @@ const Title = React.forwardRef(
           )}
           {button && (
             <Content.Button
-              to={`/${language}/${to}`}
+              onClick={() => navigate(`/${language}/${to}`)}
               data-aos="fade-left"
               $type={$type}
               display="top"
@@ -45,7 +47,7 @@ const Title = React.forwardRef(
         {children}
         {button && (
           <Content.Button
-            to={`/${language}/${to}`}
+            onClick={() => navigate(`/${language}/${to}`)}
             data-aos="fade-left"
             display="bottom"
             $type={$type}

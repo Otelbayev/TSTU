@@ -11,7 +11,7 @@ const Faxriy = () => {
     <div>
       <div className="root-container">
         <div className="root-wrapper">
-          <Title title={t("honory.title")} />
+          <Title $type={"light"} title={t("honory.title")} />
         </div>
       </div>
 

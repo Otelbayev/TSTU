@@ -50,6 +50,7 @@ const Alumni = () => {
             button={t("alumni.btn")}
             subtitle={t("alumni.desc")}
             to="honorary"
+            $type={"light"}
           />
         </div>
       </div>

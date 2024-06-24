@@ -22,6 +22,7 @@ const Talaba = ({ data }) => {
           subtitle={t("student.desc")}
           button={t("student.btn")}
           to={"student-life"}
+          $type={"light"}
         >
           <Layout $type="talaba">
             <div className="grid">

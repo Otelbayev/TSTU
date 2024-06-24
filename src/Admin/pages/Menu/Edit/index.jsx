@@ -289,7 +289,7 @@ const Edit = () => {
           label="Department"
           className={isCreate ? "form-group col-md-4" : "form-group col-md-3"}
           options={departmentOptions}
-          value={department || ""}
+          value={department || 0}
           onChange={(e) => setDepartment(e)}
         />
         {!isCreate && (

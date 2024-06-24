@@ -48,6 +48,10 @@ const Create = () => {
   }, [menuOptions]);
 
   useEffect(() => {
+    setDepartment(departmentOptions[0]?.value);
+  }, [departmentOptions]);
+
+  useEffect(() => {
     getMenuType(value);
     getAllBlogs(value);
     getAllPageSelect(value);

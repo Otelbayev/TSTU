@@ -35,7 +35,7 @@ const DepartmentCreate = () => {
   const posRef = useRef(null);
   const imgRef = useRef(null);
 
-  const [parent, setParent] = useState(1);
+  const [parent, setParent] = useState(0);
   const [type, setType] = useState(1);
   const [favo, setFavo] = useState(1);
 

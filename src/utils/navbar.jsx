@@ -113,7 +113,7 @@ export const routes = [
   { id: useId(), path: "galereya", element: <Galereya />, isPrivate: false },
   {
     id: useId(),
-    path: "facultet/:id",
+    path: "faculty/:id",
     element: <FacultiesID />,
     isPrivate: false,
   },
@@ -164,7 +164,7 @@ export const noshowcase = [
   },
   {
     id: useId(),
-    path: "facultet",
+    path: "faculty",
     element: <Faculties />,
     isPrivate: false,
   },

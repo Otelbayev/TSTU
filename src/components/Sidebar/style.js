@@ -26,10 +26,11 @@ export const Item = styled.div`
   gap: 5px;
   font-size: 18.15px;
   font-family: "Source Sans Pro";
-  font-weight: 600;
+  font-weight: 500;
   align-items: center;
   white-space: nowrap;
   cursor: pointer;
+  border-bottom: 1px solid transparent;
   padding: 5px 8px;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
@@ -45,6 +46,10 @@ export const Item = styled.div`
             color: #fff;
           }
         `}
+
+  &:hover {
+    border-bottom: 1px solid #fff;
+  }
 `;
 
 export const Icons = styled.div``;

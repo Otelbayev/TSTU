@@ -218,51 +218,57 @@ const Header = ({ uni }) => {
   const items = topMenu.map((item) => {
     return {
       key: item.id,
-      label: item.title,
-      children: data
-        .filter((i) => i.parent_id === item.id)
-        .map((i) => {
-          return {
-            key: i.id,
-            label: i.high_menu ? (
-              i.title
-            ) : (
-              <NavLink
-                onClick={() => setIsOpen(false)}
-                to={
-                  i.path
-                    ? `/${language}/${i.path}`
-                    : `/${language}/${
-                        i?.menu_type_?.title?.toLowerCase() ||
-                        i?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
-                      }/${i.id}`
-                }
-              >
-                {i.title}
-              </NavLink>
-            ),
-            children: i.high_menu
-              ? data
-                  .filter((f) => f.parent_id === i.id)
-                  .map((h) => {
-                    return {
-                      key: h.id,
-                      label: (
-                        <NavLink
-                          onClick={() => setIsOpen(false)}
-                          to={`/${language}/${
-                            h?.menu_type_?.title?.toLowerCase() ||
-                            h?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
-                          }/${h.id}`}
-                        >
-                          {h.title}
-                        </NavLink>
-                      ),
-                    };
-                  })
-              : null,
-          };
-        }),
+      label: !item?.link_ ? (
+        item.title
+      ) : (
+        <NavLink to={`/${language}/${item?.link_}`}>{item.title}</NavLink>
+      ),
+      children:
+        !item?.link_ &&
+        data
+          .filter((i) => i.parent_id === item.id)
+          .map((i) => {
+            return {
+              key: i.id,
+              label: i.high_menu ? (
+                i.title
+              ) : (
+                <NavLink
+                  onClick={() => setIsOpen(false)}
+                  to={
+                    i.path
+                      ? `/${language}/${i.path}`
+                      : `/${language}/${
+                          i?.menu_type_?.title?.toLowerCase() ||
+                          i?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
+                        }/${i.id}`
+                  }
+                >
+                  {i.title}
+                </NavLink>
+              ),
+              children: i.high_menu
+                ? data
+                    .filter((f) => f.parent_id === i.id)
+                    .map((h) => {
+                      return {
+                        key: h.id,
+                        label: (
+                          <NavLink
+                            onClick={() => setIsOpen(false)}
+                            to={`/${language}/${
+                              h?.menu_type_?.title?.toLowerCase() ||
+                              h?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
+                            }/${h.id}`}
+                          >
+                            {h.title}
+                          </NavLink>
+                        ),
+                      };
+                    })
+                : null,
+            };
+          }),
     };
   });
 

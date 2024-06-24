@@ -38,7 +38,7 @@ export const DarkSection = styled.div`
   }
   .markaz {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     transition: 0.4s;
     padding-top: 50px;
     gap: 8px;

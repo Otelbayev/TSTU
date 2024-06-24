@@ -76,14 +76,17 @@ const Survery = () => {
           to="scientific-center"
         >
           <div className="markaz">
-            {favoMarkaz?.map((e) => (
-              <IlmiyMarkazCart
-                dataAos={"zoom-in"}
-                key={e.id}
-                to={`department/${e?.id}`}
-                item={e}
-              />
-            ))}
+            {favoMarkaz
+              ?.sort((a, b) => a.position - b.position)
+              ?.slice(0, 4)
+              ?.map((e) => (
+                <IlmiyMarkazCart
+                  dataAos={"zoom-in"}
+                  key={e.id}
+                  to={`department/${e?.id}`}
+                  item={e}
+                />
+              ))}
           </div>
         </Title>
       </div>

@@ -9,7 +9,24 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
 
   const res = data?.filter((e) => e?.high_menu);
   const res1 = data?.filter((e) => !e.high_menu);
-    
+
+  const setNavigate = (type, id, link) => {
+    console.log(type, link);
+    switch (type) {
+      case "Link":
+        return `${link}`;
+      case "Blog":
+        return `/${language}/blog/${id}`;
+      case "Page":
+        return `/${language}/page/${id}`;
+      case "Faculty":
+        return id ? `/${language}/department/${id}` : `/${language}/faculty`;
+      case "Kafedra":
+        return id ? `/${language}/department/${id}` : `/${language}/kafedra`;
+      case "Department":
+        return `/${language}/department/${id}`;
+    }
+  };
 
   return (
     <Container
@@ -37,25 +54,23 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
                     ?.sort((a, b) => a?.position - b?.position)
                     ?.map((item) => (
                       <div key={item.id} className={"right__link"}>
-                        {e?.menu_type_?.title !== "Link" ? (
-                          <NavLink
-                            onClick={() => setHover(false)}
-                            to={`/${language}/${
-                              item?.menu_type_?.title?.toLowerCase() ||
-                              item?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
-                            }/${item.id}`}
-                          >
-                            {item.title}
-                          </NavLink>
-                        ) : (
-                          <NavLink
-                            onClick={() => setHover(false)}
-                            to={item?.link_}
-                            target="_blank"
-                          >
-                            {item.title}
-                          </NavLink>
-                        )}
+                        <NavLink
+                          onClick={() => setHover(false)}
+                          to={setNavigate(
+                            item?.menu_type_?.title ||
+                              item?.menu_type_translation_?.menu_type_?.title,
+                            item?.blog_?.id ||
+                              item?.blog_translation_?.blog_id ||
+                              item?.departament_?.id ||
+                              item?.departament_translation_?.departament_id ||
+                              item?.page_?.id ||
+                              item?.page_translation_?.page_id,
+                            item?.link_
+                          )}
+                          target={item?.link_ ? "_blank" : "_self"}
+                        >
+                          {item?.title}
+                        </NavLink>
                       </div>
                     ))}
                 </div>
@@ -70,15 +85,20 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
                 <div key={item.id} className={"right__link"}>
                   <NavLink
                     onClick={() => setHover(false)}
-                    to={
-                      item?.path
-                        ? `/${language}/${item.path}`
-                        : `/${language}/${item?.menu_type_?.title?.toLowerCase()}/${
-                            item.id
-                          }`
-                    }
+                    to={setNavigate(
+                      item?.menu_type_?.title ||
+                        item?.menu_type_translation_?.menu_type_?.title,
+                      item?.blog_?.id ||
+                        item?.blog_translation_?.blog_id ||
+                        item?.departament_?.id ||
+                        item?.departament_translation_?.departament_id ||
+                        item?.page_?.id ||
+                        item?.page_translation_?.page_id,
+                      item?.link_
+                    )}
+                    target={item?.link_ ? "_blank" : "_self"}
                   >
-                    {item.title}
+                    {item?.title}
                   </NavLink>
                 </div>
               ))}

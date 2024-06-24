@@ -20,7 +20,7 @@ const Faculties = () => {
         <Title
           title={t("faculties.title")}
           button={t("faculties.btn")}
-          to="facultet"
+          to="faculty"
           $type={"light"}
         >
           <FakGrid>

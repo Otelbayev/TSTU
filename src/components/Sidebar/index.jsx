@@ -19,31 +19,13 @@ export const Sidebar = ({ topData, allData, uni }) => {
     <Wrapper $hover={hover} $uni={uni} data-aos="fade-down">
       <div className="top">
         <div className="top-menu">
-          {[
-            {
-              id: 0,
-              title: "Yangiliklar",
-              parent_id: 0,
-              position: 1,
-              top_menu: true,
-              link: "blog",
-            },
-            {
-              id: 0,
-              title: "E’lonlar",
-              parent_id: 0,
-              position: 1,
-              top_menu: true,
-              link: "blog",
-            },
-            ...topData,
-          ]
+          {topData
             ?.sort((a, b) => a.position - b.position)
             ?.map((item) => (
               <Item
                 className="top-menu__item"
                 onMouseEnter={() => {
-                  if (!item?.link) {
+                  if (!item?.link_) {
                     setId(item.id);
                     setHover(true);
                   }
@@ -52,18 +34,18 @@ export const Sidebar = ({ topData, allData, uni }) => {
                   setHover(false);
                 }}
                 onClick={() => {
-                  if (item?.link) {
-                    navigate(`/${language}/${item?.link}`);
+                  if (item?.link_) {
+                    navigate(`/${language}/${item?.link_}`);
                   }
                 }}
                 key={item.id}
                 $hover={id === item.id && hover}
                 $check={hover}
                 id={id}
-                link={item?.link}
+                $link={item?.link_}
               >
                 {item.title}
-                {!item?.link ? (
+                {!item?.link_ ? (
                   id === item.id && hover ? (
                     <Icons.Arrow />
                   ) : (

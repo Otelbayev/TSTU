@@ -9,6 +9,7 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
 
   const res = data?.filter((e) => e?.high_menu);
   const res1 = data?.filter((e) => !e.high_menu);
+    
 
   return (
     <Container
@@ -72,7 +73,9 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
                     to={
                       item?.path
                         ? `/${language}/${item.path}`
-                        : `/${language}/page/${item.id}`
+                        : `/${language}/${item?.menu_type_?.title?.toLowerCase()}/${
+                            item.id
+                          }`
                     }
                   >
                     {item.title}

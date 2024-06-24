@@ -15,7 +15,7 @@ const Main = () => {
   const getData = async () => {
     const res = await sendRequest({
       method: "GET",
-      url: "/api/person/getallperson",
+      url: "/api/persondata/getallpersondata",
       headers: {
         Authorization: `Bearer ${Cookies.get("_token")}`,
       },
@@ -38,7 +38,7 @@ const Main = () => {
         data={data}
         loading={loading}
         error={error}
-        del={"/api/person/deleteperson"}
+        del={"/api/persondata/deletepersondata"}
         edit={"employee/edit"}
         setIsDelete={setIsDelete}
         col={[
@@ -47,11 +47,11 @@ const Main = () => {
             data: null,
             title: "FISH",
             render: function (data, type, row) {
-              return `${row.firstName} ${row.lastName} ${row.fathers_name}`;
+              return `${row.persons_?.firstName} ${row.persons_?.lastName} ${row.persons_?.fathers_name}`;
             },
           },
           {
-            data: "departament_.title",
+            data: "persons_.departament_.title",
             title: "Bo'lim",
           },
           { data: "status_.status", title: "Status" },

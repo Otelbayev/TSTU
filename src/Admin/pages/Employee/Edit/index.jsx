@@ -84,7 +84,7 @@ const Edit = () => {
         setSurname(res?.data?.persons_?.lastName);
         setPatronymic(res?.data?.persons_?.fathers_name);
         setEmail(res?.data?.persons_?.email);
-        setGender(res?.data?.persons_?.gender_id);
+        setGender(res?.data?.persons_?.gender_?.id);
         setJshir(res?.data?.persons_?.pinfl);
         setPassportSerial(res?.data?.persons_?.passport_text);
         setPassportNumber(res?.data?.persons_?.passport_number);
@@ -167,17 +167,17 @@ const Edit = () => {
         biography_json: biography,
         birthday: `${date}T16:38:51.281Z`,
         degree: degree,
-        experience_year: experience,
+        experience_year: Number(experience),
         phone_number1: tel1,
         phone_number2: tel2,
         orchid: orcid,
         scopus_id: scopus,
         address: address,
-        languages_uz: uzbek,
-        languages_en: ingiliz,
-        languages_ru: rus,
+        languages_uz: Number(uzbek),
+        languages_en: Number(ingiliz),
+        languages_ru: Number(rus),
         languages_any_title: other,
-        languages_any: other2,
+        languages_any: Number(other2),
         experience_json: experience_json,
         scientific_activity_json: scientific,
         portfolio_json: $(portfolioRef.current)?.summernote("code"),
@@ -255,6 +255,23 @@ const Edit = () => {
           });
       } else if (isCreate) {
         delete obj.status_translation_id;
+        obj.persons_data_id = Number(id);
+        const res = await axios.post(
+          "/api/persondata/createpersondatatranslation",
+          obj,
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("_token")}`,
+            },
+          }
+        );
+        if (res.status === 200) {
+          setIsCreate(false);
+          message.success({
+            key: "key",
+            content: "Successfully updated!",
+          });
+        }
       }
     } catch (err) {
       console.log(err);
@@ -268,10 +285,10 @@ const Edit = () => {
     getEmployeeType(value);
     getStatus(value);
     getDataId(value, id);
-  }, [value]);
+  }, [value, isCreate]);
 
   return (
-    <Wrapper title={"EDit Person"}>
+    <Wrapper title={"Edit Person"}>
       <form onSubmit={onHandleSubmit} className="form-horizontal row">
         <div className="col-md-12">
           <LanguageSelect onChange={(e) => setValue(e)} />

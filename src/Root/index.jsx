@@ -35,8 +35,7 @@ const Root = () => {
         <Route
           element={
             <Universal
-              showcase={true}
-              data={{ title: "TITLE", breadcrumb: "none" }}
+              
             />
           }
         >

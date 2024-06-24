@@ -2,37 +2,47 @@ import React, { useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import { Container } from "./style";
 import { Facebook } from "react-content-loader";
+import UniShowcase from "./../../components/UniShowcase/index";
+import { useLanguageContext } from "./../../context/LanguageContext/index";
+import { useParams } from "react-router-dom";
 
 const PageID = () => {
   const { sendRequest, loading } = useAxios();
   const [data, setData] = useState([]);
 
-  const id = window.location.pathname.split("/")[3];
+  const { language } = useLanguageContext();
+  const { id } = useParams();
 
   useEffect(() => {
     async function getData() {
       const response = await sendRequest({
         method: "get",
-        url: `/api/page/sitegetbyidpage/${id}`,
+        url:
+          language === "uz"
+            ? `/api/page/sitegetbyidpage/${id}`
+            : `/api/page/sitegetbyuzidpagetranslation/${id}?language_code=${language}`,
       });
       setData(response.data);
     }
     getData();
-  }, [window.location.pathname]);
+  }, [id, language]);
 
   return (
-    <Container className="root-container my-5">
-      <div className="root-wrapper">
-        {loading ? (
-          <Facebook backgroundColor="lightgray" foregroundColor="#fff" />
-        ) : (
-          <div
-            // data-aos="fade-up"
-            dangerouslySetInnerHTML={{ __html: data?.text }}
-          />
-        )}
-      </div>
-    </Container>
+    <div>
+      <UniShowcase title={data?.title} />
+      <Container className="root-container my-5">
+        <div className="root-wrapper">
+          {loading ? (
+            <Facebook backgroundColor="lightgray" foregroundColor="#fff" />
+          ) : (
+            <div
+              data-aos="fade-up"
+              dangerouslySetInnerHTML={{ __html: data?.text }}
+            />
+          )}
+        </div>
+      </Container>
+    </div>
   );
 };
 

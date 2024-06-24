@@ -3,10 +3,12 @@ import { Contianer, Icons } from "./style";
 import kafedra from "../../assets/images/kafedra.png";
 import { useNavigate } from "react-router-dom";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useTranslation } from "react-i18next";
 
 const IlmiyMarkazCart = ({ $border, to, item, dataAos, style }) => {
   const navigate = useNavigate();
   const { language } = useLanguageContext();
+  const { t } = useTranslation();
   return (
     <Contianer
       $border={$border}
@@ -31,7 +33,7 @@ const IlmiyMarkazCart = ({ $border, to, item, dataAos, style }) => {
           </div>
         </div>
         <div className="item__button">
-          Ko‘proq malumot olish <Icons.LightArrow />
+          {t("centers.kop")} <Icons.LightArrow />
         </div>
       </div>
     </Contianer>

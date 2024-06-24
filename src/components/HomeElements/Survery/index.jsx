@@ -80,7 +80,7 @@ const Survery = () => {
               <IlmiyMarkazCart
                 dataAos={"zoom-in"}
                 key={e.id}
-                to={`/${language}/department/${e?.id}`}
+                to={`department/${e?.id}`}
                 item={e}
               />
             ))}

@@ -28,12 +28,12 @@ const News = ({ data, type }) => {
               const gridClass = `grid__item${index + 1}`;
 
               return (
-                <div className={gridClass} key={item?.item?.id}>
+                <div className={gridClass} key={item?.id}>
                   <Component
                     item={item}
                     prop={prop}
                     type={type}
-                    onClick={() => handleNavigation(item?.item?.id)}
+                    onClick={() => handleNavigation(item?.id)}
                   />
                 </div>
               );

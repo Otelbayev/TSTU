@@ -23,7 +23,11 @@ const NewsItem = ({ item }) => {
           to={`/${language}/blog/${item?.id}`}
           className="item-right__link"
         >
-          Batafsil
+         {language === "uz"
+            ? "Batafsil"
+            : language === "ru"
+            ? "Подробнее"
+            : "More"}
         </NavLink>
       </div>
     </News>

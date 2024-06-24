@@ -46,7 +46,7 @@ const Interactive = () => {
               <div className="first__left">
                 <Icons.Int4 />
                 <NavLink
-                  to={`${language}/interactive-services`}
+                  to={`interactive-services`}
                   className="first__left__title"
                 >
                   {t("interactive.desc")}

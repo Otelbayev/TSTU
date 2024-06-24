@@ -9,7 +9,10 @@
   },
   "news": {
     "title": "Universitet yangiliklari",
-    "btn": "Barchasini ko‘rish"
+    "btn": "Barchasini ko‘rish",
+    "t": "Tadbirlardan video lavhalar",
+    "u": "Universitet yangiliklari",
+    "b": "Barchasi"
   },
   "events": {
     "title": "Kutilyotgan tadbirlar"
@@ -50,7 +53,8 @@
   "centers": {
     "title": "Ilmiy markazlar",
     "desc": "Kashfiyotlar qilish bizning dunyomiz, sog'ligimiz va intellektual hayotimiz uchun muhimdir",
-    "btn": "Barchasini ko‘rish"
+    "btn": "Barchasini ko‘rish",
+    "kop": "Ko‘proq malumot olish"
   },
   "alumni": {
     "title": "Faxriy bitiruvchilar",

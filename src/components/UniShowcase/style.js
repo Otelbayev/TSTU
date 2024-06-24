@@ -15,6 +15,7 @@ export const Container = styled.div`
   background: url(${uniShow});
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
   min-height: 370px;
   background-size: 100% 100%;
   animation: ${anim};

@@ -9,7 +9,10 @@
   },
   "news": {
     "title": "University News",
-    "btn": "View All"
+    "btn": "View All",
+    "t": "Video Highlights from Events",
+    "u": "University News",
+    "b": "All"
   },
   "events": {
     "title": "Upcoming Events"
@@ -50,7 +53,8 @@
   "centers": {
     "title": "Research Centers",
     "desc": "Making discoveries is important for our world, health, and intellectual life.",
-    "btn": "View All"
+    "btn": "View All",
+    "kop": "Learn more"
   },
   "alumni": {
     "title": "Honorary Alumni",

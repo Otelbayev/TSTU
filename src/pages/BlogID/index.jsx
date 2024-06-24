@@ -1,130 +1,93 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "./style";
-import car from "../../../assets/New/car.png";
-import ads from "../../../assets/New/ads.png";
-import TopNews from "../../../components/News/TopNews";
-import { Title } from "../../../components/Generics";
-import { useId } from "../../../hooks/useId";
-import videoflag from "../../../assets/New/flags.png";
-import VideoCart from "../../../components/News/VideoCart";
+import car from "../../assets/New/car.png";
+import ads from "../../assets/New/ads.png";
+import TopNews from "../../components/News/TopNews";
+import { Title } from "../../components/Generics";
+import { useId } from "../../hooks/useId";
+import videoflag from "../../assets/New/flags.png";
+import VideoCart from "../../components/News/VideoCart";
+import axios from "axios";
+import { useLanguageContext } from "../../context/LanguageContext";
+import { useParams } from "react-router-dom";
+import { getDate } from "../../utils/month";
+import { useFrontBlogContext } from "../../context/BlogContext";
 
 const BlogID = () => {
+  const { id } = useParams();
+  const { language } = useLanguageContext();
+  const { news } = useFrontBlogContext();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
 
-  const prop = [
-    {
-      id: useId(),
-      img: videoflag,
-      title:
-        "18-noyabr - Oʻzbekiston Respublikasi davlat bayrogʻi qabul qilinganligining 32 yilligi munosabati bilan bayram dasturi boʻlib oʻtdi",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      left: "Tadbr",
-      right: "Yan 05, 2023",
-    },
-    {
-      id: useId(),
-      img: videoflag,
-      title:
-        "18-noyabr - Oʻzbekiston Respublikasi davlat bayrogʻi qabul qilinganligining 32 yilligi munosabati bilan bayram dasturi boʻlib oʻtdi",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      left: "Tadbr",
-      right: "Yan 05, 2023",
-    },
-  ];
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        language === "uz"
+          ? `/api/blogcontroller/sitegetbyidblog/${id}`
+          : `/api/blogcontroller/sitegetbyuzidblogtranslation/${id}?language_code=${language}`
+      );
+      if (res.status === 200) {
+        setData(res.data);
+      } else {
+        setData([]);
+      }
+    };
+
+    fetchData();
+  }, [id, language]);
+
+  console.log(data);
 
   return (
     <div className="root-container">
       <div className="root-wrapper">
         <Container>
-          <div className="title">International Vienna Energy And Climate</div>
+          <div className="title">{data?.title}</div>
           <div className="news-date">
-            <span>April 24, 2021</span>
-            <span>Reading Time: 2 Min Read</span>
+            <span>
+              {getDate(data?.event_date?.split("T")[0])} -{" "}
+              {getDate(data?.event_end_date?.split("T")[0])}
+            </span>
+            <span>
+              {data?.blog_category_?.title ||
+                data?.blog_category_translation_?.title}
+            </span>
           </div>
           <div className="content">
             <div className="content__left">
-              <img
-                loading="lazy" src={car}
-                className="content__left__img1"
-                data-aos="fade-right"
-                alt=""
+              <div
+                dangerouslySetInnerHTML={{ __html: data?.text }}
+                data-aos="fade-up"
+                className="my-5"
               />
-              <p data-aos="fade-right">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto beatae
-                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                voluptas sit aspernatur aut odit aut fugit, sed quia
-                consequuntur magni dolores eos qui ratione voluptatem sequi
-                nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur, adipisci velit, sed quia non numquam eius
-                modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                voluptatem. Ut enim ad minima veniam, quis nostrum
-                exercitationem ullam corporis suscipit laboriosam, nisi ut
-                aliquid ex ea commodi consequatur? Quis autem vel eum iure
-                reprehenderit qui in ea voluptate velit esse quam nihil
-                molestiae consequatur, vel illum qui dolorem eum fugiat quo
-                voluptas nulla pariatur?
-              </p>
-              <div className="content__left__wrap" data-aos="fade-right">
-                <img loading="lazy" src={car} alt="" className="content__left__img2" />
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia .
-                </p>
-              </div>
-              <p data-aos="fade-right">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto beatae
-                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                voluptas sit aspernatur aut odit aut fugit, sed quia
-                consequuntur magni dolores eos qui ratione voluptatem sequi
-                nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur, adipisci velit, sed quia non numquam eius
-                modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                voluptatem. Ut enim ad minima veniam, quis nostrum
-                exercitationem ullam corporis suscipit laboriosam, nisi ut
-                aliquid ex ea commodi consequatur? Quis autem vel eum iure
-                reprehenderit qui in ea voluptate velit esse quam nihil
-                molestiae consequatur, vel illum qui dolorem eum fugiat quo
-                voluptas nulla pariatur?
-              </p>
-              <p data-aos="fade-right">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto beatae
-                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                voluptas sit aspernatur aut odit aut fugit, sed quia
-                consequuntur magni dolores eos qui ratione voluptatem sequi
-                nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur, adipisci velit, sed quia non numquam eius
-                modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                voluptatem. Ut enim ad minima veniam, quis nostrum
-                exercitationem ullam corporis suscipit laboriosam, nisi ut
-                aliquid ex ea commodi consequatur? Quis autem vel eum iure
-                reprehenderit qui in ea voluptate velit esse quam nihil
-                molestiae consequatur, vel illum qui dolorem eum fugiat quo
-                voluptas nulla pariatur?
-              </p>
             </div>
             <div className="content__right">
               <TopNews dataAos="fade-left" />
               <img loading="lazy" src={ads} alt="" data-aos="fade-left" />
-              <TopNews dataAos="fade-left" />
-              <img loading="lazy" src={ads} alt="" data-aos="fade-left" />
             </div>
           </div>
-          <Title title="Universitet yangiliklari" button="Barchasini ko‘rish">
+          <Title
+            title="Universitet yangiliklari"
+            button="Barchasini ko‘rish"
+            to={`blog`}
+          >
             <div className="newsid-bottom">
-              {prop.map((e) => (
-                <VideoCart dataAos={"zoom-in"} key={e.id} prop={e} />
-              ))}
+              {news
+                ?.filter((e) => e.id != id)
+                ?.slice(0, 2)
+                .map((e) => (
+                  <VideoCart
+                    dataAos={"zoom-in"}
+                    key={e.id}
+                    prop={e}
+                    to={`blog/${e.id}`}
+                  />
+                ))}
             </div>
           </Title>
         </Container>

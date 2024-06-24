@@ -4,6 +4,8 @@ import { prop6 } from "../../mock/homeProps";
 import { InteractiveCart } from "../../components/HomeElements";
 import axios from "axios";
 import { useLanguageContext } from "../../context/LanguageContext";
+import UniShowcase from "./../../components/UniShowcase/index";
+import { useTranslation } from "react-i18next";
 
 const InteractiveServices = () => {
   const { language } = useLanguageContext();
@@ -22,20 +24,27 @@ const InteractiveServices = () => {
     res.status === 200 && setData(res.data);
   };
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     getData();
   }, [language]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
-    <div className="root-container">
-      <div className="root-wrapper">
-        <Content>
-          {data.map((e) => (
-            <InteractiveCart key={e.id} prop={e} />
-          ))}
-        </Content>
+    <div>
+      <UniShowcase title={t("interactive.title")} />
+      <div className="root-container">
+        <div className="root-wrapper">
+          <Content>
+            {data.map((e) => (
+              <InteractiveCart key={e.id} prop={e} />
+            ))}
+          </Content>
+        </div>
       </div>
     </div>
   );

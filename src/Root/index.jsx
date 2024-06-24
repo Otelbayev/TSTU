@@ -32,19 +32,15 @@ const Root = () => {
             }
           />
         ))}
-        <Route
-          element={
-            <Universal
-              
-            />
-          }
-        >
+        <Route element={<Universal />}>
           {navbar.map((item) => (
             <Route
               key={item.id}
               path={`/:lang/${item.path}`}
               element={
-                <Suspense fallback={<Loading />}>{item.element}</Suspense>
+                <Suspense fallback={<h1>Loading...</h1>}>
+                  {item.element}
+                </Suspense>
               }
             />
           ))}
@@ -55,7 +51,9 @@ const Root = () => {
               key={item.id}
               path={`/:lang/${item.path}`}
               element={
-                <Suspense fallback={<Loading />}>{item.element}</Suspense>
+                <Suspense fallback={<h1>Loading...</h1>}>
+                  {item.element}
+                </Suspense>
               }
             />
           ))}

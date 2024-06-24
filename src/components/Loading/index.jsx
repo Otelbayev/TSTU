@@ -1,22 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import loading from "../../Admin/assets/icons/trainloading.gif";
+import logo from "../../assets/icons/logo1.png";
 
 const Div = styled.div`
   width: 100%;
-  height: ${({ $height }) => $height && "100dvh"};
+  height: 100dvh;
   display: grid;
   place-items: center;
-  margin: 50px 0;
+  background-color: var(--darkBg);
   img {
-    width: 400px;
-    /* height: 100px; */
   }
 `;
-const Loading = ({ height }) => {
+const Loading = () => {
   return (
-    <Div $height={height}>
-      <img src={loading} alt="" />
+    <Div>
+      <img src={logo} alt="" />
     </Div>
   );
 };

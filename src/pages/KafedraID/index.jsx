@@ -46,6 +46,8 @@ const KafedraID = () => {
     fetchData();
   }, [id, language]);
 
+  console.log(data)
+
   const data1 = [
     { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
     { id: 2, label: "60640102 Transport logistikasi (avtomobil transporti)" },
@@ -57,6 +59,7 @@ const KafedraID = () => {
     { id: 8, label: "60640102 Transport logistikasi (avtomobil transporti)" },
     { id: 9, label: "60640102 Transport logistikasi (avtomobil transporti)" },
   ];
+
   const aboutRef = useRef();
   const mudirRef = useRef();
   const yonalishRef = useRef();

@@ -6,6 +6,8 @@ export const Container = styled.div`
   gap: 5px;
   label {
     cursor: pointer;
+    padding: 0;
+    margin: 0;
     font-size: 16px;
     color: var(--titleDark);
     font-weight: 600;
@@ -16,5 +18,7 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  white-space: nowrap;
   gap: 10px;
 `;

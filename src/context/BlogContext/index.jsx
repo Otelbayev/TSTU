@@ -16,7 +16,7 @@ const FrontBlogContextProvider = ({ children }) => {
   const [news, setNews] = useState([]);
   const [events, setEvents] = useState([]);
   const [student, setStudent] = useState([]);
-  const [talim, setTalim] = useState([]);
+  const [talim, setTalim] = useState([])
 
   const { language } = useLanguageContext();
 

@@ -4,13 +4,12 @@ import { NavLink } from "react-router-dom";
 import { useLanguageContext } from "../../../context/LanguageContext";
 import videoflag from "../../../assets/New/flags.png";
 
-const VideoCart = ({ prop, dataAos, to, state }) => {
+const VideoCart = ({ prop, dataAos, to }) => {
   const { language } = useLanguageContext();
 
-  const [modal, setModal] = state || [null, () => {}];
   return (
     <Content data-aos={dataAos}>
-      <div className="video-cart-left" onClick={() => setModal(!modal)}>
+      <div className="video-cart-left">
         <img loading="lazy" src={prop?.img || videoflag} alt="" />
         <Icon className="video-cart-icon" />
       </div>

@@ -25,7 +25,7 @@ const Cart = ({ prop, onClick, item }) => {
         </Wrap.Date>
         <Wrap.Title onClick={onClick}>
           {item?.title}
-          <i class="fa-solid fa-arrow-right icon"></i>
+          <i className="fa-solid fa-arrow-right icon"></i>
           <div className="bottom"></div>
         </Wrap.Title>
       </Wrap.Content>

@@ -1,30 +1,29 @@
 import React from "react";
 import { Container } from "./style";
 import { NavLink } from "react-router-dom";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
-const TopNews = ({ dataAos }) => {
+const TopNews = ({ dataAos, data }) => {
+  const { language } = useLanguageContext();
+
   return (
     <Container data-aos={dataAos}>
       <div className="contnet">
         <div className="content__title">TOP Yangilik</div>
         <div className="content__wrap">
-          <NavLink className="content__wrap__item">
-            Men may be 2.5 times more likely to die from COVID-19 than women
-          </NavLink>
-          <NavLink className="content__wrap__item">
-            Men may be 2.5 times more likely to die from COVID-19 than women
-          </NavLink>
-          <NavLink className="content__wrap__item">
-            Men may be 2.5 times more likely to die from COVID-19 than women
-          </NavLink>
-          <NavLink className="content__wrap__item">
-            Men may be 2.5 times more likely to die from COVID-19 than women
-          </NavLink>
-          <NavLink className="content__wrap__item">
-            Men may be 2.5 times more likely to die from COVID-19 than women
-          </NavLink>
+          {data?.slice(0, 10).map((e) => (
+            <NavLink
+              className="content__wrap__item"
+              to={`/${language}/blog/${e?.id}`}
+              key={e?.id}
+            >
+              {e?.title}
+            </NavLink>
+          ))}
         </div>
-        <button className="content__btn">See More</button>
+        <NavLink className="content__btn" to={`/${language}/blog`}>
+          See More
+        </NavLink>
       </div>
     </Container>
   );

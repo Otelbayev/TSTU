@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Center, Content, Flex, Grid, Layout } from "./style";
 import NewsItem from "../../components/News/NewsItem";
-import newcar from "../../assets/New/newcar.png";
 import { useNavigate } from "react-router-dom";
 import MiniItem from "../../components/News/MiniItem";
-import Pagination from "../../components/Pagination";
 import RadioButton from "../../components/RadioButton";
 import { useId } from "../../hooks/useId";
 import { Title } from "../../components/Generics";
-import flag from "../../assets/New/flag.png";
 import NewsCart from "../../components/News/NewsCart";
-import videoflag from "../../assets/New/flags.png";
 import VideoCart from "../../components/News/VideoCart";
-import video from "../../assets/New/video.mp4";
 import { useFrontBlogContext } from "./../../context/BlogContext/index";
 import { useLanguageContext } from "../../context/LanguageContext";
 import axios from "axios";
@@ -21,13 +16,13 @@ import { useTranslation } from "react-i18next";
 const Blog = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [modal, setModal] = useState(false);
 
   const { language } = useLanguageContext();
 
-  const { news, events, student } = useFrontBlogContext();
+  const { news } = useFrontBlogContext();
 
   const [allData, setAllData] = useState([]);
+  const [types, setTypes] = useState([]);
   const [page, setpage] = useState(1);
 
   const getData = async () => {
@@ -39,9 +34,26 @@ const Blog = () => {
     res.status === 200 && setAllData(res.data);
   };
 
+  const getTypes = async () => {
+    try {
+      const res = await axios.get(
+        language === "uz"
+          ? "/api/blogcategorycontroller/sitegetallblogcategory"
+          : `/api/blogcategorycontroller/sitegetallblogcategorytranslation?language_code=${language}`
+      );
+      res.status === 200 && setTypes(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getData();
   }, [language, page]);
+
+  useEffect(() => {
+    getTypes();
+  }, [language]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -50,7 +62,7 @@ const Blog = () => {
   return (
     <div className="root-container">
       <div className="root-wrapper">
-        <Content $modal={modal.toString()}>
+        <Content>
           <div className="title">{t("news.u")}</div>
           <Layout>
             <Layout.Item data-aos="fade-right">
@@ -85,13 +97,7 @@ const Blog = () => {
             </Layout.Item>
           </Layout>
           <Center>
-            {/* <Pagination
-              current={page}
-              onChange={(e) =>}
-              total={50}
-              dataAos="fade-right"
-            /> */}
-            <RadioButton prop={prop3} dataAos="fade-left" />
+            <RadioButton prop={types} dataAos="fade-left" />
           </Center>
           <Grid>
             {allData.map((e) => (
@@ -105,24 +111,9 @@ const Blog = () => {
           </Grid>
           <Title title={t("news.t")} component={""}>
             <Flex>
-              {allData.map((e) => (
-                <VideoCart
-                  dataAos={"zoom-in"}
-                  key={e.id}
-                  prop={e}
-                  to={`blog/${e.id}`}
-                  state={[modal, setModal]}
-                />
-              ))}
+              <VideoCart dataAos={"zoom-in"} key={""} prop={""} to={``} />
             </Flex>
           </Title>
-          <div className="video-cart-video">
-            <div
-              className="video-cart-video__bg"
-              onClick={() => setModal(!modal)}
-            ></div>
-            <video muted controls src={video}></video>
-          </div>
         </Content>
       </div>
     </div>

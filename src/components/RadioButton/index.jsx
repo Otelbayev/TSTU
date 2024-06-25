@@ -4,14 +4,9 @@ import { Container, Wrapper } from "./style";
 const RadioButton = ({ prop, dataAos }) => {
   return (
     <Wrapper data-aos={dataAos}>
-      {prop.map(({ id, title, checked }) => (
+      {prop.map(({ id, title }) => (
         <Container key={id}>
-          <input
-            defaultChecked={checked && checked}
-            type="radio"
-            id={id}
-            name="radio"
-          />
+          <input type="radio" id={id} name="radio" />
           <label htmlFor={id}>{title}</label>
         </Container>
       ))}

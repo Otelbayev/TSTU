@@ -22,6 +22,8 @@ export const Container = styled.div`
     }
     &__btn {
       background: transparent;
+      display: block;
+      text-align: center;
       color: #ffff;
       border: 1px solid #fff;
       width: 100%;

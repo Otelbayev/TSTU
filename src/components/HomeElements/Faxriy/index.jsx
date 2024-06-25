@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 const Faxriy = () => {
   const { t } = useTranslation();
 
+  
+
   return (
     <div>
       <div className="root-container">

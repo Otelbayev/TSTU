@@ -24,6 +24,17 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
         return id ? `/${language}/department/${id}` : `/${language}/kafedra`;
       case "Department":
         return `/${language}/department/${id}`;
+
+      case "Havola":
+        return `${link}`;
+      case "Blog":
+        return `/${language}/blog/${id}`;
+      case "Sahifa":
+        return id ? `/${language}/page/${id}` : `/${language}/${link}`;
+      case "Fakultet":
+        return id ? `/${language}/department/${id}` : `/${language}/faculty`;
+      case "Bo'lim":
+        return `/${language}/department/${id}`;
     }
   };
 

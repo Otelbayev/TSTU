@@ -9,13 +9,13 @@ const LargeBanner = ({ prop, onClick, item, type }) => {
         <Large.Date>
           {type === "news" && <span>TOP istalgani </span>}
           <span>
-            {type === "events" && <i class="fa-solid fa-calendar-days"></i>}{" "}
+            {type === "events" && <i className="fa-solid fa-calendar-days"></i>}{" "}
             {(type === "news" || type === "events") &&
               `TSTU | ${getDate(item?.event_date?.split("T")[0])}`}
           </span>
           {type === "events" && (
             <span>
-              <i class="fa-solid fa-user"></i> Pedagok
+              <i className="fa-solid fa-user"></i> Pedagok
             </span>
           )}
         </Large.Date>

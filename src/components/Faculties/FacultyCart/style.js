@@ -1,8 +1,76 @@
 import styled from "styled-components";
+import fak from "../../../assets/images/bggggg.png";
 
 export const Container = styled.div`
-  position: relative;
-  height: 200px;
+  perspective: 1000px;
+  height: 250px;
+
+  .card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+
+  &:hover .card {
+    transform: rotateY(180deg);
+  }
+
+  .card-front,
+  .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #cecece;
+    border-radius: 3px;
+  }
+  .card-title {
+    color: var(--titleDark);
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%;
+    padding: 16px;
+  }
+
+  .card-front {
+    background-color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 19px 16px;
+    img {
+      width: 64px;
+    }
+  }
+
+  .card-back {
+    transform: rotateY(180deg);
+    background-image: url(${fak});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    align-items: end;
+    p {
+      color: #fff;
+    }
+  }
+
+  .card-back img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 `;
 
 export const Content = styled.div`
@@ -17,7 +85,6 @@ Content.Front = styled.div`
   height: 100%;
   border-radius: 3px;
   border: 1px solid #cecece;
-  background: #fdfdfd;
   display: flex;
   align-items: center;
   justify-content: center;

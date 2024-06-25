@@ -45,14 +45,6 @@ export const Content = styled.div`
       color: var(--titleDark);
     }
   }
-  .video-cart-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: red;
-  }
   @media (max-width: 600px) {
     flex-direction: column;
   }

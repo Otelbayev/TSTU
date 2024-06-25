@@ -64,7 +64,7 @@ const BlogID = () => {
               />
             </div>
             <div className="content__right">
-              <TopNews dataAos="fade-left" />
+              <TopNews data={news} dataAos="fade-left" />
               <img loading="lazy" src={ads} alt="" data-aos="fade-left" />
             </div>
           </div>

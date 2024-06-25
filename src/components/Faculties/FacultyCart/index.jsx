@@ -5,12 +5,15 @@ import fak from "../../../assets/icons/fakdark.png";
 const FacultyCart = ({ item, onClick }) => {
   return (
     <Container onClick={onClick}>
-      <Content>
-        <Content.Front>
-          <Content.Icon loading="lazy" src={item?.url || fak} />
-          <Content.Title>{item?.title}</Content.Title>
-        </Content.Front>
-      </Content>
+      <div class="card">
+        <div class="card-front">
+          <img loading="lazy" src={item?.url || fak} />
+          <p className="card-title">{item?.title}</p>
+        </div>
+        <div class="card-back">
+          <p className="card-title">{item?.title}</p>
+        </div>
+      </div>
     </Container>
   );
 };

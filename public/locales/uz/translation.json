@@ -25,7 +25,8 @@
   "faculties": {
     "title": "Fakultet va kafedralar",
     "btn": "Barchasini ko‘rish",
-    "kafedra": "Kafedralar"
+    "kafedra": "Kafedralar",
+    "all":"Fakultetlar"
   },
   "talim": {
     "title": "Ta’lim",

@@ -11,14 +11,13 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
   const res1 = data?.filter((e) => !e.high_menu);
 
   const setNavigate = (type, id, link) => {
-    console.log(type, link);
     switch (type) {
       case "Link":
         return `${link}`;
       case "Blog":
         return `/${language}/blog/${id}`;
       case "Page":
-        return `/${language}/page/${id}`;
+        return id ? `/${language}/page/${id}` : `/${language}/${link}`;
       case "Faculty":
         return id ? `/${language}/department/${id}` : `/${language}/faculty`;
       case "Kafedra":
@@ -34,13 +33,15 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="left">
-        <div className="left__top">
-          <img src={icon} alt="" className="left__top__icon" />
-          <div className="left__top__title">{title}</div>
+      {title && (
+        <div className="left">
+          <div className="left__top">
+            <img src={icon} alt="" className="left__top__icon" />
+            <div className="left__top__title">{title}</div>
+          </div>
+          <div className="left__desc">{desc}</div>
         </div>
-        <div className="left__desc">{desc}</div>
-      </div>
+      )}
       <div className="right">
         {res?.length ? (
           res
@@ -79,7 +80,7 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
         ) : (
           <div className="right__item">
             {res1
-              ?.filter((item) => item?.parent_id === id)
+              ?.filter((item) => item?.parent_id === id || id === "alldata")
               ?.sort((a, b) => a?.position - b?.position)
               ?.map((item) => (
                 <div key={item.id} className={"right__link"}>

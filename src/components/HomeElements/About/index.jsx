@@ -9,7 +9,7 @@ const About = () => {
   const [counterOn, setCounterOn] = useState(false);
   return (
     <Container className="root-container">
-      <div className="wrapper about" data-aos="fade-up">
+      <div className="root-wrapper about " data-aos="fade-up">
         <div className="about__title">{t("about.title")}</div>
         <div className="about__desc">{t("about.desc")}</div>
         <ScrollTrigger

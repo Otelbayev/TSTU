@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import { Content } from "./style";
 import FacultyCart from "../../components/Faculties/FacultyCart";
 import { useNavigate } from "react-router-dom";
 import { useFrontDepartmentContext } from "./../../context/DepartmentContext";
 import { useTranslation } from "react-i18next";
+import { Content } from "../Faculties/style";
 
 const Faculties = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { faculties } = useFrontDepartmentContext();
+  const { kafedras } = useFrontDepartmentContext();
 
   const { t } = useTranslation();
 
@@ -20,9 +20,9 @@ const Faculties = () => {
     <div className="root-container">
       <div className="root-wrapper">
         <Content data-aos="fade-up">
-          <div className="title">{t("faculties.all")}</div>
+          <div className="title">{t("faculties.kafedra")}</div>
           <Content.Body>
-            {faculties?.map((item) => {
+            {kafedras?.map((item) => {
               return (
                 <FacultyCart
                   key={item?.id}

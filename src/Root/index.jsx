@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Loading from "../components/Loading";
 const HomePage = lazy(() => import("../pages/Home"));
 import Admin from "../Admin";
+import Loading2 from "../components/Loading2";
 
 const Root = () => {
   return (
@@ -38,9 +39,7 @@ const Root = () => {
               key={item.id}
               path={`/:lang/${item.path}`}
               element={
-                <Suspense fallback={<h1>Loading...</h1>}>
-                  {item.element}
-                </Suspense>
+                <Suspense fallback={<Loading2 />}>{item.element}</Suspense>
               }
             />
           ))}
@@ -51,9 +50,7 @@ const Root = () => {
               key={item.id}
               path={`/:lang/${item.path}`}
               element={
-                <Suspense fallback={<h1>Loading...</h1>}>
-                  {item.element}
-                </Suspense>
+                <Suspense fallback={<Loading2 />}>{item.element}</Suspense>
               }
             />
           ))}

@@ -25,7 +25,8 @@
   "faculties": {
     "title": "Faculties and Departments",
     "btn": "View All",
-    "kafedra": "Departments"
+    "kafedra": "Departments",
+    "all": "Faculties"
   },
   "talim": {
     "title": "Education",

@@ -57,6 +57,16 @@ export const Sidebar = ({ topData, allData, uni }) => {
         </div>
         <div className="top-right">
           <Lang />
+          <div className="top-right__all">
+            <Icons.Menu
+              onMouseEnter={() => {
+                setHover(true);
+                setId("alldata");
+              }}
+              onMouseLeave={() => setHover(false)}
+              onClick={() => setHover(!hover)}
+            />
+          </div>
         </div>
       </div>
       <Content
@@ -64,7 +74,9 @@ export const Sidebar = ({ topData, allData, uni }) => {
         desc={res?.description}
         hover={hover}
         setHover={setHover}
-        data={allData?.filter((e) => e?.parent_id === id || !e.high_menu)}
+        data={allData?.filter(
+          (e) => e?.parent_id === id || !e.high_menu || id === "alldata"
+        )}
         id={id}
       />
     </Wrapper>

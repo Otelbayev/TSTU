@@ -15,6 +15,11 @@ export const Wrapper = styled.div`
       display: flex;
       gap: 5px;
     }
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
   }
 `;
 
@@ -56,3 +61,7 @@ export const Icons = styled.div``;
 
 Icons.Arrow = styled(arrowUp)``;
 Icons.Arrow1 = styled(arrowDown)``;
+
+Icons.Menu = styled(menu)`
+  cursor: pointer;
+`;

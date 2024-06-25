@@ -11,7 +11,10 @@ const PageID = lazy(() => import("../pages/PageID"));
 
 const EmployeeID = lazy(() => import("../pages/EmployeeID"));
 
+const Faculties = lazy(() => import("../pages/Faculties"));
 const FacultiesID = lazy(() => import("../pages/FacultiesID"));
+
+const Kafedra = lazy(() => import("../pages/Kafedra"));
 const KafedraID = lazy(() => import("../pages/KafedraID"));
 
 const Contact = lazy(() => import("../pages/Contact"));
@@ -23,7 +26,6 @@ const Rectorat = lazy(() => import("../pages/Rectorat"));
 const InteractiveServices = lazy(() => import("../pages/Interactive"));
 const Centers = lazy(() => import("../pages/Centers"));
 const Honorary = lazy(() => import("../pages/Honorary"));
-const Faculties = lazy(() => import("../pages/Faculties"));
 const ScientificCenter = lazy(() => import("../pages/ScientificCenter"));
 const SignUp = lazy(() => import("../pages/SignUp"));
 const SignIn = lazy(() => import("../pages/SignIn"));
@@ -178,6 +180,12 @@ export const noshowcase = [
     id: useId(),
     path: "signup",
     element: <SignUp />,
+    isPrivate: false,
+  },
+  {
+    id: useId(),
+    path: "kafedra",
+    element: <Kafedra />,
     isPrivate: false,
   },
 ];

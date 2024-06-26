@@ -32,11 +32,38 @@ import {
   SearchBox,
 } from "./style";
 
-
 const Header = ({ uni }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { language } = useLanguageContext();
+
+  const setNavigate = (type, id, link) => {
+    switch (type) {
+      case "Link":
+        return `${link}`;
+      case "Blog":
+        return `/${language}/blog/${id}`;
+      case "Page":
+        return id ? `/${language}/page/${id}` : `/${language}/${link}`;
+      case "Faculty":
+        return id ? `/${language}/department/${id}` : `/${language}/faculty`;
+      case "Kafedra":
+        return id ? `/${language}/department/${id}` : `/${language}/kafedra`;
+      case "Department":
+        return `/${language}/department/${id}`;
+
+      case "Havola":
+        return `${link}`;
+      case "Blog":
+        return `/${language}/blog/${id}`;
+      case "Sahifa":
+        return id ? `/${language}/page/${id}` : `/${language}/${link}`;
+      case "Fakultet":
+        return id ? `/${language}/department/${id}` : `/${language}/faculty`;
+      case "Bo'lim":
+        return `/${language}/department/${id}`;
+    }
+  };
 
   const { t } = useTranslation();
 
@@ -78,13 +105,32 @@ const Header = ({ uni }) => {
               ) : (
                 <NavLink
                   onClick={() => setIsOpen(false)}
-                  to={
-                    i.path
-                      ? `/${language}/${i.path}`
-                      : `/${language}/${
-                          i?.menu_type_?.title?.toLowerCase() ||
-                          i?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
-                        }/${i.id}`
+                  // to={
+                  //   i.path
+                  //     ? `/${language}/${i.path}`
+                  //     : `/${language}/${
+                  //         i?.menu_type_?.title?.toLowerCase() ||
+                  //         i?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
+                  //       }/${i.id}`
+                  // }
+                  to={setNavigate(
+                    i?.menu_type_?.title ||
+                      i?.menu_type_translation_?.menu_type_?.title,
+                    i?.blog_?.id ||
+                      i?.blog_translation_?.blog_id ||
+                      i?.departament_?.id ||
+                      i?.departament_translation_?.departament_id ||
+                      i?.page_?.id ||
+                      i?.page_translation_?.page_id,
+                    i?.link_
+                  )}
+                  target={
+                    (i?.link_ && i?.menu_type_?.title === "Link") ||
+                    i?.menu_type_?.title === "Link" ||
+                    i?.menu_type_?.title === "Havola" ||
+                    i?.menu_type_?.title === "Havola"
+                      ? "_blank"
+                      : "_self"
                   }
                 >
                   {i.title}
@@ -99,10 +145,29 @@ const Header = ({ uni }) => {
                         label: (
                           <NavLink
                             onClick={() => setIsOpen(false)}
-                            to={`/${language}/${
-                              h?.menu_type_?.title?.toLowerCase() ||
-                              h?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
-                            }/${h.id}`}
+                            // to={`/${language}/${
+                            //   h?.menu_type_?.title?.toLowerCase() ||
+                            //   h?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
+                            // }/${h.id}`}
+                            to={setNavigate(
+                              h?.menu_type_?.title ||
+                                h?.menu_type_translation_?.menu_type_?.title,
+                              h?.blog_?.id ||
+                                h?.blog_translation_?.blog_id ||
+                                h?.departament_?.id ||
+                                h?.departament_translation_?.departament_id ||
+                                h?.page_?.id ||
+                                h?.page_translation_?.page_id,
+                              h?.link_
+                            )}
+                            target={
+                              (h?.link_ && h?.menu_type_?.title === "Link") ||
+                              h?.menu_type_?.title === "Link" ||
+                              h?.menu_type_?.title === "Havola" ||
+                              h?.menu_type_?.title === "Havola"
+                                ? "_blank"
+                                : "_self"
+                            }
                           >
                             {h.title}
                           </NavLink>

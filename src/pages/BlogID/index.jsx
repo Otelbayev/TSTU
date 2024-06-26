@@ -12,6 +12,7 @@ import { useLanguageContext } from "../../context/LanguageContext";
 import { useParams } from "react-router-dom";
 import { getDate } from "../../utils/month";
 import { useFrontBlogContext } from "../../context/BlogContext";
+import img from "../../../../api/file-uploads/attached/images/1d17452c-431a-4f52-858d-965b902a66e3.jpg";
 
 const BlogID = () => {
   const { id } = useParams();
@@ -39,11 +40,13 @@ const BlogID = () => {
     };
 
     fetchData();
-  }, [id, language]);
+  }, [id, language])
   return (
     <div className="root-container">
       <div className="root-wrapper">
         <Container>
+          <img src={`../../../../api/${data?.img_?.url}`} alt="" />
+
           <div className="title">{data?.title}</div>
           <div className="news-date">
             <span>

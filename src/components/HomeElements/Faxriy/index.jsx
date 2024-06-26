@@ -3,11 +3,14 @@ import { Title } from "../../Generics";
 import { Container } from "./style";
 import prof from "../../../assets/images/prof.jpg";
 import { useTranslation } from "react-i18next";
+import { useFrontPersonContext } from "../../../context/PersonContext";
 
 const Faxriy = () => {
   const { t } = useTranslation();
 
-  
+  const { faxriyBitiruvchi } = useFrontPersonContext();
+
+  console.log(faxriyBitiruvchi);
 
   return (
     <div>

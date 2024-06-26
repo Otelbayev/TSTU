@@ -79,7 +79,15 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
                               item?.page_translation_?.page_id,
                             item?.link_
                           )}
-                          target={item?.link_ ? "_blank" : "_self"}
+                          target={
+                            (item?.link_ &&
+                              item?.menu_type_?.title === "Link") ||
+                            item?.menu_type_?.title === "Link" ||
+                            item?.menu_type_?.title === "Havola" ||
+                            item?.menu_type_?.title === "Havola"
+                              ? "_blank"
+                              : "_self"
+                          }
                         >
                           {item?.title}
                         </NavLink>
@@ -108,7 +116,14 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
                         item?.page_translation_?.page_id,
                       item?.link_
                     )}
-                    target={item?.link_ ? "_blank" : "_self"}
+                    target={
+                      (item?.link_ && item?.menu_type_?.title === "Link") ||
+                      item?.menu_type_?.title === "Link" ||
+                      item?.menu_type_?.title === "Havola" ||
+                      item?.menu_type_?.title === "Havola"
+                        ? "_blank"
+                        : "_self"
+                    }
                   >
                     {item?.title}
                   </NavLink>

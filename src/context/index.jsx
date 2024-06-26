@@ -1,6 +1,7 @@
 import FrontBlogContextProvider from "./BlogContext";
 import FrontDepartmentContxtProvider from "./DepartmentContext";
 import LanguageContexProvider from "./LanguageContext";
+import FrontPersonContextProvider from "./PersonContext";
 import PersonContextProvider from "./PersonContext";
 
 const Context = ({ children }) => {
@@ -8,7 +9,7 @@ const Context = ({ children }) => {
     <LanguageContexProvider>
       <FrontDepartmentContxtProvider>
         <FrontBlogContextProvider>
-          <PersonContextProvider>{children}</PersonContextProvider>
+          <FrontPersonContextProvider>{children}</FrontPersonContextProvider>
         </FrontBlogContextProvider>
       </FrontDepartmentContxtProvider>
     </LanguageContexProvider>

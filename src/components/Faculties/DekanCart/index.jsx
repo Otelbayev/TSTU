@@ -2,20 +2,24 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Content } from "./style";
 
-const DekanCart = ({ name, position, links, img }) => {
+const DekanCart = ({ data }) => {
+  console.log(data);
   return (
     <Content data-aos="zoom-in">
-      <Content.Img loading="lazy" src={img || "none"} />
-      <Content.Name>{name || "none"}</Content.Name>
-      <Content.Position>{position || "none"}</Content.Position>
+      <Content.Img loading="lazy" src={data?.img_?.url || "none"} />
+      <Content.Name>
+        {data?.persons_?.firstName} {data?.persons_?.lastName}{" "}
+        {data?.persons_?.fathers_name}
+      </Content.Name>
+      <Content.Position>{data?.degree || "Position"}</Content.Position>
       <Content.Media>
-        <NavLink to={`/${links && links[0]}`}>
+        <NavLink>
           <Content.Facebook />
         </NavLink>
-        <NavLink to={`/${links && links[0]}`}>
+        <NavLink>
           <Content.Whatsup />
         </NavLink>
-        <NavLink to={`/${links && links[0]}`}>
+        <NavLink>
           <Content.Instagram />
         </NavLink>
       </Content.Media>

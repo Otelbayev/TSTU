@@ -1,19 +1,28 @@
 import React from "react";
 import { Container } from "./style";
 
-const RamatovSlider = ({ prop: { name, img, position, bottom } }) => {
+const RamatovSlider = ({ prop }) => {
   return (
     <Container data-aos="zoom-in">
       <div className="item">
         <div className="item__content">
           <div className="slider-top">
-            <img loading="lazy" src={img} alt="" />
+            <img loading="lazy" src={"img"} alt="" />
             <div>
-              <div className="slider-top__name">{name}</div>
-              <div className="slider-top__position">{position}</div>
+              <div className="slider-top__name">
+                {prop?.persons_?.firstName} {prop?.persons_?.lastName}{" "}
+                {prop?.persons_?.fathers_name}
+              </div>
+              <div className="slider-top__position">
+                {prop?.degree ||
+                  "Oʻzbekiston Bosh vazirining birinchi oʻrinbosari"}
+              </div>
             </div>
           </div>
-          <div className="slidet-bottom">{bottom}</div>
+          <div className="slidet-bottom">
+            {prop?.experience_json ||
+              "1984-yildan 1988-yilgacha Toshkent temir yoʻl muhandislari institutida tahsil olgan."}
+          </div>
         </div>
       </div>
     </Container>

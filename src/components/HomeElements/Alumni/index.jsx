@@ -6,6 +6,7 @@ import RamatovSlider from "../RamatovSlider";
 import { prop10 } from "../../../mock/homeProps";
 import ramatova from "../../../assets/images/ramatova.jpg";
 import { useTranslation } from "react-i18next";
+import { useFrontPersonContext } from "../../../context/PersonContext";
 
 const ramatovSetting = {
   dots: false,
@@ -41,6 +42,8 @@ const ramatovSetting = {
 const Alumni = () => {
   const { t } = useTranslation();
 
+  const { faxriyBitiruvchi } = useFrontPersonContext();
+
   return (
     <div>
       <div className="root-container">
@@ -66,27 +69,23 @@ const Alumni = () => {
                 className="content__img"
               />
               <div className="content__name">
-                Ramatov Ochilboy Jumaniyazovich
+                {faxriyBitiruvchi[0]?.persons_?.firstName}{" "}
+                {faxriyBitiruvchi[0]?.persons_?.lastName}{" "}
+                {faxriyBitiruvchi[0]?.persons_?.fathers_name}
               </div>
               <div className="content__sub">
-                O‘zbekiston Bosh vazirini birinchi o‘rinbosar
+                {faxriyBitiruvchi[0]?.degree ||
+                  "Oʻzbekiston Bosh vazirining birinchi oʻrinbosari"}
               </div>
               <div className="content__p">
-                Lorem ipsum dolor sit amet consectetur. Ullamcorper platea eu
-                vel enim ultrices lectus odio malesuada euismod. Amet dolor eu
-                vitae gravida fermentum lectus ut rutrum etiam. Diam ut dui a
-                mauris non aenean fermentum. Ultrices nisi pellentesque eu
-                tortor posuere in tellus congue. Adipiscing a neque eget aliquam
-                egestas arcu pharetra amet. Etiam vel tincidunt quis porta massa
-                vitae scelerisque pellentesque sem. At purus nec ante commodo
-                venenatis hac. Dui ultrices vitae pulvinar in. Proin pretium
-                nullam orci massa lectus interdum nisl.
+                {faxriyBitiruvchi[0]?.experience_json ||
+                  "1984-yildan 1988-yilgacha Toshkent temir yoʻl muhandislari institutida tahsil olgan."}
               </div>
             </div>
           </div>
         </div>
         <Slider className="slider" {...ramatovSetting}>
-          {prop10.map((e) => (
+          {faxriyBitiruvchi?.map((e) => (
             <RamatovSlider key={e.id} prop={e} />
           ))}
         </Slider>

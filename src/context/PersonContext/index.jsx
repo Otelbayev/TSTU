@@ -2,11 +2,11 @@ import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useLanguageContext } from "../LanguageContext";
 
-const PersonContext = createContext();
+const FrontPersonContext = createContext();
 
-export const usePersonContext = () => useContext(PersonContext);
+export const useFrontPersonContext = () => useContext(FrontPersonContext);
 
-const PersonContextProvider = ({ children }) => {
+const FrontPersonContextProvider = ({ children }) => {
   const { language } = useLanguageContext();
   const [faxriyProfessor, setFaxriyProfessor] = useState([]);
   const [faxriyBitiruvchi, setFaxriyBitiruvchi] = useState([]);
@@ -42,10 +42,10 @@ const PersonContextProvider = ({ children }) => {
   }, [language]);
 
   return (
-    <PersonContext.Provider value={{ faxriyBitiruvchi, faxriyProfessor }}>
+    <FrontPersonContext.Provider value={{ faxriyBitiruvchi, faxriyProfessor }}>
       {children}
-    </PersonContext.Provider>
+    </FrontPersonContext.Provider>
   );
 };
 
-export default PersonContextProvider;
+export default FrontPersonContextProvider;

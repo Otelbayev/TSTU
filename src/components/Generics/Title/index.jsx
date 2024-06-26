@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Title = React.forwardRef(
   (
-    { children, title, subtitle, button, $type, $border, component, to },
+    { children, title, subtitle, button, $type, $border, component, to, link },
     ref
   ) => {
     const { language } = useLanguageContext();
@@ -25,7 +25,7 @@ const Title = React.forwardRef(
           )}
           {button && (
             <Content.Button
-              onClick={() => navigate(`/${language}/${to}`)}
+              onClick={() => navigate(link ? link : `/${language}/${to}`)}
               data-aos="fade-left"
               $type={$type}
               display="top"

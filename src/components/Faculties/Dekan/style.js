@@ -30,7 +30,7 @@ Dekan.Right = styled.div`
   width: 65%;
   @media (max-width: 776px) {
     width: 100%;
-  } 
+  }
 `;
 Dekan.Img = styled.img`
   width: 100%;
@@ -94,8 +94,6 @@ Dekan.Li = styled.li`
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 30px; /* 150% */
-  letter-spacing: -0.3px;
   @media (max-width: 500px) {
     font-size: 14px;
   }

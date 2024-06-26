@@ -1,12 +1,22 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Content } from "./style";
+import img from "../../../assets/images/bggggg.png";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 const DekanCart = ({ data }) => {
+  const naviagte = useNavigate();
+  const { language } = useLanguageContext();
   return (
     <Content data-aos="zoom-in">
-      <Content.Img loading="lazy" src={data?.img_?.url || "none"} />
-      <Content.Name>
+      <Content.Img
+        onClick={() => naviagte(`/${language}/employee/${data?.id}`)}
+        loading="lazy"
+        src={data?.img_?.url || img}
+      />
+      <Content.Name
+        onClick={() => naviagte(`/${language}/employee/${data?.id}`)}
+      >
         {data?.persons_?.firstName} {data?.persons_?.lastName}{" "}
         {data?.persons_?.fathers_name}
       </Content.Name>

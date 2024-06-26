@@ -52,7 +52,7 @@ Malumot.Div = styled.div`
 `;
 export const Orinbosar = styled.div`
   display: grid;
-  row-gap: 30px;
+  row-gap: 40px;
   grid-template-columns: repeat(4, 1fr);
   padding: 50px 0;
   @media (max-width: 1100px) {

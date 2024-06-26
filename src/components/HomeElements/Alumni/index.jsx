@@ -7,6 +7,7 @@ import { prop10 } from "../../../mock/homeProps";
 import ramatova from "../../../assets/images/ramatova.jpg";
 import { useTranslation } from "react-i18next";
 import { useFrontPersonContext } from "../../../context/PersonContext";
+import { useNavigate } from "react-router-dom";
 
 const ramatovSetting = {
   dots: false,
@@ -44,6 +45,8 @@ const Alumni = () => {
 
   const { faxriyBitiruvchi } = useFrontPersonContext();
 
+  console.log(faxriyBitiruvchi);
+
   return (
     <div>
       <div className="root-container">
@@ -52,7 +55,7 @@ const Alumni = () => {
             title={t("alumni.title")}
             button={t("alumni.btn")}
             subtitle={t("alumni.desc")}
-            to="honorary"
+            link="https://alumni.tstu.uz"
             $type={"light"}
           />
         </div>
@@ -85,9 +88,9 @@ const Alumni = () => {
           </div>
         </div>
         <Slider className="slider" {...ramatovSetting}>
-          {faxriyBitiruvchi?.map((e) => (
+          {/* {faxriyBitiruvchi?.map((e) => (
             <RamatovSlider key={e.id} prop={e} />
-          ))}
+          ))} */}
         </Slider>
       </Ramatov>
     </div>

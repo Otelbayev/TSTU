@@ -34,7 +34,7 @@ const Dekans = ({ data }) => {
         </Dekan.Contact>
         <Dekan.Ul>
           {data?.experience_json?.split(";").map((e, index) => (
-            <Dekan.Li key={index}>{e}</Dekan.Li>
+            <Dekan.Li key={index}>{e}.</Dekan.Li>
           ))}{" "}
         </Dekan.Ul>
 

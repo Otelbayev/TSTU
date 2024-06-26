@@ -17,6 +17,8 @@ const FacultiesID = lazy(() => import("../pages/FacultiesID"));
 const Kafedra = lazy(() => import("../pages/Kafedra"));
 const KafedraID = lazy(() => import("../pages/KafedraID"));
 
+const Graduates = lazy(() => import("../pages/Graduates"));
+
 const Contact = lazy(() => import("../pages/Contact"));
 const Faq = lazy(() => import("../pages/Faq"));
 const Appeals = lazy(() => import("../pages/Rector"));
@@ -25,7 +27,6 @@ const Rectorat = lazy(() => import("../pages/Rectorat"));
 
 const InteractiveServices = lazy(() => import("../pages/Interactive"));
 const Centers = lazy(() => import("../pages/Centers"));
-const Honorary = lazy(() => import("../pages/Honorary"));
 const ScientificCenter = lazy(() => import("../pages/ScientificCenter"));
 const SignUp = lazy(() => import("../pages/SignUp"));
 const SignIn = lazy(() => import("../pages/SignIn"));
@@ -63,8 +64,8 @@ export const navbar = [
   },
   {
     id: useId(),
-    path: "honorary",
-    element: <Honorary />,
+    path: "graduates",
+    element: <Graduates />,
     isPrivate: false,
   },
   {

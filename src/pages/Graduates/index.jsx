@@ -5,20 +5,21 @@ import { Container } from "./style";
 import { Title } from "../../components/Generics";
 import UniShowcase from "./../../components/UniShowcase/index";
 
-const Honorary = () => {
+const Graduates = () => {
   const { faxriyBitiruvchi } = useFrontPersonContext();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="root-container">
-      <div className="root-wrapper my-4">
-        <UniShowcase title="Faxriy bitiruvchilari" />
-        <Container></Container>
+    <div>
+      <UniShowcase title="Faxriy bitiruvchilari" />
+      <div className="root-container">
+        <div className="root-wrapper my-4">
+          <Container></Container>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Honorary;
+export default Graduates;

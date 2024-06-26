@@ -28,6 +28,7 @@ export const Container = styled.div`
     align-items: center;
     border: 1px solid #cecece;
     border-radius: 3px;
+    cursor: pointer;
   }
   .card-title {
     color: var(--titleDark);
@@ -41,7 +42,6 @@ export const Container = styled.div`
 
   .card-front {
     background-color: #fff;
-    cursor: pointer;
     transition: 0.3s;
     width: 100%;
     height: 100%;

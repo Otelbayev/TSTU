@@ -15,10 +15,16 @@ export const Content = styled.div`
 `;
 
 Content.Img = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   border: 1px solid #cecece;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
   @media (max-width: 800px) {
     width: 120px;
     height: 120px;
@@ -29,6 +35,7 @@ Content.Img = styled.img`
   }
 `;
 Content.Name = styled.div`
+  cursor: pointer;
   color: #1b192a;
   text-align: center;
   font-size: 22px;

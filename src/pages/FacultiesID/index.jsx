@@ -89,6 +89,17 @@ const FacultiesID = () => {
               ?.trim() === "dekan"
         )
       );
+
+      setOrinBosar(
+        res.data?.filter(
+          (e) =>
+            e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() !==
+              "Dekan" ||
+            e?.persons_?.employee_type_translation_?.title
+              ?.toLowerCase()
+              ?.trim() !== "Dekan"
+        )
+      );
     }
   };
 
@@ -149,14 +160,8 @@ const FacultiesID = () => {
             <Dekans img={dekan} data={dekan} />
             <Title title={t("facultet.orin")} $border={"none"} />
             <Orinbosar>
-              {orinbosar.map(({ id, name, position, links, img }) => (
-                <DekanCart
-                  key={id}
-                  name={name}
-                  position={position}
-                  links={links}
-                  img={img}
-                />
+              {orinbosar.map((e) => (
+                <DekanCart key={id} data={e} />
               ))}
             </Orinbosar>
             {/* <Title title="Fakultet e’lon va  yangiliklari" $border={"none"} /> */}

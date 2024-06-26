@@ -28,7 +28,7 @@ const Header = ({ links }) => {
             <ul className="ul">
               {links?.map((e, index) =>
                 index === 0 ? (
-                  <li className="first">
+                  <li className="first" key={index}>
                     <Link onClick={() => useHandleScroll(e?.refs)}>
                       {e?.title}
                     </Link>
@@ -40,7 +40,7 @@ const Header = ({ links }) => {
                     ></i>
                   </li>
                 ) : (
-                  <li>
+                  <li key={index}>
                     <Link
                       onClick={() => {
                         setIsOpen(false);
@@ -86,7 +86,7 @@ const Header = ({ links }) => {
           </div>
         </Content>
       </Container>
-      <SearchBox $isopen={isSearchOpen.toString()} zIndex={10}>
+      <SearchBox $isopen={isSearchOpen.toString()} $zIndex={10}>
         <div className="root-container">
           <div className="root-wrapper">
             <input type="text" placeholder={`${t("header.qidiruv")}...`} />

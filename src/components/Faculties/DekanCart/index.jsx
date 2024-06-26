@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { Content } from "./style";
 
 const DekanCart = ({ data }) => {
-  console.log(data);
   return (
     <Content data-aos="zoom-in">
       <Content.Img loading="lazy" src={data?.img_?.url || "none"} />

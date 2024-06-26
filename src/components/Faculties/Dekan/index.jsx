@@ -1,38 +1,55 @@
 import React from "react";
 import { Dekan } from "./style";
+import dekan from "../../../assets/Faculties/dekan.png";
+import { useLanguageContext } from "../../../context/LanguageContext";
 import { useNavigate } from "react-router-dom";
 
-const Dekans = ({ img, name, position, phone, email, li, button }) => {
+const Dekans = ({ data }) => {
+  const { language } = useLanguageContext();
+
+  console.log(data);
+
   const naviagte = useNavigate();
   return (
     <Dekan>
       <Dekan.Left data-aos="fade-right">
-        <Dekan.Img loading="lazy" src={img} />
+        <Dekan.Img loading="lazy" src={dekan} />
       </Dekan.Left>
       <Dekan.Right data-aos="fade-left">
-        <Dekan.Name>{name}</Dekan.Name>
+        <Dekan.Name>
+          {data?.persons_?.firstName} {data?.persons_?.lastName}{" "}
+          {data?.persons_?.fathers_name}
+        </Dekan.Name>
         <Dekan.Contact>
           <Dekan.User />
-          <div>{position}</div>
+          <div>{data?.degree}</div>
         </Dekan.Contact>
         <Dekan.Contact>
           <Dekan.Phone />
-          <div>{phone}</div>
+          <div>{data?.phone_number1}</div>
         </Dekan.Contact>
         <Dekan.Contact>
           <Dekan.Email />
-          <div>{email}</div>
+          <div>{data?.persons_?.email}</div>
         </Dekan.Contact>
         <Dekan.Ul>
-          {li.map((e) => (
-            <Dekan.Li key={e}> {e}</Dekan.Li>
-          ))}
+          {data?.experience_json?.split(";").map((e, index) => (
+            <Dekan.Li key={index}>{e}</Dekan.Li>
+          ))}{" "}
         </Dekan.Ul>
-        {button && (
-          <Dekan.Btn type="primary" onClick={() => naviagte(`${button}`)}>
-            Biz haqimizda
-          </Dekan.Btn>
-        )}
+
+        <Dekan.Btn
+          type="primary"
+          onClick={() =>
+            naviagte(
+              `/${language}/employee/${
+                language === "uz" ? data?.id : data?.persons_id
+              }`
+            )
+          }
+        >
+          Batafsil
+        </Dekan.Btn>
       </Dekan.Right>
     </Dekan>
   );

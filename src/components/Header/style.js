@@ -223,7 +223,7 @@ export const SearchBox = styled.div`
   position: absolute;
   left: 0;
   width: 100%;
-  z-index: ${({ zIndex }) => (zIndex ? zIndex : -1)};
+  z-index: ${({ $zIndex }) => ($zIndex ? $zIndex : -1)};
   transition: 0.5s;
   transform: ${({ $isopen }) =>
     $isopen === "true" ? "translateY(20px)" : "translateY(-200px)"};

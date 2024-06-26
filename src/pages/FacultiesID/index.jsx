@@ -14,7 +14,6 @@ import {
   Wrap,
 } from "./style";
 import { useNavigate, useParams } from "react-router-dom";
-import dekan from "../../assets/Faculties/dekan.png";
 import DekanCart from "../../components/Faculties/DekanCart";
 import kaf1 from "../../assets/Faculties/kaf1.png";
 import kaf2 from "../../assets/Faculties/kaf2.png";
@@ -62,6 +61,9 @@ const FacultiesID = () => {
 
   const [data, setData] = useState([]);
 
+  const [orinbosar, setOrinBosar] = useState([]);
+  const [dekan, setDekan] = useState({});
+
   const { t } = useTranslation();
 
   const { id } = useParams();
@@ -69,6 +71,26 @@ const FacultiesID = () => {
   const { favoMarkaz, kafedras } = useFrontDepartmentContext();
 
   const kafedraData = kafedras?.filter((e) => e?.parent_id == id);
+
+  const getPersonData = async () => {
+    const res = await axios.get(
+      language === "uz"
+        ? `/api/persondata/sitegetallpersondatadepid/${id}`
+        : `/api/persondata/sitegetallpersondatatranslationdepuzid/${id}?language_code=${language}`
+    );
+    if (res.status === 200) {
+      setDekan(
+        res.data?.find(
+          (e) =>
+            e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
+              "dekan" ||
+            e?.persons_?.employee_type_translation_?.title
+              ?.toLowerCase()
+              ?.trim() === "dekan"
+        )
+      );
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,7 +105,7 @@ const FacultiesID = () => {
         setData([]);
       }
     };
-
+    getPersonData();
     fetchData();
   }, [id, language]);
 
@@ -102,7 +124,6 @@ const FacultiesID = () => {
 
     return obj[language];
   };
-
 
   return (
     <div className="overflow-hidden">
@@ -125,17 +146,7 @@ const FacultiesID = () => {
               />
             </div>
             <Title title={t("facultet.dekan")} $border={"none"} />
-            <Dekans
-              img={dekan}
-              name={"Rasulov Marufdjan Xalikovich"}
-              position={" Dekan, Professor, Texnika fanlari nomzodi"}
-              phone={"+99871 299 00 10"}
-              email={"marufdzhan.rasulov@bk.ru"}
-              li={[
-                "1976-1981 yy. – Toshkent temir yо‘l muhandislari instituti talabasi",
-                "1987-1990 yy. – Moskva temir yо‘l muhandislari instituti aspiranti.",
-              ]}
-            />
+            <Dekans img={dekan} data={dekan} />
             <Title title={t("facultet.orin")} $border={"none"} />
             <Orinbosar>
               {orinbosar.map(({ id, name, position, links, img }) => (
@@ -179,7 +190,7 @@ const FacultiesID = () => {
               <Title title={t("facultet.kafedra")} $border={"none"} />
               <KafedraWrap>
                 <Kafedra>
-                  {kafedras?.map((e) => (
+                  {kafedraData?.map((e) => (
                     <Kafedra.Item
                       data-aos="zoom-in"
                       onClick={() => naviagte(`/${language}/kafedra/${e.id}`)}

@@ -80,32 +80,34 @@ const Alumni = () => {
       <Ramatov>
         <div className="root-container">
           <div className="root-wrapper" data-aos="fade-up">
-            <Slider {...ramatovSetting1}>
-              {data?.map((e) => (
-                <div>
-                  <div className="content">
-                    <img
-                      loading="lazy"
-                      src={e?.img_?.url}
-                      alt=""
-                      className="content__img"
-                    />
-                    <div className="content__name">
-                      {e?.persons_?.firstName} {e?.persons_?.lastName}{" "}
-                      {e?.persons_?.fathers_name}
-                    </div>
-                    <div className="content__sub">
-                      {e?.degree ||
-                        "Oʻzbekiston Bosh vazirining birinchi oʻrinbosari"}
-                    </div>
-                    <div className="content__p">
-                      {e?.experience_json ||
-                        "1984-yildan 1988-yilgacha Toshkent temir yoʻl muhandislari institutida tahsil olgan."}
+            <div className="alumni">
+              <Slider {...ramatovSetting1}>
+                {data?.map((e) => (
+                  <div>
+                    <div className="content">
+                      <img
+                        loading="lazy"
+                        src={e?.img_?.url}
+                        alt=""
+                        className="content__img"
+                      />
+                      <div className="content__name">
+                        {e?.persons_?.firstName} {e?.persons_?.lastName}{" "}
+                        {e?.persons_?.fathers_name}
+                      </div>
+                      <div className="content__sub">
+                        {e?.degree ||
+                          "Oʻzbekiston Bosh vazirining birinchi oʻrinbosari"}
+                      </div>
+                      <div className="content__p">
+                        {e?.experience_json ||
+                          "1984-yildan 1988-yilgacha Toshkent temir yoʻl muhandislari institutida tahsil olgan."}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </Slider>
+                ))}
+              </Slider>
+            </div>
           </div>
         </div>
         <Slider className="slider" {...ramatovSetting}>

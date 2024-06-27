@@ -1,5 +1,4 @@
 export { default as About } from "./About";
-import Interactive from "./Interactive/index";
 export { default as News } from "./News";
 export { default as Events } from "./Events";
 export { default as Interactive } from "./Interactive";

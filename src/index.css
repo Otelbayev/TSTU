@@ -181,12 +181,12 @@ html {
   min-height: calc(100dvh - 115px);
 }
 
-.slick-next {
+.alumni .slick-next {
   margin-right: 23px !important;
   z-index: 99 !important;
 }
 
-.slick-prev {
+.alumni .slick-prev {
   margin-left: 20px !important;
   z-index: 99 !important;
 }

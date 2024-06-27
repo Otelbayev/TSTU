@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Title } from "../../Generics";
 import { Container } from "./style";
 import prof from "../../../assets/images/prof.jpg";
 import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 const Faxriy = () => {
   const { t } = useTranslation();
+  const { language } = useLanguageContext();
+
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    fetch(language === "uz" ? `` : ``);
+  }, []);
+
   return (
     <div>
       <div className="root-container">
         <div className="root-wrapper">
-          <Title $type={"light"} title={t("honory.title")} />
+          <Title
+            $type={"light"}
+            title={t("honory.title")}
+            button={t("alumni.btn")}
+            to={"honory"}
+          />
         </div>
       </div>
 

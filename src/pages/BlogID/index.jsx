@@ -41,16 +41,10 @@ const BlogID = () => {
     fetchData();
   }, [id, language]);
 
-  const imgSrc = `../../../../api/${data?.img_?.url}`;
-
-  console.log(img);
-
   return (
     <div className="root-container">
       <div className="root-wrapper">
         <Container>
-          <img src={imgSrc} alt="" />
-
           <div className="title">{data?.title}</div>
           <div className="news-date">
             <span>

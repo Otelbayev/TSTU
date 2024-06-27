@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Title } from "../../Generics";
 import { Ramatov } from "./style";
 import Slider from "react-slick";
 import RamatovSlider from "../RamatovSlider";
-import { prop10 } from "../../../mock/homeProps";
 import ramatova from "../../../assets/images/ramatova.jpg";
 import { useTranslation } from "react-i18next";
-import { useFrontPersonContext } from "../../../context/PersonContext";
-import { useNavigate } from "react-router-dom";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 const ramatovSetting = {
   dots: false,
@@ -42,10 +40,19 @@ const ramatovSetting = {
 
 const Alumni = () => {
   const { t } = useTranslation();
+  const { language } = useLanguageContext();
 
-  const { faxriyBitiruvchi } = useFrontPersonContext();
+  const [data, setData] = useState([]);
 
-  console.log(faxriyBitiruvchi);
+  useEffect(() => {
+    fetch(
+      language === "uz"
+        ? "/api/persondata/sitegetallpersondata?employee_type=Faxriy%20bitiruvchi"
+        : `/api/persondata/sitegetallpersondatatranslation?language_code=${language}&employee_type=Faxriy%20bitiruvchi`
+    )
+      .then((e) => e.json())
+      .then((e) => setData(e));
+  }, [language]);
 
   return (
     <div>
@@ -55,7 +62,7 @@ const Alumni = () => {
             title={t("alumni.title")}
             button={t("alumni.btn")}
             subtitle={t("alumni.desc")}
-            link="https://alumni.tstu.uz"
+            link="http://alumni.tstu.uz"
             $type={"light"}
           />
         </div>
@@ -64,7 +71,7 @@ const Alumni = () => {
       <Ramatov>
         <div className="root-container">
           <div className="root-wrapper" data-aos="fade-up">
-            <div className="content">
+            {/* <div className="content">
               <img
                 loading="lazy"
                 src={ramatova}
@@ -84,13 +91,13 @@ const Alumni = () => {
                 {faxriyBitiruvchi[0]?.experience_json ||
                   "1984-yildan 1988-yilgacha Toshkent temir yoʻl muhandislari institutida tahsil olgan."}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <Slider className="slider" {...ramatovSetting}>
-          {/* {faxriyBitiruvchi?.map((e) => (
+          {data?.map((e) => (
             <RamatovSlider key={e.id} prop={e} />
-          ))} */}
+          ))}
         </Slider>
       </Ramatov>
     </div>

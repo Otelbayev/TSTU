@@ -25,7 +25,11 @@ const Title = React.forwardRef(
           )}
           {button && (
             <Content.Button
-              onClick={() => navigate(link ? link : `/${language}/${to}`)}
+              onClick={() =>
+                link
+                  ? (window.location.href = link)
+                  : navigate(`/${language}/${to}`)
+              }
               data-aos="fade-left"
               $type={$type}
               display="top"

@@ -14,6 +14,10 @@ const Honory = () => {
   const [faxriy, setFaxriy] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     fetch(
       language === "uz"
         ? `/api/persondata/sitegetallpersondata?employee_type=Faxriy%20professor`

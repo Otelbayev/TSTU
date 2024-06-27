@@ -18,16 +18,92 @@ import { useHandleScroll } from "../../hooks/useHandleScroll";
 import { useTranslation } from "react-i18next";
 
 const KafedraID = () => {
+  const { t } = useTranslation();
+  const { id } = useParams();
+  const { language } = useLanguageContext();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const [data, setData] = useState([]);
 
-  const { t } = useTranslation();
+  const [mudir, setMudir] = useState({});
+  const [professor, setProfessor] = useState([]);
+  const [katta, setKatta] = useState([]);
+  const [assistent, setAssistent] = useState([]);
+  const [dotsent, setDotsent] = useState([]);
+  const [doktarant, setDoktarant] = useState([]);
 
-  const { id } = useParams();
-  const { language } = useLanguageContext();
+  const getPersonData = async () => {
+    const res = await axios.get(
+      language === "uz"
+        ? `/api/persondata/sitegetallpersondatadepid/${id}`
+        : `/api/persondata/sitegetallpersondatatranslationdepuzid/${id}?language_code=${language}`
+    );
+    if (res.status === 200) {
+      setMudir(
+        res.data?.find(
+          (e) =>
+            e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
+              "kafedra mudiri" ||
+            e?.persons_?.employee_type_translation_?.title
+              ?.toLowerCase()
+              ?.trim() === "kafedra mudiri"
+        )
+      );
+      setKatta(
+        res.data?.filter(
+          (e) =>
+            e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
+              "katta o'qituvchi" ||
+            e?.persons_?.employee_type_translation_?.title
+              ?.toLowerCase()
+              ?.trim() === "katta o'qituvchi"
+        )
+      );
+      setProfessor(
+        res.data?.filter(
+          (e) =>
+            e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
+              "professor" ||
+            e?.persons_?.employee_type_translation_?.title
+              ?.toLowerCase()
+              ?.trim() === "professor"
+        )
+      );
+      setAssistent(
+        res.data?.filter(
+          (e) =>
+            e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
+              "assistent" ||
+            e?.persons_?.employee_type_translation_?.title
+              ?.toLowerCase()
+              ?.trim() === "assistent"
+        )
+      );
+      setDotsent(
+        res.data?.filter(
+          (e) =>
+            e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
+              "dotsent" ||
+            e?.persons_?.employee_type_translation_?.title
+              ?.toLowerCase()
+              ?.trim() === "dotsent"
+        )
+      );
+      setDoktarant(
+        res.data?.filter(
+          (e) =>
+            e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
+              "doktorant" ||
+            e?.persons_?.employee_type_translation_?.title
+              ?.toLowerCase()
+              ?.trim() === "doktorant"
+        )
+      );
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,9 +120,8 @@ const KafedraID = () => {
     };
 
     fetchData();
+    getPersonData();
   }, [id, language]);
-
-  console.log(data)
 
   const data1 = [
     { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
@@ -98,28 +173,23 @@ const KafedraID = () => {
               data-aos="fade-up"
             />
             <Title ref={mudirRef} title={t("kafedra.mudir")} $border={"none"} />
-            <Dekans
-              img={dekan}
-              name={"Raximov Rustam Vyacheslavovich"}
-              position={"Kafedra mudiri, professor, Texnika fanlari doktori"}
-              phone={"+99871 299 00 10"}
-              email={"marufdzhan.rasulov@bk.ru"}
-              li={[
-                "1976-1981 yy. – Toshkent temir yо‘l muhandislari instituti talabasi",
-                "1987-1990 yy. – Moskva temir yо‘l muhandislari instituti aspiranti.",
-              ]}
-              button={"/"}
-            />
+            <Dekans img={dekan} data={mudir} />
             <Title title={t("kafedra.teachers")} $border={"none"} />
             <Orinbosar>
-              {kafData.map(({ id, img, name, position, links }) => (
-                <DekanCart
-                  key={id}
-                  img={img}
-                  name={name}
-                  position={position}
-                  links={links}
-                />
+              {professor.map((e) => (
+                <DekanCart key={id} data={e} />
+              ))}
+              {katta.map((e) => (
+                <DekanCart key={id} data={e} />
+              ))}
+              {dotsent.map((e) => (
+                <DekanCart key={id} data={e} />
+              ))}
+              {assistent.map((e) => (
+                <DekanCart key={id} data={e} />
+              ))}
+              {doktarant.map((e) => (
+                <DekanCart key={id} data={e} />
               ))}
             </Orinbosar>
             <Yonalish ref={yonalishRef}>

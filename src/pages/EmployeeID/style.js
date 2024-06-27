@@ -37,4 +37,14 @@ export const Container = styled.div`
       ${scrollStyle}
     }
   }
+
+  @media (max-width: 1000px) {
+    .employee {
+      &__first-item {
+      }
+      &__second-item {
+        margin: 10px;
+      }
+    }
+  }
 `;

@@ -20,7 +20,10 @@ const DekanCart = ({ data }) => {
         {data?.persons_?.firstName} {data?.persons_?.lastName}{" "}
         {data?.persons_?.fathers_name}
       </Content.Name>
-      <Content.Position>{data?.degree || "Position"}</Content.Position>
+      <Content.Position>
+        {data?.persons_?.employee_type_?.title ||
+          data?.persons_?.employee_type_translation?.title}
+      </Content.Position>
       <Content.Media>
         <NavLink>
           <Content.Facebook />

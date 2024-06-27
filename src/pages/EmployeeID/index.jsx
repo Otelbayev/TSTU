@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "./style";
+import { useParams } from "react-router-dom";
+import { useLanguageContext } from "../../context/LanguageContext";
+import img from "../../../public/logo.png";
 
-const EmployeeID = ({ img, fio, status, links }) => {
+const EmployeeID = () => {
+  const { id } = useParams();
+  const { language } = useLanguageContext();
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      language === "uz"
+        ? `/api/persondata/sitegetbyidpersondata/${id}`
+        : `/api/persondata/sitegetbyuzidpersondatatranslation/${id}?language_code=${language}`
+    )
+      .then((res) => res.json())
+      .then((res) => setData(res));
+  }, []);
+
   return (
     <Container>
       <div className="root-container">
@@ -12,14 +30,25 @@ const EmployeeID = ({ img, fio, status, links }) => {
                 <img
                   className="w-100 img-fluid mb-4"
                   loading="lazy"
-                  src="https://tstu.uz/storage/app/public/images/2022-12-30/w8SbeaS6LOkjXOUoytDiL7I6ftpRaIoevFsZolHr.jpg"
+                  src={
+                    data?.persons_?.img_?.url
+                      ? ` ${img.split("/logo")[0]}api${
+                          data?.persons_?.img_?.url
+                        }`
+                      : img
+                  }
                   alt="Image"
                 />
-                <h1 className="mt-1">Gulamov Abdulaziz Abdullayevich</h1>
+                <h1 className="mt-1">
+                  {data?.persons_?.firstName} {data?.persons_?.lastName}{" "}
+                  {data?.persons_?.fathers_name}
+                </h1>
                 <div className="mb-4">
                   <div>
-                    Prorektor, O’quv ishlari bo’yicha prorektor, Iqtisod fanlari
-                    doktori, professor
+                    {data?.persons_?.employee_type_?.title ||
+                      data?.persons_?.employee_type_translation?.title}
+                    {", "}
+                    {data?.degree}
                   </div>
                 </div>
                 <div className="d-flex justify-content-center">
@@ -55,51 +84,50 @@ const EmployeeID = ({ img, fio, status, links }) => {
                       </h2>
                     </div>
                     <div className="col-12">
-                      <p>
-                        Gulamov Abdulaziz Abdullayevich 1982-yil 14-noyabrda
-                        Toshkent shahrida tug‘ilgan. Millati – o‘zbek. Oliy
-                        ma’lumotli, 2006-yili Toshkent temir yoʻl muhandislari
-                        institutini tugatgan. Tarmoqlar iqtisodiyoti
-                        mutaxassisligiga ega. Iqtisod fanlari doktori, dotsent.
-                      </p>
+                      <p>{data?.persons_?.biography_json}</p>
                       <div className="row">
                         <div className="col-sm-6 py-1">
                           <h5 className="d-inline text-primary">F.I.O.:</h5>{" "}
-                          Gulamov Abdulaziz Abdullayevich
+                          {data?.persons_?.firstName} {data?.persons_?.lastName}{" "}
+                          {data?.persons_?.fathers_name}
                         </div>
                         <div className="col-sm-6 py-1">
                           <h5 className="d-inline text-primary">
                             Tavallud kuni:
-                          </h5>
+                          </h5>{" "}
+                          {data?.birthday
+                            ?.split("T")[0]
+                            ?.split("-")
+                            ?.reverse()
+                            ?.join(".")}
                         </div>
                         <div className="col-sm-6 py-1">
                           <h5 className="d-inline text-primary">Darajasi:</h5>{" "}
-                          Iqtisod fanlari doktori, professor
+                          {data?.degree}
                         </div>
                         <div className="col-sm-6 py-1">
                           <h5 className="d-inline text-primary">Tajriba:</h5>{" "}
-                          Yil
+                          {data?.experience_year}
                         </div>
                         <div className="col-sm-6 py-1">
                           <h5 className="d-inline text-primary">Telefon:</h5>{" "}
-                          +998 71 299-00-04
+                          {data?.phone_number1}
                         </div>
                         <div className="col-sm-6 py-1">
                           <h5 className="d-inline text-primary">Email:</h5>{" "}
-                          abdulaziz.gulamov@gmail.com
+                          {data?.persons_?.email}
                         </div>
                         <div className="col-sm-6 py-1">
                           <h5 className="d-inline text-primary">ORCID:</h5>{" "}
-                          0000-0002-4702-7468
+                          {data?.orchid}
                         </div>
                         <div className="col-sm-6 py-1">
                           <h5 className="d-inline text-primary">Scopus ID:</h5>{" "}
-                          57767041700
+                          {data?.scopus_id}
                         </div>
                         <div className="col-sm-12 py-1">
                           <h5 className="d-inline text-primary">Manzil:</h5>{" "}
-                          Toshkent shahar Mirobod tumani Temiryo‘lchilar
-                          ko‘chasi 1-uy
+                          {data?.address}
                         </div>
                       </div>
                     </div>
@@ -119,32 +147,32 @@ const EmployeeID = ({ img, fio, status, links }) => {
                       <div className="skill mb-4">
                         <div className="d-flex justify-content-between">
                           <p className="mb-2">O'zbek tili</p>
-                          <p className="mb-2">99%</p>
+                          <p className="mb-2">{data?.languages_uz}%</p>
                         </div>
                         <div className="progress">
                           <div
                             className="progress-bar bg-primary"
                             role="progressbar"
-                            aria-valuenow={99}
+                            aria-valuenow={data?.languages_uz}
                             aria-valuemin={0}
                             aria-valuemax={100}
-                            style={{ width: "99%" }}
+                            style={{ width: `${data?.languages_uz}%` }}
                           />
                         </div>
                       </div>
                       <div className="skill mb-4">
                         <div className="d-flex justify-content-between">
                           <p className="mb-2">Rus tili</p>
-                          <p className="mb-2">95%</p>
+                          <p className="mb-2">{data?.languages_ru}%</p>
                         </div>
                         <div className="progress">
                           <div
                             className="progress-bar bg-warning"
                             role="progressbar"
-                            aria-valuenow={95}
+                            aria-valuenow={data?.languages_ru}
                             aria-valuemin={0}
                             aria-valuemax={100}
-                            style={{ width: "95%" }}
+                            style={{ width: `${data?.languages_ru}%` }}
                           />
                         </div>
                       </div>
@@ -153,32 +181,32 @@ const EmployeeID = ({ img, fio, status, links }) => {
                       <div className="skill mb-4">
                         <div className="d-flex justify-content-between">
                           <p className="mb-2">Ingliz tili</p>
-                          <p className="mb-2">90%</p>
+                          <p className="mb-2">{data?.languages_en}%</p>
                         </div>
                         <div className="progress">
                           <div
                             className="progress-bar bg-danger"
                             role="progressbar"
-                            aria-valuenow={90}
+                            aria-valuenow={data?.languages_en}
                             aria-valuemin={0}
                             aria-valuemax={100}
-                            style={{ width: "90%" }}
+                            style={{ width: `${data?.languages_en}%` }}
                           />
                         </div>
                       </div>
                       <div className="skill mb-4">
                         <div className="d-flex justify-content-between">
-                          <p className="mb-2">Koreys tili</p>
-                          <p className="mb-2">60%</p>
+                          <p className="mb-2">{data?.languages_any_title}</p>
+                          <p className="mb-2">{data?.languages_any}%</p>
                         </div>
                         <div className="progress">
                           <div
                             className="progress-bar bg-dark"
                             role="progressbar"
-                            aria-valuenow={60}
+                            aria-valuenow={data?.languages_any}
                             aria-valuemin={0}
                             aria-valuemax={100}
-                            style={{ width: "60%" }}
+                            style={{ width: `${data?.languages_any}%` }}
                           />
                         </div>
                       </div>

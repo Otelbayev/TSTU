@@ -44,6 +44,7 @@ const Talim = () => {
           subtitle={t("talim.desc")}
           button={t("talim.btn")}
           $type={"light"}
+          to={"education"}
         >
           <div data-aos="fade-up">
             <Slider className="slider" {...settings}>

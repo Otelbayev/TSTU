@@ -3,6 +3,8 @@ import { useId } from "../hooks/useId";
 
 const Blog = lazy(() => import("../pages/Blog"));
 const BlogId = lazy(() => import("../pages/BlogID"));
+const Announcements = lazy(() => import("../pages/Announcements"));
+const Education = lazy(() => import("../pages/Education"));
 
 const Department = lazy(() => import("../pages/Department"));
 const DepartmentID = lazy(() => import("../pages/DepartmentID"));
@@ -17,7 +19,7 @@ const FacultiesID = lazy(() => import("../pages/FacultiesID"));
 const Kafedra = lazy(() => import("../pages/Kafedra"));
 const KafedraID = lazy(() => import("../pages/KafedraID"));
 
-const Honory = lazy(() => import("../pages/Honory"))
+const Honory = lazy(() => import("../pages/Honory"));
 
 const Contact = lazy(() => import("../pages/Contact"));
 const Faq = lazy(() => import("../pages/Faq"));
@@ -163,6 +165,18 @@ export const noshowcase = [
     id: useId(),
     path: "blog/:id",
     element: <BlogId />,
+    isPrivate: false,
+  },
+  {
+    id: useId(),
+    path: "announcements",
+    element: <Announcements />,
+    isPrivate: false,
+  },
+  {
+    id: useId(),
+    path: "education",
+    element: <Education />,
     isPrivate: false,
   },
   {

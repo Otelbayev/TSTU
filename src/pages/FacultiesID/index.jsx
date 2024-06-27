@@ -93,11 +93,11 @@ const FacultiesID = () => {
       setOrinBosar(
         res.data?.filter(
           (e) =>
-            e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() !==
-              "Dekan" ||
+            e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
+              "dekan o'rinbosari" ||
             e?.persons_?.employee_type_translation_?.title
               ?.toLowerCase()
-              ?.trim() !== "Dekan"
+              ?.trim() === "dekan o'rinbosari"
         )
       );
     }

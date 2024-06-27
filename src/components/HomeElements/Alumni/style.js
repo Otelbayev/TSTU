@@ -7,7 +7,10 @@ export const Ramatov = styled.div`
   background-size: cover;
   .content {
     padding: 50px 0;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     &__img {
       width: 230px;
       height: 230px;
@@ -24,6 +27,7 @@ export const Ramatov = styled.div`
     }
     &__sub {
       color: var(--white);
+      text-align: center;
       font-size: 20px;
       font-style: normal;
       font-weight: 600;

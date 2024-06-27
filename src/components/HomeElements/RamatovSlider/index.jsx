@@ -1,13 +1,19 @@
 import React from "react";
 import { Container } from "./style";
+import img from "../../../../public/logo.png";
 
 const RamatovSlider = ({ prop }) => {
+  console.log(`${img.split("logo")[0]}api/${prop?.img_?.url}`);
   return (
     <Container data-aos="zoom-in">
       <div className="item">
         <div className="item__content">
           <div className="slider-top">
-            <img loading="lazy" src={"img"} alt="" />
+            <img
+              loading="lazy"
+              src={`${img.split("logo")[0]}api/${prop?.img_?.url}`}
+              alt=""
+            />
             <div>
               <div className="slider-top__name">
                 {prop?.persons_?.firstName} {prop?.persons_?.lastName}{" "}

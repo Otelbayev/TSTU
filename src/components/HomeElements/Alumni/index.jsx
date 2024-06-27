@@ -11,7 +11,7 @@ const ramatovSetting = {
   dots: false,
   infinite: true,
   autoplay: true,
-  autoplaySpeed: 2000,
+  autoplaySpeed: 1000,
   arrows: false,
   speed: 500,
   slidesToShow: 4,
@@ -36,6 +36,15 @@ const ramatovSetting = {
       },
     },
   ],
+};
+
+const ramatovSetting1 = {
+  dots: false,
+  infinite: true,
+  arrows: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
 };
 
 const Alumni = () => {
@@ -71,27 +80,32 @@ const Alumni = () => {
       <Ramatov>
         <div className="root-container">
           <div className="root-wrapper" data-aos="fade-up">
-            {/* <div className="content">
-              <img
-                loading="lazy"
-                src={ramatova}
-                alt=""
-                className="content__img"
-              />
-              <div className="content__name">
-                {faxriyBitiruvchi[0]?.persons_?.firstName}{" "}
-                {faxriyBitiruvchi[0]?.persons_?.lastName}{" "}
-                {faxriyBitiruvchi[0]?.persons_?.fathers_name}
-              </div>
-              <div className="content__sub">
-                {faxriyBitiruvchi[0]?.degree ||
-                  "Oʻzbekiston Bosh vazirining birinchi oʻrinbosari"}
-              </div>
-              <div className="content__p">
-                {faxriyBitiruvchi[0]?.experience_json ||
-                  "1984-yildan 1988-yilgacha Toshkent temir yoʻl muhandislari institutida tahsil olgan."}
-              </div>
-            </div> */}
+            <Slider {...ramatovSetting1}>
+              {data?.map((e) => (
+                <div>
+                  <div className="content">
+                    <img
+                      loading="lazy"
+                      src={e?.img_?.url}
+                      alt=""
+                      className="content__img"
+                    />
+                    <div className="content__name">
+                      {e?.persons_?.firstName} {e?.persons_?.lastName}{" "}
+                      {e?.persons_?.fathers_name}
+                    </div>
+                    <div className="content__sub">
+                      {e?.degree ||
+                        "Oʻzbekiston Bosh vazirining birinchi oʻrinbosari"}
+                    </div>
+                    <div className="content__p">
+                      {e?.experience_json ||
+                        "1984-yildan 1988-yilgacha Toshkent temir yoʻl muhandislari institutida tahsil olgan."}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
         <Slider className="slider" {...ramatovSetting}>

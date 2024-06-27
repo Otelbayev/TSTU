@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&family=Rubik:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
-
 
 * {
   margin: 0;
@@ -156,30 +155,38 @@ html {
   }
 }
 
-.ant-menu-submenu{
-  padding :0 !important;
-  padding-left :0 !important;
-  padding-right :0 !important;
-  margin :0 !important;
-
+.ant-menu-submenu {
+  padding: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin: 0 !important;
 } /*ul*/
-.ant-menu-item{
+.ant-menu-item {
   height: 40px !important;
-  padding :0 !important;
-  padding-left :0 !important;
-  padding-right :0 !important;
+  padding: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   /* margin :0 !important; */
 } /*li*/
-.ant-menu-item-selected{
-  background:none !important;
-  color:#fff !important;
+.ant-menu-item-selected {
+  background: none !important;
+  color: #fff !important;
 } /*selected li*/
-.ant-menu-item-active{
-  background:none !important;
-  color:#fff !important;
-} 
+.ant-menu-item-active {
+  background: none !important;
+  color: #fff !important;
+}
 
-
-.wrapper-min-height{
+.wrapper-min-height {
   min-height: calc(100dvh - 115px);
+}
+
+.slick-next {
+  margin-right: 23px !important;
+  z-index: 99 !important;
+}
+
+.slick-prev {
+  margin-left: 20px !important;
+  z-index: 99 !important;
 }

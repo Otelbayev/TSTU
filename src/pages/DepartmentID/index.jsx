@@ -32,7 +32,6 @@ const DepartmentID = () => {
     fetchData();
   }, [id, language]);
 
-  console.log(data);
 
   return (
     <div>

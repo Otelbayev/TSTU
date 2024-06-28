@@ -3,7 +3,6 @@ import { Title } from "../../Generics";
 import { Ramatov } from "./style";
 import Slider from "react-slick";
 import RamatovSlider from "../RamatovSlider";
-import ramatova from "../../../assets/images/ramatova.jpg";
 import { useTranslation } from "react-i18next";
 import { useLanguageContext } from "../../../context/LanguageContext";
 
@@ -63,6 +62,8 @@ const Alumni = () => {
       .then((e) => setData(e));
   }, [language]);
 
+  console.log(data);
+
   return (
     <div>
       <div className="root-container">
@@ -82,30 +83,34 @@ const Alumni = () => {
           <div className="root-wrapper" data-aos="fade-up">
             <div className="alumni">
               <Slider {...ramatovSetting1}>
-                {data?.map((e) => (
-                  <div>
-                    <div className="content">
-                      <img
-                        loading="lazy"
-                        src={e?.img_?.url}
-                        alt=""
-                        className="content__img"
-                      />
-                      <div className="content__name">
-                        {e?.persons_?.firstName} {e?.persons_?.lastName}{" "}
-                        {e?.persons_?.fathers_name}
-                      </div>
-                      <div className="content__sub">
-                        {e?.degree ||
-                          "Oʻzbekiston Bosh vazirining birinchi oʻrinbosari"}
-                      </div>
-                      <div className="content__p">
-                        {e?.experience_json ||
-                          "1984-yildan 1988-yilgacha Toshkent temir yoʻl muhandislari institutida tahsil olgan."}
+                {data?.map((e) => {
+                  return (
+                    <div key={e?.id}>
+                      <div className="content">
+                        <img
+                          loading="lazy"
+                          src={`../../../../public/api/${
+                            e?.persons_?.img_?.url
+                          }`}
+                          alt=""
+                          className="content__img"
+                        />
+                        <div className="content__name">
+                          {e?.persons_?.firstName} {e?.persons_?.lastName}{" "}
+                          {e?.persons_?.fathers_name}
+                        </div>
+                        <div className="content__sub">
+                          {e?.degree ||
+                            "Oʻzbekiston Bosh vazirining birinchi oʻrinbosari"}
+                        </div>
+                        <div className="content__p">
+                          {e?.experience_json ||
+                            "1984-yildan 1988-yilgacha Toshkent temir yoʻl muhandislari institutida tahsil olgan."}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </Slider>
             </div>
           </div>

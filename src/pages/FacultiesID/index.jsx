@@ -140,7 +140,7 @@ const FacultiesID = () => {
     <div className="overflow-hidden">
       <Header links={links} />
       <Showcase
-        bg={bg}
+        bg={`../../../public/api/${data?.img_?.url}`}
         title={getTitle(data?.title, language)}
         button={t("facultet.btn")}
         onClick={() => useHandleScroll(aboutRef)}
@@ -161,7 +161,7 @@ const FacultiesID = () => {
             <Title title={t("facultet.orin")} $border={"none"} />
             <Orinbosar>
               {orinbosar.map((e) => (
-                <DekanCart key={id} data={e} />
+                <DekanCart key={e?.id} data={e} />
               ))}
             </Orinbosar>
             {/* <Title title="Fakultet e’lon va  yangiliklari" $border={"none"} /> */}

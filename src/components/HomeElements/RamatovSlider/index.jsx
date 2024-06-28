@@ -3,7 +3,6 @@ import { Container } from "./style";
 import img from "../../../../public/logo.png";
 
 const RamatovSlider = ({ prop }) => {
-  console.log(`${img.split("logo")[0]}api/${prop?.img_?.url}`);
   return (
     <Container data-aos="zoom-in">
       <div className="item">
@@ -11,7 +10,7 @@ const RamatovSlider = ({ prop }) => {
           <div className="slider-top">
             <img
               loading="lazy"
-              src={`${img.split("logo")[0]}api/${prop?.img_?.url}`}
+              src={`${img.split("logo")[0]}api/${prop?.persons_?.img_?.url}`}
               alt=""
             />
             <div>

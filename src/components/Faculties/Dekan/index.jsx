@@ -1,19 +1,19 @@
 import React from "react";
 import { Dekan } from "./style";
-import dekan from "../../../assets/Faculties/dekan.png";
 import { useLanguageContext } from "../../../context/LanguageContext";
 import { useNavigate } from "react-router-dom";
 
 const Dekans = ({ data }) => {
   const { language } = useLanguageContext();
 
-  console.log(data);
-
   const naviagte = useNavigate();
   return (
     <Dekan>
       <Dekan.Left data-aos="fade-right">
-        <Dekan.Img loading="lazy" src={dekan} />
+        <Dekan.Img
+          loading="lazy"
+          src={`../../../.../../../public/api/${data?.persons_?.img_?.url}`}
+        />
       </Dekan.Left>
       <Dekan.Right data-aos="fade-left">
         <Dekan.Name>

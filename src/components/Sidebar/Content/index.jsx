@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container } from "./style";
-import icon from "../../../assets/icons/sidebar1.png";
 import { NavLink } from "react-router-dom";
 import { useLanguageContext } from "../../../context/LanguageContext";
 
-const Content = ({ hover, setHover, title, desc, data, id }) => {
+const Content = ({ hover, setHover, title, desc, data, id, icon }) => {
   const { language } = useLanguageContext();
 
   const res = data?.filter((e) => e?.high_menu);
@@ -47,7 +46,11 @@ const Content = ({ hover, setHover, title, desc, data, id }) => {
       {title && (
         <div className="left">
           <div className="left__top">
-            <img src={icon} alt="" className="left__top__icon" />
+            <img
+              src={`../../../../public/api/${icon}`}
+              alt=""
+              className="left__top__icon"
+            />
             <div className="left__top__title">{title}</div>
           </div>
           <div className="left__desc">{desc}</div>

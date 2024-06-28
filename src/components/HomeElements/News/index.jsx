@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import { Title } from "../../Generics";
 import { Layout } from "./style";
-import { prop1, prop2 } from "../../../mock/homeProps";
 import LargeBanner from "../LargeBanner";
 import Cart from "../Cart";
 import { useTranslation } from "react-i18next";
@@ -24,14 +23,12 @@ const News = ({ data, type }) => {
           <div className="grid">
             {data.slice(0, 6).map((item, index) => {
               const Component = index === 0 || index === 5 ? LargeBanner : Cart;
-              const prop = index === 0 || index === 5 ? prop1 : prop2;
               const gridClass = `grid__item${index + 1}`;
 
               return (
                 <div className={gridClass} key={item?.id}>
                   <Component
                     item={item}
-                    prop={prop}
                     type={type}
                     onClick={() => handleNavigation(item?.id)}
                   />

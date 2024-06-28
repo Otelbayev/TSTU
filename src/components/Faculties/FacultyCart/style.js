@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import fak from "../../../assets/images/bggggg.png";
 
 export const Container = styled.div`
   perspective: 1000px;
@@ -38,6 +37,7 @@ export const Container = styled.div`
     font-weight: 700;
     line-height: 140%;
     padding: 16px;
+    z-index: 2;
   }
 
   .card-front {
@@ -57,13 +57,25 @@ export const Container = styled.div`
 
   .card-back {
     transform: rotateY(180deg);
-    background-image: url(${fak});
+    background-image: ${({ $bg }) => `url(${$bg})`};
+
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     align-items: end;
     p {
       color: #fff;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 3px;
     }
   }
 

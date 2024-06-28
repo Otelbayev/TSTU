@@ -34,6 +34,7 @@ const DepartmentEdit = () => {
   const { statusData, getStatus } = useStatusContext();
 
   const imgRef = useRef(null);
+  const img2Ref = useRef(null);
   const editorRef = useRef(null);
 
   const [title, setTitle] = useState("");
@@ -63,6 +64,7 @@ const DepartmentEdit = () => {
     formData.append("favorite", favo);
     formData.append("departament_type_id", type);
     formData.append("img_up", imgRef.current?.files[0] || null);
+    formData.append("img_icon_up", img2Ref.current?.files[0] || null);
 
     const res = await useEdit(
       isCreate,
@@ -208,19 +210,24 @@ const DepartmentEdit = () => {
           />
         )}
         <Input
-          className="form-group col-md-4"
+          className={!isCreate ? "form-group col-md-3" : "form-group col-md-4"}
           label="Position"
           type="number"
           value={position || ""}
           onChange={(e) => setPosition(e.target.value)}
         />
         <ChooseFile
-          className="form-group col-md-4"
-          label="Фотография"
+          className={!isCreate ? "form-group col-md-3" : "form-group col-md-4"}
+          label="Image"
           ref={imgRef}
         />
+        <ChooseFile
+          className={!isCreate ? "form-group col-md-3" : "form-group col-md-4"}
+          label="Icon"
+          ref={img2Ref}
+        />
         {!isCreate && (
-          <Image className={"form-group col-md-4"} img={img} alt="none" />
+          <Image className={"form-group col-md-3"} img={img} alt="none" />
         )}
         <div className="form-group col-md-12">
           <div className="col-sm-12">

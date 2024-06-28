@@ -1,16 +1,21 @@
 import React from "react";
-import { Container, Content } from "./style";
-import fak from "../../../assets/icons/fakdark.png";
+import { Container } from "./style";
 
 const FacultyCart = ({ item, onClick }) => {
   return (
-    <Container onClick={onClick}>
-      <div class="card">
-        <div class="card-front">
-          <img loading="lazy" src={item?.url || fak} />
+    <Container
+      onClick={onClick}
+      $bg={`../../../../public/api/${item?.img_?.url}`}
+    >
+      <div className="card">
+        <div className="card-front">
+          <img
+            loading="lazy"
+            src={`../../../../public/api/${item?.img_icon_?.url}`}
+          />
           <p className="card-title">{item?.title}</p>
         </div>
-        <div class="card-back">
+        <div className="card-back">
           <p className="card-title">{item?.title}</p>
         </div>
       </div>

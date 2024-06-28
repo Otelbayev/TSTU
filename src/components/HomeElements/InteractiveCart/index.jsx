@@ -1,12 +1,16 @@
 import React from "react";
 import { Wrap } from "./style";
 import { NavLink } from "react-router-dom";
-import intIcon1 from "../../../assets/icons/intIcon1.svg";
 
 const InteractiveCart = ({ prop, no }) => {
   return (
     <Wrap data-aos={!no && "zoom-in"}>
-      <img src={intIcon1} alt="" />
+      <img
+        src={`../../../../public/api/${
+          prop?.icon_?.url || prop?.icon_translation_?.url
+        }`}
+        alt=""
+      />
       <NavLink className={"title"} to={`${prop?.url_}`} target="_blank">
         {prop?.title} <i className="fa-solid fa-arrow-right"></i>
       </NavLink>

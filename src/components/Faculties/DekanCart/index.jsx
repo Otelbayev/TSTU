@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Content } from "./style";
-import img from "../../../assets/images/bggggg.png";
 import { useLanguageContext } from "../../../context/LanguageContext";
 
 const DekanCart = ({ data }) => {
@@ -12,7 +11,7 @@ const DekanCart = ({ data }) => {
       <Content.Img
         onClick={() => naviagte(`/${language}/employee/${data?.id}`)}
         loading="lazy"
-        src={data?.img_?.url || img}
+        src={`../../../../public/api/${data?.persons_?.img_?.url}`}
       />
       <Content.Name
         onClick={() => naviagte(`/${language}/employee/${data?.id}`)}

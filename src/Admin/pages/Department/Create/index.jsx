@@ -34,6 +34,7 @@ const DepartmentCreate = () => {
   const descRef = useRef(null);
   const posRef = useRef(null);
   const imgRef = useRef(null);
+  const img2Ref = useRef(null);
 
   const [parent, setParent] = useState(0);
   const [type, setType] = useState(1);
@@ -50,6 +51,7 @@ const DepartmentCreate = () => {
     const favorite = favo == 1 ? false : true;
     const departament_type_id = type;
     const img_up = imgRef?.current?.files[0];
+    const img_icon_up = img2Ref?.current?.files[0];
 
     const formData = new FormData();
     formData.append("title_short", title_short);
@@ -61,6 +63,7 @@ const DepartmentCreate = () => {
     formData.append("favorite", favorite);
     formData.append("departament_type_id", departament_type_id);
     formData.append("img_up", img_up);
+    formData.append("img_icon_up", img_icon_up);
 
     const res = await useCreate(
       value,
@@ -162,8 +165,13 @@ const DepartmentCreate = () => {
         />
         <ChooseFile
           className="form-group col-md-4"
-          label="Фотография"
+          label="Image"
           ref={imgRef}
+        />
+        <ChooseFile
+          className="form-group col-md-4"
+          label="Icon"
+          ref={img2Ref}
         />
         <div className="form-group col-md-12">
           <div className="col-sm-12">

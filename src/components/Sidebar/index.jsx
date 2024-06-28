@@ -73,6 +73,7 @@ export const Sidebar = ({ topData, allData, uni }) => {
         title={res?.title}
         desc={res?.description}
         hover={hover}
+        icon={res?.icon_?.url}
         setHover={setHover}
         data={allData?.filter(
           (e) => e?.parent_id === id || !e.high_menu || id === "alldata"

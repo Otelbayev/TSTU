@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Title } from "../../Generics";
 import { Container } from "./style";
-import prof from "../../../assets/images/prof.jpg";
+import logo from "../../../../public/logo.png";
 import { useTranslation } from "react-i18next";
 import { useLanguageContext } from "../../../context/LanguageContext";
 
@@ -38,7 +38,14 @@ const Faxriy = () => {
         <div className="root-container">
           <div className="root-wrapper" data-aos="fade-up">
             <div className="content">
-              <img loading="lazy" src={prof} alt="" className="content__img" />
+              <img
+                loading="lazy"
+                src={`${logo?.split("logo")[0]}api/${
+                  data?.persons_?.img_?.url
+                }`}
+                alt=""
+                className="content__img"
+              />
               <div className="content__name">
                 {data?.persons_?.fitstName} {data?.persons_?.lastName}{" "}
                 {data?.persons_?.fathers_name}

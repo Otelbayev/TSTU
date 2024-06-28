@@ -2,9 +2,14 @@ import React from "react";
 import { Large, Icons } from "./style";
 import { getDate } from "../../../utils/month";
 
-const LargeBanner = ({ prop, onClick, item, type }) => {
+const LargeBanner = ({ onClick, item, type }) => {
   return (
-    <Large $img={prop?.img} onClick={onClick}>
+    <Large
+      $img={`../../../../public/api/${
+        item?.img_?.url || item?.img_translation_?.url
+      }`}
+      onClick={onClick}
+    >
       <div>
         <Large.Date>
           {type === "news" && <span>TOP istalgani </span>}

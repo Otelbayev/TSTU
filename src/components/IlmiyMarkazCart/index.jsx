@@ -4,6 +4,7 @@ import kafedra from "../../assets/images/kafedra.png";
 import { useNavigate } from "react-router-dom";
 import { useLanguageContext } from "../../context/LanguageContext";
 import { useTranslation } from "react-i18next";
+import logo from "../../../public/logo.png";
 
 const IlmiyMarkazCart = ({ $border, to, item, dataAos, style }) => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const IlmiyMarkazCart = ({ $border, to, item, dataAos, style }) => {
       <div className="item">
         <img
           loading="lazy"
-          src={item?.img || kafedra}
+          src={`../../../public/api/${item?.img_?.url}`}
           alt=""
           className="item__img"
         />

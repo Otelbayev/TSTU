@@ -16,7 +16,7 @@ const FrontBlogContextProvider = ({ children }) => {
   const [news, setNews] = useState([]);
   const [events, setEvents] = useState([]);
   const [student, setStudent] = useState([]);
-  const [talim, setTalim] = useState([])
+  const [talim, setTalim] = useState([]);
 
   const { language } = useLanguageContext();
 
@@ -70,7 +70,7 @@ const FrontBlogContextProvider = ({ children }) => {
         getBlogs("Ta'lim"),
       ]);
 
-      setNews(newsData);
+      setNews(newsData?.sort((a, b) => a.position - b.position));
       setEvents(eventsData);
       setStudent(studentData);
       setTalim(talimData);

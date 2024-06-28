@@ -26,7 +26,7 @@
     "title": "Fakultet va kafedralar",
     "btn": "Barchasini ko‘rish",
     "kafedra": "Kafedralar",
-    "all":"Fakultetlar"
+    "all": "Fakultetlar"
   },
   "talim": {
     "title": "Ta’lim",
@@ -122,5 +122,21 @@
       "link1": "Kafedra haqida",
       "link2": "Yo'nalishlar"
     }
+  },
+  "employee": {
+    "bio": "Biografiya",
+    "fio": "F.I.O.",
+    "birth": "Tavallud kuni",
+    "deg": "Darajasi",
+    "ex": "Tajriba",
+    "tel": "Telefon",
+    "address": "Manzil",
+    "lang": "Tillar",
+    "uz": "O'zbek tili",
+    "en": "Ingliz tili",
+    "ru": "Rus tili",
+    "ilm": "ILMIY FAOLIYAT",
+    "portfolio": "Portfolio",
+    "appeal": "Murojaat yuboring"
   }
 }

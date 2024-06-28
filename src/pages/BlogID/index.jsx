@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "./style";
-import car from "../../assets/New/car.png";
 import ads from "../../assets/New/ads.png";
 import TopNews from "../../components/News/TopNews";
 import { Title } from "../../components/Generics";
-import { useId } from "../../hooks/useId";
-import videoflag from "../../assets/New/flags.png";
 import VideoCart from "../../components/News/VideoCart";
 import axios from "axios";
 import { useLanguageContext } from "../../context/LanguageContext";
@@ -58,6 +55,13 @@ const BlogID = () => {
           </div>
           <div className="content">
             <div className="content__left">
+              <img
+                src={`../../../public/api/${
+                  data?.img_?.url || data?.img_translation_?.url
+                }`}
+                style={{ width: "100%" }}
+                alt=""
+              />
               <div
                 dangerouslySetInnerHTML={{ __html: data?.text }}
                 data-aos="fade-up"

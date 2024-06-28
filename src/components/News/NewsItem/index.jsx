@@ -2,12 +2,15 @@ import React from "react";
 import { Large, Btn } from "./style";
 import { useLanguageContext } from "../../../context/LanguageContext";
 import { getDate } from "./../../../utils/month";
-import newcar from "../../../assets/New/newcar.png";
 
 const NewsItem = ({ prop, onClick }) => {
   const { language } = useLanguageContext();
   return (
-    <Large $img={prop?.img || newcar}>
+    <Large
+      $img={`../../../../public/api/${
+        prop?.img_?.url || prop?.img_translation_?.url
+      }`}
+    >
       <div>
         <Large.Date>
           <span>

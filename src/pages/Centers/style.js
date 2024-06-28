@@ -12,13 +12,16 @@ Content.Item = styled.div`
   cursor: pointer;
   height: 100%;
   transition: 0.5s;
-  &:hover {
-    box-shadow: 0 0 15px gray;
-  }
+  overflow: hidden;
 `;
 Content.Img = styled.img`
   border-radius: 10px;
   width: 100%;
+  object-fit: cover;
+  &:hover {
+    transition: ease-out 0.2s;
+    transform: scale(1.05);
+  }
 `;
 Content.Title = styled.div`
   color: #1c1c1c;

@@ -21,6 +21,7 @@ export const Content = styled.div`
   img {
     width: 70px;
     height: 70px;
+    object-fit: cover;
   }
   .line {
     width: 2px;

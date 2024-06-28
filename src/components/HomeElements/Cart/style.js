@@ -18,6 +18,7 @@ export const Wrap = styled.div`
 Wrap.Img = styled.div`
   overflow: hidden;
   height: 60%;
+  object-fit: cover;
   img {
     width: 100%;
     height: 100%;

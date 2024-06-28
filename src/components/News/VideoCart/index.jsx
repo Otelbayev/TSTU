@@ -1,8 +1,7 @@
 import React from "react";
-import { Content, Icon } from "./style";
+import { Content } from "./style";
 import { NavLink } from "react-router-dom";
 import { useLanguageContext } from "../../../context/LanguageContext";
-import videoflag from "../../../assets/New/flags.png";
 
 const VideoCart = ({ prop, dataAos, to }) => {
   const { language } = useLanguageContext();
@@ -10,8 +9,13 @@ const VideoCart = ({ prop, dataAos, to }) => {
   return (
     <Content data-aos={dataAos}>
       <div className="video-cart-left">
-        <img loading="lazy" src={prop?.img || videoflag} alt="" />
-        <Icon className="video-cart-icon" />
+        <img
+          loading="lazy"
+          src={`../../../../public/api/${
+            prop?.img_?.url || prop?.img_translation_?.ur
+          }`}
+          alt=""
+        />
       </div>
       <div className="video-cart-right">
         <div className="video-cart-right__date">

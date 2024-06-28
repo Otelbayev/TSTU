@@ -1,11 +1,17 @@
 import React from "react";
 import { Content } from "./style";
-import flag from "../../../assets/New/flag.png";
 import { getDate } from "../../../utils/month";
+
 const NewsCart = ({ prop, onClick, dataAos }) => {
   return (
     <Content onClick={onClick} data-aos={dataAos}>
-      <img loading="lazy" src={prop?.img || flag} alt="" />
+      <img
+        loading="lazy"
+        src={`../../../../public/api/${
+          prop?.img_?.url || prop?.img_translation_?.url
+        }`}
+        alt=""
+      />
       <div className="news-cart-bottom">
         <div className="news-cart-bottom__mintitle">
           {prop?.blog_category_?.title ||

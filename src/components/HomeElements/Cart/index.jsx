@@ -4,12 +4,6 @@ import darkArrow from "../../../assets/icons/arrow-dark.svg?react";
 import styled from "styled-components";
 import { getDate } from "../../../utils/month";
 
-const Icon = styled(darkArrow)`
-  width: 20px;
-  height: 20px;
-  transform: translateY(4px);
-`;
-
 const Cart = ({ onClick, item }) => {
   return (
     <Wrap onClick={onClick}>

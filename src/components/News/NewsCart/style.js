@@ -9,6 +9,7 @@ export const Content = styled.div`
     width: 100%;
     height: 248px;
     transition: transform 0.3s;
+    object-fit: cover;
     &:hover {
       transform: scale(1.08);
     }
@@ -38,7 +39,7 @@ export const Content = styled.div`
     }
   }
   &:hover {
-    transition: ease-out 0.2s ;
+    transition: ease-out 0.2s;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   }
 `;

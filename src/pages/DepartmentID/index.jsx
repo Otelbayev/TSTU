@@ -3,7 +3,6 @@ import UniShowcase from "./../../components/UniShowcase/index";
 import { useParams } from "react-router-dom";
 import { useLanguageContext } from "../../context/LanguageContext";
 import axios from "axios";
-import img from "../../assets/images/ilmiy.png";
 
 const DepartmentID = () => {
   const [data, setData] = useState({});
@@ -32,14 +31,17 @@ const DepartmentID = () => {
     fetchData();
   }, [id, language]);
 
-
   return (
     <div>
       <UniShowcase title={data?.title} />
       <div className="root-container my-3">
         <div className="root-wrapper">
           <h3>{data?.title}</h3>
-          <img src={img} className="w-80" alt="" />
+          <img
+            src={`../../../public/api/${data?.img_?.url}`}
+            className="w-80"
+            alt=""
+          />
           <div
             dangerouslySetInnerHTML={{ __html: data?.text }}
             data-aos="fade-up"

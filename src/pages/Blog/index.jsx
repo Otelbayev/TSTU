@@ -58,7 +58,8 @@ const Blog = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const prop3 = [{ id: useId(), title: t("news.b"), name: 1, checked: true }];
+
+  
   return (
     <div className="root-container">
       <div className="root-wrapper">

@@ -30,6 +30,7 @@ export const Content = styled.div`
     height: ${({ $slider }) => ($slider === "true" ? "70%" : "60%")};
     transition: 0.3s;
     border-radius: 3px 3px 0 0;
+    object-fit: cover;
     &:hover {
       transform: scale(1.1);
     }

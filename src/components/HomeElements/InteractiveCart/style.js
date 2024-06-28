@@ -12,6 +12,7 @@ export const Wrap = styled.div`
   img {
     width: 75px;
     height: 75px;
+    object-fit: cover;
   }
   .title {
     color: var(--titleDark);

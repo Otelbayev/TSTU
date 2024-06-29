@@ -5,13 +5,13 @@ const FacultyCart = ({ item, onClick }) => {
   return (
     <Container
       onClick={onClick}
-      $bg={`../../../../public/api/${item?.img_?.url}`}
+      $bg={`/public/api/${item?.img_?.url}`}
     >
       <div className="card">
         <div className="card-front">
           <img
             loading="lazy"
-            src={`../../../../public/api/${item?.img_icon_?.url}`}
+            src={`/public/api/${item?.img_icon_?.url}`}
           />
           <p className="card-title">{item?.title}</p>
         </div>

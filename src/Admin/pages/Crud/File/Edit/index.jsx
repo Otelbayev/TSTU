@@ -115,7 +115,13 @@ const Edit = () => {
             ref={fileRef}
             onChange={(e) => setFile(e.target.files[0])}
           />
-          {!isCreate && <Image label="Img" img={img} className={"col-md-2"} />}
+          {!isCreate && (
+            <Image
+              label="Img"
+              img={`/public/api/${img}`}
+              className={"col-md-2"}
+            />
+          )}
           {!isCreate && (
             <Select
               label="Status"

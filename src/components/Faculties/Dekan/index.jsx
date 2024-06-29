@@ -12,7 +12,7 @@ const Dekans = ({ data }) => {
       <Dekan.Left data-aos="fade-right">
         <Dekan.Img
           loading="lazy"
-          src={`../../../.../../../public/api/${data?.persons_?.img_?.url}`}
+          src={`/public/api/${data?.persons_?.img_?.url}`}
         />
       </Dekan.Left>
       <Dekan.Right data-aos="fade-left">

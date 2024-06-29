@@ -6,7 +6,7 @@ const KafedraCart = ({ prop, dataAos, $slider, onClick }) => {
   return (
     <Content data-aos={dataAos} onClick={onClick} $slider={$slider}>
       <img
-        src={`../../../../public/api/${
+        src={`/public/api/${
           prop?.img_?.url || prop?.img_translation_?.url
         }`}
         alt=""

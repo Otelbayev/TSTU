@@ -223,7 +223,13 @@ const Edit = () => {
           className={isCreate ? "form-group col-md-3" : "form-group col-md-4"}
           ref={imgRef}
         />
-        {!isCreate && <Image label="Image" className="col-md-4" img={img} />}
+        {!isCreate && (
+          <Image
+            label="Image"
+            className="col-md-4"
+            img={`/public/api/${img}`}
+          />
+        )}
         <div className="form-group mt-3 col-md-12">
           <div className="col-sm-12">
             {isCreate ? (

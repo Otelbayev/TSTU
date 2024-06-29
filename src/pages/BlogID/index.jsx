@@ -56,7 +56,7 @@ const BlogID = () => {
           <div className="content">
             <div className="content__left">
               <img
-                src={`../../../public/api/${
+                src={`/public/api/${
                   data?.img_?.url || data?.img_translation_?.url
                 }`}
                 style={{ width: "100%" }}

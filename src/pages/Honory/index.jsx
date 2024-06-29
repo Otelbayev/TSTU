@@ -36,7 +36,7 @@ const Honory = () => {
               {faxriy?.map((e, index) => (
                 <Item id={index} key={e?.id} className={"content__item"}>
                   <img
-                    src={`../../../public/api/${e?.persons_?.img_?.url}`}
+                    src={`/public/api/${e?.persons_?.img_?.url}`}
                     alt=""
                     className="content__item__img"
                   />

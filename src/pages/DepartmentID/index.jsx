@@ -38,7 +38,7 @@ const DepartmentID = () => {
         <div className="root-wrapper">
           <h3>{data?.title}</h3>
           <img
-            src={`../../../public/api/${data?.img_?.url}`}
+            src={`/public/api/${data?.img_?.url}`}
             className="w-80"
             alt=""
           />

@@ -37,6 +37,8 @@ const Create = () => {
 
   const { statusData, getStatus } = useStatusContext();
 
+  const [img, setImg] = useState(null);
+
   const onHandleSubmit = async (e) => {
     e.preventDefault();
 
@@ -99,6 +101,7 @@ const Create = () => {
         descRef.current.value = res?.data?.description;
         detailRef.current.value = res?.data?.details;
         setStatus(res?.data?.status_.id);
+        setImg(res?.data?.img_?.url);
       }
     }
     getStatus("uz");
@@ -144,7 +147,11 @@ const Create = () => {
         </div>
         <div className="row">
           <ChooseFile className="col-md-4" ref={iconRef} label="Icon" />
-          <Image className="col-md-4" label="Image" />
+          <Image
+            className="col-md-4"
+            label="Image"
+            img={`/public/api/${img}`}
+          />
         </div>
         <div className="row">
           <div className="col-md-3 m-2">

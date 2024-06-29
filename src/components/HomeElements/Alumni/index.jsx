@@ -89,7 +89,7 @@ const Alumni = () => {
                       <div className="content">
                         <img
                           loading="lazy"
-                          src={`../../../../public/api/${
+                          src={`/public/api/${
                             e?.persons_?.img_?.url
                           }`}
                           alt=""

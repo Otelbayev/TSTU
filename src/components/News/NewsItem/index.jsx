@@ -7,7 +7,7 @@ const NewsItem = ({ prop, onClick }) => {
   const { language } = useLanguageContext();
   return (
     <Large
-      $img={`../../../../public/api/${
+      $img={`/public/api/${
         prop?.img_?.url || prop?.img_translation_?.url
       }`}
     >

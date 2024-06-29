@@ -551,7 +551,7 @@ const Edit = () => {
         {value === "uz" && (
           <Image
             className="form-group col-md-2"
-            img={`../../../../../public/api/${src}`}
+            img={`/public/api/${src}`}
             label="Rasm"
           />
         )}

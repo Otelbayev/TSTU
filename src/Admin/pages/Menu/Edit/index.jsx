@@ -210,7 +210,11 @@ const Edit = () => {
           ref={icon}
         />
         {!isCreate && (
-          <Image className="form-group col-md-3" label="Image" img={img} />
+          <Image
+            className="form-group col-md-1"
+            label="Icon"
+            img={`/public/api/${img}`}
+          />
         )}
         <Select
           showSearch={true}

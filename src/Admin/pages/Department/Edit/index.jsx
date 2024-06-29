@@ -46,6 +46,7 @@ const DepartmentEdit = () => {
   const [position, setPosition] = useState("");
   const [img, setImg] = useState(null);
   const [status, setStatus] = useState(null);
+  const [icon, setIcon] = useState(null);
 
   const [isCreate, setIsCreate] = useState(false);
   const [transId, setTransId] = useState(null);
@@ -118,9 +119,10 @@ const DepartmentEdit = () => {
       );
       setPosition(res.data?.position);
       setFavo(res.data?.favorite);
-      setImg(res.data?.img_?.url);
+      setImg(res.data?.img_?.url || res.data?.img_translation_?.url);
       $(editorRef.current)?.summernote("code", `${res?.data?.text || ""}`);
       setStatus(res.data?.status_?.id || res?.data?.status_translation_?.id);
+      setIcon(res.data?.img_icon_?.url || res.data?.img_icon_translation_?.url);
     } else {
       setTransId(null);
       setIsCreate(true);
@@ -134,6 +136,7 @@ const DepartmentEdit = () => {
       setImg(null);
       $(editorRef.current)?.summernote("code", "");
       setStatus(statusData[0].value);
+      setIcon(null);
     }
   };
 
@@ -210,7 +213,7 @@ const DepartmentEdit = () => {
           />
         )}
         <Input
-          className={!isCreate ? "form-group col-md-3" : "form-group col-md-4"}
+          className={!isCreate ? "form-group col-md-2" : "form-group col-md-4"}
           label="Position"
           type="number"
           value={position || ""}
@@ -221,14 +224,28 @@ const DepartmentEdit = () => {
           label="Image"
           ref={imgRef}
         />
+        {!isCreate && (
+          <Image
+            className={"form-group col-md-2"}
+            img={`/public/api/${img}`}
+            label={"Image"}
+            alt="none"
+          />
+        )}
         <ChooseFile
           className={!isCreate ? "form-group col-md-3" : "form-group col-md-4"}
           label="Icon"
           ref={img2Ref}
         />
         {!isCreate && (
-          <Image className={"form-group col-md-3"} img={img} alt="none" />
+          <Image
+            className={"form-group col-md-2"}
+            img={`/public/api/${icon}`}
+            label={"Icon"}
+            alt="none"
+          />
         )}
+
         <div className="form-group col-md-12">
           <div className="col-sm-12">
             {isCreate ? (

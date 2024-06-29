@@ -10,7 +10,7 @@ const Cart = ({ onClick, item }) => {
       <Wrap.Img>
         <img
           loading="lazy"
-          src={`../../../../public/api/${
+          src={`/public/api/${
             item?.img_?.url || item?.img_translation_?.url
           }`}
           alt=""

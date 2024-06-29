@@ -77,7 +77,7 @@ const Edit = () => {
       setIsCreate(false);
       setTitle(res.data?.title);
       setDescription(res.data?.description);
-      setImg(res.data?.img_?.url);
+      setImg(res.data?.img_?.url || res.data?.img_translation_?.url);
       setUrl(res.data?.url_);
       setIcon(res.data?.icon_?.url);
       setStatus(res.data?.status_?.id || res.data?.status_translation_?.id);
@@ -139,13 +139,17 @@ const Edit = () => {
             className={isCreate ? "col-md-4" : "col-md-3"}
             onChange={(e) => setImg(e.target.files[0])}
           />
-          {!isCreate && <Image img={img} className="col-md-2" />}
+          {!isCreate && (
+            <Image img={`/public/api/${img}`} className="col-md-2" />
+          )}
           <ChooseFile
             label="Icon"
             className={isCreate ? "col-md-4" : "col-md-3"}
             onChange={(e) => setIcon(e.target.files[0])}
           />
-          {!isCreate && <Image img={icon} className="col-md-2" />}
+          {!isCreate && (
+            <Image img={`/public/api/${icon}`} className="col-md-2" />
+          )}
           {!isCreate && (
             <Select
               label="Status"

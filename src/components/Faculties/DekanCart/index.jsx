@@ -11,7 +11,7 @@ const DekanCart = ({ data }) => {
       <Content.Img
         onClick={() => naviagte(`/${language}/employee/${data?.id}`)}
         loading="lazy"
-        src={`../../../../public/api/${data?.persons_?.img_?.url}`}
+        src={`/public/api/${data?.persons_?.img_?.url}`}
       />
       <Content.Name
         onClick={() => naviagte(`/${language}/employee/${data?.id}`)}

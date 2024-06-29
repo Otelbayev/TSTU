@@ -1,9 +1,16 @@
 blog
 kafedra pagination
+department
+rectorat
+
 fakultet id
 kafedra id
-department
 department id
-faxriy professor
 employee id
-menu ru en
+
+employee admin panel
+department create en bug
+
+menu ru en responsive
+login responsive
+galereya responsive

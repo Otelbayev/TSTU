@@ -4,7 +4,7 @@ export const Layout = styled.div`
   margin: 40px 0 20px;
   .grid {
     display: grid;
-    grid-template-columns: repeat(1fr, 4);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 300px 300px;
     gap: 10px;
     margin: 20px 0;
@@ -35,7 +35,7 @@ export const Layout = styled.div`
   }
   @media (max-width: 950px) {
     .grid {
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: repeat(6, 1fr);
       grid-template-rows: 300px 300px 300px;
       &__item1 {
         grid-column: 1/5;

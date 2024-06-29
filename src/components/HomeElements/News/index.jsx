@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { Title } from "../../Generics";
 import { Layout } from "./style";
 import LargeBanner from "../LargeBanner";
@@ -42,4 +42,4 @@ const News = ({ data, type }) => {
   );
 };
 
-export default memo(News);
+export default News;

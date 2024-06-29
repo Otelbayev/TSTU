@@ -91,7 +91,6 @@ const Galereya = () => {
                 onClick={() => umumiyRef.current.scrollIntoView()}
                 type="primary"
               >
-                loading="lazy"
                 <img src={icon} alt="" />
                 universitetga <br /> 3d sayohat
               </Absolute.Btn>

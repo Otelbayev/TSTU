@@ -58,12 +58,27 @@ const DepartmentCreate = () => {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("text", text);
-    formData.append("parent_id", parent);
     formData.append("position", position);
     formData.append("favorite", favorite);
-    formData.append("departament_type_id", departament_type_id);
-    formData.append("img_up", img_up);
-    formData.append("img_icon_up", img_icon_up);
+    if (value === "uz") {
+      formData.append("parent_id", parent);
+      formData.append("departament_type_id", departament_type_id);
+    } else {
+      console.log(departmentOptions);
+      console.log(parent);
+      formData.append(
+        "parent_id",
+        departmentOptions.find((e) => e.value === parent)?.parent
+      );
+      console.log(departament_type_id);
+      console.log(departmentType);
+      formData.append(
+        "departament_type_id",
+        departmentType.find(e => e.value === departament_type_id)?.parent
+      );
+    }
+    formData.append("img_up", img_up || null);
+    formData.append("img_icon_up", img_icon_up || null);
 
     const res = await useCreate(
       value,

@@ -56,7 +56,7 @@ const DepartmentProvider = ({ children }) => {
             value: e.id,
             label: e.type,
             path: value === "uz" ? e?.type : e?.departament_type_?.type,
-            parent: e?.departament_type_id,
+            parent: e?.departament_type_?.id,
           }))
       );
     }

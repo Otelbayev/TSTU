@@ -3,7 +3,7 @@ import search from "../../../assets/ARM/search.svg?react";
 
 export const Container = styled.div`
   background: #0056b1;
-  height: 70px;
+  height: 60px;
   position: relative;
 `;
 
@@ -15,8 +15,8 @@ export const Content = styled.div`
     display: none;
   }
   .logo {
-    width: 170px;
-    height: 46px;
+    width: 164px;
+    height: 42px;
   }
   .right {
     display: flex;
@@ -113,7 +113,7 @@ export const Link = styled.div`
   font-size: 15px;
   font-style: normal;
   font-family: "Inter";
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
   text-decoration: none;
   display: flex;

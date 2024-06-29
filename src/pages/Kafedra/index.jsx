@@ -28,6 +28,7 @@ const Faculties = () => {
                   key={item?.id}
                   item={item}
                   onClick={() => naviagte(`${item.id}`)}
+                  type="kafedra"
                 />
               );
             })}

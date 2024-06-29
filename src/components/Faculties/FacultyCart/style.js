@@ -83,39 +83,45 @@ export const Container = styled.div`
     max-width: 100%;
     max-height: 100%;
   }
-`;
 
-export const Content = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-Content.Front = styled.div`
-  cursor: pointer;
-  transition: 0.3s;
-  width: 100%;
-  height: 100%;
-  border-radius: 3px;
-  border: 1px solid #cecece;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 19px 16px;
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  .kafedra {
+    border: 1px solid #cecece;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    .kafedra-title {
+      position: absolute;
+      z-index: 99;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      color: #fff;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 3px;
+      object-fit: cover;
+      transition: 0.3s;
+    }
+    &:hover {
+      img {
+        transform: scale(1.05);
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 3px;
+    }
   }
-`;
-Content.Title = styled.div`
-  color: var(--titleDark);
-  text-align: center;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%;
-  padding: 16px;
-`;
-Content.Icon = styled.img`
-  width: 64px;
 `;

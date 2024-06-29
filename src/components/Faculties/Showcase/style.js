@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100dvh - 70px);
+  height: calc(100dvh - 60px);
   background-image: ${({ $bg }) => `url(${$bg})`};
   background-repeat: no-repeat;
   background-size: cover;

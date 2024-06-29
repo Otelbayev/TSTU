@@ -76,6 +76,7 @@ const Create = () => {
         "persons_.gender_id",
         genderData.find((e) => e.value === gender)?.parent
       );
+      console.log(employeeTypeData);
       formData.append(
         "persons_.employee_type_id",
         employeeTypeData.find((e) => e.value === employee)?.parent

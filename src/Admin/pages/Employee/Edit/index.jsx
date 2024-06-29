@@ -5,6 +5,7 @@ import {
   Input,
   Select,
   TextArea,
+  Image,
 } from "../../../components/Generics";
 import LanguageSelect from "../../../components/Generics/LanguageSelect";
 import { useLanguageContext } from "../../../../context/LanguageContext";
@@ -60,6 +61,7 @@ const Edit = () => {
   const [experience_json, setExperience_json] = useState("");
   const [img, setImg] = useState(null);
   const [status, setStatus] = useState(null);
+  const [src, setSrc] = useState(null);
 
   const portfolioRef = useRef(null);
   const blogRef = useRef(null);
@@ -80,16 +82,46 @@ const Edit = () => {
       if (res.status === 200) {
         setIsCreate(false);
         setTransId(res?.data?.id);
-        setName(res?.data?.persons_?.firstName);
-        setSurname(res?.data?.persons_?.lastName);
-        setPatronymic(res?.data?.persons_?.fathers_name);
-        setEmail(res?.data?.persons_?.email);
-        setGender(res?.data?.persons_?.gender_?.id);
-        setJshir(res?.data?.persons_?.pinfl);
-        setPassportSerial(res?.data?.persons_?.passport_text);
-        setPassportNumber(res?.data?.persons_?.passport_number);
-        setDepartent(res?.data?.persons_?.departament_?.id);
-        setEmployee(res?.data?.persons_?.employee_type_?.id);
+        setName(
+          res?.data?.persons_?.firstName ||
+            res?.data?.persons_translation_?.firstName
+        );
+        setSurname(
+          res?.data?.persons_?.lastName ||
+            res?.data?.persons_translation_?.lastName
+        );
+        setPatronymic(
+          res?.data?.persons_?.fathers_name ||
+            res?.data?.persons_translation_?.fathers_name
+        );
+        setEmail(
+          res?.data?.persons_?.email ||
+            res?.data?.persons_translation_?.persons_?.email
+        );
+        setGender(
+          res?.data?.persons_?.gender_?.id ||
+            res?.data?.persons_translation_?.gender_?.id
+        );
+        setJshir(
+          res?.data?.persons_?.pinfl || res?.data?.persons_translation_?.pinfl
+        );
+        setPassportSerial(
+          res?.data?.persons_?.passport_text ||
+            res?.data?.persons_translation_?.passport_text
+        );
+        setPassportNumber(
+          res?.data?.persons_?.passport_number ||
+            res?.data?.persons_translation_?.passport_number
+        );
+        setDepartent(
+          res?.data?.persons_?.departament_?.id ||
+            res?.data?.persons_translation_?.departament_translation_?.id
+        );
+        setEmployee(
+          res?.data?.persons_?.employee_type_?.id ||
+            res?.data?.persons_translation_?.employee_type_translation_?.id
+        );
+        setSrc(res?.data?.persons_?.img_?.url);
         setBiography(res?.data?.biography_json);
         setDate(res?.data?.birthday?.split("T")[0]);
         setDegree(res?.data?.degree);
@@ -104,8 +136,8 @@ const Edit = () => {
         setRus(res?.data?.languages_ru);
         setOther(res?.data?.languages_any_title);
         setOther2(res?.data?.languages_any);
-        setScientific(res?.data?.scientific);
-        setExperience_json(res?.data?.scientific_activity_json);
+        setScientific(res?.data?.scientific_activity_json);
+        setExperience_json(res?.data?.experience_json);
         setImg(res?.data?.img_?.url || res?.data?.img_translation_?.url);
         setStatus(res?.data?.status_?.id || res?.data?.status_translation_?.id);
         $(portfolioRef.current)?.summernote("code", res?.data?.portfolio_json);
@@ -120,12 +152,12 @@ const Edit = () => {
       setSurname("");
       setPatronymic("");
       setEmail("");
-      setGender(null);
+      setGender(genderData[0]?.value);
       setJshir("");
       setPassportSerial("");
       setPassportNumber("");
-      setDepartent(null);
-      setEmployee(null);
+      setDepartent(departmentOptions[0]?.value);
+      setEmployee(employeeTypeData[0]?.value);
       setBiography("");
       setDate("2000-01-01");
       setDegree("");
@@ -390,13 +422,6 @@ const Edit = () => {
           value={date || ""}
           onChange={(e) => setDate(e.target.value)}
         />
-        {value === "uz" && (
-          <ChooseFile
-            className="form-group col-md-3"
-            label="Rasm"
-            onChange={(e) => setImg(e.target.files[0])}
-          />
-        )}
         <Input
           label={`Ilmiy daraja (${value})`}
           placeholder="type"
@@ -454,7 +479,9 @@ const Edit = () => {
         />
         <Input
           label="O'zbek tili (1-99)%"
-          className="form-group col-md-2"
+          className={
+            value === "uz" ? "form-group col-md-3" : "form-group col-md-2"
+          }
           placeholder="80%"
           minLength={2}
           maxLength={2}
@@ -463,7 +490,9 @@ const Edit = () => {
         />
         <Input
           label="Ingiliz tili (1-99)%"
-          className="form-group col-md-2"
+          className={
+            value === "uz" ? "form-group col-md-3" : "form-group col-md-2"
+          }
           placeholder="80%"
           minLength={2}
           maxLength={2}
@@ -472,7 +501,9 @@ const Edit = () => {
         />
         <Input
           label="Rus tili (1-99)%"
-          className="form-group col-md-2"
+          className={
+            value === "uz" ? "form-group col-md-3" : "form-group col-md-2"
+          }
           placeholder="80%"
           minLength={2}
           maxLength={2}
@@ -481,14 +512,18 @@ const Edit = () => {
         />
         <Input
           label="Boshqa til nomi"
-          className="form-group col-md-2"
+          className={
+            value === "uz" ? "form-group col-md-3" : "form-group col-md-2"
+          }
           placeholder="Koreys tili"
           value={other || ""}
           onChange={(e) => setOther(e.target.value)}
         />
         <Input
           label="Boshqa til (1-99)%"
-          className="form-group col-md-2"
+          className={
+            value === "uz" ? "form-group col-md-3" : "form-group col-md-2"
+          }
           placeholder="80%"
           minLength={2}
           maxLength={2}
@@ -498,10 +533,26 @@ const Edit = () => {
         {!isCreate && (
           <Select
             label={"Status"}
-            className={"form-group col-md-2"}
+            className={
+              value === "uz" ? "form-group col-md-4" : "form-group col-md-2"
+            }
             value={status}
             onChange={(e) => setStatus(e)}
             options={statusData}
+          />
+        )}
+        {value === "uz" && (
+          <ChooseFile
+            className="form-group col-md-4"
+            label="Rasm"
+            onChange={(e) => setImg(e.target.files[0])}
+          />
+        )}
+        {value === "uz" && (
+          <Image
+            className="form-group col-md-2"
+            img={`../../../../../public/api/${src}`}
+            label="Rasm"
           />
         )}
         <TextArea

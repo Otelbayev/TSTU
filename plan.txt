@@ -1,14 +1,13 @@
 blog
-kafedra pagination
+kafedra pagination, delte rotate
 department
 rectorat
 
-fakultet id
+fakultet id (haeader height and logo)
 kafedra id
 department id
 employee id
 
-employee admin panel
 edit admin panel image 
 
 menu ru en responsive

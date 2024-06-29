@@ -8,8 +8,8 @@ const Image = ({ label, className, img, alt }) => {
       </label>
       <div className="col-sm-12">
         <img
-        loading="lazy"
-          style={{ width: "100px", height: "100px" }}
+          loading="lazy"
+          style={{ width: "100%" }}
           src={img}
           alt={alt || "Img"}
         />

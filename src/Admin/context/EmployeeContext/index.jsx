@@ -20,7 +20,6 @@ const EmployeeContextProvider = ({ children }) => {
         },
       }
     );
-    console.log(res?.data);
     res?.status === 200 &&
       setEmployeeTypeData(
         res.data?.map((e) => ({

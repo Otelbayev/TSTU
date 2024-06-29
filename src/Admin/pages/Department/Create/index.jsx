@@ -64,17 +64,14 @@ const DepartmentCreate = () => {
       formData.append("parent_id", parent);
       formData.append("departament_type_id", departament_type_id);
     } else {
-      console.log(departmentOptions);
-      console.log(parent);
       formData.append(
         "parent_id",
         departmentOptions.find((e) => e.value === parent)?.parent
       );
-      console.log(departament_type_id);
-      console.log(departmentType);
+
       formData.append(
         "departament_type_id",
-        departmentType.find(e => e.value === departament_type_id)?.parent
+        departmentType.find((e) => e.value === departament_type_id)?.parent
       );
     }
     formData.append("img_up", img_up || null);

@@ -125,7 +125,7 @@ const Create = () => {
         );
         if (res?.status === 200) {
           message.success({ key: "msg", content: "Succesfully Created!" });
-          // navigate(`/${language}/admin/employee`);
+          navigate(`/${language}/admin/employee`);
         }
       } catch (err) {
         message.error({ key: "msg", content: "Something went wrong!" });
@@ -182,7 +182,7 @@ const Create = () => {
         );
         if (res2.status === 200) {
           message.success({ key: "msg", content: "Succesfully Created!" });
-          // navigate(`/${language}/admin/employee`);
+          navigate(`/${language}/admin/employee`);
         }
       } catch (err) {
         message.error({ key: "msg", content: "Something went wrong!" });

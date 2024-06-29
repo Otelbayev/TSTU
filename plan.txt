@@ -1,0 +1,9 @@
+blog
+kafedra pagination
+fakultet id
+kafedra id
+department
+department id
+faxriy professor
+employee id
+menu ru en

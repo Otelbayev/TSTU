@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import UniShowcase from "../../components/UniShowcase";
 import { useTranslation } from "react-i18next";
 import { useLanguageContext } from "../../context/LanguageContext";
-import img from "../../assets/images/ilmiy.png";
 import { Content, Item } from "./style";
 import { useNavigate } from "react-router-dom";
 
@@ -35,8 +34,12 @@ const Honory = () => {
           <Content>
             <div className="content">
               {faxriy?.map((e, index) => (
-                <Item id={index} className={"content__item"}>
-                  <img src={`` || img} alt="" className="content__item__img" />
+                <Item id={index} key={e?.id} className={"content__item"}>
+                  <img
+                    src={`../../../public/api/${e?.persons_?.img_?.url}`}
+                    alt=""
+                    className="content__item__img"
+                  />
                   <div className="content__item__data">
                     <div className="content__item__data__fio">
                       {e?.persons_?.firstName} {e?.persons_?.firstName}{" "}

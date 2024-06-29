@@ -116,7 +116,7 @@ const Create = () => {
       ["menu_type_id", "blog_id", "page_id", "departament_id"]
     );
 
-    // res?.statusCode === 200 && navigate(`/${language}/admin/menu`);
+    res?.statusCode === 200 && navigate(`/${language}/admin/menu`);
   };
 
   return (

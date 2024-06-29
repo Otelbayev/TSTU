@@ -74,7 +74,7 @@ const Create = () => {
       ["blog_category_id"]
     );
 
-    // res?.statusCode === 200 && navigate(`/${language}/admin/blogs`);
+    res?.statusCode === 200 && navigate(`/${language}/admin/blogs`);
   };
 
   useEffect(() => {

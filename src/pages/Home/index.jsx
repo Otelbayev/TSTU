@@ -25,12 +25,12 @@ const HomePage = () => {
       <Showcase />
       <About />
       <News data={news} type="news" />
-      <Events data={news} type="events" />
+      <Events data={events} type="events" />
       <Interactive />
       <Faculties />
       <Talim />
       <Faxriy />
-      <Talaba data={news} type="student" />
+      <Talaba data={student} type="student" />
       <Survery />
       <Alumni />
       <Footer />

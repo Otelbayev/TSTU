@@ -20,8 +20,6 @@ const Survery = () => {
         <Title
           $type="dark"
           title={t("survery.title")}
-          button={t("survery.btn")}
-          to="scientific-center"
         >
           <div>
             <ScrollTrigger

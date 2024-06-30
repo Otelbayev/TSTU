@@ -42,8 +42,8 @@ const Honory = () => {
                   />
                   <div className="content__item__data">
                     <div className="content__item__data__fio">
-                      {e?.persons_?.firstName} {e?.persons_?.firstName}{" "}
-                      {e?.persons_?.firstName}
+                      {e?.persons_?.firstName} {e?.persons_?.lastName}{" "}
+                      {e?.persons_?.fathers_name}
                     </div>
                     <div className="content__item__data__position">
                       {e?.degree || "position"}

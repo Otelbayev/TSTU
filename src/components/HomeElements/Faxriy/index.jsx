@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Title } from "../../Generics";
 import { Container } from "./style";
-import logo from "../../../../public/logo.png";
 import { useTranslation } from "react-i18next";
 import { useLanguageContext } from "../../../context/LanguageContext";
 
@@ -20,6 +19,8 @@ const Faxriy = () => {
       .then((res) => res.json())
       .then((res) => setData(res));
   }, []);
+
+  console.log(data);
 
   return (
     <div>
@@ -40,8 +41,9 @@ const Faxriy = () => {
             <div className="content">
               <img
                 loading="lazy"
-                src={`${logo?.split("logo")[0]}api/${
-                  data?.persons_?.img_?.url
+                src={`/public/api/${
+                  data?.persons_?.img_?.url ||
+                  data?.persons_translation_?.persons_?.img_?.url
                 }`}
                 alt=""
                 className="content__img"

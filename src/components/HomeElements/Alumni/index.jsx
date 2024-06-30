@@ -90,7 +90,8 @@ const Alumni = () => {
                         <img
                           loading="lazy"
                           src={`/public/api/${
-                            e?.persons_?.img_?.url
+                            e?.persons_?.img_?.url ||
+                            e?.persons_translation_?.persons_ ?.img_?.url
                           }`}
                           alt=""
                           className="content__img"

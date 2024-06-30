@@ -8,44 +8,63 @@ import { useLanguageContext } from "../../context/LanguageContext";
 const RectorCart = ({ data }) => {
   const { language } = useLanguageContext();
 
-  useEffect(() => {
-  
-  }, [language]);
+  useEffect(() => {}, [language]);
 
   return (
     <Container>
       <Content className="content">
         <Content.Front>
-          <img loading="lazy" src={data?.img} alt="" />
-          <div className="position">{data?.position}</div>
-          <div className="name">{data?.name}</div>
+          <img
+            loading="lazy"
+            src={`/public/api/${data?.persons_?.img_?.url}`}
+            alt=""
+          />
+          <div className="position">
+            {data?.persons_?.employee_type_?.title ||
+              data?.persons_translation_?.persons_?.employee_type_?.title}{" "}
+            , {data?.degree}
+          </div>
+          <div className="name">
+            {data?.persons_?.firstName} {data?.persons_?.lastName}{" "}
+            {data?.persons_?.fathers_name}
+          </div>
         </Content.Front>
         <Content.Back>
-          <img loading="lazy" src={data?.img} alt="" />
-          <div className="position">{data?.position}</div>
-          <div className="name">{data?.name}</div>
+          <img
+            loading="lazy"
+            src={`/public/api/${data?.persons_?.img_?.url}`}
+            alt=""
+          />
+          <div className="position">
+            {data?.persons_?.employee_type_?.title ||
+              data?.persons_translation_?.persons_?.employee_type_?.title}{" "}
+            , {data?.degree}
+          </div>
+          <div className="name">
+            {data?.persons_?.firstName} {data?.persons_?.lastName}{" "}
+            {data?.persons_?.fathers_name}
+          </div>
           <div className="desc">{data?.desc}</div>
           <div className="wrap">
             <img loading="lazy" src={phone} alt="" />
             <div>
-              {data?.phone.map((e, index) => (
-                <div key={index} className="phone">
-                  {e}
-                </div>
-              ))}
+              <div className="phone">{data?.phone_number1}</div>
+              <div className="phone">2</div>
             </div>
           </div>
           <div className="wrap">
             <img loading="lazy" src={email} alt="" />
             <div>
-              {data?.email.map((e, index) => (
-                <div key={index} className="phone">
-                  {e}
-                </div>
-              ))}
+              <div className="phone">1</div>
+              <div className="phone">1</div>
             </div>
           </div>
-          <NavLink className={"btn btn-primary"} to={`/${language}/employee/1`}>
+          <NavLink
+            className={"btn btn-primary"}
+            to={`/${language}/employee/${
+              language === "uz" ? data?.id : data?.persons_id
+            }`}
+          >
             Batafsil
           </NavLink>
         </Content.Back>

@@ -10,7 +10,10 @@ const RamatovSlider = ({ prop }) => {
           <div className="slider-top">
             <img
               loading="lazy"
-              src={`${img.split("logo")[0]}api/${prop?.persons_?.img_?.url}`}
+              src={`${img.split("logo")[0]}api/${
+                prop?.persons_?.img_?.url ||
+                prop?.persons_translation_?.persons_?.img_?.url
+              }`}
               alt=""
             />
             <div>

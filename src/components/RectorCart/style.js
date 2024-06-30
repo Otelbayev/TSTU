@@ -43,6 +43,7 @@ Content.Front = styled.div`
   img {
     width: 100%;
     height: 75%;
+    border-radius: 9px;
   }
 `;
 

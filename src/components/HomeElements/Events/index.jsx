@@ -10,7 +10,6 @@ import { useLanguageContext } from "../../../context/LanguageContext";
 
 const Events = ({ data, type }) => {
   const { t } = useTranslation();
-  let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const navigate = useNavigate();
   const { language } = useLanguageContext();
   return (

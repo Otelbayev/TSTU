@@ -1,16 +1,19 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  position: relative;
   height: 500px;
+  perspective: 1000px;
+  &:hover .content {
+    transform: rotateY(180deg);
+  }
 `;
 
 export const Content = styled.div`
-  position: absolute;
-  transform-style: preserve-3d;
   width: 100%;
   height: 100%;
-  transition: all 0.5s ease;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
   .position {
     color: var(--date);
     text-align: center;
@@ -28,9 +31,6 @@ export const Content = styled.div`
     line-height: 120%;
     padding: 5px 0;
   }
-  &:hover {
-    transform: rotateY(180deg);
-  }
 `;
 
 Content.Front = styled.div`
@@ -47,11 +47,12 @@ Content.Front = styled.div`
 `;
 
 Content.Back = styled.div`
-  padding: 30px;
   position: absolute;
-  border-radius: 9px;
   width: 100%;
   height: 100%;
+  backface-visibility: hidden;
+  padding: 30px;
+  border-radius: 9px;
   border: 1px solid #007aff;
   backface-visibility: hidden;
   transform: rotateY(180deg);

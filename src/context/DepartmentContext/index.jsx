@@ -21,9 +21,11 @@ const FrontDepartmentContxtProvider = ({ children }) => {
   const [markazlar, setMarkazlar] = useState([]);
   const [favoMarkaz, setFavoMarkaz] = useState([]);
 
-  const fetchUzDepartment = async (title) => {
+  const getData = async (title) => {
     const res = await axios.get(
-      `/api/departament/getalldepartamenttypesite/${title}`
+      language === "uz"
+        ? `/api/departament/getalldepartamenttypesite/${title}`
+        : `/api/departament/getalldepartamenttranslationtypesite/${title}?language_code=${language}`
     );
     if (res.status === 200) {
       return res.data;
@@ -32,42 +34,12 @@ const FrontDepartmentContxtProvider = ({ children }) => {
     }
   };
 
-  const fetchTranslationDepartment = async (titleuz) => {
-    const departmentTypeResponse = await axios.get(
-      `/api/deartamenttypecontroller/sitegetbytitledepartamenttype/${titleuz}`
-    );
-    if (departmentTypeResponse.status === 200) {
-      const translationResponse = await axios.get(
-        `/api/deartamenttypecontroller/sitegetbyuziddepartamenttypetranslation/${departmentTypeResponse.data?.id}?language_code=${language}`
-      );
-      if (translationResponse.status === 200) {
-        const departmentResponse = await axios.get(
-          `/api/departament/getalldepartamenttranslationtypesite/${translationResponse.data?.type}?language_code=${language}`
-        );
-        if (departmentResponse.status === 200) {
-          return departmentResponse.data;
-        }
-      }
-    }
-  };
-
-  const getDepartment = useCallback(
-    async (titleuz) => {
-      if (language === "uz") {
-        return await fetchUzDepartment(titleuz);
-      } else {
-        return await fetchTranslationDepartment(titleuz);
-      }
-    },
-    [language]
-  );
-
   useEffect(() => {
     const fetchAllDepartment = async () => {
       const [first, second, thrid] = await Promise.all([
-        getDepartment("Fakultet"),
-        getDepartment("Kafedra"),
-        getDepartment("Ilmiy markaz"),
+        getData("Fakultet"),
+        getData("Kafedra"),
+        getData("Ilmiy markaz"),
       ]);
 
       setFaculties(first);
@@ -81,7 +53,7 @@ const FrontDepartmentContxtProvider = ({ children }) => {
     };
 
     fetchAllDepartment();
-  }, [getDepartment]);
+  }, [language]);
 
   return (
     <FrontDepartmentContxt.Provider

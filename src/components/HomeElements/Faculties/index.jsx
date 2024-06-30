@@ -45,7 +45,13 @@ const Faculties = () => {
                     ?.map((item) => (
                       <KafedraCart
                         onClick={() =>
-                          navigate(`/${language}/kafedra/${item?.id}`)
+                          navigate(
+                            `/${language}/kafedra/${`${
+                              language === "uz"
+                                ? item?.id
+                                : item?.departament_?.id
+                            }`}`
+                          )
                         }
                         key={item?.id}
                         prop={item}

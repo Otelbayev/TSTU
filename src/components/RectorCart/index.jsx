@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Content } from "./style";
 import email from "../../assets/icons/rectorEmail.png";
 import phone from "../../assets/icons/rectorPhone.png";
+import { NavLink } from "react-router-dom";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 const RectorCart = ({ data }) => {
+  const { language } = useLanguageContext();
+
+  useEffect(() => {
+  
+  }, [language]);
+
   return (
     <Container>
-      <Content>
+      <Content className="content">
         <Content.Front>
           <img loading="lazy" src={data?.img} alt="" />
           <div className="position">{data?.position}</div>
@@ -37,6 +45,9 @@ const RectorCart = ({ data }) => {
               ))}
             </div>
           </div>
+          <NavLink className={"btn btn-primary"} to={`/${language}/employee/1`}>
+            Batafsil
+          </NavLink>
         </Content.Back>
       </Content>
     </Container>

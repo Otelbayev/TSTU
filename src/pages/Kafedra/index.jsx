@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useFrontDepartmentContext } from "./../../context/DepartmentContext";
 import { useTranslation } from "react-i18next";
 import { Content } from "../Faculties/style";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 const Faculties = () => {
   useEffect(() => {
@@ -14,6 +15,7 @@ const Faculties = () => {
 
   const { t } = useTranslation();
 
+  const { language } = useLanguageContext();
   const naviagte = useNavigate();
 
   return (
@@ -27,7 +29,11 @@ const Faculties = () => {
                 <FacultyCart
                   key={item?.id}
                   item={item}
-                  onClick={() => naviagte(`${item.id}`)}
+                  onClick={() =>
+                    naviagte(
+                      `${language === "uz" ? item?.id : item?.departament_?.id}`
+                    )
+                  }
                   type="kafedra"
                 />
               );

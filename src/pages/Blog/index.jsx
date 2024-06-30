@@ -12,6 +12,7 @@ import { useFrontBlogContext } from "./../../context/BlogContext/index";
 import { useLanguageContext } from "../../context/LanguageContext";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { Pagination } from "antd";
 
 const Blog = () => {
   const navigate = useNavigate();
@@ -28,8 +29,8 @@ const Blog = () => {
   const getData = async () => {
     const res = await axios.get(
       language === "uz"
-        ? `/api/blogcontroller/sitegetallblog?queryNum=10&pageNum=${page}`
-        : `/api/blogcontroller/sitegetallblogtranslation?queryNum=10&pageNum=${page}&language_code=${language}`
+        ? `/api/blogcontroller/sitegetallblog`
+        : `/api/blogcontroller/sitegetallblogtranslation&language_code=${language}`
     );
     res.status === 200 && setAllData(res.data);
   };
@@ -52,14 +53,26 @@ const Blog = () => {
   }, [language, page]);
 
   useEffect(() => {
-    getTypes();
+    // getTypes();
   }, [language]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(9);
+
+  const handlePageChange = (page, size) => {
+    setCurrentPage(page);
+    setPageSize(size);
+  };
+
+  const currentData = allData.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+
   return (
     <div className="root-container">
       <div className="root-wrapper">
@@ -101,7 +114,7 @@ const Blog = () => {
             <RadioButton prop={types} dataAos="fade-left" />
           </Center>
           <Grid>
-            {allData.map((e) => (
+            {currentData.map((e) => (
               <NewsCart
                 dataAos="zoom-in"
                 onClick={() => navigate(`/${language}/blog/${e.id}`)}
@@ -110,6 +123,13 @@ const Blog = () => {
               />
             ))}
           </Grid>
+          <Pagination
+            total={allData?.length}
+            current={currentPage}
+            pageSize={pageSize}
+            onChange={handlePageChange}
+            style={{ textAlign: "center", marginBottom: "20px" }}
+          />
           <Title title={t("news.t")} component={""}>
             <Flex>
               <VideoCart dataAos={"zoom-in"} key={""} prop={""} to={``} />

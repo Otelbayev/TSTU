@@ -43,11 +43,6 @@ export const Container = styled.div`
   .card-front {
     background-color: #fff;
     transition: 0.3s;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
     padding: 19px 16px;
     img {

@@ -270,9 +270,10 @@ const Edit = () => {
             key: "key",
             content: "Successfully updated!",
           });
-      } else if (value !== "ru" && !isCreate) {
+      } else if (value !== "uz" && !isCreate) {
+        obj.persons_data_id = id;
         const res = await axios.put(
-          `/api/persondata/updatepersondatatranslation/${id}`,
+          `/api/persondata/updatepersondatatranslation/${transId}`,
           obj,
           {
             headers: {

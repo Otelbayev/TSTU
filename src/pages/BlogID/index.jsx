@@ -10,10 +10,21 @@ import { useParams } from "react-router-dom";
 import { getDate } from "../../utils/month";
 import { useFrontBlogContext } from "../../context/BlogContext";
 
+
 const BlogID = () => {
   const { id } = useParams();
   const { language } = useLanguageContext();
   const { news } = useFrontBlogContext();
+
+  useEffect(() => {
+    // Ensure jQuery is attached to the window object
+    window.jQuery = $;
+    $(".flexslider").flexslider({
+      animation: "slide",
+      controlNav: true,
+      directionNav: true,
+    });
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);

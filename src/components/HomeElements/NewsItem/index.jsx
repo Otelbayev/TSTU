@@ -20,10 +20,12 @@ const NewsItem = ({ item }) => {
       </div>
       <div className="item-right">
         <NavLink
-          to={`/${language}/blog/${item?.id}`}
+          to={`/${language}/blog/${
+            language === "uz" ? item?.id : item?.blog_id
+          }`}
           className="item-right__link"
         >
-         {language === "uz"
+          {language === "uz"
             ? "Batafsil"
             : language === "ru"
             ? "Подробнее"

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Content } from "../Footer/style";
 import logo1 from "../../../assets/ARM/logo.png";
 import { useNavigate } from "react-router-dom";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 const Header = ({
   mainRef,
@@ -13,6 +14,7 @@ const Header = ({
 }) => {
   const naviagte = useNavigate();
   const width = window.innerWidth;
+  const { language } = useLanguageContext();
   return (
     <Container>
       <div className="root-container" style={{ position: "relative" }}>
@@ -67,7 +69,10 @@ const Header = ({
                   </Content.Link>
                 </div>
               )}
-              <Content.Btn type="primary" onClick={() => naviagte("/signin")}>
+              <Content.Btn
+                type="primary"
+                onClick={() => naviagte(`${language}/signin`)}
+              >
                 Sign In
               </Content.Btn>
             </Content.Right>

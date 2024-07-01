@@ -20,13 +20,25 @@ const Events = ({ data, type }) => {
             <div className="grid__item first" data-aos="fade-right">
               <LargeBanner
                 prop={prop3}
-                onClick={() => navigate(`/${language}/blog/${data[0]?.id}`)}
+                onClick={() =>
+                  navigate(
+                    `/${language}/blog/${
+                      language === "uz" ? data[0]?.id : data[0]?.blog_id
+                    }`
+                  )
+                }
                 item={data && data[0]}
                 type={type}
               />
               <LargeBanner
                 prop={prop3}
-                onClick={() => navigate(`/${language}/blog/${data[1]?.id}`)}
+                onClick={() =>
+                  navigate(
+                    `/${language}/blog/${
+                      language === "uz" ? data[1]?.id : data[1]?.blog_id
+                    }`
+                  )
+                }
                 item={data && data[1]}
                 type={type}
               />
@@ -34,7 +46,13 @@ const Events = ({ data, type }) => {
             <div className="grid__item second" data-aos="fade-up">
               <LargeBanner
                 prop={prop4}
-                onClick={() => navigate(`/${language}/blog/${data[2]?.id}`)}
+                onClick={() =>
+                  navigate(
+                    `/${language}/blog/${
+                      language === "uz" ? data[2]?.id : data[2]?.blog_id
+                    }`
+                  )
+                }
                 item={data && data[2]}
                 type={type}
               />

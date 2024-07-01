@@ -17,10 +17,7 @@ const Survery = () => {
   return (
     <DarkSection className="root-container">
       <div className="root-wrapper">
-        <Title
-          $type="dark"
-          title={t("survery.title")}
-        >
+        <Title $type="dark" title={t("survery.title")}>
           <div>
             <ScrollTrigger
               onEnter={() => setCounterOn(true)}
@@ -81,7 +78,9 @@ const Survery = () => {
                 <IlmiyMarkazCart
                   dataAos={"zoom-in"}
                   key={e.id}
-                  to={`department/${e?.id}`}
+                  to={`department/${
+                    language === "uz" ? e?.id : e?.departament_?.id
+                  }`}
                   item={e}
                 />
               ))}

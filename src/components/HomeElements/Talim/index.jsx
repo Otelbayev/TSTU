@@ -51,7 +51,13 @@ const Talim = () => {
               {talim?.map((e) => (
                 <div className="slider__item" key={e.id}>
                   <KafedraCart
-                    onClick={() => navigate(`/${language}/blog/${e.id}`)}
+                    onClick={() =>
+                      navigate(
+                        `/${language}/blog/${
+                          language === "uz" ? e?.id : e?.blog_id
+                        }`
+                      )
+                    }
                     $slider={"true"}
                     prop={e}
                   />

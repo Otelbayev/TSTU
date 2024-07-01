@@ -95,7 +95,7 @@ const BlogID = () => {
                     dataAos={"zoom-in"}
                     key={e.id}
                     prop={e}
-                    to={`blog/${e.id}`}
+                    to={`blog/${language === "uz" ? e?.id : e?.blog_id}`}
                   />
                 ))}
             </div>

@@ -16,7 +16,10 @@ const RectorCart = ({ data }) => {
         <Content.Front>
           <img
             loading="lazy"
-            src={`/public/api/${data?.persons_?.img_?.url}`}
+            src={`/public/api/${
+              data?.persons_?.img_?.url ||
+              data?.persons_translation_?.persons_?.img_?.url
+            }`}
             alt=""
           />
           <div className="position">
@@ -25,14 +28,19 @@ const RectorCart = ({ data }) => {
             , {data?.degree}
           </div>
           <div className="name">
-            {data?.persons_?.firstName} {data?.persons_?.lastName}{" "}
-            {data?.persons_?.fathers_name}
+            {data?.persons_?.firstName || data?.persons_translation_?.firstName}{" "}
+            {data?.persons_?.lastName || data?.persons_translation_?.lastName}{" "}
+            {data?.persons_?.fathers_name ||
+              data?.persons_translation_?.fathers_name}
           </div>
         </Content.Front>
         <Content.Back>
           <img
             loading="lazy"
-            src={`/public/api/${data?.persons_?.img_?.url}`}
+            src={`/public/api/${
+              data?.persons_?.img_?.url ||
+              data?.persons_translation_?.persons_?.img_?.url
+            }`}
             alt=""
           />
           <div className="position">
@@ -62,7 +70,7 @@ const RectorCart = ({ data }) => {
           <NavLink
             className={"btn btn-primary"}
             to={`/${language}/employee/${
-              language === "uz" ? data?.id : data?.persons_id
+              language === "uz" ? data?.id : data?.persons_data_id
             }`}
           >
             Batafsil

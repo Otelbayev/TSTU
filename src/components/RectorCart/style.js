@@ -17,19 +17,21 @@ export const Content = styled.div`
   .position {
     color: var(--date);
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    padding: 10px;
   }
   .name {
     color: var(--titleDark);
     text-align: center;
-    font-size: 24px;
+    font-size: 22px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
     padding: 5px 0;
+    padding: 0 10px 10px;
   }
 `;
 
@@ -42,7 +44,7 @@ Content.Front = styled.div`
   border: 1px solid #cecece;
   img {
     width: 100%;
-    height: 75%;
+    height: 70%;
     border-radius: 9px;
   }
 `;

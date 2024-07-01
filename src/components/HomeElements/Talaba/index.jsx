@@ -30,19 +30,37 @@ const Talaba = ({ data }) => {
                 <LargeBanner
                   prop={prop7}
                   item={data && data[0]}
-                  onClick={() => navigate(`/${language}/blog/${data[0]?.id}`)}
+                  onClick={() =>
+                    navigate(
+                      `/${language}/blog/${
+                        language === "uz" ? data[0]?.id : data[0]?.blog_id
+                      }`
+                    )
+                  }
                 />
                 <LargeBanner
                   prop={prop8}
                   item={data && data[1]}
-                  onClick={() => navigate(`/${language}/blog/${data[1]?.id}`)}
+                  onClick={() =>
+                    navigate(
+                      `/${language}/blog/${
+                        language === "uz" ? data[1]?.id : data[1]?.blog_id
+                      }`
+                    )
+                  }
                 />
               </div>
               <div data-aos="fade-up">
                 <LargeBanner
                   prop={prop9}
                   item={data && data[2]}
-                  onClick={() => navigate(`/${language}/blog/${data[2]?.id}`)}
+                  onClick={() =>
+                    navigate(
+                      `/${language}/blog/${
+                        language === "uz" ? data[2]?.id : data[2]?.blog_id
+                      }`
+                    )
+                  }
                 />
               </div>
               <div className="grid__large" data-aos="fade-left">

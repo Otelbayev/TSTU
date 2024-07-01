@@ -30,7 +30,11 @@ const News = ({ data, type }) => {
                   <Component
                     item={item}
                     type={type}
-                    onClick={() => handleNavigation(item?.id)}
+                    onClick={() =>
+                      handleNavigation(
+                        language === "uz" ? item?.id : item?.blog_id
+                      )
+                    }
                   />
                 </div>
               );

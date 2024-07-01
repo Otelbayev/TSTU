@@ -22,7 +22,6 @@ const FileImg = ({ className, lan, editorRef }) => {
 
   const [selectData, setSelectData] = useState([]);
   const [select2Data, setSelect2Data] = useState([]);
-
   const [title, setTitle] = useState("");
   const [title2, setTitle2] = useState("");
 
@@ -59,7 +58,7 @@ const FileImg = ({ className, lan, editorRef }) => {
         $(editorRef.current).summernote(
           "code",
           `${$(editorRef.current).summernote("code")} 
-          <a href="${res.data.url}">${title}</a>
+          <a href="/public/api/${res.data.url}">${title}</a>
           `
         );
         setTitle("");
@@ -80,9 +79,9 @@ const FileImg = ({ className, lan, editorRef }) => {
       $(editorRef.current).summernote(
         "code",
         `${$(editorRef.current)?.summernote("code")} 
-        <a href="${selectData.find((e) => e.value === select)?.url}">${
-          selectData.find((e) => e.value === select)?.label
-        }</a>`
+        <a href="/public/api/${
+          selectData.find((e) => e.value === select)?.url
+        }">${selectData.find((e) => e.value === select)?.label}</a>`
       );
       setSelect("other");
       setShow(true);
@@ -100,48 +99,119 @@ const FileImg = ({ className, lan, editorRef }) => {
     setModal(false);
   };
 
+  // const onModal2Ok = async () => {
+  //   if (show2) {
+  //     setTitle2("");
+  //     fileRef2.current.value = "";
+  //     setModal2(false);
+  //   } else {
+  //     if (select2.length === 1) {
+  //       select2Data.forEach((el) => {
+  //         if (select2[0] === el.value) {
+  //           $(editorRef.current).summernote(
+  //             "code",
+  //             `${$(editorRef.current)?.summernote("code")}
+  //             <img src="${`/public/api/${el.url}`}" alt="${el.label}" />`
+  //           );
+  //         }
+  //       });
+  //     } else {
+  //       const carouselItems = select2Data
+  //         .filter((e) => select2.includes(e.value))
+  //         .map(
+  //           (item, index) => `
+  //           <div key="${index}" class="carousel-item ${
+  //             index === 0 ? "active" : ""
+  //           }">
+  //             <img src="/public/api/${
+  //               item.url
+  //             }" class="d-block w-100" alt="carousel img" />
+  //           </div>
+  //         `
+  //         )
+  //         .join("");
+
+  //       const carouselHTML = `
+  //         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  //           <div class="carousel-inner">
+  //             ${carouselItems}
+  //           </div>
+  //           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+  //             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  //             <span class="sr-only">Previous</span>
+  //           </a>
+  //           <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+  //             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  //             <span class="sr-only">Next</span>
+  //           </a>
+  //         </div>
+  //       `;
+
+  //       $(editorRef.current).summernote(
+  //         "code",
+  //         `${$(editorRef.current)?.summernote("code")} ${carouselHTML}`
+  //       );
+  //     }
+
+  //     setSelect2(null);
+  //     setShow2(true);
+  //     setModal2(false);
+  //   }
+  // };
+
   const onModal2Ok = async () => {
     if (show2) {
       setTitle2("");
       fileRef2.current.value = "";
       setModal2(false);
     } else {
-      select2.length === 1
-        ? select2Data.forEach((el) => {
-            if (select2[0] === el.value) {
-              $(editorRef.current).summernote(
-                "code",
-                `${$(editorRef.current)?.summernote("code")} 
-              <img src="${el.url}" alt="${el.label}" />`
-              );
-            }
-          })
-        : $(editorRef.current).summernote(
-            "code",
-            `${$(editorRef.current)?.summernote("code")} 
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">    
-          ${select2Data
-            .filter((e) => select2.includes(e.value))
-            .map((el) => {
-              return `
-            <div class="carousel-item">
-            <img class="d-block w-100" src="https://news.ubc.ca/wp-content/uploads/2023/08/AdobeStock_559145847.jpeg" alt="${el.label}">
+      if (select2.length === 1) {
+        select2Data.forEach((el) => {
+          if (select2[0] === el.value) {
+            $(editorRef.current).summernote(
+              "code",
+              `${$(editorRef.current)?.summernote("code")} 
+              <img src="${`/public/api/${el.url}`}" alt="${el.label}" />`
+            );
+          }
+        });
+      } else {
+        const carouselItems = select2Data
+          .filter((e) => select2.includes(e.value))
+          .map(
+            (item, index) => `
+            <div key="${index}" class="carousel-item ${
+              index === 0 ? "active" : ""
+            }">
+              <img src="/public/api/${
+                item.url
+              }" class="d-block w-100" alt="carousel img" />
+            </div>
+          `
+          )
+          .join("");
+
+        const carouselHTML = `
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              ${carouselItems}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
-            `;
-            })}
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-            `
-          );
+        `;
+
+        $(editorRef.current).summernote(
+          "code",
+          `${$(editorRef.current)?.summernote("code")} ${carouselHTML}`
+        );
+      }
 
       setSelect2(null);
       setShow2(true);
@@ -402,11 +472,20 @@ const FileImg = ({ className, lan, editorRef }) => {
                     <div className="form-group col-md-6">
                       <label className="col-sm-4 col-form-label">Image</label>
                       <div className="col-sm-12">
-                        <img
-                          src=""
-                          id="imageold_uz_img"
-                          style={{ width: "100%" }}
-                        />
+                        {select2?.length ? (
+                          <img
+                            src={`/public/api/${
+                              select2?.length > 1
+                                ? select2Data.filter((e) =>
+                                    select2.includes(e.value)
+                                  )[select2?.length - 1]?.url
+                                : select2Data?.find((e) => e.value == select2)
+                                    ?.url
+                            }`}
+                            id="imageold_uz_img"
+                            style={{ width: "100%" }}
+                          />
+                        ) : null}
                       </div>
                     </div>
                   </div>

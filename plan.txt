@@ -1,11 +1,7 @@
-blog
-kafedra pagination
 department
 rectorat
 
-fakultet id
-kafedra id
-department id
+
 employee id
 
 menu ru en responsive

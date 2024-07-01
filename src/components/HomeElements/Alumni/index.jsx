@@ -62,7 +62,6 @@ const Alumni = () => {
       .then((e) => setData(e));
   }, [language]);
 
-  console.log(data);
 
   return (
     <div>

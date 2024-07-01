@@ -12,13 +12,18 @@ const Dekans = ({ data }) => {
       <Dekan.Left data-aos="fade-right">
         <Dekan.Img
           loading="lazy"
-          src={`/public/api/${data?.persons_?.img_?.url}`}
+          src={`/public/api/${
+            data?.persons_?.img_?.url ||
+            data?.persons_translation_?.persons_?.img_?.url
+          }`}
         />
       </Dekan.Left>
       <Dekan.Right data-aos="fade-left">
         <Dekan.Name>
-          {data?.persons_?.firstName} {data?.persons_?.lastName}{" "}
-          {data?.persons_?.fathers_name}
+          {data?.persons_?.firstName || data?.persons_translation_?.firstName}{" "}
+          {data?.persons_?.lastName || data?.persons_translation_?.lastName}{" "}
+          {data?.persons_?.fathers_name ||
+            data?.persons_translation_?.fathers_name}
         </Dekan.Name>
         <Dekan.Contact>
           <Dekan.User />
@@ -43,7 +48,7 @@ const Dekans = ({ data }) => {
           onClick={() =>
             naviagte(
               `/${language}/employee/${
-                language === "uz" ? data?.id : data?.persons_id
+                language === "uz" ? data?.id : data?.persons_data_id
               }`
             )
           }

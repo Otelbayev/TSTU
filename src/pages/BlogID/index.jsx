@@ -9,12 +9,13 @@ import { useLanguageContext } from "../../context/LanguageContext";
 import { useParams } from "react-router-dom";
 import { getDate } from "../../utils/month";
 import { useFrontBlogContext } from "../../context/BlogContext";
-
+import { useTranslation } from "react-i18next";
 
 const BlogID = () => {
   const { id } = useParams();
   const { language } = useLanguageContext();
   const { news } = useFrontBlogContext();
+  const { t } = useTranslation();
 
   useEffect(() => {
     // Ensure jQuery is attached to the window object
@@ -84,11 +85,7 @@ const BlogID = () => {
               <img loading="lazy" src={ads} alt="" data-aos="fade-left" />
             </div>
           </div>
-          <Title
-            title="Universitet yangiliklari"
-            button="Barchasini ko‘rish"
-            to={`blog`}
-          >
+          <Title title={t("news.t")} button={t("news.btn")} to={`blog`}>
             <div className="newsid-bottom">
               {news
                 ?.filter((e) => e.id != id)

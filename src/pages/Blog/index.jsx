@@ -53,10 +53,6 @@ const Blog = () => {
   }, [language, page]);
 
   useEffect(() => {
-    // getTypes();
-  }, [language]);
-
-  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
@@ -81,7 +77,13 @@ const Blog = () => {
           <Layout>
             <Layout.Item data-aos="fade-right">
               <NewsItem
-                onClick={() => navigate(`/${language}/blog/${news[0]?.id}`)}
+                onClick={() =>
+                  navigate(
+                    `/${language}/blog/${
+                      language === "uz" ? news[0]?.id : news[0]?.blog_id
+                    }`
+                  )
+                }
                 prop={news[0]}
               />
               <Layout.Second>
@@ -89,14 +91,26 @@ const Blog = () => {
                   <MiniItem
                     key={item.id}
                     prop={item}
-                    onClick={() => navigate(`/${language}/blog/${item.id}`)}
+                    onClick={() =>
+                      navigate(
+                        `/${language}/blog/${
+                          language === "uz" ? item.id : item?.blog_id
+                        }`
+                      )
+                    }
                   />
                 ))}
               </Layout.Second>
             </Layout.Item>
             <Layout.Item data-aos="fade-left">
               <NewsItem
-                onClick={() => navigate(`/${language}/blog/${news[0]?.id}`)}
+                onClick={() =>
+                  navigate(
+                    `/${language}/blog/${
+                      language === "uz" ? news[0]?.id : news[0]?.blog_id
+                    }`
+                  )
+                }
                 prop={news[0]}
               />
               <Layout.Second>
@@ -104,7 +118,13 @@ const Blog = () => {
                   <MiniItem
                     key={item.id}
                     prop={item}
-                    onClick={() => navigate(`/${language}/blog/${item.id}`)}
+                    onClick={() =>
+                      navigate(
+                        `/${language}/blog/${
+                          language === "uz" ? item.id : item?.blog_id
+                        }`
+                      )
+                    }
                   />
                 ))}
               </Layout.Second>
@@ -117,22 +137,48 @@ const Blog = () => {
             {currentData.map((e) => (
               <NewsCart
                 dataAos="zoom-in"
-                onClick={() => navigate(`/${language}/blog/${e.id}`)}
+                onClick={() =>
+                  navigate(
+                    `/${language}/blog/${language === "uz" ? e.id : e?.blog_id}`
+                  )
+                }
                 key={e.id}
                 prop={e}
               />
             ))}
           </Grid>
-          <Pagination
-            total={allData?.length}
-            current={currentPage}
-            pageSize={pageSize}
-            onChange={handlePageChange}
-            style={{ textAlign: "center", marginBottom: "20px" }}
-          />
+          {allData?.length ? (
+            <Pagination
+              total={allData?.length}
+              current={currentPage}
+              pageSize={pageSize}
+              onChange={handlePageChange}
+              style={{ textAlign: "center", marginBottom: "20px" }}
+            />
+          ) : null}
           <Title title={t("news.t")} component={""}>
             <Flex>
-              <VideoCart dataAos={"zoom-in"} key={""} prop={""} to={``} />
+              {/* <VideoCart dataAos={"zoom-in"} key={""} prop={""} to={``} /> */}
+              <iframe
+                width="100%"
+                height="300px"
+                src="https://www.youtube.com/embed/lQf1Xgr9kgk?si=I7Dyn1grGAkWS4T0"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+              <iframe
+                width="100%"
+                height="300px"
+                src="https://www.youtube.com/embed/UoG4D2vDEXE?si=rPdgPPgwFPQZGvzM"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
             </Flex>
           </Title>
         </Content>

@@ -1,10 +1,8 @@
 import React from "react";
 import { Contianer, Icons } from "./style";
-import kafedra from "../../assets/images/kafedra.png";
 import { useNavigate } from "react-router-dom";
 import { useLanguageContext } from "../../context/LanguageContext";
 import { useTranslation } from "react-i18next";
-import logo from "../../../public/logo.png";
 
 const IlmiyMarkazCart = ({ $border, to, item, dataAos, style }) => {
   const navigate = useNavigate();

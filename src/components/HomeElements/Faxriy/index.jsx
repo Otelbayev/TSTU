@@ -20,7 +20,7 @@ const Faxriy = () => {
       .then((res) => setData(res));
   }, []);
 
-  console.log(data);
+
 
   return (
     <div>

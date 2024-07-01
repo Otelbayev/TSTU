@@ -77,7 +77,6 @@ const Rectorat = () => {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setRector(
           res.find(
             (e) =>

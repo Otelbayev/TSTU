@@ -39,7 +39,7 @@ const DepartmentID = () => {
           <h3>{data?.title}</h3>
           <img
             src={`/public/api/${data?.img_?.url}`}
-            className="w-80"
+            style={{ width: "100%" }}
             alt=""
           />
           <div

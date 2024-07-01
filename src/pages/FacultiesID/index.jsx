@@ -15,18 +15,9 @@ import {
 } from "./style";
 import { useNavigate, useParams } from "react-router-dom";
 import DekanCart from "../../components/Faculties/DekanCart";
-import kaf1 from "../../assets/Faculties/kaf1.png";
-import kaf2 from "../../assets/Faculties/kaf2.png";
-import kaf3 from "../../assets/Faculties/kaf3.png";
 import Dekans from "../../components/Faculties/Dekan";
 import Footer from "../../components/Footer";
 import FackBottom from "../../components/Faculties/FakBottom";
-import {
-  data as bottomData,
-  fakNewsData1,
-  orinbosar,
-  fakNewsData,
-} from "../Faculties/mock";
 import FakNews from "../../components/Faculties/FakNews";
 import Yonalishlar from "../../components/Faculties/Yonalishlar";
 import { Title } from "../../components/Generics";
@@ -70,7 +61,9 @@ const FacultiesID = () => {
   const { language } = useLanguageContext();
   const { favoMarkaz, kafedras } = useFrontDepartmentContext();
 
-  const kafedraData = kafedras?.filter((e) => e?.parent_id == id);
+  const kafedraData = kafedras?.filter(
+    (e) => e?.parent_id == id || e?.departament_?.parent_id == id
+  );
 
   const getPersonData = async () => {
     const res = await axios.get(
@@ -84,7 +77,7 @@ const FacultiesID = () => {
           (e) =>
             e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
               "dekan" ||
-            e?.persons_?.employee_type_translation_?.title
+            e?.persons_translation_?.employee_type_translation_?.employee_?.title
               ?.toLowerCase()
               ?.trim() === "dekan"
         )
@@ -95,7 +88,7 @@ const FacultiesID = () => {
           (e) =>
             e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
               "dekan o'rinbosari" ||
-            e?.persons_?.employee_type_translation_?.title
+            e?.persons_translation_?.employee_type_translation_?.employee_?.title
               ?.toLowerCase()
               ?.trim() === "dekan o'rinbosari"
         )
@@ -149,12 +142,12 @@ const FacultiesID = () => {
         <div className="root-wrapper">
           <Wrap>
             <div ref={aboutRef}>
-              <Title title={t("facultet.about")} $border={"none"} />
-              <div
+              {/* <Title title={t("facultet.about")} $border={"none"} /> */}
+              {/* <div
                 dangerouslySetInnerHTML={{ __html: data?.text }}
                 data-aos="fade-up"
                 className="text"
-              />
+              /> */}
             </div>
             <Title title={t("facultet.dekan")} $border={"none"} />
             <Dekans img={dekan} data={dekan} />
@@ -198,8 +191,14 @@ const FacultiesID = () => {
                   {kafedraData?.map((e) => (
                     <Kafedra.Item
                       data-aos="zoom-in"
-                      onClick={() => naviagte(`/${language}/kafedra/${e.id}`)}
-                      $bg={kaf1}
+                      onClick={() =>
+                        naviagte(
+                          `/${language}/kafedra/${
+                            language === "uz" ? e?.id : e?.departament_?.id
+                          }`
+                        )
+                      }
+                      $bg={`/public/api/${e?.img_?.url}`}
                       key={e.id}
                     >
                       <Kafedra.Content>
@@ -217,7 +216,9 @@ const FacultiesID = () => {
                 {favoMarkaz?.map((e) => (
                   <IlmiyMarkazCart
                     key={e?.id}
-                    to={`department/${e?.id}`}
+                    to={`department/${
+                      language === "uz" ? e?.id : e?.departament_?.id
+                    }`}
                     $border={"#CECECE"}
                     dataAos="zoom-in"
                     item={e}

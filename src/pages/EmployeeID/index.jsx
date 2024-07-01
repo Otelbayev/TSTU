@@ -13,6 +13,10 @@ const EmployeeID = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     fetch(
       language === "uz"
         ? `/api/persondata/sitegetbyidpersondata/${id}`
@@ -29,12 +33,19 @@ const EmployeeID = () => {
           <div className="sidebar-text d-flex flex-column h-100 justify-content-center text-center">
             <img
               className="w-100 img-fluid mb-4"
-              src={`${img.split("logo")[0]}api/${data?.persons_?.img_?.url}`}
+              src={`${img.split("logo")[0]}api/${
+                data?.persons_?.img_?.url ||
+                data?.persons_translation_?.persons_?.img_?.url
+              }`}
               alt="Image"
             />
             <h1 className="mt-2">
-              {data?.persons_?.firstName} {data?.persons_?.lastName}{" "}
-              {data?.persons_?.fathers_name}
+              {data?.persons_?.firstName ||
+                data?.persons_translation_?.persons_?.firstName}{" "}
+              {data?.persons_?.lastName ||
+                data?.persons_translation_?.persons_?.lastName}{" "}
+              {data?.persons_?.fathers_name ||
+                data?.persons_translation_?.persons_?.fathers_name}
             </h1>
             <div className="mb-4">
               <h4 className="d-inline-block" />
@@ -93,7 +104,12 @@ const EmployeeID = () => {
                     <h5 className="d-inline text-primary">
                       {t("employee.fio")}:
                     </h5>
-                    {data?.persons_?.firstName} {data?.persons_?.lastName}
+                    {data?.persons_?.firstName ||
+                      data?.persons_translation_?.persons_?.firstName}{" "}
+                    {data?.persons_?.lastName ||
+                      data?.persons_translation_?.persons_?.lastName}{" "}
+                    {data?.persons_?.fathers_name ||
+                      data?.persons_translation_?.persons_?.fathers_name}
                   </div>
                   <div className="col-sm-6 py-1">
                     <h5 className="d-inline text-primary">

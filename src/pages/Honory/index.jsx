@@ -24,8 +24,8 @@ const Honory = () => {
     )
       .then((res) => res.json())
       .then((res) => setFaxriy(res));
-  }, [language]);
 
+  }, [language]);
   return (
     <div>
       <UniShowcase title={t("honory.title")} />
@@ -36,14 +36,21 @@ const Honory = () => {
               {faxriy?.map((e, index) => (
                 <Item id={index} key={e?.id} className={"content__item"}>
                   <img
-                    src={`/public/api/${e?.persons_?.img_?.url}`}
+                    src={`/public/api/${
+                      e?.persons_?.img_?.url ||
+                      e?.persons_translation_?.persons_?.img_?.url
+                    }`}
                     alt=""
                     className="content__item__img"
                   />
                   <div className="content__item__data">
                     <div className="content__item__data__fio">
-                      {e?.persons_?.firstName} {e?.persons_?.lastName}{" "}
-                      {e?.persons_?.fathers_name}
+                      {e?.persons_?.firstName ||
+                        e?.persons_translation_?.persons_?.firstName}{" "}
+                      {e?.persons_?.lastName ||
+                        e?.persons_translation_?.persons_?.lastName}{" "}
+                      {e?.persons_?.fathers_name ||
+                        e?.persons_translation_?.persons_?.fathers_name}
                     </div>
                     <div className="content__item__data__position">
                       {e?.degree || "position"}
@@ -55,7 +62,13 @@ const Honory = () => {
                     </ul>
                     <button
                       className="btn btn-primary"
-                      onClick={() => navigate(`/${language}/employee/${e.id}`)}
+                      onClick={() =>
+                        navigate(
+                          `/${language}/employee/${
+                            language === "uz" ? e.id : e?.persons_data_id
+                          }`
+                        )
+                      }
                     >
                       Batafsil
                     </button>

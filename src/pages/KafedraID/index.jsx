@@ -47,7 +47,7 @@ const KafedraID = () => {
           (e) =>
             e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
               "kafedra mudiri" ||
-            e?.persons_?.employee_type_translation_?.title
+            e?.persons_translation_?.employee_type_translation_?.employee_?.title
               ?.toLowerCase()
               ?.trim() === "kafedra mudiri"
         )
@@ -57,7 +57,7 @@ const KafedraID = () => {
           (e) =>
             e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
               "katta o'qituvchi" ||
-            e?.persons_?.employee_type_translation_?.title
+            e?.persons_translation_?.employee_type_translation_?.employee_?.title
               ?.toLowerCase()
               ?.trim() === "katta o'qituvchi"
         )
@@ -67,7 +67,7 @@ const KafedraID = () => {
           (e) =>
             e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
               "professor" ||
-            e?.persons_?.employee_type_translation_?.title
+            e?.persons_translation_?.employee_type_translation_?.employee_?.title
               ?.toLowerCase()
               ?.trim() === "professor"
         )
@@ -77,7 +77,7 @@ const KafedraID = () => {
           (e) =>
             e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
               "assistent" ||
-            e?.persons_?.employee_type_translation_?.title
+            e?.persons_translation_?.employee_type_translation_?.employee_?.title
               ?.toLowerCase()
               ?.trim() === "assistent"
         )
@@ -87,7 +87,7 @@ const KafedraID = () => {
           (e) =>
             e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
               "dotsent" ||
-            e?.persons_?.employee_type_translation_?.title
+            e?.persons_translation_?.employee_type_translation_?.employee_?.title
               ?.toLowerCase()
               ?.trim() === "dotsent"
         )
@@ -97,7 +97,7 @@ const KafedraID = () => {
           (e) =>
             e?.persons_?.employee_type_?.title?.toLowerCase()?.trim() ===
               "doktorant" ||
-            e?.persons_?.employee_type_translation_?.title
+            e?.persons_translation_?.employee_type_translation_?.employee_?.title
               ?.toLowerCase()
               ?.trim() === "doktorant"
         )
@@ -146,9 +146,9 @@ const KafedraID = () => {
 
   const getTitle = (title, language) => {
     const obj = {
-      uz: `${title} fakultetiga xush kelibsiz!`,
-      en: `Welcome to the Faculty of ${title}!`,
-      ru: `Добро пожаловать на факультет ${title}!`,
+      uz: `${title} kafedrasiga xush kelibsiz!`,
+      en: `Welcome to the department of ${title}!`,
+      ru: `Добро пожаловать на кафедру ${title}!`,
     };
 
     return obj[language];
@@ -167,11 +167,11 @@ const KafedraID = () => {
       <div className="root-container">
         <div className="root-wrapper">
           <Wrap>
-            <Title ref={aboutRef} title={t("kafedra.about")} $border={"none"} />
+            {/* <Title ref={aboutRef} title={t("kafedra.about")} $border={"none"} />
             <p
               dangerouslySetInnerHTML={{ __html: data?.text }}
               data-aos="fade-up"
-            />
+            /> */}
             <Title ref={mudirRef} title={t("kafedra.mudir")} $border={"none"} />
             <Dekans img={dekan} data={mudir} />
             <Title title={t("kafedra.teachers")} $border={"none"} />

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import bg from "../../assets/Faculties/bgFak2.jpeg";
 import Header from "../../components/Faculties/Header";
 import Showcase from "../../components/Faculties/Showcase";
 import Dekans from "../../components/Faculties/Dekan";
@@ -7,7 +6,6 @@ import dekan from "../../assets/Faculties/rustam.png";
 import DekanCart from "../../components/Faculties/DekanCart";
 import Footer from "../../components/Footer";
 import FackBottom from "../../components/Faculties/FakBottom";
-import { data as data1, kafData } from "../Faculties/mock";
 import { Orinbosar, Wrap, Yonalish } from "../FacultiesID/style";
 import Yonalishlar from "../../components/Faculties/Yonalishlar";
 import { Title } from "../../components/Generics";
@@ -34,7 +32,9 @@ const KafedraID = () => {
   const [assistent, setAssistent] = useState([]);
   const [dotsent, setDotsent] = useState([]);
   const [doktarant, setDoktarant] = useState([]);
+  const [y, setY] = useState([]);
 
+  const [transId, settransId] = useState(null);
   const getPersonData = async () => {
     const res = await axios.get(
       language === "uz"
@@ -105,6 +105,18 @@ const KafedraID = () => {
     }
   };
 
+  const getYon = async () => {
+    const res = await axios.get(
+      language === "uz"
+        ? `/api/departament/sitegetalldepartamentchild/${id}`
+        : `/api/departament/sitegetalldepartamenttranslationchild/${transId}?language_code=${language}`
+    );
+
+    if (res.status === 200) {
+      setY(res.data);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
@@ -114,26 +126,15 @@ const KafedraID = () => {
       );
       if (res.status === 200) {
         setData(res.data);
+        settransId(res.data.id);
       } else {
         setData([]);
       }
     };
-
     fetchData();
     getPersonData();
+    getYon();
   }, [id, language]);
-
-  const data1 = [
-    { id: 1, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 2, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 3, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 4, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 5, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 6, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 7, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 8, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-    { id: 9, label: "60640102 Transport logistikasi (avtomobil transporti)" },
-  ];
 
   const aboutRef = useRef();
   const mudirRef = useRef();
@@ -195,11 +196,11 @@ const KafedraID = () => {
             <Yonalish ref={yonalishRef}>
               <Yonalish.Left data-aos="fade-right">
                 <Yonalish.Title>{t("kafedra.bakalavr")}</Yonalish.Title>
-                <Yonalishlar data={data1} />
+                <Yonalishlar data={y} />
               </Yonalish.Left>
               <Yonalish.Right data-aos="fade-left">
-                <Yonalish.Title>{t("kafedra.bakalavr")}</Yonalish.Title>
-                <Yonalishlar data={data1} />
+                <Yonalish.Title>{t("kafedra.magistr")}</Yonalish.Title>
+                <Yonalishlar data={y} />
               </Yonalish.Right>
             </Yonalish>
           </Wrap>

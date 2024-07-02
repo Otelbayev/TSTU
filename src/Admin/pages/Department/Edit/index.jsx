@@ -227,7 +227,7 @@ const DepartmentEdit = () => {
         {!isCreate && (
           <Image
             className={"form-group col-md-2"}
-            img={`/public/api/${img}`}
+            img={`${import.meta.env.VITE_BASE_URL}/${img}`}
             label={"Image"}
             alt="none"
           />
@@ -240,7 +240,7 @@ const DepartmentEdit = () => {
         {!isCreate && (
           <Image
             className={"form-group col-md-2"}
-            img={`/public/api/${icon}`}
+            img={`${import.meta.env.VITE_BASE_URL}/${icon}`}
             label={"Icon"}
             alt="none"
           />

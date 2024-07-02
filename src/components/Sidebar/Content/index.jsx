@@ -47,7 +47,7 @@ const Content = ({ hover, setHover, title, desc, data, id, icon }) => {
         <div className="left">
           <div className="left__top">
             <img
-              src={`/public/api/${icon}`}
+              src={`${import.meta.env.VITE_BASE_URL}/${icon}`}
               alt=""
               className="left__top__icon"
             />

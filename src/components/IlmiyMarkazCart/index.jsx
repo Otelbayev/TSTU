@@ -18,7 +18,7 @@ const IlmiyMarkazCart = ({ $border, to, item, dataAos, style }) => {
       <div className="item">
         <img
           loading="lazy"
-          src={`/public/api/${item?.img_?.url}`}
+          src={`${import.meta.env.VITE_BASE_URL}/${item?.img_?.url}`}
           alt=""
           className="item__img"
         />

@@ -7,7 +7,7 @@ const NewsCart = ({ prop, onClick, dataAos }) => {
     <Content onClick={onClick} data-aos={dataAos}>
       <img
         loading="lazy"
-        src={`/public/api/${
+        src={`${import.meta.env.VITE_BASE_URL}/${
           prop?.img_?.url || prop?.img_translation_?.url
         }`}
         alt=""

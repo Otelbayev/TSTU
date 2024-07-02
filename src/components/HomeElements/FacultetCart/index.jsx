@@ -7,7 +7,7 @@ const FacultetCart = ({ prop, id, onClick }) => {
       <div className="icon">
         <img
           loading="lazy"
-          src={`/public/api/${prop?.img_icon_?.url}`}
+          src={`${import.meta.env.VITE_BASE_URL}/${prop?.img_icon_?.url}`}
           alt=""
         />
       </div>

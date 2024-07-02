@@ -6,7 +6,7 @@ const InteractiveCart = ({ prop, no }) => {
   return (
     <Wrap data-aos={!no && "zoom-in"}>
       <img
-        src={`/public/api/${
+        src={`${import.meta.env.VITE_BASE_URL}/${
           prop?.icon_?.url || prop?.icon_translation_?.url
         }`}
         alt=""

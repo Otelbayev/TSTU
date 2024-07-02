@@ -150,7 +150,7 @@ const Create = () => {
           <Image
             className="col-md-4"
             label="Image"
-            img={`/public/api/${img}`}
+            img={`${import.meta.env.VITE_BASE_URL}/${img}`}
           />
         </div>
         <div className="row">

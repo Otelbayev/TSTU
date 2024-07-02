@@ -58,7 +58,7 @@ const FileImg = ({ className, lan, editorRef }) => {
         $(editorRef.current).summernote(
           "code",
           `${$(editorRef.current).summernote("code")} 
-          <a href="/public/api/${res.data.url}">${title}</a>
+          <a href="${import.meta.env.VITE_BASE_URL}/${res.data.url}">${title}</a>
           `
         );
         setTitle("");
@@ -79,7 +79,7 @@ const FileImg = ({ className, lan, editorRef }) => {
       $(editorRef.current).summernote(
         "code",
         `${$(editorRef.current)?.summernote("code")} 
-        <a href="/public/api/${
+        <a href="${import.meta.env.VITE_BASE_URL}/${
           selectData.find((e) => e.value === select)?.url
         }">${selectData.find((e) => e.value === select)?.label}</a>`
       );
@@ -111,7 +111,7 @@ const FileImg = ({ className, lan, editorRef }) => {
   //           $(editorRef.current).summernote(
   //             "code",
   //             `${$(editorRef.current)?.summernote("code")}
-  //             <img src="${`/public/api/${el.url}`}" alt="${el.label}" />`
+  //             <img src="${`${import.meta.env.VITE_BASE_URL}/${el.url}`}" alt="${el.label}" />`
   //           );
   //         }
   //       });
@@ -123,7 +123,7 @@ const FileImg = ({ className, lan, editorRef }) => {
   //           <div key="${index}" class="carousel-item ${
   //             index === 0 ? "active" : ""
   //           }">
-  //             <img src="/public/api/${
+  //             <img src="${import.meta.env.VITE_BASE_URL}/${
   //               item.url
   //             }" class="d-block w-100" alt="carousel img" />
   //           </div>
@@ -171,7 +171,7 @@ const FileImg = ({ className, lan, editorRef }) => {
             $(editorRef.current).summernote(
               "code",
               `${$(editorRef.current)?.summernote("code")} 
-              <img src="${`/public/api/${el.url}`}" alt="${el.label}" />`
+              <img src="${`${import.meta.env.VITE_BASE_URL}/${el.url}`}" alt="${el.label}" />`
             );
           }
         });
@@ -183,7 +183,7 @@ const FileImg = ({ className, lan, editorRef }) => {
             <div key="${index}" class="carousel-item ${
               index === 0 ? "active" : ""
             }">
-              <img src="/public/api/${
+              <img src="${import.meta.env.VITE_BASE_URL}/${
                 item.url
               }" class="d-block w-100" alt="carousel img" />
             </div>
@@ -474,7 +474,7 @@ const FileImg = ({ className, lan, editorRef }) => {
                       <div className="col-sm-12">
                         {select2?.length ? (
                           <img
-                            src={`/public/api/${
+                            src={`${import.meta.env.VITE_BASE_URL}/${
                               select2?.length > 1
                                 ? select2Data.filter((e) =>
                                     select2.includes(e.value)

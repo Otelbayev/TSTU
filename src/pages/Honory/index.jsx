@@ -24,7 +24,6 @@ const Honory = () => {
     )
       .then((res) => res.json())
       .then((res) => setFaxriy(res));
-
   }, [language]);
   return (
     <div>
@@ -36,7 +35,7 @@ const Honory = () => {
               {faxriy?.map((e, index) => (
                 <Item id={index} key={e?.id} className={"content__item"}>
                   <img
-                    src={`/public/api/${
+                    src={`${import.meta.env.VITE_BASE_URL}/${
                       e?.persons_?.img_?.url ||
                       e?.persons_translation_?.persons_?.img_?.url
                     }`}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Container } from "./style";
 import { useParams } from "react-router-dom";
 import { useLanguageContext } from "../../context/LanguageContext";
-import img from "../../../public/logo.png";
 import "./style.css";
 import { useTranslation } from "react-i18next";
 
@@ -33,7 +32,7 @@ const EmployeeID = () => {
           <div className="sidebar-text d-flex flex-column h-100 justify-content-center text-center">
             <img
               className="w-100 img-fluid mb-4"
-              src={`${img.split("logo")[0]}api/${
+              src={`${import.meta.env.VITE_BASE_URL}/${
                 data?.persons_?.img_?.url ||
                 data?.persons_translation_?.persons_?.img_?.url
               }`}
@@ -527,6 +526,7 @@ const EmployeeID = () => {
                     name="sentMessage"
                     id="contactForm"
                     noValidate="novalidate"
+                    onSubmit={(e) => e.preventDefault()}
                   >
                     <div className="form-row">
                       <div className="control-group col-sm-6">

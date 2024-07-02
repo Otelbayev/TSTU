@@ -62,7 +62,6 @@ const Alumni = () => {
       .then((e) => setData(e));
   }, [language]);
 
-
   return (
     <div>
       <div className="root-container">
@@ -88,9 +87,9 @@ const Alumni = () => {
                       <div className="content">
                         <img
                           loading="lazy"
-                          src={`/public/api/${
+                          src={`${import.meta.env.VITE_BASE_URL}/${
                             e?.persons_?.img_?.url ||
-                            e?.persons_translation_?.persons_ ?.img_?.url
+                            e?.persons_translation_?.persons_?.img_?.url
                           }`}
                           alt=""
                           className="content__img"

@@ -38,7 +38,7 @@ const DepartmentID = () => {
         <div className="root-wrapper">
           <h3>{data?.title}</h3>
           <img
-            src={`/public/api/${data?.img_?.url}`}
+            src={`${import.meta.env.VITE_BASE_URL}/${data?.img_?.url}`}
             style={{ width: "100%" }}
             alt=""
           />

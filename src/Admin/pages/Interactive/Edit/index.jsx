@@ -140,7 +140,7 @@ const Edit = () => {
             onChange={(e) => setImg(e.target.files[0])}
           />
           {!isCreate && (
-            <Image img={`/public/api/${img}`} className="col-md-2" />
+            <Image img={`${import.meta.env.VITE_BASE_URL}/${img}`} className="col-md-2" />
           )}
           <ChooseFile
             label="Icon"
@@ -148,7 +148,7 @@ const Edit = () => {
             onChange={(e) => setIcon(e.target.files[0])}
           />
           {!isCreate && (
-            <Image img={`/public/api/${icon}`} className="col-md-2" />
+            <Image img={`${import.meta.env.VITE_BASE_URL}/${icon}`} className="col-md-2" />
           )}
           {!isCreate && (
             <Select

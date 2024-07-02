@@ -159,7 +159,7 @@ const KafedraID = () => {
     <div className="overflow-hidden">
       <Header links={links} />
       <Showcase
-        bg={`/public/api/${data?.img_?.url}`}
+        bg={`${import.meta.env.VITE_BASE_URL}/${data?.img_?.url}`}
         title={getTitle(data?.title, language)}
         button={t("kafedra.btn")}
         onClick={() => useHandleScroll(aboutRef)}

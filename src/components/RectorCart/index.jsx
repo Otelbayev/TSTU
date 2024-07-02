@@ -16,7 +16,7 @@ const RectorCart = ({ data }) => {
         <Content.Front>
           <img
             loading="lazy"
-            src={`/public/api/${
+            src={`${import.meta.env.VITE_BASE_URL}/${
               data?.persons_?.img_?.url ||
               data?.persons_translation_?.persons_?.img_?.url
             }`}
@@ -37,7 +37,7 @@ const RectorCart = ({ data }) => {
         <Content.Back>
           <img
             loading="lazy"
-            src={`/public/api/${
+            src={`${import.meta.env.VITE_BASE_URL}/${
               data?.persons_?.img_?.url ||
               data?.persons_translation_?.persons_?.img_?.url
             }`}

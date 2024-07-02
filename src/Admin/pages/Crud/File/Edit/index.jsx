@@ -118,7 +118,7 @@ const Edit = () => {
           {!isCreate && (
             <Image
               label="Img"
-              img={`/public/api/${img}`}
+              img={`${import.meta.env.VITE_BASE_URL}/${img}`}
               className={"col-md-2"}
             />
           )}

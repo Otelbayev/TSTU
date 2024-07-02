@@ -552,7 +552,7 @@ const Edit = () => {
         {value === "uz" && (
           <Image
             className="form-group col-md-2"
-            img={`/public/api/${src}`}
+            img={`${import.meta.env.VITE_BASE_URL}/${src}`}
             label="Rasm"
           />
         )}

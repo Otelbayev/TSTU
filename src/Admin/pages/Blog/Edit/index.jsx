@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   ChooseFile,
   Editor,
+  FileImg,
   Image,
   Input,
   Select,
@@ -166,35 +167,36 @@ const Edit = () => {
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
         />
-        <Editor
-          className="form-group col-md-6 card-header"
+        <Editor className="form-group col-md-6" lan={value} ref={editorRef} />
+        <FileImg
+          className="form-group col-md-6"
           lan={value}
-          ref={editorRef}
+          editorRef={editorRef}
         />
         <Input
           label="Event date"
           type="date"
-          className="form-group col-md-3 mt-4"
+          className="form-group col-md-3"
           value={date1 || ""}
           onChange={(e) => setDate1(e.target.value)}
         />
         <Input
           label="Event end date"
           type="date"
-          className="form-group col-md-3 mt-4"
+          className="form-group col-md-3"
           value={date2 || ""}
           onChange={(e) => setDate2(e.target.value)}
         />
         <Select
           label="Blog Ctegory"
-          className={isCreate ? "form-group col-md-3" : "form-group col-md-4"}
+          className={isCreate ? "form-group col-md-3" : "form-group col-md-3"}
           value={blogValue}
           onChange={(e) => setBlogValue(e)}
           options={blogCategoryOptions}
         />
         <Input
           label="Position"
-          className={isCreate ? "form-group col-md-3" : "form-group col-md-4"}
+          className={isCreate ? "form-group col-md-3" : "form-group col-md-3"}
           value={position || ""}
           onChange={(e) => setPosition(e.target.value)}
           type="number"
@@ -227,7 +229,7 @@ const Edit = () => {
           <Image
             label="Image"
             className="col-md-4"
-            img={`/public/api/${img}`}
+            img={`${import.meta.env.VITE_BASE_URL}/${img}`}
           />
         )}
         <div className="form-group mt-3 col-md-12">

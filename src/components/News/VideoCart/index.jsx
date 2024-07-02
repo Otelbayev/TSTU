@@ -11,7 +11,7 @@ const VideoCart = ({ prop, dataAos, to }) => {
       <div className="video-cart-left">
         <img
           loading="lazy"
-          src={`/public/api/${prop?.img_?.url || prop?.img_translation_?.url}`}
+          src={`${import.meta.env.VITE_BASE_URL}/${prop?.img_?.url || prop?.img_translation_?.url}`}
           alt=""
         />
       </div>

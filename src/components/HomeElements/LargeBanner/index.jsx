@@ -5,9 +5,7 @@ import { getDate } from "../../../utils/month";
 const LargeBanner = ({ onClick, item, type }) => {
   return (
     <Large
-      $img={`/public/api/${
-        item?.img_?.url || item?.img_translation_?.url
-      }`}
+      $img={`${import.meta.env.VITE_BASE_URL}/${item?.img_?.url || item?.img_translation_?.url}`}
       onClick={onClick}
     >
       <div>

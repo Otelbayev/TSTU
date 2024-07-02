@@ -17,16 +17,7 @@ const BlogID = () => {
   const { news } = useFrontBlogContext();
   const { t } = useTranslation();
 
-  useEffect(() => {
-    // Ensure jQuery is attached to the window object
-    window.jQuery = $;
-    $(".flexslider").flexslider({
-      animation: "slide",
-      controlNav: true,
-      directionNav: true,
-    });
-  }, []);
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
@@ -68,7 +59,7 @@ const BlogID = () => {
           <div className="content">
             <div className="content__left">
               <img
-                src={`/public/api/${
+                src={`${import.meta.env.VITE_BASE_URL}/${
                   data?.img_?.url || data?.img_translation_?.url
                 }`}
                 style={{ width: "100%" }}

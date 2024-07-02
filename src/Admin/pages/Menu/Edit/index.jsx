@@ -213,7 +213,7 @@ const Edit = () => {
           <Image
             className="form-group col-md-1"
             label="Icon"
-            img={`/public/api/${img}`}
+            img={`${import.meta.env.VITE_BASE_URL}/${img}`}
           />
         )}
         <Select

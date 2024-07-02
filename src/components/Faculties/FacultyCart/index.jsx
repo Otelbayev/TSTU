@@ -3,16 +3,16 @@ import { Container } from "./style";
 
 const FacultyCart = ({ item, onClick, type }) => {
   return (
-    <Container onClick={onClick} $bg={`/public/api/${item?.img_?.url}`}>
+    <Container onClick={onClick} $bg={`${import.meta.env.VITE_BASE_URL}/${item?.img_?.url}`}>
       {type === "kafedra" ? (
         <div className="kafedra" data-aos="zoom-in">
           <p className="kafedra-title card-title">{item?.title}</p>
-          <img src={`/public/api/${item?.img_?.url}`} alt="" />
+          <img src={`${import.meta.env.VITE_BASE_URL}/${item?.img_?.url}`} alt="" />
         </div>
       ) : (
         <div className="card">
           <div className="card-front">
-            <img loading="lazy" src={`/public/api/${item?.img_icon_?.url}`} />
+            <img loading="lazy" src={`${import.meta.env.VITE_BASE_URL}/${item?.img_icon_?.url}`} />
             <p className="card-title">{item?.title}</p>
           </div>
           <div className="card-back">

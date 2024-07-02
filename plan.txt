@@ -1,12 +1,27 @@
+home
+e'lonalar
+arm
+blog
+blog id
+centers
+contact
 department
-rectorat
-
-
+department id
+education
 employee id
-
-menu ru en responsive
-login responsive
-galereya responsive
-
-kafedra yonalishlarni perent id bo'yicha olib kelish
-facultetga tegishli hamma yonalishllarni buittada oli bkelish
+faculties
+faculty id
+faq
+galereya
+history
+honory
+interactive
+kafedra
+kafedra id
+page id
+rector
+rectorat
+scientific center
+sign in
+structure
+student life

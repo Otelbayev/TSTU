@@ -12,7 +12,7 @@ const Dekans = ({ data }) => {
       <Dekan.Left data-aos="fade-right">
         <Dekan.Img
           loading="lazy"
-          src={`/public/api/${
+          src={`${import.meta.env.VITE_BASE_URL}/${
             data?.persons_?.img_?.url ||
             data?.persons_translation_?.persons_?.img_?.url
           }`}

@@ -1,0 +1,48 @@
+import IlmiyMarkazCart from "../../components/IlmiyMarkazCart";
+import { Content } from "./style";
+import React, { useEffect } from "react";
+import UniShowcase from "./../../components/UniShowcase/index";
+import { useTranslation } from "react-i18next";
+import { useDepartment } from "../../hooks/useDepartment";
+
+const ScientificCenter = () => {
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const { data, loading, error } = useDepartment("Ilmiy markaz");
+
+  if (loading) {
+    return <h1 className="text-center">Loading...</h1>;
+  }
+
+  if (!loading && error) {
+    return <h1 className="text-center">Error!</h1>;
+  }
+
+  return (
+    <div>
+      <UniShowcase title={t("centers.title")} />
+      <div className="root-container">
+        <div className="root-wrapper">
+          <Content data-aos="fade-up">
+            {data?.map((e) => (
+              <IlmiyMarkazCart
+                key={e.id}
+                $border={`var(--borderCart)`}
+                borderHover={`var(--bgHover)`}
+                to={`department/${
+                  i18n.language === "uz" ? e.id : e.departament_?.id
+                }`}
+                dataAos={"zoom-in"}
+                item={e}
+              />
+            ))}
+          </Content>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ScientificCenter;

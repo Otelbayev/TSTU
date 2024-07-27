@@ -1,0 +1,28 @@
+import React from "react";
+import { Content } from "./style";
+import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+const KafedraCart = ({ prop, dataAos, $slider, onClick, arrow, fac }) => {
+  const { t, i18n } = useTranslation();
+
+  return (
+    <Content data-aos={dataAos} onClick={onClick} $slider={$slider}>
+      <img
+        src={`${import.meta.env.VITE_BASE_URL_IMG}${
+          prop?.img_?.url || prop?.img_translation_?.url
+        }`}
+        alt=""
+        className="img"
+      />
+      <div className="flex-name">
+        <NavLink className="name">
+          {prop?.title} {fac ? t("faculties.in") : ""}
+          {arrow === false ? "" : <i className="fa-solid fa-arrow-right"></i>}
+        </NavLink>
+      </div>
+    </Content>
+  );
+};
+
+export default KafedraCart;

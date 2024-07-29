@@ -1,7 +1,14 @@
 import { useEffect } from "react";
-import { useBlogContext } from "../context/BlogContext";
 import { useDepartmentContext } from "../context/DepartmentContext";
-import { employee, generics, location, menu, site, user } from "../utils/mock";
+import {
+  blog,
+  employee,
+  generics,
+  location,
+  menu,
+  site,
+  user,
+} from "../utils/mock";
 
 export const admin = () => {
   const {
@@ -11,20 +18,9 @@ export const admin = () => {
     isDeleteDepartmentType,
   } = useDepartmentContext();
 
-  const {
-    getBlogCategorySelect,
-    blogCategoryOptions,
-    isCreateBlogCategory,
-    isDeleteBlogCategory,
-  } = useBlogContext();
-
   useEffect(() => {
     getSidebarDepartment();
   }, [isCreateDepartmentType, isDeleteDepartmentType]);
-
-  useEffect(() => {
-    getBlogCategorySelect("uz");
-  }, [isCreateBlogCategory, isDeleteBlogCategory]);
 
   return [
     {
@@ -43,7 +39,7 @@ export const admin = () => {
       title: "Blog",
       roles: ["admin"],
       icon: "nav-icon fas fa-blog",
-      data: blogCategoryOptions,
+      data: blog,
     },
     {
       title: "Employee",

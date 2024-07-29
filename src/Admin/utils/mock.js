@@ -4,8 +4,10 @@ export const menu = [
 ];
 
 export const blog = [
-  { id: 727271, title: "Blog", path: "blogs" },
-  { id: 72722, title: "Blog Category", path: "blogcategory" },
+  { id: 72271, title: "News", path: "blog/news" },
+  { id: 16546, title: "Blog", path: "blog/blog" },
+  { id: 49965, title: "Events", path: "blog/events" },
+  { id: 72270, title: "Blog Category", path: "blogcategory" },
 ];
 
 export const employee = [

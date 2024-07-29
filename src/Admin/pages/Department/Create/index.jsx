@@ -183,7 +183,7 @@ const DepartmentCreate = () => {
           <Input
             className="form-group col-md-3"
             label="Hemis ID"
-            ref={posRef}
+            ref={hemisID}
           />
         )}
         <Input

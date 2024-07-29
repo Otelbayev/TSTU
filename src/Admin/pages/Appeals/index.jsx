@@ -11,7 +11,6 @@ const Appeals = () => {
     <Wrapper
       create={false}
       date={true}
-      type={""}
       setData={setData}
       sendRequest={sendRequest}
       isDelete={""}

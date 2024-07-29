@@ -1,6 +1,6 @@
 import React from "react";
 import Accardion from "../Accardion";
-import { NavLink, useRouteLoaderData } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";

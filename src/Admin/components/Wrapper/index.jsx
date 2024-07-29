@@ -9,7 +9,6 @@ const Wrapper = ({
   create,
   path,
   date,
-  type,
   setData,
   sendRequest,
   isDelete,
@@ -26,7 +25,7 @@ const Wrapper = ({
     return `${year}-${month}-${day}`;
   }
 
-  const [start, setStart] = useState(getCurrentDate());
+  const [start, setStart] = useState("2020-01-01");
   const [end, setEnd] = useState(getCurrentDate());
 
   const getData = async () => {
@@ -34,7 +33,7 @@ const Wrapper = ({
       method: "get",
       url: `${
         import.meta.env.VITE_BASE_URL_API
-      }${url}?blog_category=${type}&start_time=${start}&end_time=${end}`,
+      }${url}?&start_time=${start}&end_time=${end}`,
       headers: {
         Authorization: `Bearer ${Cookies.get("_token")}`,
       },
@@ -46,9 +45,10 @@ const Wrapper = ({
     if (date) {
       getData();
     }
-  }, [isDelete, type]);
+  }, [isDelete]);
 
-  function handleClick() {
+  function handleClick(e) {
+    e.preventDefault();
     getData();
   }
 
@@ -129,51 +129,52 @@ const Wrapper = ({
                   )} */}
 
                     {date ? (
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <div className="card-title">
-                            {create && (
-                              <NavLink
-                                to={`/${i18n.language}/admin/blogs/create`}
-                                className="btn btn-primary"
-                              >
-                                Create
-                              </NavLink>
-                            )}
+                      <form onSubmit={handleClick} action="">
+                        <div className="row">
+                          <div className="col-sm-3">
+                            <div className="card-title">
+                              {create && (
+                                <NavLink
+                                  to={`/${i18n.language}/admin/blogs/create`}
+                                  className="btn btn-primary"
+                                >
+                                  Create
+                                </NavLink>
+                              )}
+                            </div>
+                          </div>
+                          <div className="col-sm-3">
+                            <input
+                              type="date"
+                              className="form-control"
+                              name="subday"
+                              id="subday"
+                              value={start}
+                              onChange={(e) => setStart(e.target.value)}
+                            />
+                          </div>
+                          <div className="col-sm-3">
+                            <input
+                              type="date"
+                              className="form-control"
+                              name="today"
+                              id="today"
+                              value={end}
+                              onChange={(e) => setEnd(e.target.value)}
+                            />
+                          </div>
+                          <div className="col-sm-3">
+                            <button
+                              type="submit"
+                              className="btn btn-primary"
+                              id="refresh"
+                              style={{ width: "100%" }}
+                            >
+                              Update table
+                            </button>
                           </div>
                         </div>
-                        <div className="col-sm-3">
-                          <input
-                            type="date"
-                            className="form-control"
-                            name="subday"
-                            id="subday"
-                            value={start}
-                            onChange={(e) => setStart(e.target.value)}
-                          />
-                        </div>
-                        <div className="col-sm-3">
-                          <input
-                            type="date"
-                            className="form-control"
-                            name="today"
-                            id="today"
-                            value={end}
-                            onChange={(e) => setEnd(e.target.value)}
-                          />
-                        </div>
-                        <div className="col-sm-3">
-                          <button
-                            type="submit"
-                            className="btn btn-primary"
-                            id="refresh"
-                            style={{ width: "100%" }}
-                            onClick={handleClick}
-                          >
-                            Update table
-                          </button>
-                        </div>
-                      </div>
+                      </form>
                     ) : (
                       <div className="card-title">
                         {create && (

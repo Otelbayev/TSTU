@@ -34,6 +34,10 @@ const PageID = ({ oldID }) => {
     getData();
   }, [id, i18n.language, oldID]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <UniShowcase title={data?.title} />

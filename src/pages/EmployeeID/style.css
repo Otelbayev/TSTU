@@ -9599,6 +9599,16 @@ button.bg-dark:focus {
 
 .text-primary {
   color: #004fec !important;
+  font-size: 22px !important;
+}
+
+.bio {
+  font-size: 16px !important;
+}
+
+.langu {
+  font-size: 20px !important;
+  font-family: sans-serif !important;
 }
 
 a.text-primary:hover,

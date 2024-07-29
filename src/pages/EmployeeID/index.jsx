@@ -93,10 +93,11 @@ const EmployeeID = () => {
               </div>
               <div className="col-12">
                 <p
+                  className="bio"
                   dangerouslySetInnerHTML={{
                     __html: data?.biography_json
                       ? data?.biography_json
-                      : "<p>Ma'lumotlar yo'q</p>",
+                      : "Ma'lumotlar yo'q",
                   }}
                 />
                 <div className="row">
@@ -181,8 +182,8 @@ const EmployeeID = () => {
               <div className="col-sm-6">
                 <div className="skill mb-4">
                   <div className="d-flex justify-content-between">
-                    <p className="mb-2">{t("employee.uz")}</p>
-                    <p className="mb-2">{data?.languages_uz}%</p>
+                    <p className="mb-2 langu">{t("employee.uz")}</p>
+                    <p className="mb-2 langu">{data?.languages_uz}%</p>
                   </div>
                   <div className="progress">
                     <div
@@ -197,8 +198,8 @@ const EmployeeID = () => {
                 </div>
                 <div className="skill mb-4">
                   <div className="d-flex justify-content-between">
-                    <p className="mb-2">{t("employee.ru")}</p>
-                    <p className="mb-2">{data?.languages_ru}%</p>
+                    <p className="mb-2 langu">{t("employee.ru")}</p>
+                    <p className="mb-2 langu">{data?.languages_ru}%</p>
                   </div>
                   <div className="progress">
                     <div
@@ -215,8 +216,8 @@ const EmployeeID = () => {
               <div className="col-sm-6">
                 <div className="skill mb-4">
                   <div className="d-flex justify-content-between">
-                    <p className="mb-2">{t("employee.en")}</p>
-                    <p className="mb-2">{data?.languages_en}%</p>
+                    <p className="mb-2 langu">{t("employee.en")}</p>
+                    <p className="mb-2 langu">{data?.languages_en}%</p>
                   </div>
                   <div className="progress">
                     <div
@@ -232,8 +233,8 @@ const EmployeeID = () => {
                 {data?.languages_any && (
                   <div className="skill mb-4">
                     <div className="d-flex justify-content-between">
-                      <p className="mb-2">{data?.languages_any_title}</p>
-                      <p className="mb-2">{data?.languages_any}%</p>
+                      <p className="mb-2 langu">{data?.languages_any_title}</p>
+                      <p className="mb-2 langu">{data?.languages_any}%</p>
                     </div>
                     <div className="progress">
                       <div

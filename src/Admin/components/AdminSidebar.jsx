@@ -23,6 +23,7 @@ export const admin = () => {
   }, [isCreateDepartmentType, isDeleteDepartmentType]);
 
   return [
+    //admin
     {
       path: "pages",
       title: "Sahifalar",
@@ -65,6 +66,13 @@ export const admin = () => {
       roles: ["admin"],
       data: [...generics, ...site, ...location],
       icon: "nav-icon fas fa-edit",
+    },
+    //teacher
+    {
+      path: "import-doc",
+      title: "Import Doc",
+      roles: ["teacher"],
+      icon: "nav-icon fa fa-file-import",
     },
   ];
 };

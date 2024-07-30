@@ -18,22 +18,23 @@ export const Container = styled.div`
       color: var(--titleDark);
     }
   }
-  .structute-content {
+  .str {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     margin-top: 40px;
-    &__item {
-      border: 1px solid var(--minDate);
-      text-align: center;
-      padding: 5px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: 0.3s;
-      &:hover {
-        transform: scale(1.05);
-      }
+    &__top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+  }
+  .str-item {
+    border: 1px solid var(--minDate);
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
   }
   @media (max-width: 900px) {
     margin: 20px 0;
@@ -42,7 +43,7 @@ export const Container = styled.div`
       text-align: center;
       gap: 10px;
       padding: 10px 0;
-      &__title{
+      &__title {
         font-size: 22px;
       }
     }

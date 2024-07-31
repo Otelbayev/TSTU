@@ -93,6 +93,8 @@ const Create110 = () => {
       });
   }, []);
 
+  const [mock, setMock] = useState([])
+
   return (
     <Wrapper title="Create Teacher 110">
       <form className="form-horizontal row" onSubmit={handleSubmit}>
@@ -115,13 +117,14 @@ const Create110 = () => {
           value={parent}
           onChange={(e) => setParent(e)}
         />
-        <Select
+        <Input
           className="form-group col-md-6"
-          label="Department"
-          options={departmentOptions}
-          value={department}
-          onChange={(e) => setDepartment(e)}
+          type="number"
+          value={sequence}
+          onChange={(e) => setSequence(e.target.value)}
+          label="Ball"
         />
+
         <Select
           className="form-group col-md-4"
           label="Indicator 1"
@@ -143,20 +146,31 @@ const Create110 = () => {
           value={ind3}
           onChange={(e) => setInd3(e)}
         />
-        <Input
-          className="form-group col-md-6"
-          type="number"
-          value={sequence}
-          onChange={(e) => setSequence(e.target.value)}
-          label="Ball"
-        />
-        <Input
-          className="form-group col-md-6"
-          type="number"
-          label="Sequence Number"
-          value={score}
-          onChange={(e) => setScore(e.target.value)}
-        />
+        <div className="row col-md-10">
+          <Select
+            className="form-group col-md-6"
+            label="Department"
+            options={departmentOptions}
+            value={department}
+            onChange={(e) => setDepartment(e)}
+          />
+          <Input
+            className="form-group col-md-6"
+            type="number"
+            label="Sequence Number"
+            value={score}
+            onChange={(e) => setScore(e.target.value)}
+          />
+        </div>
+        <div className="col-md-2">
+          <label className="col-sm-12 col-form-label">Add Item</label>
+          <div className="col-sm-12">
+            <button type="button" className="btn btn-primary w-100">
+              Add
+            </button>
+          </div>
+        </div>
+
         <div className="form-group mt-3 col-md-12">
           <div className="col-sm-12">
             <button type="submit" className="btn btn-success">

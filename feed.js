@@ -6,7 +6,7 @@ const buildXML = async () => {
   try {
     // Fetch data
     const response = await fetch(
-      `http://localhost:5058/api/blogcontroller/sitegetallblog?queryNum=10&pageNum=1&favorite=true`
+      `${import.meta.env.VITE_BASE_}blogcontroller/sitegetallblog?queryNum=10&pageNum=1&favorite=true`
     );
     const data = await response.json();
 

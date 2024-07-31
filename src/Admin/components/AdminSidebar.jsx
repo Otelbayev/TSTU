@@ -1,14 +1,6 @@
 import { useEffect } from "react";
 import { useDepartmentContext } from "../context/DepartmentContext";
-import {
-  blog,
-  employee,
-  generics,
-  location,
-  menu,
-  site,
-  user,
-} from "../utils/mock";
+import { blog, employee, menu, user, crud } from "../utils/mock";
 
 export const admin = () => {
   const {
@@ -64,7 +56,7 @@ export const admin = () => {
     {
       title: "CRUD",
       roles: ["admin"],
-      data: [...generics, ...site, ...location],
+      data: crud,
       icon: "nav-icon fas fa-edit",
     },
     //teacher

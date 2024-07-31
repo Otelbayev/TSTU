@@ -24,7 +24,7 @@ export const useDepartment = (title, favo) => {
               }`
         );
         const result = await response.json();
-        setData(result);
+        setData(result?.list);
       } catch (err) {
         setError(err);
       } finally {

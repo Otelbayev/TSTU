@@ -21,31 +21,26 @@ export const department = [
   { id: 78277, title: "Department Type", path: "departmenttype" },
 ];
 
-export const site = [
-  { id: 47524727, title: "Site", path: "site" },
-  { id: 1578577000, title: "Site Type", path: "sitetype" },
-  { id: 524524, title: "Site Details", path: "site-details" },
-];
-
-export const location = [
-  { id: 1138777, title: "Mamlakat", path: "country" },
-  { id: 2677787, title: "Viloyat", path: "region" },
-  { id: 77383738, title: "Tuman", path: "city" },
-  { id: 47878778, title: "Mahalla", path: "neighborhood" },
-];
-
 export const user = [
   { id: 4733, title: "Users", path: "users" },
   { id: 17678, title: "User Type", path: "usertype" },
 ];
 
-export const generics = [
-  { id: 783787, title: "Interactive", path: "interactive" },
+export const crud = [
+  { id: 455, title: "110 CRUD", path: "crud-110" },
   { id: 373387, title: "Appeals", path: "appeals" },
+  { id: 783787, title: "Interactive", path: "interactive" },
   { id: 377837, title: "Statistika", path: "statistics" },
   { id: 778637, title: "File", path: "file" },
-  { id: 73737, title: "Til", path: "language" },
+  { id: 73737, title: "Language", path: "language" },
   { id: 73773, title: "Token", path: "token" },
   { id: 373773, title: "Status", path: "status" },
-  { id: 737373, title: "Jins", path: "gender" },
+  { id: 737373, title: "Gender", path: "gender" },
+  { id: 47524727, title: "Site", path: "site" },
+  { id: 1578577000, title: "Site Type", path: "sitetype" },
+  { id: 524524, title: "Site Details", path: "site-details" },
+  { id: 1138777, title: "Mamlakat", path: "country" },
+  { id: 2677787, title: "Viloyat", path: "region" },
+  { id: 77383738, title: "Tuman", path: "city" },
+  { id: 47878778, title: "Mahalla", path: "neighborhood" },
 ];

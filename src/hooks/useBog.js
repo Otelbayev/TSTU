@@ -24,7 +24,7 @@ export const useBlog = (title, favo) => {
               }&blog_category_uz=${title}${favo ? "&favorite=true" : ""}`
         );
         const result = await response.json();
-        setData(result);
+        setData(result?.list);
       } catch (err) {
         setError(err);
       } finally {

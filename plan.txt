@@ -1,8 +1,25 @@
-blog
+admin panel 110 ball CRUD
+teacher profile 110ball
+
+filter by blog category
+
+blog pagination
+announcements pagination
+oav pagination
+events pagination
+faculty pagination
+kafedra pagination
+department pagination
+centers pagination
+college pagination
+
 structure
+
 history
-pagination
+
 appeals
+
+responsive home page
 
 https://tstu.uz/blog/463
 https://tstu.uz/blog/459
@@ -12,16 +29,3 @@ https://tstu.uz/blog/456
 
 
 https://tstu.uz/dep_page/385
-
-https://tstu.uz/page/167
-https://tstu.uz/page/166 
-https://tstu.uz/page/104
-https://tstu.uz/page/169
-https://tstu.uz/page/180
-https://tstu.uz/page/117
-https://tstu.uz/page/107
-https://tstu.uz/page/92
-https://tstu.uz/page/187 
-https://tstu.uz/page/72
-https://tstu.uz/page/5 
-https://tstu.uz/page/182

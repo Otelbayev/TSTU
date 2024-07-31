@@ -1,0 +1,214 @@
+import React, { useEffect, useState } from "react";
+import Wrapper from "../../../components/Wrapper";
+import { Input, Select } from "../../../components/Generics";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { message } from "antd";
+import { useDepartmentContext } from "../../../context/DepartmentContext";
+import { useParams } from "react-router-dom";
+import { useStatusContext } from "../../../context/Status";
+
+const Edit110 = () => {
+  const { departmentOptions, getSelectDepartment } = useDepartmentContext();
+  const [parentOptions, setParentOptions] = useState([]);
+  const { statusData, getStatus } = useStatusContext();
+
+  const { id } = useParams();
+
+  const [department, setDepartment] = useState(0);
+  const [parent, setParent] = useState(0);
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [score, setScore] = useState("");
+  const [sequence, setSequence] = useState("");
+  const [ind1, setInd1] = useState(true);
+  const [ind2, setInd2] = useState(true);
+  const [ind3, setInd3] = useState(true);
+  const [status, setStatus] = useState(null);
+
+  async function handleSubmit(e) {
+    message.loading({ key: "sub", content: "Loading..." });
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(
+        `${
+          import.meta.env.VITE_BASE_URL_API
+        }/documentteacher110controller/createdocumentteacher110`,
+        {
+          title,
+          parent_id: parent,
+          indicator: ind1,
+          one_indicator: ind2,
+          two_indicator: ind3,
+          max_score: score,
+          description: desc,
+          document_sequence: [
+            {
+              sequence_number: sequence,
+              department_id: department,
+            },
+          ],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("_token")}`,
+          },
+        }
+      );
+
+      if (res.status === 200) {
+        message.success({ key: "sub", content: "Success!" });
+        setTitle("");
+        setDesc("");
+        setDepartment(0);
+        setParent(parentOptions[0].value);
+        setScore("");
+        setSequence("");
+        setInd1(true);
+        setInd2(true);
+        setInd3(true);
+      }
+    } catch (err) {
+      message.error({ key: "sub", content: "Error!" });
+    }
+  }
+
+  const bool = [
+    { value: true, label: "true" },
+    { value: false, label: "false" },
+  ];
+
+  useEffect(() => {
+    getSelectDepartment("uz");
+    getStatus("uz");
+    fetch(
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/documentteacher110controller/getalldocumentteacher110select`,
+      {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("_token")}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => res.map((e) => ({ label: e.title, value: e.id })))
+      .then((res) => {
+        setParentOptions(res);
+        setParent(res[0].value);
+      });
+    fetch(
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/documentteacher110controller/getbyiddocumentteacher110admin/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("_token")}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setTitle(res.title);
+        setDesc(res.description);
+        setDepartment(res.document_sequence[0]?.profil_user_id);
+        setSequence(res.document_sequence[0]?.sequence_number);
+        setParent(res.parent_id);
+        setScore(res.max_score);
+        setInd1(res.indicator);
+        setInd2(res.one_indicator);
+        setInd3(res.two_indicator);
+        setStatus(res.status_?.id);
+      });
+  }, []);
+
+  return (
+    <Wrapper title="Create Teacher 110">
+      <form className="form-horizontal row" onSubmit={handleSubmit}>
+        <Input
+          className="form-group col-md-6"
+          label="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <Input
+          className="form-group col-md-6"
+          label="Description"
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
+        />
+        <Select
+          className="form-group col-md-6"
+          label="Parent"
+          options={parentOptions}
+          value={parent}
+          onChange={(e) => setParent(e)}
+        />
+
+        <Select
+          className="form-group col-md-4"
+          label="Indicator 1"
+          options={bool}
+          value={ind1}
+          onChange={(e) => setInd1(e)}
+        />
+        <Select
+          className="form-group col-md-4"
+          label="Indicator 2"
+          options={bool}
+          value={ind2}
+          onChange={(e) => setInd2(e)}
+        />
+        <Select
+          className="form-group col-md-4"
+          label="Indicator 3"
+          options={bool}
+          value={ind3}
+          onChange={(e) => setInd3(e)}
+        />
+        <Input
+          className="form-group col-md-4"
+          type="number"
+          value={score}
+          onChange={(e) => setScore(e.target.value)}
+          label="Ball"
+        />
+        <Input
+          className="form-group col-md-5"
+          type="number"
+          label="Sequence Number"
+          value={sequence}
+          onChange={(e) => setSequence(e.target.value)}
+        />
+        <Select
+          className="form-group col-md-5"
+          label="User Profile"
+          options={departmentOptions}
+          value={department}
+          onChange={(e) => setDepartment(e)}
+        />
+        <div className="col-md-2">
+          <button className="btn btn-primary">Add</button>
+        </div>
+        <Select
+          className="form-group col-md-4"
+          label="Status"
+          options={statusData}
+          value={status}
+          onChange={(e) => setStatus(e)}
+        />
+        <div className="form-group mt-3 col-md-12">
+          <div className="col-sm-12">
+            <button type="submit" className="btn btn-primary">
+              Update
+            </button>
+          </div>
+        </div>
+      </form>
+    </Wrapper>
+  );
+};
+
+export default Edit110;

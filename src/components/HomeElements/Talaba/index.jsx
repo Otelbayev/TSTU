@@ -12,10 +12,7 @@ const Talaba = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
-  const { data, loading, error } = useBlog(
-    "Dissertatsiya ishi muhokamasi",
-    true
-  );
+  const { data, loading, error } = useBlog("Talaba hayoti", true);
 
   const d = data?.sort((a, b) => b?.id - a?.id);
 

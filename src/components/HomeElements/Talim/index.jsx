@@ -32,7 +32,7 @@ const settings = {
 const Talim = () => {
   const { t, i18n } = useTranslation();
 
-  const { data } = useBlog("OAV biz haqimizda", true);
+  const { data } = useBlog("Ta‘lim", true);
 
   const navigate = useNavigate();
 

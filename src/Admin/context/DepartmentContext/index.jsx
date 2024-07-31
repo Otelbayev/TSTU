@@ -20,7 +20,9 @@ const DepartmentProvider = ({ children }) => {
       method: "get",
       url:
         value === "uz"
-          ? `${import.meta.env.VITE_BASE_URL_API}/departament/selecteddepartament`
+          ? `${
+              import.meta.env.VITE_BASE_URL_API
+            }/departament/selecteddepartament`
           : `${
               import.meta.env.VITE_BASE_URL_API
             }/departament/selectdepartamenttranslation?language_code=${value}`,
@@ -46,7 +48,9 @@ const DepartmentProvider = ({ children }) => {
       method: "get",
       url:
         value === "uz"
-          ? `${import.meta.env.VITE_BASE_URL_API}/deartamenttypecontroller/sitegetalldepartamentType`
+          ? `${
+              import.meta.env.VITE_BASE_URL_API
+            }/deartamenttypecontroller/sitegetalldepartamentType`
           : `${
               import.meta.env.VITE_BASE_URL_API
             }/deartamenttypecontroller/sitegetalldepartamentTypetranslation?language_code=${value}`,
@@ -69,7 +73,9 @@ const DepartmentProvider = ({ children }) => {
   async function getSidebarDepartment() {
     const res = await sendRequest({
       method: "get",
-      url: `${import.meta.env.VITE_BASE_URL_API}/deartamenttypecontroller/sitegetalldepartamentType`,
+      url: `${
+        import.meta.env.VITE_BASE_URL_API
+      }/deartamenttypecontroller/sitegetalldepartamentType`,
       headers: { Authorization: token },
     });
     if (res.status === 200) {

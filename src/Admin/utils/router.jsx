@@ -135,6 +135,10 @@ const StatisticsEdit = lazy(() => import("../pages/Crud/Statistics/Edit"));
 
 const TeacherDoc = lazy(() => import("../pages/Teacher/FileImport"));
 
+const Crud110 = lazy(() => import("../pages/Crud/Crud110"));
+const Create110 = lazy(() => import("../pages/Crud/Crud110/Create110"));
+const Edit110 = lazy(() => import("../pages/Crud/Crud110/Edit110"));
+
 export const routes = [
   {
     id: useId(),
@@ -672,6 +676,24 @@ export const routes = [
     id: useId(),
     path: "import-doc",
     element: <TeacherDoc />,
+    isPrivate: true,
+  },
+  {
+    id: useId(),
+    path: "crud-110",
+    element: <Crud110 />,
+    isPrivate: true,
+  },
+  {
+    id: useId(),
+    path: "crud-110/create",
+    element: <Create110 />,
+    isPrivate: true,
+  },
+  {
+    id: useId(),
+    path: "crud-110/edit/:id",
+    element: <Edit110 />,
     isPrivate: true,
   },
 ];

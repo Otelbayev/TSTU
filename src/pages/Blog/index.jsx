@@ -31,7 +31,7 @@ const Blog = () => {
             i18n.language
           }`
     );
-    res.status === 200 && setAllData(res.data);
+    res.status === 200 && setAllData(res.data.list);
   };
 
   useEffect(() => {

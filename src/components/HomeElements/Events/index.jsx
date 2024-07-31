@@ -11,7 +11,7 @@ const Events = ({ type }) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
-  const { data, loading, error } = useBlog("Xalqaro hamkorlik", true);
+  const { data, loading, error } = useBlog("Kutilayotgan tadbirlar", true);
 
   const d1 = data?.sort((a, b) => b.id - a.id);
 

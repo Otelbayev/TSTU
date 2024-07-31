@@ -75,11 +75,14 @@ const SignIn = () => {
         },
       });
       if (response.status === 200) {
-        Cookies.set("_token", response.data.token);
-        Cookies.set("_userDetails", JSON.stringify(response.data.userDetails));
+        Cookies.set("_token", response.data.token, { expires: 1 });
+        Cookies.set("_userDetails", JSON.stringify(response.data.userDetails), {
+          expires: 1,
+        });
         Cookies.set(
           "role",
-          response.data?.userDetails?.user_type_?.type?.toLowerCase()
+          response.data?.userDetails?.user_type_?.type?.toLowerCase(),
+          { expires: 1 }
         );
 
         navigate(`/${i18n.language}/admin/home`);

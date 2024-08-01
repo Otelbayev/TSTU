@@ -20,7 +20,7 @@ const Crud110 = () => {
         Authorization: `Bearer ${Cookies.get("_token")}`,
       },
     });
-    res.status === 200 && setData(res.data);
+    res.status === 200 && setData(res.data?.sort((a, b) => a.id - b.id));
   }
 
   useEffect(() => {

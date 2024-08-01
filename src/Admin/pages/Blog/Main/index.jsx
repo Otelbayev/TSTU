@@ -39,12 +39,12 @@ const Pages = () => {
     };
 
     if (obj[type]) {
-      return data.filter((item) =>
-        obj[type].includes(item?.blog_category_?.title)
-      );
+      return data
+        .filter((item) => obj[type].includes(item?.blog_category_?.title))
+        .sort((a, b) => b.id - a.id);
     }
 
-    return data;
+    return data.sort((a, b) => b.id - a.id);
   }
 
   const fdata = filterData(type);

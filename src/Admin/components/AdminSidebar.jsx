@@ -15,52 +15,59 @@ export const admin = () => {
   }, [isCreateDepartmentType, isDeleteDepartmentType]);
 
   return [
-    //admin
+    // admin
     {
+      id: 1,
       path: "pages",
       title: "Sahifalar",
       roles: ["admin"],
       icon: "nav-icon fa fa-file",
     },
     {
+      id: 2,
       title: "Menu",
       roles: ["admin"],
       data: menu,
       icon: "nav-icon fas fa-bars",
     },
     {
+      id: 3,
       title: "Blog",
       roles: ["admin"],
       icon: "nav-icon fas fa-blog",
       data: blog,
     },
     {
+      id: 4,
       title: "Employee",
       roles: ["admin"],
       data: employee,
       icon: "nav-icon fas fa-users",
     },
     {
+      id: 5,
       title: "Depaerment",
       roles: ["admin"],
       icon: "nav-icon fas fa-building",
       data: sidebarDepartment,
     },
     {
+      id: 6,
       title: "User",
       roles: ["admin"],
       data: user,
       icon: "nav-icon fas fa-users-gear",
     },
-
     {
+      id: 7,
       title: "CRUD",
       roles: ["admin"],
       data: crud,
       icon: "nav-icon fas fa-edit",
     },
-    //teacher
+    // teacher
     {
+      id: 8,
       path: "import-doc",
       title: "Import Doc",
       roles: ["teacher"],

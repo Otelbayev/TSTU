@@ -36,6 +36,7 @@ const Edit = () => {
   const [img, setImg] = useState(null);
   const [isCreate, setIsCreate] = useState(false);
   const [transId, setTransId] = useState(null);
+  const [upd, setUpd] = useState({});
 
   const getData = async (value) => {
     const response = await sendRequest({
@@ -58,7 +59,7 @@ const Edit = () => {
       setShort(response?.data?.title_short);
       $(editorRef.current).summernote("code", response?.data?.text);
       setDesc(response?.data?.description);
-      setImg(response?.data?.img_?.url);
+      setImg(response?.data?.img_?.url || response.data?.img_translation_?.url);
       setStatus(
         response?.data?.status_?.id || response?.data?.status_translation_?.id
       );
@@ -75,7 +76,7 @@ const Edit = () => {
   useEffect(() => {
     getData(value);
     getStatus(value);
-  }, [value, isCreate]);
+  }, [value, isCreate, upd]);
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
@@ -105,7 +106,10 @@ const Edit = () => {
       [{ page_id: id }, { language_id }]
     );
 
-    res?.status === 200 && setIsCreate(false);
+    if (res?.status === 200) {
+      setUpd({ name: "test" });
+      setIsCreate(false);
+    }
   };
 
   return (

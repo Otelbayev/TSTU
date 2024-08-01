@@ -10,21 +10,41 @@ const Create110 = () => {
   const { departmentOptions, getSelectDepartment } = useDepartmentContext();
   const [parentOptions, setParentOptions] = useState([]);
 
-  const [department, setDepartment] = useState(0);
   const [parent, setParent] = useState(0);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [score, setScore] = useState("");
-  const [sequence, setSequence] = useState("");
+  const [score, setScore] = useState(null);
   const [ind1, setInd1] = useState(true);
   const [ind2, setInd2] = useState(true);
   const [ind3, setInd3] = useState(true);
+
+  const [mock, setMock] = useState([
+    {
+      sequence_number: 1,
+      profil_user_id: 0,
+    },
+  ]);
+
+  const handleSelectChange = (index, newValue) => {
+    const updatedMock = [...mock];
+    updatedMock[index].profil_user_id = newValue;
+    setMock(updatedMock);
+  };
+
+  const handleInputChange = (index, newValue) => {
+    const updatedMock = [...mock];
+    updatedMock[index].sequence_number = Number(newValue);
+    setMock(updatedMock);
+  };
 
   async function handleSubmit(e) {
     message.loading({ key: "sub", content: "Loading..." });
     e.preventDefault();
 
     try {
+      if (!title) {
+        throw new Error();
+      }
       const res = await axios.post(
         `${
           import.meta.env.VITE_BASE_URL_API
@@ -37,12 +57,7 @@ const Create110 = () => {
           two_indicator: ind3,
           max_score: score,
           description: desc,
-          document_sequence: [
-            {
-              sequence_number: sequence,
-              department_id: department,
-            },
-          ],
+          document_sequence: mock,
         },
         {
           headers: {
@@ -55,13 +70,17 @@ const Create110 = () => {
         message.success({ key: "sub", content: "Success!" });
         setTitle("");
         setDesc("");
-        setDepartment(0);
         setParent(parentOptions[0].value);
-        setScore("");
-        setSequence("");
+        setScore(null);
         setInd1(true);
         setInd2(true);
         setInd3(true);
+        setMock([
+          {
+            sequence_number: 1,
+            profil_user_id: 0,
+          },
+        ]);
       }
     } catch (err) {
       message.error({ key: "sub", content: "Error!" });
@@ -93,8 +112,6 @@ const Create110 = () => {
       });
   }, []);
 
-  const [mock, setMock] = useState([])
-
   return (
     <Wrapper title="Create Teacher 110">
       <form className="form-horizontal row" onSubmit={handleSubmit}>
@@ -120,8 +137,8 @@ const Create110 = () => {
         <Input
           className="form-group col-md-6"
           type="number"
-          value={sequence}
-          onChange={(e) => setSequence(e.target.value)}
+          value={score}
+          onChange={(e) => setScore(Number(e.target.value))}
           label="Ball"
         />
 
@@ -146,27 +163,61 @@ const Create110 = () => {
           value={ind3}
           onChange={(e) => setInd3(e)}
         />
-        <div className="row col-md-10">
-          <Select
-            className="form-group col-md-6"
-            label="Department"
-            options={departmentOptions}
-            value={department}
-            onChange={(e) => setDepartment(e)}
-          />
-          <Input
-            className="form-group col-md-6"
-            type="number"
-            label="Sequence Number"
-            value={score}
-            onChange={(e) => setScore(e.target.value)}
-          />
+        <div className="row col-md-11">
+          {mock.map((e, index) => (
+            <div className="row col-md-12" key={index}>
+              <Select
+                className="form-group col-md-6"
+                label={`User Profile ${index + 1}`}
+                options={departmentOptions}
+                value={e.profil_user_id}
+                onChange={(e) => handleSelectChange(index, e)}
+              />
+              <Input
+                className={
+                  index === 0 ? "form-group col-md-6" : "form-group col-md-5"
+                }
+                type="number"
+                label={`Sequence Number ${index + 1}`}
+                value={e.sequence_number}
+                onChange={(e) => handleInputChange(index, e.target.value)}
+              />
+              {index !== 0 && (
+                <div className="col-md-1">
+                  <label className="col-sm-12 col-form-label">Delete</label>
+                  <div className="col-sm-12">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setMock(mock.filter((e, count) => count !== index))
+                      }
+                      className="btn btn-danger w-100"
+                    >
+                      <i className="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
-        <div className="col-md-2">
-          <label className="col-sm-12 col-form-label">Add Item</label>
+        <div className="col-md-1">
+          <label className="col-sm-12 col-form-label">Add</label>
           <div className="col-sm-12">
-            <button type="button" className="btn btn-primary w-100">
-              Add
+            <button
+              type="button"
+              onClick={() =>
+                setMock([
+                  ...mock,
+                  {
+                    sequence_number: mock[mock.length - 1].sequence_number + 1,
+                    profil_user_id: 0,
+                  },
+                ])
+              }
+              className="btn btn-primary w-100"
+            >
+              <i className="fa-solid fa-plus"></i>
             </button>
           </div>
         </div>

@@ -55,3 +55,15 @@
     height: 400px;
   }
 }
+.ant-collapse-header-text {
+  font-size: 18px;
+
+  font-weight: 500;
+}
+.ant-collapse {
+  border-radius: 3px !important;
+}
+
+.ant-collapse-expand-icon svg {
+  font-size: 16px !important;
+}

@@ -69,7 +69,7 @@ export const admin = () => {
     {
       id: 8,
       path: "import-doc",
-      title: "Import Doc",
+      title: "110 ball",
       roles: ["teacher"],
       icon: "nav-icon fa fa-file-import",
     },

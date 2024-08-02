@@ -25,7 +25,9 @@ const Cart = ({ onClick, item }) => {
           </span>
         </Wrap.Date>
         <Wrap.Title onClick={onClick}>
-          {item?.title}
+          {item?.title?.split(" ")?.length <= 4
+            ? item.title
+            : item?.title?.split(" ")?.slice(0, 4)?.join(" ") + "..."}
           <i className="fa-solid fa-arrow-right icon"></i>
           <div className="bottom"></div>
         </Wrap.Title>

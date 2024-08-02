@@ -129,52 +129,52 @@ const items = [
       </Collapse>
     ),
   },
-  // {
-  //   key: "2",
-  //   label: "Тарбиявий фаолияти",
-  //   icon: "20 балл",
-  //   content: (
-  //     <Collapse>
-  //       <Panel header="Ўқитувчилик фаолияти (20 балл):" key="2-1"></Panel>
-  //     </Collapse>
-  //   ),
-  // },
-  // {
-  //   key: "3",
-  //   label: "Илмий фаолияти",
-  //   icon: "30 балл",
-  //   content: (
-  //     <Collapse>
-  //       <Panel header="This is panel header 1" key="3-1">
-  //         <p>{text}</p>
-  //       </Panel>
-  //     </Collapse>
-  //   ),
-  // },
-  // {
-  //   key: "4",
-  //   label: "Олий таълим муассасасини ривожлантиришга қўшган улуши",
-  //   icon: "10 балл",
-  //   content: (
-  //     <Collapse>
-  //       <Panel header="This is panel header 1" key="4-1">
-  //         <p>{text}</p>
-  //       </Panel>
-  //     </Collapse>
-  //   ),
-  // },
-  // {
-  //   key: "5",
-  //   label: "Шахсий фазилатлари",
-  //   icon: "10 балл",
-  //   content: (
-  //     <Collapse>
-  //       <Panel header="This is panel header 1" key="5-1">
-  //         <p>{text}</p>
-  //       </Panel>
-  //     </Collapse>
-  //   ),
-  // },
+  {
+    key: "2",
+    label: "Тарбиявий фаолияти",
+    icon: "20 балл",
+    content: (
+      <Collapse>
+        <Panel header="Ўқитувчилик фаолияти (20 балл):" key="2-1"></Panel>
+      </Collapse>
+    ),
+  },
+  {
+    key: "3",
+    label: "Илмий фаолияти",
+    icon: "30 балл",
+    content: (
+      <Collapse>
+        <Panel header="This is panel header 1" key="3-1">
+          <p>{text}</p>
+        </Panel>
+      </Collapse>
+    ),
+  },
+  {
+    key: "4",
+    label: "Олий таълим муассасасини ривожлантиришга қўшган улуши",
+    icon: "10 балл",
+    content: (
+      <Collapse>
+        <Panel header="This is panel header 1" key="4-1">
+          <p>{text}</p>
+        </Panel>
+      </Collapse>
+    ),
+  },
+  {
+    key: "5",
+    label: "Шахсий фазилатлари",
+    icon: "10 балл",
+    content: (
+      <Collapse>
+        <Panel header="This is panel header 1" key="5-1">
+          <p>{text}</p>
+        </Panel>
+      </Collapse>
+    ),
+  },
 ];
 
 const FileImport = () => {

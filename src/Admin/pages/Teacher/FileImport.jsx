@@ -4,11 +4,16 @@ import { Collapse } from "antd";
 import styled from "styled-components";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Upload from "./upload-content";
 
 const Space = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
+  .ball {
+    white-space: nowrap;
+  }
 `;
 
 const { Panel } = Collapse;
@@ -41,14 +46,16 @@ const FileImport = () => {
         header={
           <Space>
             <div>{item.title}</div>
-            <div>{item.max_score ? `${item.max_score} ball` : ""}</div>
+            <div className="ball">
+              {item.max_score ? `${item.max_score} ball` : ""}
+            </div>
           </Space>
         }
       >
         {item.children?.length ? (
           <Collapse>{buildPanels(item.children)}</Collapse>
         ) : (
-          item.title
+          <Upload id={item.id} />
         )}
       </Panel>
     ));
@@ -64,8 +71,6 @@ const FileImport = () => {
   };
 
   const nestedItems = buildNestedItems(rawData, 0);
-
-  console.log(nestedItems);
 
   return (
     <Wrapper title="">

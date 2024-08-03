@@ -3,9 +3,11 @@ import React, { forwardRef } from "react";
 const ChooseFile = forwardRef(({ label, className, onChange, value }, ref) => {
   return (
     <div className={className}>
-      <label htmlFor="img" className="col-form-label">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor="img" className="col-form-label">
+          {label}
+        </label>
+      )}
       <div className="col-sm-12">
         <input
           type="file"

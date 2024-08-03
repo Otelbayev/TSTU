@@ -36,19 +36,21 @@ const FileImport = () => {
   }, []);
   const buildPanels = (items) => {
     return items.map((item) => (
-      <Collapse>
-        <Panel
-          key={item.id}
-          header={
-            <Space>
-              <div>{item.title}</div>
-              <div>{item.max_score ? `${item.max_score} ball` : ""}</div>
-            </Space>
-          }
-        >
-          {item.children && buildPanels(item.children)}
-        </Panel>
-      </Collapse>
+      <Panel
+        key={item.id}
+        header={
+          <Space>
+            <div>{item.title}</div>
+            <div>{item.max_score ? `${item.max_score} ball` : ""}</div>
+          </Space>
+        }
+      >
+        {item.children?.length ? (
+          <Collapse>{buildPanels(item.children)}</Collapse>
+        ) : (
+          item.title
+        )}
+      </Panel>
     ));
   };
 
@@ -63,9 +65,10 @@ const FileImport = () => {
 
   const nestedItems = buildNestedItems(rawData, 0);
 
+  console.log(nestedItems);
+
   return (
-    <Wrapper title="Педагог ходимларнинг ўқув йилидаги фаолиятини баҳолаш">
-      {/* <Collapse items={nestedItems} /> */}
+    <Wrapper title="">
       <Collapse>{buildPanels(nestedItems)}</Collapse>
     </Wrapper>
   );

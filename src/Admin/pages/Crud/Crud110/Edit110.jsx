@@ -60,7 +60,7 @@ const Edit110 = () => {
           indicator: ind1,
           one_indicator: ind2,
           two_indicator: ind3,
-          max_score: Number(score),
+          max_score: score,
           description: desc,
           document_sequence: mock,
           status_id: status,

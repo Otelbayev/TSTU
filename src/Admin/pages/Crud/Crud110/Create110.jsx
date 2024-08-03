@@ -139,7 +139,7 @@ const Create110 = () => {
           className="form-group col-md-6"
           type="number"
           value={score}
-          onChange={(e) => setScore(Number(e.target.value))}
+          onChange={(e) => setScore(e.target.value)}
           label="Ball"
         />
 

@@ -12,42 +12,41 @@ const Upload = ({ id }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(id);
 
-    // if (!fileRef?.current?.files[0] || !commentRef) {
-    //   message.error("All files are required");
-    //   return;
-    // }
+    if (!fileRef?.current?.files[0] || !commentRef) {
+      message.error("All files are required");
+      return;
+    }
 
-    // try {
-    //   message.loading({ key: "form", content: "Loading.." });
-    //   const formData = new FormData();
-    //   formData.append("old_year", 2023);
-    //   formData.append("new_year", 2024);
-    //   formData.append("document_id", id);
-    //   formData.append("comment", commentRef?.current?.value);
-    //   formData.append("file_up", fileRef?.current?.files[0]);
+    try {
+      message.loading({ key: "form", content: "Loading.." });
+      const formData = new FormData();
+      formData.append("old_year", 2023);
+      formData.append("new_year", 2024);
+      formData.append("document_id", id);
+      formData.append("comment", commentRef?.current?.value);
+      formData.append("file_up", fileRef?.current?.files[0]);
 
-    //   const res = await axios.post(
-    //     `${
-    //       import.meta.env.VITE_BASE_URL_API
-    //     }/documentteacher110setcontroller/createdocumentteacher110set`,
-    //     formData,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${Cookies.get("_token")}`,
-    //       },
-    //     }
-    //   );
+      const res = await axios.post(
+        `${
+          import.meta.env.VITE_BASE_URL_API
+        }/documentteacher110setcontroller/createdocumentteacher110set`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("_token")}`,
+          },
+        }
+      );
 
-    //   if (res.status === 200) {
-    //     message.success({ key: "form", content: "Succesfully uploaded!" });
-    //     commentRef.current.value = "";
-    //     fileRef.current.value = "";
-    //   }
-    // } catch (err) {
-    //   message.error({ key: "form", content: "Error to Create!" });
-    // }
+      if (res.status === 200) {
+        message.success({ key: "form", content: "Succesfully uploaded!" });
+        commentRef.current.value = "";
+        fileRef.current.value = "";
+      }
+    } catch (err) {
+      message.error({ key: "form", content: "Error to Create!" });
+    }
   };
 
   const [data, setData] = useState([]);

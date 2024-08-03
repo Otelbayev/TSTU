@@ -19,8 +19,6 @@ const Edit110 = () => {
   const [desc, setDesc] = useState("");
   const [score, setScore] = useState(null);
   const [ind1, setInd1] = useState(true);
-  const [ind2, setInd2] = useState(true);
-  const [ind3, setInd3] = useState(true);
   const [status, setStatus] = useState(0);
 
   const [mock, setMock] = useState([
@@ -58,8 +56,6 @@ const Edit110 = () => {
           title,
           parent_id: parent,
           indicator: ind1,
-          one_indicator: ind2,
-          two_indicator: ind3,
           max_score: score,
           description: desc,
           document_sequence: mock,
@@ -118,8 +114,6 @@ documentteacher110controller/getbyiddocumentteacher110admin/${id}`,
         setParent(res.parent_id);
         setScore(res.max_score);
         setInd1(res.indicator);
-        setInd2(res.one_indicator);
-        setInd3(res.two_indicator);
         setMock(res.document_sequence);
         setStatus(res.status_?.id);
       });
@@ -155,27 +149,12 @@ documentteacher110controller/getbyiddocumentteacher110admin/${id}`,
           onChange={(e) => setScore(e.target.value)}
           label="Ball"
         />
-
         <Select
           className="form-group col-md-4"
           label="Indicator 1"
           options={bool}
           value={ind1}
           onChange={(e) => setInd1(e)}
-        />
-        <Select
-          className="form-group col-md-4"
-          label="Indicator 2"
-          options={bool}
-          value={ind2}
-          onChange={(e) => setInd2(e)}
-        />
-        <Select
-          className="form-group col-md-4"
-          label="Indicator 3"
-          options={bool}
-          value={ind3}
-          onChange={(e) => setInd3(e)}
         />
         <Select
           className="form-group col-md-4"

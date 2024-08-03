@@ -15,8 +15,6 @@ const Create110 = () => {
   const [desc, setDesc] = useState("");
   const [score, setScore] = useState(null);
   const [ind1, setInd1] = useState(true);
-  const [ind2, setInd2] = useState(true);
-  const [ind3, setInd3] = useState(true);
 
   const [mock, setMock] = useState([
     {
@@ -53,8 +51,6 @@ const Create110 = () => {
           title,
           parent_id: parent,
           indicator: ind1,
-          one_indicator: ind2,
-          two_indicator: ind3,
           max_score: score,
           description: desc,
           document_sequence: mock,
@@ -73,8 +69,6 @@ const Create110 = () => {
         setParent(parentOptions[0].value);
         setScore(null);
         setInd1(true);
-        setInd2(true);
-        setInd3(true);
         setMock([
           {
             sequence_number: 1,
@@ -128,7 +122,7 @@ const Create110 = () => {
           onChange={(e) => setDesc(e.target.value)}
         />
         <Select
-          className="form-group col-md-6"
+          className="form-group col-md-4"
           label="Parent"
           options={[{ label: "Parent", value: 0 }, ...parentOptions]}
           value={parent}
@@ -136,7 +130,7 @@ const Create110 = () => {
           showSearch={true}
         />
         <Input
-          className="form-group col-md-6"
+          className="form-group col-md-4"
           type="number"
           value={score}
           onChange={(e) => setScore(e.target.value)}
@@ -149,20 +143,6 @@ const Create110 = () => {
           options={bool}
           value={ind1}
           onChange={(e) => setInd1(e)}
-        />
-        <Select
-          className="form-group col-md-4"
-          label="Indicator 2"
-          options={bool}
-          value={ind2}
-          onChange={(e) => setInd2(e)}
-        />
-        <Select
-          className="form-group col-md-4"
-          label="Indicator 3"
-          options={bool}
-          value={ind3}
-          onChange={(e) => setInd3(e)}
         />
         <div className="row col-md-11">
           {mock.map((e, index) => (

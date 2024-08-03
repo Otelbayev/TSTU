@@ -36,7 +36,7 @@ const Crud110 = () => {
         col={[
           { data: "id", title: "#" },
           { data: "title", title: "title" },
-          { data: "description", title: "description" },
+          { data: "max_score", title: "Ball" },
         ]}
         edit="crud-110/edit"
         del={`${

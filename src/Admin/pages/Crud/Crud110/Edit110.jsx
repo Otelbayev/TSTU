@@ -26,7 +26,7 @@ const Edit110 = () => {
   const [mock, setMock] = useState([
     {
       sequence_number: 1,
-      profil_user_id: 0,
+      profil_user_id: null,
     },
   ]);
 
@@ -60,7 +60,7 @@ const Edit110 = () => {
           indicator: ind1,
           one_indicator: ind2,
           two_indicator: ind3,
-          max_score: score,
+          max_score: Number(score),
           description: desc,
           document_sequence: mock,
           status_id: status,
@@ -100,7 +100,6 @@ const Edit110 = () => {
       .then((res) => res.map((e) => ({ label: e.title, value: e.id })))
       .then((res) => {
         setParentOptions(res);
-        setParent(res[0].value);
       });
 
     fetch(
@@ -144,15 +143,16 @@ documentteacher110controller/getbyiddocumentteacher110admin/${id}`,
         <Select
           className="form-group col-md-4"
           label="Parent"
-          options={parentOptions}
+          options={[{ label: "Parent", value: 0 }, ...parentOptions]}
           value={parent}
           onChange={(e) => setParent(e)}
+          showSearch={true}
         />
         <Input
           className="form-group col-md-4"
           type="number"
           value={score}
-          onChange={(e) => setScore(Number(e.target.value))}
+          onChange={(e) => setScore(e.target.value)}
           label="Ball"
         />
 
@@ -193,6 +193,7 @@ documentteacher110controller/getbyiddocumentteacher110admin/${id}`,
                 options={departmentOptions}
                 value={e.profil_user_id}
                 onChange={(e) => handleSelectChange(index, e)}
+                showSearch={true}
               />
               <Input
                 className={

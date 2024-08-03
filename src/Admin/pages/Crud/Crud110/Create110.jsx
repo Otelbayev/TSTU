@@ -130,9 +130,10 @@ const Create110 = () => {
         <Select
           className="form-group col-md-6"
           label="Parent"
-          options={parentOptions}
+          options={[{ label: "Parent", value: 0 }, ...parentOptions]}
           value={parent}
           onChange={(e) => setParent(e)}
+          showSearch={true}
         />
         <Input
           className="form-group col-md-6"
@@ -172,6 +173,7 @@ const Create110 = () => {
                 options={departmentOptions}
                 value={e.profil_user_id}
                 onChange={(e) => handleSelectChange(index, e)}
+                showSearch={true}
               />
               <Input
                 className={

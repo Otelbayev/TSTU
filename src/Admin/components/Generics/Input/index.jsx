@@ -17,6 +17,7 @@ const Input = forwardRef(
       style,
       onFocus,
       value,
+      min,
     },
     ref
   ) => {
@@ -43,6 +44,7 @@ const Input = forwardRef(
             disabled={disabled}
             onFocus={onFocus}
             value={value}
+            min={min}
           />
         </div>
       </div>

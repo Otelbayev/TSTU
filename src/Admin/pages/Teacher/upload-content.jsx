@@ -6,34 +6,18 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { NavLink } from "react-router-dom";
 
-const Upload = ({ id }) => {
+const Upload = ({ id, old_year, new_year, getData, data }) => {
   const fileRef = useRef();
   const commentRef = useRef();
   const editFileRef = useRef();
 
-  const [data, setData] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [comment, setComment] = useState("");
-
-  const getData = async () => {
-    const res = await axios.get(
-      `${
-        import.meta.env.VITE_BASE_URL_API
-      }/documentteacher110setcontroller/getalldocumentteacher110set?oldYear=2023&newYear=2024`,
-      {
-        headers: {
-          Authorization: `Bearer ${Cookies.get("_token")}`,
-        },
-      }
-    );
-
-    res.status === 200 && setData(res.data);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!fileRef?.current?.files[0] || !commentRef) {
+    if (!fileRef?.current?.files[0] || !commentRef.current.value) {
       message.error("All files are required");
       return;
     }
@@ -41,8 +25,8 @@ const Upload = ({ id }) => {
     try {
       message.loading({ key: "form", content: "Loading.." });
       const formData = new FormData();
-      formData.append("old_year", 2023);
-      formData.append("new_year", 2024);
+      formData.append("old_year", old_year);
+      formData.append("new_year", new_year);
       formData.append("document_id", id);
       formData.append("comment", commentRef?.current?.value);
       formData.append("file_up", fileRef?.current?.files[0]);
@@ -55,6 +39,12 @@ const Upload = ({ id }) => {
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("_token")}`,
+          },
+          params: {
+            old_year,
+            new_year,
+            document_id: id,
+            comment: commentRef?.current?.value,
           },
         }
       );
@@ -70,8 +60,59 @@ const Upload = ({ id }) => {
     }
   };
 
-  const onSave = async (id) => {
-    setIsEdit(false);
+  const onSave = async (key) => {
+    if (!editFileRef?.current?.files[0] || !comment) {
+      message.error("All files are required");
+      return;
+    }
+    try {
+      message.loading({ key: "error", content: "Loading!" });
+
+      const formData = new FormData();
+      formData.append("old_year", old_year);
+      formData.append("new_year", new_year);
+      formData.append("document_id", id);
+      formData.append("comment", comment);
+      formData.append("file_up", editFileRef?.current?.files[0]);
+
+      const res = await axios.put(
+        `${
+          import.meta.env.VITE_BASE_URL_API
+        }/documentteacher110setcontroller/updatedocumentteacher110set/${key}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("_token")}`,
+          },
+          params: {
+            old_year,
+            new_year,
+            document_id: id,
+            comment,
+          },
+        }
+      );
+
+      if (res.status === 200) {
+        setIsEdit(false);
+        message.success({ key: "error", content: "Succesfully updated!" });
+        getData();
+      }
+    } catch (err) {
+      message.error({ key: "error", content: "Error!" });
+    }
+  };
+
+  const onDel = async (key) => {
+    const res = await axios.delete(
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/documentteacher110setcontroller/deletedocumentteacher110set/${key}`
+    );
+
+    if (res.status === 200) {
+      getData();
+    }
   };
 
   useEffect(() => {
@@ -106,10 +147,13 @@ const Upload = ({ id }) => {
                     onChange={(e) => setComment(e.target.value)}
                     className="form-group col-md-5"
                   />
-                  <ChooseFile className="form-group col-md-5" />
+                  <ChooseFile
+                    ref={editFileRef}
+                    className="form-group col-md-5"
+                  />
                 </>
               ) : (
-                <div className="col-md-10">{item.comment}</div>
+                <div className="col-md-9">{item.comment}</div>
               )}
               {isEdit === item.id ? (
                 <div className="col-md-1">
@@ -156,14 +200,16 @@ const Upload = ({ id }) => {
                   </button>
                 </div>
               )}
-              {/* <div className="col-md-1">
-                <button
-                  onClick={() => onDel(item.id)}
-                  className={"btn btn-danger w-100"}
-                >
-                  <i className="fa-solid fa-trash"></i>
-                </button>
-              </div> */}
+              {isEdit !== item.id ? (
+                <div className="col-md-1">
+                  <button
+                    onClick={() => onDel(item.id)}
+                    className={"btn btn-danger w-100"}
+                  >
+                    <i className="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              ) : null}
             </div>
           ))}
         </div>

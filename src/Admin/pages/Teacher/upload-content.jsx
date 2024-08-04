@@ -1,4 +1,3 @@
-import { Container } from "./style";
 import { ChooseFile, Input } from "../../components/Generics";
 import { message } from "antd";
 import { useEffect, useRef, useState } from "react";
@@ -6,13 +5,34 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { NavLink } from "react-router-dom";
 
-const Upload = ({ id, old_year, new_year, getData, data }) => {
+const Upload = ({ id, old_year, new_year, upd }) => {
   const fileRef = useRef();
   const commentRef = useRef();
   const editFileRef = useRef();
 
   const [isEdit, setIsEdit] = useState(false);
   const [comment, setComment] = useState("");
+
+  const [data, setData] = useState([]);
+
+  const getData = async (id) => {
+    const res = await axios.get(
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/documentteacher110setcontroller/getbydocumentiddocumentteacher110set/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("_token")}`,
+        },
+        params: {
+          oldYear: old_year,
+          newYear: Number(old_year) + 1,
+        },
+      }
+    );
+
+    res.status === 200 && setData(res.data);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +73,7 @@ const Upload = ({ id, old_year, new_year, getData, data }) => {
         message.success({ key: "form", content: "Succesfully uploaded!" });
         commentRef.current.value = "";
         fileRef.current.value = "";
-        getData();
+        getData(id);
       }
     } catch (err) {
       message.error({ key: "form", content: "Error to Create!" });
@@ -69,9 +89,9 @@ const Upload = ({ id, old_year, new_year, getData, data }) => {
       message.loading({ key: "error", content: "Loading!" });
 
       const formData = new FormData();
-      formData.append("old_year", old_year);
-      formData.append("new_year", new_year);
-      formData.append("document_id", id);
+      formData.append("old_year", Number(old_year));
+      formData.append("new_year", Number(new_year));
+      formData.append("document_id", Number(id));
       formData.append("comment", comment);
       formData.append("file_up", editFileRef?.current?.files[0]);
 
@@ -96,7 +116,7 @@ const Upload = ({ id, old_year, new_year, getData, data }) => {
       if (res.status === 200) {
         setIsEdit(false);
         message.success({ key: "error", content: "Succesfully updated!" });
-        getData();
+        getData(id);
       }
     } catch (err) {
       message.error({ key: "error", content: "Error!" });
@@ -107,111 +127,180 @@ const Upload = ({ id, old_year, new_year, getData, data }) => {
     const res = await axios.delete(
       `${
         import.meta.env.VITE_BASE_URL_API
-      }/documentteacher110setcontroller/deletedocumentteacher110set/${key}`
+      }/documentteacher110setcontroller/deletedocumentteacher110set/${key}`,
+      {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("_token")}`,
+        },
+      }
     );
 
     if (res.status === 200) {
-      getData();
+      getData(id);
     }
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    getData(id);
+  }, [upd]);
 
-  const filterData = data.filter((e) => e.document_?.id === id);
+  if (data?.length) {
+    console.log(data);
+  }
 
   return (
     <div>
-      <Container className="row" onSubmit={handleSubmit}>
+      <form className="row" onSubmit={handleSubmit}>
         <Input
           ref={commentRef}
-          placeholder="Comment"
+          placeholder="Izoh"
           className="form-group col-md-5"
         />
         <ChooseFile ref={fileRef} className="form-group col-md-5" />
         <div className="col-md-2">
           <button className="btn btn-primary w-100" type="submit">
-            Upload
+            Yulash
           </button>
         </div>
-      </Container>
-      {filterData.length ? (
+      </form>
+      {data.length ? (
         <div className="card p-3">
-          {filterData.map((item) => (
-            <div className="row my-1" key={item.id}>
-              {isEdit === item.id ? (
-                <>
-                  <Input
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    className="form-group col-md-5"
-                  />
-                  <ChooseFile
-                    ref={editFileRef}
-                    className="form-group col-md-5"
-                  />
-                </>
-              ) : (
-                <div className="col-md-9">{item.comment}</div>
-              )}
-              {isEdit === item.id ? (
-                <div className="col-md-1">
-                  <button
-                    onClick={() => onSave(item.id)}
-                    className={"btn btn-success w-100"}
-                  >
-                    <i className="fa-solid fa-check"></i>
-                  </button>
-                </div>
-              ) : (
-                <div className="col-md-1">
-                  <NavLink
-                    target="_blank"
-                    to={`${import.meta.env.VITE_BASE_URL_IMG}${
-                      item?.file_?.url
-                    }`}
-                    className={"btn btn-secondary w-100"}
-                  >
-                    <i className="fa-solid fa-eye"></i>
-                  </NavLink>
-                </div>
-              )}
-
-              {isEdit === item.id ? (
-                <div className="col-md-1">
-                  <button
-                    onClick={() => setIsEdit(false)}
-                    className={"btn btn-danger w-100"}
-                  >
-                    <i className="fa-solid fa-x"></i>
-                  </button>
-                </div>
-              ) : (
-                <div className="col-md-1">
-                  <button
-                    onClick={() => {
-                      setIsEdit(item.id);
-                      setComment(item.comment);
-                    }}
-                    className={"btn btn-primary w-100"}
-                  >
-                    <i className="fa-solid fa-edit"></i>
-                  </button>
-                </div>
-              )}
-              {isEdit !== item.id ? (
-                <div className="col-md-1">
-                  <button
-                    onClick={() => onDel(item.id)}
-                    className={"btn btn-danger w-100"}
-                  >
-                    <i className="fa-solid fa-trash"></i>
-                  </button>
-                </div>
-              ) : null}
-            </div>
-          ))}
+          {data
+            .sort((a, b) => b.id - a.id)
+            .map((item) => (
+              <div className="row my-1" key={item.id}>
+                {isEdit === item.id ? (
+                  <>
+                    <Input
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      className="form-group col-md-5"
+                    />
+                    <ChooseFile
+                      ref={editFileRef}
+                      className="form-group col-md-5"
+                    />
+                  </>
+                ) : (
+                  <div className={item.rejection ? "col-md-6" : "col-md-8"}>
+                    {item.comment}
+                  </div>
+                )}
+                {item.rejection && isEdit !== item.id ? (
+                  <div className="col-md-3">
+                    <button
+                      className="btn w-100 btn-warning"
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                    >
+                      {item.reason_for_rejection.split(" ").length > 3
+                        ? `${item.reason_for_rejection
+                            .split(" ")
+                            .slice(0, 3)
+                            .join(" ")}...`
+                        : item.reason_for_rejection}
+                    </button>
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Rad edilgan
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            {item.reason_for_rejection}
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-dismiss="modal"
+                            >
+                              Yopish
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+                {!item.rejection && item.id !== isEdit ? (
+                  <div className="col-md-1">
+                    <h5>{item.score || 0} ball</h5>
+                  </div>
+                ) : null}
+                {isEdit === item.id ? (
+                  <div className="col-md-1">
+                    <button
+                      onClick={() => onSave(item.id)}
+                      className={"btn btn-success w-100"}
+                    >
+                      <i className="fa-solid fa-check"></i>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="col-md-1">
+                    <NavLink
+                      target="_blank"
+                      to={`${import.meta.env.VITE_BASE_URL_IMG}${
+                        item?.file_?.url
+                      }`}
+                      className={"btn btn-secondary w-100"}
+                    >
+                      <i className="fa-solid fa-eye"></i>
+                    </NavLink>
+                  </div>
+                )}
+                {isEdit === item.id ? (
+                  <div className="col-md-1">
+                    <button
+                      onClick={() => setIsEdit(false)}
+                      className={"btn btn-danger w-100"}
+                    >
+                      <i className="fa-solid fa-x"></i>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="col-md-1">
+                    <button
+                      onClick={() => {
+                        setIsEdit(item.id);
+                        setComment(item.comment);
+                      }}
+                      className={"btn btn-primary w-100"}
+                    >
+                      <i className="fa-solid fa-edit"></i>
+                    </button>
+                  </div>
+                )}
+                {isEdit !== item.id ? (
+                  <div className="col-md-1">
+                    <button
+                      onClick={() => onDel(item.id)}
+                      className={"btn btn-danger w-100"}
+                    >
+                      <i className="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+            ))}
         </div>
       ) : null}
     </div>

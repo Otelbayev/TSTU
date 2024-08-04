@@ -27,7 +27,10 @@ const Crud110 = () => {
     getData();
   }, [isDelete]);
   return (
-    <Wrapper create="true" title="Teacher 110 ball">
+    <Wrapper
+      create="true"
+      title="Pedagog xodimlarning o‘quv yilidagi faoliyatini baholash"
+    >
       <DataTable
         data={data}
         loading={loading}

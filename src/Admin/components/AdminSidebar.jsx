@@ -73,5 +73,12 @@ export const admin = () => {
       roles: ["teacher"],
       icon: "nav-icon fa fa-file-import",
     },
+    {
+      id: 9,
+      path: "confirm-teacher-110",
+      title: "O'qituvchi 110 tasdiqlash",
+      roles: ["headdepartment"],
+      icon: "nav-icon fa fa-check",
+    },
   ];
 };

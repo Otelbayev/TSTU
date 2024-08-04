@@ -62,7 +62,7 @@ const AllTeacher = () => {
                       />
                       <div className="col-md-2">
                         <button className="btn btn-primary" type="submit">
-                          Update
+                          Yangilash
                         </button>
                       </div>
                     </form>

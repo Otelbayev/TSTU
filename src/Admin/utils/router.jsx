@@ -142,6 +142,8 @@ const Edit110 = lazy(() => import("../pages/Crud/Crud110/Edit110"));
 const Teacher110 = lazy(() => import("../pages/Crud/Crud110/all-teacher"));
 const Teacher110ID = lazy(() => import("../pages/Crud/Crud110/all-teacher-id"));
 
+const Mudir = lazy(() => import("../pages/Mudir/mudir"));
+
 export const routes = [
   {
     id: useId(),
@@ -709,6 +711,12 @@ export const routes = [
     id: useId(),
     path: "teacher-110/:id",
     element: <Teacher110ID />,
+    isPrivate: true,
+  },
+  {
+    id: useId(),
+    path: "confirm-teacher-110",
+    element: <Mudir />,
     isPrivate: true,
   },
 ];

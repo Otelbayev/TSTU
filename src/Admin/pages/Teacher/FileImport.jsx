@@ -5,7 +5,7 @@ import styled from "styled-components";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Upload from "./upload-content";
-import { Input } from "../../components/Generics";
+import { Select } from "../../components/Generics";
 import { useDateContext } from "../../context/DateContext";
 
 const Space = styled.div`
@@ -23,24 +23,10 @@ const { Panel } = Collapse;
 const FileImport = () => {
   const { old_year, setOldYear } = useDateContext();
   const [rawData, setRawData] = useState([]);
+  const [updateData, setUpdateData] = useState(false);
 
-  const [data, setData] = useState([]);
-  const getData1 = async () => {
-    const res = await axios.get(
-      `${
-        import.meta.env.VITE_BASE_URL_API
-      }/documentteacher110setcontroller/getalldocumentteacher110set?oldYear=${old_year}&newYear=${
-        Number(old_year) + 1
-      }`,
-      {
-        headers: {
-          Authorization: `Bearer ${Cookies.get("_token")}`,
-        },
-      }
-    );
-
-    res.status === 200 && setData(res.data);
-  };
+  let all = 0;
+  let has = 0;
 
   const getData = async () => {
     const res = await axios.get(
@@ -81,8 +67,7 @@ const FileImport = () => {
             old_year={old_year}
             new_year={Number(old_year) + 1}
             id={item.id}
-            getData={getData1}
-            data={data}
+            upd={updateData}
           />
         )}
       </Panel>
@@ -92,50 +77,71 @@ const FileImport = () => {
   const buildNestedItems = (data, parentId) => {
     return data
       .filter((item) => item.parent_id === parentId)
-      .map((item) => ({
-        ...item,
-        children: buildNestedItems(data, item.id),
-      }));
+      .map((item) => {
+        if (item.parent_id === 0) {
+          all += item.max_score;
+        }
+        return {
+          ...item,
+          children: buildNestedItems(data, item.id),
+        };
+      });
   };
 
   const nestedItems = buildNestedItems(rawData, 0);
-
-  const onDateSubmit = (e) => {
-    e.preventDefault();
-    getData1();
-  };
 
   return (
     <div>
       <div className="content-wrapper wrapper-min-height">
         <section className="content pt-5">
+          <section className="content-header">
+            <div className="container-fluid">
+              <div className="row mb-2">
+                <div className="col-sm-6">
+                  <h1>
+                    Pedagog xodimlarning o‘quv yilidagi faoliyatini baholash
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </section>
           <div className="container-fluid">
             <section className="row">
               <div className="col-md-12">
                 <div className="card">
-                  <div className="card-header">
-                    <form className="row" onSubmit={onDateSubmit}>
-                      <div className="col-md-2">
-                        <h2>O'quv yili:</h2>
-                      </div>
-                      <Input
+                  <div className="card-header pt-4 pl-4">
+                    <div className="row">
+                      <h4>O'quv yili:</h4>
+                      <Select
                         value={old_year}
-                        onChange={(e) => setOldYear(e.target.value)}
-                        className="form-group col-md-2"
-                        type="number"
-                        min={2020}
+                        options={[
+                          { value: 2020, label: "2020/2021" },
+                          { value: 2021, label: "2021/2022" },
+                          { value: 2022, label: "2022/2023" },
+                          { value: 2023, label: "2023/2024" },
+                          { value: 2024, label: "2024/2025" },
+                          { value: 2025, label: "2025/2026" },
+                          { value: 2026, label: "2026/2027" },
+                          { value: 2027, label: "2027/2028" },
+                          { value: 2028, label: "2028/2029" },
+                          { value: 2029, label: "2029/2030" },
+                          { value: 2030, label: "2030/2031" },
+                        ]}
+                        className={"col-md-2"}
+                        onChange={(e) => {
+                          setOldYear(e);
+                          setUpdateData({ name: "Jasurbek" });
+                        }}
                       />
-                      <Input
-                        value={Number(old_year) + 1}
-                        disabled={true}
-                        className="form-group col-md-2"
-                      />
-                      <div className="col-md-2">
-                        <button className="btn btn-primary" type="submit">
-                          Update
-                        </button>
-                      </div>
-                    </form>
+                      <h4 className="col-md-4">
+                        Maksimal Ball :{" "}
+                        <span className="bg-success p-1 rounded">{all}</span>
+                      </h4>
+                      <h4 className="col-md-4">
+                        To'plangan Ball :{" "}
+                        <span className="bg-warning p-1 rounded">{has}</span>
+                      </h4>
+                    </div>
                   </div>
                   <div className="card-body">
                     <Collapse>{buildPanels(nestedItems)}</Collapse>

@@ -10,6 +10,7 @@ import PersonContextProvider from "./PersonContext";
 import SiteContextProvider from "./SiteContext";
 import UserContextProvider from "./UserContext";
 import EmployeeContextProvider from "./EmployeeContext";
+import DateContextProvider from "./DateContext";
 const AdminContext = ({ children }) => {
   return (
     <BlogProvider>
@@ -23,7 +24,7 @@ const AdminContext = ({ children }) => {
                     <SiteContextProvider>
                       <UserContextProvider>
                         <EmployeeContextProvider>
-                          {children}
+                          <DateContextProvider>{children}</DateContextProvider>
                         </EmployeeContextProvider>
                       </UserContextProvider>
                     </SiteContextProvider>

@@ -28,6 +28,7 @@ export const user = [
 
 export const crud = [
   { id: 455, title: "110 CRUD", path: "crud-110" },
+  { id: 455121, title: "110 Teacher", path: "teacher-110" },
   { id: 373387, title: "Appeals", path: "appeals" },
   { id: 783787, title: "Interactive", path: "interactive" },
   { id: 377837, title: "Statistika", path: "statistics" },

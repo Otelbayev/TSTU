@@ -6,6 +6,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Upload from "./upload-content";
 import { Input } from "../../components/Generics";
+import { useDateContext } from "../../context/DateContext";
 
 const Space = styled.div`
   display: flex;
@@ -20,14 +21,8 @@ const Space = styled.div`
 const { Panel } = Collapse;
 
 const FileImport = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth();
-
-  console.log(month);
-
+  const { old_year, setOldYear } = useDateContext();
   const [rawData, setRawData] = useState([]);
-  const [old_year, setOldYear] = useState(month >= 8 ? year : year - 1);
 
   const [data, setData] = useState([]);
   const getData1 = async () => {

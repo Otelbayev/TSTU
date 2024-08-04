@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Input } from "../../../components/Generics";
+import { Input, Select } from "../../../components/Generics";
 import Cookies from "js-cookie";
 import DataTable from "../../../components/DataTable";
 import useAxios from "../../../../hooks/useAxios";
@@ -10,8 +10,6 @@ const AllTeacher = () => {
 
   const { old_year, setOldYear } = useDateContext();
   const [data, setData] = useState([]);
-
-  const onDateSubmit = () => {};
 
   const getData = async () => {
     const res = await sendRequest({
@@ -44,28 +42,30 @@ const AllTeacher = () => {
               <div className="col-md-12">
                 <div className="card">
                   <div className="card-header">
-                    <form className="row" onSubmit={onDateSubmit}>
-                      <div className="col-md-2">
-                        <h2>O'quv yili:</h2>
-                      </div>
-                      <Input
+                    <div className="row">
+                      <h4>O'quv yili:</h4>
+                      <Select
                         value={old_year}
-                        onChange={(e) => setOldYear(e.target.value)}
-                        className="form-group col-md-2"
-                        type="number"
-                        min={2020}
+                        options={[
+                          { value: 2020, label: "2020/2021" },
+                          { value: 2021, label: "2021/2022" },
+                          { value: 2022, label: "2022/2023" },
+                          { value: 2023, label: "2023/2024" },
+                          { value: 2024, label: "2024/2025" },
+                          { value: 2025, label: "2025/2026" },
+                          { value: 2026, label: "2026/2027" },
+                          { value: 2027, label: "2027/2028" },
+                          { value: 2028, label: "2028/2029" },
+                          { value: 2029, label: "2029/2030" },
+                          { value: 2030, label: "2030/2031" },
+                        ]}
+                        className={"col-md-3"}
+                        onChange={(e) => {
+                          setOldYear(e);
+                          getData();
+                        }}
                       />
-                      <Input
-                        value={Number(old_year) + 1}
-                        disabled={true}
-                        className="form-group col-md-2"
-                      />
-                      <div className="col-md-2">
-                        <button className="btn btn-primary" type="submit">
-                          Yangilash
-                        </button>
-                      </div>
-                    </form>
+                    </div>
                   </div>
                   <div className="card-body">
                     <DataTable

@@ -160,7 +160,12 @@ const FileImport = () => {
                       <h4 className="col-md-4 py-2">
                         To'plangan Ball :{" "}
                         <span className="bg-warning p-1 rounded">
-                          я
+                          {/* {rawData
+                            .filter((e) => !e.indicator)
+                            .reduce(
+                              (prev, curr) => (prev += curr?.max_score),
+                              0
+                            )} */}
                         </span>
                       </h4>
                     </div>

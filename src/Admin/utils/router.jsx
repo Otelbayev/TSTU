@@ -143,19 +143,22 @@ const Teacher110 = lazy(() => import("../pages/Crud/Crud110/all-teacher"));
 const Teacher110ID = lazy(() => import("../pages/Crud/Crud110/all-teacher-id"));
 
 const Mudir = lazy(() => import("../pages/Mudir/mudir"));
+const ConfirmTeacher = lazy(() => import("../pages/Mudir/confirm"));
+
+const StudyDepartment = lazy(() => import("../pages/Study"));
 
 export const routes = [
   {
     id: useId(),
     path: "/",
     element: <Navigate to="home" />,
-    roles: ["admin", "teacher", "headdepartment"],
+    roles: ["admin", "teacher", "headdepartment", "studydepartment"],
   },
   {
     id: useId(),
     path: "/home",
     element: <Home />,
-    roles: ["admin", "teacher", "headdepartment"],
+    roles: ["admin", "teacher", "headdepartment", "studydepartment"],
   },
   {
     id: useId(),
@@ -689,7 +692,7 @@ export const routes = [
     id: useId(),
     path: "import-doc",
     element: <TeacherDoc />,
-    roles: ["admin", "teacher"],
+    roles: ["teacher"],
   },
   {
     id: useId(),
@@ -726,6 +729,18 @@ export const routes = [
     id: useId(),
     path: "confirm-teacher-110",
     element: <Mudir />,
-    roles: ["admin", "headdepartment"],
+    roles: ["headdepartment"],
+  },
+  {
+    id: useId(),
+    path: "confirm-teacher-110/:id",
+    element: <ConfirmTeacher />,
+    roles: ["headdepartment"],
+  },
+  {
+    id: useId(),
+    path: "study-department",
+    element: <StudyDepartment />,
+    roles: ["studydepartment"],
   },
 ];

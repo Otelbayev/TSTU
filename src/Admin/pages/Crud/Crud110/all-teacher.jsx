@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Input, Select } from "../../../components/Generics";
+import { Select } from "../../../components/Generics";
 import Cookies from "js-cookie";
 import DataTable from "../../../components/DataTable";
 import useAxios from "../../../../hooks/useAxios";

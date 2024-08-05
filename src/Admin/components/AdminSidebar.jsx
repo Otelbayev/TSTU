@@ -80,5 +80,12 @@ export const admin = () => {
       roles: ["headdepartment"],
       icon: "nav-icon fa fa-check",
     },
+    {
+      id: 10,
+      path: "study-department",
+      title: "O'qituvchilarni baholash",
+      roles: ["studydepartment"],
+      icon: "nav-icon fa-solid fa-ranking-star",
+    },
   ];
 };

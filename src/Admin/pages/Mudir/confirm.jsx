@@ -1,0 +1,155 @@
+import { useEffect, useState } from "react";
+import Wrapper from "../../components/Wrapper";
+import useAxios from "../../../hooks/useAxios";
+import Cookies from "js-cookie";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useDateContext } from "../../context/DateContext";
+import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+import "datatables.net-bs5";
+import "datatables.net";
+import $ from "jquery";
+
+const Div = styled.div`
+  td:last-child {
+    width: 100px;
+  }
+  td:first-child {
+    width: 5%;
+    text-align: center !important;
+  }
+  th {
+    text-align: center !important;
+  }
+`;
+
+const ConfirmTeacher = () => {
+  const { loading, error, sendRequest } = useAxios();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { i18n } = useTranslation();
+  const { id } = useParams();
+  const { old_year } = useDateContext();
+
+  const [data, setDate] = useState([]);
+
+  const getData = async () => {
+    const res = await sendRequest({
+      method: "get",
+      url: `${
+        import.meta.env.VITE_BASE_URL_API
+      }/documentteacher110setcontroller/getdocumentteacher110setdepartament`,
+      headers: {
+        Authorization: `Bearer ${Cookies.get("_token")}`,
+      },
+      params: {
+        oldYear: old_year,
+        newYear: Number(old_year) + 1,
+        person_id: id,
+      },
+    });
+
+    res.status === 200 && setDate(res.data);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const confirm = (id) => {};
+  const reject = (id) => {};
+
+  useEffect(() => {
+    if (data?.documents_teacher_?.length) {
+      const queryParams = new URLSearchParams(location.search);
+      const page = parseInt(queryParams.get("page")) || 1;
+
+      const table = $("#example")?.DataTable({
+        data: data?.documents_teacher_,
+        columns: [
+          { data: "id", title: "#" },
+          { data: "comment", title: "title" },
+          { data: "document_.title", title: "Document" },
+          {
+            data: null,
+            title: "Actions",
+            orderable: false,
+            render: function (data) {
+              return `<div style="display: flex; gap:5px"> 
+              <button class="btn btn-outline-primary show" data-id="${data?.id}">
+                            <i class="fa fa-eye"></i>
+                    </button>      
+              <button class="btn btn-outline-success confirm" data-id="${data?.id}">
+                            <i class="fa fa-check"></i>
+                    </button>
+                    <button class="btn btn-outline-danger reject" data-id="${data?.id}">
+                            <i class="fa fa-times"></i>
+                    </button>
+                </div> `;
+            },
+          },
+        ],
+        destroy: true,
+        responsive: true,
+        ordering: false,
+        pageLength: 10,
+        displayStart: (page - 1) * 10,
+      });
+
+      table.on("page.dt", function () {
+        let pageInfo = table.page.info();
+        navigate(`?page=${pageInfo.page + 1}`);
+      });
+
+      $("#example tbody").on("click", ".confirm", function () {
+        const id = $(this).data("id");
+        confirm(id);
+      });
+      $("#example tbody").on("click", ".reject", function () {
+        const id = $(this).data("id");
+        reject(id);
+      });
+      $("#example tbody").on("click", ".show", function () {
+        const id = $(this).data("id");
+        show(id);
+      });
+
+      return () => {
+        table.destroy();
+        $("#example tbody").off("click", ".edit-btn");
+        $("#example tbody").off("click", ".delete-btn");
+      };
+    }
+  }, [data, location.search]);
+
+  const show = (id) => {
+    const res = data?.documents_teacher_?.find((e) => e.id === id);
+    console.log(res?.file_?.url);
+  };
+
+  return (
+    <Wrapper
+      title={`${data.person_?.lastName} ${data.person_?.firstName} ${data.person_?.fathers_name}`}
+    >
+      <Div>
+        <table
+          id="example"
+          className="display responsive table table-bordered w-100"
+        ></table>
+      </Div>
+      {/* <DataTable
+        data={data?.documents_teacher_}
+        loading={loading}
+        error={error}
+        col={[
+          { data: "id", title: "#" },
+          { data: "comment", title: "title" },
+          { data: "document_.title", title: "Document" },
+        ]}
+      /> */}
+    </Wrapper>
+  );
+};
+
+export default ConfirmTeacher;

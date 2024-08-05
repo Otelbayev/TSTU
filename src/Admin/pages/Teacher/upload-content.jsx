@@ -187,7 +187,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
                     <button
                       className="btn w-100 btn-warning"
                       data-toggle="modal"
-                      data-target="#exampleModal"
+                      data-target={`#exampleModal${item.id}`}
                     >
                       {item.reason_for_rejection?.split(" ")?.length > 3
                         ? `${item?.reason_for_rejection
@@ -198,7 +198,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
                     </button>
                     <div
                       className="modal fade"
-                      id="exampleModal"
+                      id={`exampleModal${item.id}`}
                       tabIndex="-1"
                       role="dialog"
                       aria-labelledby="exampleModalLabel"

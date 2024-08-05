@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Wrapper from "../../components/Wrapper";
 import useAxios from "../../../hooks/useAxios";
 import Cookies from "js-cookie";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDateContext } from "../../context/DateContext";
 import styled from "styled-components";
-import { useTranslation } from "react-i18next";
 import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
 import "datatables.net-bs5";
 import "datatables.net";
 import $ from "jquery";
+import { Input } from "../../components/Generics";
+import { message } from "antd";
+import axios from "axios";
 
 const Div = styled.div`
   td:last-child {
@@ -25,14 +27,16 @@ const Div = styled.div`
 `;
 
 const ConfirmTeacher = () => {
-  const { loading, error, sendRequest } = useAxios();
+  const { sendRequest } = useAxios();
   const navigate = useNavigate();
   const location = useLocation();
-  const { i18n } = useTranslation();
   const { id } = useParams();
   const { old_year } = useDateContext();
+  const [modalId, setModalId] = useState(null);
 
   const [data, setDate] = useState([]);
+
+  const commentRef = useRef();
 
   const getData = async () => {
     const res = await sendRequest({
@@ -57,9 +61,6 @@ const ConfirmTeacher = () => {
     getData();
   }, []);
 
-  const confirm = (id) => {};
-  const reject = (id) => {};
-
   useEffect(() => {
     if (data?.documents_teacher_?.length) {
       const queryParams = new URLSearchParams(location.search);
@@ -80,10 +81,10 @@ const ConfirmTeacher = () => {
               <button class="btn btn-outline-primary show" data-id="${data?.id}">
                             <i class="fa fa-eye"></i>
                     </button>      
-              <button class="btn btn-outline-success confirm" data-id="${data?.id}">
+              <button class="btn btn-outline-success confirm" data-toggle="modal" data-target=".modal1" data-id="${data?.id}">
                             <i class="fa fa-check"></i>
                     </button>
-                    <button class="btn btn-outline-danger reject" data-id="${data?.id}">
+                    <button class="btn btn-outline-danger reject" data-toggle="modal" data-target=".modal2" data-id="${data?.id}">
                             <i class="fa fa-times"></i>
                     </button>
                 </div> `;
@@ -104,11 +105,11 @@ const ConfirmTeacher = () => {
 
       $("#example tbody").on("click", ".confirm", function () {
         const id = $(this).data("id");
-        confirm(id);
+        setModalId(id);
       });
       $("#example tbody").on("click", ".reject", function () {
         const id = $(this).data("id");
-        reject(id);
+        setModalId(id);
       });
       $("#example tbody").on("click", ".show", function () {
         const id = $(this).data("id");
@@ -125,29 +126,177 @@ const ConfirmTeacher = () => {
 
   const show = (id) => {
     const res = data?.documents_teacher_?.find((e) => e.id === id);
-    console.log(res?.file_?.url);
+    window.open(
+      `${import.meta.env.VITE_BASE_URL_IMG}${res?.file_?.url}`,
+      "_blank"
+    );
+  };
+
+  const confirm = async () => {
+    try {
+      message.loading({ key: "confirm", content: "Yuklamoqda.." });
+      const res = await axios.put(
+        `${
+          import.meta.env.VITE_BASE_URL_API
+        }/documentteacher110setcontroller/confirmheaddepartamentdocument110/${modalId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("_token")}`,
+          },
+          params: {
+            confirm: true,
+          },
+        }
+      );
+      if (res.status === 200) {
+        message.success({ key: "confirm", content: "Tasdiqlandi!" });
+        getData();
+      }
+    } catch (err) {
+      message.error({ key: "confirm", content: "Xatokil!" });
+    }
+  };
+  const reject = async () => {
+    if (!commentRef.current.value) {
+      message.error({ key: "reject", content: "Izoh kiriting!" });
+      return;
+    }
+    try {
+      message.loading({ key: "reject", content: "Yukamoqda!" });
+      const res = await axios.put(
+        `${
+          import.meta.env.VITE_BASE_URL_API
+        }/documentteacher110setcontroller/confirmheaddepartamentdocument110/${modalId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("_token")}`,
+          },
+          params: {
+            confirm: false,
+            reason_for_rejection: commentRef?.current?.value,
+          },
+        }
+      );
+
+      if (res.status === 200) {
+        message.success({ key: "reject", content: "Yuborildi!" });
+        getData();
+      }
+    } catch (err) {
+      message.error({ key: "reject", content: "Xatolik!" });
+    }
   };
 
   return (
     <Wrapper
       title={`${data.person_?.lastName} ${data.person_?.firstName} ${data.person_?.fathers_name}`}
     >
+      <div
+        className="modal fade bd-example-modal-sm modal1"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mySmallModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-sm">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="mySmallModalLabel">
+                Tasdiqlaysizmi?
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="text-center">
+                <button
+                  type="button"
+                  className="btn btn-outline-success mx-1"
+                  data-dismiss="modal"
+                  onClick={confirm}
+                >
+                  Ha
+                </button>
+
+                <button
+                  type="button"
+                  className="btn btn-outline-danger mx-1"
+                  data-dismiss="modal"
+                >
+                  Yo'q
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="modal fade bd-example-modal-sm  modal2"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mySmallModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-sm">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="mySmallModalLabel">
+                Rad etasizmi?
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="text-center row">
+                <Input
+                  className="col-md-12 form-group"
+                  ref={commentRef}
+                  placeholder="Izoh"
+                />
+                <div className="col-md-6">
+                  <button
+                    type="button"
+                    className="btn btn-outline-success w-100"
+                    onClick={reject}
+                    data-dismiss="modal"
+                  >
+                    Ha
+                  </button>
+                </div>
+                <div className="col-md-6">
+                  <button
+                    type="button"
+                    className="btn btn-outline-danger w-100"
+                    data-dismiss="modal"
+                  >
+                    Yo'q
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <Div>
         <table
           id="example"
           className="display responsive table table-bordered w-100"
         ></table>
       </Div>
-      {/* <DataTable
-        data={data?.documents_teacher_}
-        loading={loading}
-        error={error}
-        col={[
-          { data: "id", title: "#" },
-          { data: "comment", title: "title" },
-          { data: "document_.title", title: "Document" },
-        ]}
-      /> */}
     </Wrapper>
   );
 };

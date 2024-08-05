@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Wrapper from "../../components/Wrapper";
 import { Collapse } from "antd";
 import styled from "styled-components";
 import axios from "axios";
@@ -90,6 +89,27 @@ const FileImport = () => {
 
   const nestedItems = buildNestedItems(rawData, 0);
 
+  // const getCount = async () => {
+  //   const res = await axios.get(
+  //     `${
+  //       import.meta.env.VITE_BASE_URL_API
+  //     }/documentteacher110setcontroller/getalldocumentteacher110set?oldYear=${old_year}&newYear=${
+  //       Number(old_year) + 1
+  //     }`,
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${Cookies.get("_token")}`,
+  //       },
+  //     }
+  //   );
+
+  //   console.log(res.data.filter((e) => !e.document_?.indicator));
+  // };
+
+  // useEffect(() => {
+  //   getCount();
+  // }, []);
+
   return (
     <div>
       <div className="content-wrapper wrapper-min-height">
@@ -109,9 +129,9 @@ const FileImport = () => {
             <section className="row">
               <div className="col-md-12">
                 <div className="card">
-                  <div className="card-header pt-4 pl-4">
+                  <div className="card-header pl-4">
                     <div className="row">
-                      <h4>O'quv yili:</h4>
+                      <h4 className="py-2">O'quv yili:</h4>
                       <Select
                         value={old_year}
                         options={[
@@ -127,19 +147,26 @@ const FileImport = () => {
                           { value: 2029, label: "2029/2030" },
                           { value: 2030, label: "2030/2031" },
                         ]}
-                        className={"col-md-2"}
+                        className={"col-md-2 py-2"}
                         onChange={(e) => {
                           setOldYear(e);
                           setUpdateData({ name: "Jasurbek" });
                         }}
                       />
-                      <h4 className="col-md-4">
+                      <h4 className="col-md-4 py-2">
                         Maksimal Ball :{" "}
                         <span className="bg-success p-1 rounded">{all}</span>
                       </h4>
-                      <h4 className="col-md-4">
+                      <h4 className="col-md-4 py-2">
                         To'plangan Ball :{" "}
-                        <span className="bg-warning p-1 rounded">{has}</span>
+                        <span className="bg-warning p-1 rounded">
+                          {rawData
+                            .filter((e) => !e.indicator)
+                            .reduce(
+                              (prev, curr) => (prev += curr?.max_score),
+                              0
+                            )}
+                        </span>
                       </h4>
                     </div>
                   </div>

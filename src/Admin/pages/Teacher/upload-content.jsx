@@ -144,10 +144,6 @@ const Upload = ({ id, old_year, new_year, upd }) => {
     getData(id);
   }, [upd]);
 
-  if (data?.length) {
-    console.log(data);
-  }
-
   return (
     <div>
       <form className="row" onSubmit={handleSubmit}>
@@ -193,43 +189,43 @@ const Upload = ({ id, old_year, new_year, upd }) => {
                       data-toggle="modal"
                       data-target="#exampleModal"
                     >
-                      {item.reason_for_rejection.split(" ").length > 3
-                        ? `${item.reason_for_rejection
-                            .split(" ")
-                            .slice(0, 3)
-                            .join(" ")}...`
-                        : item.reason_for_rejection}
+                      {item.reason_for_rejection?.split(" ")?.length > 3
+                        ? `${item?.reason_for_rejection
+                            ?.split(" ")
+                            ?.slice(0, 2)
+                            ?.join(" ")}...`
+                        : item.reason_for_rejection || "Rad etilgan"}
                     </button>
                     <div
-                      class="modal fade"
+                      className="modal fade"
                       id="exampleModal"
-                      tabindex="-1"
+                      tabIndex="-1"
                       role="dialog"
                       aria-labelledby="exampleModalLabel"
                       aria-hidden="true"
                     >
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
+                      <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
                               Rad edilgan
                             </h5>
                             <button
                               type="button"
-                              class="close"
+                              className="close"
                               data-dismiss="modal"
                               aria-label="Close"
                             >
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                          <div class="modal-body">
-                            {item.reason_for_rejection}
+                          <div className="modal-body">
+                            {item.reason_for_rejection || "Rad etilgan"}
                           </div>
-                          <div class="modal-footer">
+                          <div className="modal-footer">
                             <button
                               type="button"
-                              class="btn btn-secondary"
+                              className="btn btn-secondary"
                               data-dismiss="modal"
                             >
                               Yopish

@@ -17,7 +17,10 @@ const KafedraCart = ({ prop, dataAos, $slider, onClick, arrow, fac }) => {
       />
       <div className="flex-name">
         <NavLink className="name">
-          {prop?.title} {fac ? t("faculties.in") : ""}
+          {prop?.title?.split(" ")?.length <= 4
+            ? prop.title
+            : prop?.title?.split(" ")?.slice(0, 3)?.join(" ") + "..."}
+          {fac ? t("faculties.in") : ""}
           {arrow === false ? "" : <i className="fa-solid fa-arrow-right"></i>}
         </NavLink>
       </div>

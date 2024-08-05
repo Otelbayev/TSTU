@@ -146,6 +146,7 @@ const Mudir = lazy(() => import("../pages/Mudir/mudir"));
 const ConfirmTeacher = lazy(() => import("../pages/Mudir/confirm"));
 
 const StudyDepartment = lazy(() => import("../pages/Study"));
+const StudyDepartmentID = lazy(() => import("../pages/Study/study-dep"));
 
 export const routes = [
   {
@@ -254,7 +255,7 @@ export const routes = [
     id: useId(),
     path: "/profile",
     element: <Profile />,
-    roles: ["admin"],
+    roles: ["admin", "teacher", "headdepartment", "studydepartment"],
   },
   {
     id: useId(),
@@ -741,6 +742,12 @@ export const routes = [
     id: useId(),
     path: "study-department",
     element: <StudyDepartment />,
+    roles: ["studydepartment"],
+  },
+  {
+    id: useId(),
+    path: "study-department/:id",
+    element: <StudyDepartmentID />,
     roles: ["studydepartment"],
   },
 ];

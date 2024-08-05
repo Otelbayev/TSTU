@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import Upload from "./upload-content";
 import { Select } from "../../components/Generics";
 import { useDateContext } from "../../context/DateContext";
+import { studyYears } from "../../utils/mock";
 
 const Space = styled.div`
   display: flex;
@@ -25,7 +26,6 @@ const FileImport = () => {
   const [updateData, setUpdateData] = useState(false);
 
   let all = 0;
-  let has = 0;
 
   const getData = async () => {
     const res = await axios.get(
@@ -89,27 +89,6 @@ const FileImport = () => {
 
   const nestedItems = buildNestedItems(rawData, 0);
 
-  // const getCount = async () => {
-  //   const res = await axios.get(
-  //     `${
-  //       import.meta.env.VITE_BASE_URL_API
-  //     }/documentteacher110setcontroller/getalldocumentteacher110set?oldYear=${old_year}&newYear=${
-  //       Number(old_year) + 1
-  //     }`,
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${Cookies.get("_token")}`,
-  //       },
-  //     }
-  //   );
-
-  //   console.log(res.data.filter((e) => !e.document_?.indicator));
-  // };
-
-  // useEffect(() => {
-  //   getCount();
-  // }, []);
-
   return (
     <div>
       <div className="content-wrapper wrapper-min-height">
@@ -134,19 +113,7 @@ const FileImport = () => {
                       <h4 className="py-2">O'quv yili:</h4>
                       <Select
                         value={old_year}
-                        options={[
-                          { value: 2020, label: "2020/2021" },
-                          { value: 2021, label: "2021/2022" },
-                          { value: 2022, label: "2022/2023" },
-                          { value: 2023, label: "2023/2024" },
-                          { value: 2024, label: "2024/2025" },
-                          { value: 2025, label: "2025/2026" },
-                          { value: 2026, label: "2026/2027" },
-                          { value: 2027, label: "2027/2028" },
-                          { value: 2028, label: "2028/2029" },
-                          { value: 2029, label: "2029/2030" },
-                          { value: 2030, label: "2030/2031" },
-                        ]}
+                        options={studyYears}
                         className={"col-md-2 py-2"}
                         onChange={(e) => {
                           setOldYear(e);
@@ -159,14 +126,7 @@ const FileImport = () => {
                       </h4>
                       <h4 className="col-md-4 py-2">
                         To'plangan Ball :{" "}
-                        <span className="bg-warning p-1 rounded">
-                          {/* {rawData
-                            .filter((e) => !e.indicator)
-                            .reduce(
-                              (prev, curr) => (prev += curr?.max_score),
-                              0
-                            )} */}
-                        </span>
+                        <span className="bg-warning p-1 rounded">0</span>
                       </h4>
                     </div>
                   </div>

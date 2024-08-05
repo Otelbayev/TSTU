@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Select } from "../../../components/Generics";
+import { Select } from "../../components/Generics";
 import Cookies from "js-cookie";
 import DataTable from "../../components/DataTable";
 import useAxios from "../../../hooks/useAxios";
@@ -72,7 +72,7 @@ const Study = () => {
                         },
                       ]}
                       appeal={true}
-                      edit={"confirm-teacher-110"}
+                      edit={"study-department"}
                     />
                   </div>
                   <div className="card-footer clearfix">

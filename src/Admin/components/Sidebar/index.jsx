@@ -20,6 +20,19 @@ const Sidebar = () => {
   const sidebarItems = admin();
   const role = Cookies.get("role");
 
+  const getName = (role) => {
+    switch (role) {
+      case "admin":
+        return "Super Admin";
+      case "teacher":
+        return "O'qituvchi";
+      case "studydepartment":
+        return "O'quv bo'lim";
+      case "headdepartment":
+        return "Kafedra mudiri";
+    }
+  };
+
   return (
     <div>
       <aside className="main-sidebar sidebar-dark-primary vh-100">
@@ -35,7 +48,7 @@ const Sidebar = () => {
             </div>
             <div className="info" style={{ whiteSpace: "initial" }}>
               <NavLink to="profile" className="d-block">
-                Super Admin
+                {getName(role)}
               </NavLink>
             </div>
           </div>

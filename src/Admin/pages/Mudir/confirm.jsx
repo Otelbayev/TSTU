@@ -157,6 +157,7 @@ const ConfirmTeacher = () => {
       message.error({ key: "confirm", content: "Xatokil!" });
     }
   };
+
   const reject = async () => {
     if (!commentRef.current.value) {
       message.error({ key: "reject", content: "Izoh kiriting!" });
@@ -182,6 +183,7 @@ const ConfirmTeacher = () => {
 
       if (res.status === 200) {
         message.success({ key: "reject", content: "Yuborildi!" });
+        commentRef.current.value = "";
         getData();
       }
     } catch (err) {
@@ -195,7 +197,7 @@ const ConfirmTeacher = () => {
     >
       <div
         className="modal fade bd-example-modal-sm modal1"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
@@ -240,7 +242,7 @@ const ConfirmTeacher = () => {
       </div>
       <div
         className="modal fade bd-example-modal-sm  modal2"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
@@ -271,8 +273,8 @@ const ConfirmTeacher = () => {
                   <button
                     type="button"
                     className="btn btn-outline-success w-100"
-                    onClick={reject}
                     data-dismiss="modal"
+                    onClick={reject}
                   >
                     Ha
                   </button>

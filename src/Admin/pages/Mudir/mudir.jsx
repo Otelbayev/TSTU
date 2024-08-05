@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Select } from "../../../components/Generics";
+import { Select } from "../../components/Generics";
 import Cookies from "js-cookie";
 import DataTable from "../../components/DataTable";
 import useAxios from "../../../hooks/useAxios";
@@ -37,23 +37,32 @@ const Mudir = () => {
   return (
     <div>
       <div className="content-wrapper wrapper-min-height">
-        <section className="content pt-5">
+        <section className="content pt-3">
+          <section className="content-header">
+            <div className="container-fluid">
+              <div className="row mb-2">
+                <div className="col-sm-6">
+                  <h1>
+                    Pedagog xodimlarning o‘quv yilidagi faoliyatini baholash
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </section>
           <div className="container-fluid">
-            <section className="content-header">
-              <h1>Pedagog xodimlarning o‘quv yilidagi faoliyatini baholash</h1>
-            </section>
             <section className="row">
               <div className="col-md-12">
                 <div className="card">
-                  <div className="card-header">
+                  <div className="card-header pl-4">
                     <div className="row">
-                      <h4>O'quv yili:</h4>
+                      <h4 className="py-2">O'quv yili:</h4>
                       <Select
                         value={old_year}
                         options={studyYears}
-                        className={"col-md-3"}
+                        className={"col-md-2 py-2"}
                         onChange={(e) => {
                           setOldYear(e);
+                          setUpdateData({ name: "Jasurbek" });
                         }}
                       />
                     </div>

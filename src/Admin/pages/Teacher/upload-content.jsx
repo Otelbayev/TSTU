@@ -251,7 +251,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
                     </button>
                   </div>
                 ) : (
-                  <div className="col-md-1">
+                  <div className={item.score ? "col-md-3" : "col-md-1"}>
                     <NavLink
                       target="_blank"
                       to={`${import.meta.env.VITE_BASE_URL_IMG}${
@@ -272,7 +272,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
                       <i className="fa-solid fa-x"></i>
                     </button>
                   </div>
-                ) : (
+                ) : item.score ? null : (
                   <div className="col-md-1">
                     <button
                       onClick={() => {
@@ -285,7 +285,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
                     </button>
                   </div>
                 )}
-                {isEdit !== item.id ? (
+                {isEdit !== item.id && !item.score ? (
                   <div className="col-md-1">
                     <button
                       onClick={() => onDel(item.id)}

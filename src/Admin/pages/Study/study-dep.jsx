@@ -194,9 +194,8 @@ const StudyDep = () => {
     }
   };
 
-  const title = data?.documents_teacher_?.find((e) => e.id === modalId);
-
-  console.log(title);
+  const title = data?.documents_teacher_?.find((e) => e.id === modalId)
+    ?.document_?.title;
 
   return (
     <Wrapper
@@ -209,12 +208,12 @@ const StudyDep = () => {
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-sm">
+        <div className="modal-dialog modal-mg">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="mySmallModalLabel">
-                Tasdiqlaysizmi?
-              </h5>
+              <p className="modal-title" id="mySmallModalLabel">
+                {title}
+              </p>
               <button
                 type="button"
                 className="close"

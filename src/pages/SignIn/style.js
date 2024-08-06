@@ -4,13 +4,15 @@ import apple from "../../assets/icons/apple.svg?react";
 import facebook from "../../assets/icons/facebook-dark.svg?react";
 
 export const Content = styled.div`
-  margin: 70px 0;
+  padding: 10px 0;
+  height: calc(100vh - 122px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 100px;
   @media (max-width: 950px) {
     flex-direction: column-reverse;
+    height: auto;
     gap: 20px;
     margin: 20px 0;
   }
@@ -162,9 +164,11 @@ Content.Next = styled.div`
 
 Content.Right = styled.div`
   width: 50%;
+  height: 100%;
   max-height: 600px;
   @media (max-width: 950px) {
-    width: 90%;
+    width: 60%;
+    height: auto;
   }
 `;
 Content.Img = styled.img`
@@ -173,7 +177,7 @@ Content.Img = styled.img`
 `;
 
 export const Div = styled.div`
-  margin: 30px 0;
+  margin: 15px 0;
 `;
 
 export const Icons = styled.div``;

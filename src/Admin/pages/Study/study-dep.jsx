@@ -194,6 +194,10 @@ const StudyDep = () => {
     }
   };
 
+  const title = data?.documents_teacher_?.find((e) => e.id === modalId);
+
+  console.log(title);
+
   return (
     <Wrapper
       title={`${data.person_?.lastName} ${data.person_?.firstName} ${data.person_?.fathers_name}`}

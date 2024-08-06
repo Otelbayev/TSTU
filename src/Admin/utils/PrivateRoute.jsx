@@ -42,7 +42,7 @@ const PrivateRoute = () => {
       <img loading="lazy" style={{ width: "80px" }} src={loadingGif} alt="" />
     </div>
   ) : error ? (
-    <Navigate to={`/${language}/signin`} />
+    <Navigate to={`/${i18n.language}/signin`} />
   ) : (
     <Outlet />
   );

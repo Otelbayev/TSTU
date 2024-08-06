@@ -8,6 +8,22 @@ import { Select } from "../../components/Generics";
 import { useDateContext } from "../../context/DateContext";
 import { studyYears } from "../../utils/mock";
 
+const getSize = (id, italic) => {
+  if (!italic) {
+    return "14px";
+  }
+  switch (id) {
+    case 0:
+      return "20px";
+    case 1:
+      return "18px";
+    case 2:
+      return "16px";
+    default:
+      return "14px";
+  }
+};
+
 const Space = styled.div`
   display: flex;
   align-items: center;
@@ -15,6 +31,14 @@ const Space = styled.div`
   gap: 20px;
   .ball {
     white-space: nowrap;
+    font-style: ${({ italic }) => (italic ? "" : "italic")};
+    font-weight: ${({ italic }) => (italic ? "" : "400")};
+    font-size: ${({ italic, id }) => getSize(id, italic)};
+  }
+  .panel-title {
+    font-style: ${({ italic }) => (italic ? "" : "italic")};
+    font-weight: ${({ italic }) => (italic ? "" : "400")};
+    font-size: ${({ italic, id }) => getSize(id, italic)};
   }
 `;
 
@@ -24,6 +48,7 @@ const FileImport = () => {
   const { old_year, setOldYear } = useDateContext();
   const [rawData, setRawData] = useState([]);
   const [updateData, setUpdateData] = useState(false);
+  const [count, setCount] = useState(0);
 
   let all = 0;
 
@@ -40,6 +65,19 @@ const FileImport = () => {
     );
 
     res.status === 200 && setRawData(res.data);
+
+    const res2 = await axios.get(
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/documentteacher110setcontroller/getalldocumentteacher110set?oldYear=2023&newYear=2024`,
+      {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("_token")}`,
+        },
+      }
+    );
+    res2.status === 200 &&
+      setCount(res2.data?.reduce((a, b) => (a += b.score), 0));
   };
 
   useEffect(() => {
@@ -51,8 +89,8 @@ const FileImport = () => {
       <Panel
         key={item.id}
         header={
-          <Space>
-            <div>{item.title}</div>
+          <Space italic={item.indicator} id={item.parent_id}>
+            <div className="panel-title">{item.title}</div>
             <div className="ball">
               {item.max_score ? `${item.max_score} ball` : ""}
             </div>
@@ -126,7 +164,7 @@ const FileImport = () => {
                       </h4>
                       <h4 className="col-md-4 py-2">
                         To'plangan Ball :{" "}
-                        <span className="bg-warning p-1 rounded">0</span>
+                        <span className="bg-warning p-1 rounded">{count}</span>
                       </h4>
                     </div>
                   </div>

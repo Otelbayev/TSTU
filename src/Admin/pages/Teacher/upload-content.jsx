@@ -238,7 +238,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
                 ) : null}
                 {!item.rejection && item.id !== isEdit ? (
                   <div className="col-md-1">
-                    <h5>{item.score || 0} ball</h5>
+                    <p>{item.score || 0} ball</p>
                   </div>
                 ) : null}
                 {isEdit === item.id ? (

@@ -12,6 +12,7 @@ import $ from "jquery";
 import { Input } from "../../components/Generics";
 import { message } from "antd";
 import axios from "axios";
+import loadingGif from "../../../assets/icons/loading.gif";
 
 const Div = styled.div`
   td:last-child {
@@ -27,7 +28,7 @@ const Div = styled.div`
 `;
 
 const StudyDep = () => {
-  const { sendRequest } = useAxios();
+  const { sendRequest, loading, error } = useAxios();
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
@@ -304,12 +305,37 @@ const StudyDep = () => {
           </div>
         </div>
       </div>
-      <Div>
-        <table
-          id="example"
-          className="display responsive table table-bordered w-100"
-        ></table>
-      </Div>
+      {data.documents_teacher_?.length ? (
+        <Div>
+          <table
+            id="example"
+            className="display responsive table table-bordered w-100"
+          ></table>
+        </Div>
+      ) : (
+        <table className="display responsive table w-100">
+          <tbody>
+            <tr>
+              <td colSpan={10} className="text-center">
+                {loading ? (
+                  <div>
+                    <img
+                      loading="lazy"
+                      style={{ width: "50px" }}
+                      src={loadingGif}
+                      alt=""
+                    />
+                  </div>
+                ) : error ? (
+                  "Error"
+                ) : (
+                  "No data"
+                )}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      )}
     </Wrapper>
   );
 };

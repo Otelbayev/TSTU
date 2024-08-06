@@ -313,7 +313,7 @@ const Header = ({ uni }) => {
                   <Link to="https://elib.tstu.uz/" target="_blank">
                     {t("header.kutubxona")}
                   </Link>
-                  <Link>{t("header.alumni")}</Link>
+                  <Link to="http://alumni.tstu.uz/">{t("header.alumni")}</Link>
                   <Search onClick={() => setIsSearchOpen(!isSearchOpen)}>
                     <Icon loading="lazy" src={search} width={24} />
                     <div>{t("header.qidiruv")}</div>

@@ -35,9 +35,9 @@ import icon from "../../assets/Galereya/btn.png";
 import logo from "../../../public/logo2.png";
 import { Absolute, Container, Header, Showcase } from "./style";
 import { NavLink } from "react-router-dom";
-import Pagination from "../../components/Pagination";
 import { Lang, Title } from "../../components/Generics";
 import { useTranslation } from "react-i18next";
+import { Pagination } from "antd";
 
 const Galereya = () => {
   const categoryRef = useRef();

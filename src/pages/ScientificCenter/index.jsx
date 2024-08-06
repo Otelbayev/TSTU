@@ -4,16 +4,17 @@ import React, { useEffect } from "react";
 import UniShowcase from "./../../components/UniShowcase/index";
 import { useTranslation } from "react-i18next";
 import { useDepartment } from "../../hooks/useDepartment";
+import Loading2 from "../../components/Loading2";
 
 const ScientificCenter = () => {
   const { t, i18n } = useTranslation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const { data, loading, error } = useDepartment("Ilmiy markaz");
+  const { data, loading, error } = useDepartment("Ilmiy markaz", true);
 
   if (loading) {
-    return <h1 className="text-center">Loading...</h1>;
+    return <Loading2 />;
   }
 
   if (!loading && error) {

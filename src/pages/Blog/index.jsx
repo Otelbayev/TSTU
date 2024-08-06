@@ -15,8 +15,6 @@ const Blog = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
-  const { data } = useBlog("Yangiliklar", false);
-
   const [allData, setAllData] = useState([]);
   const [types, setTypes] = useState([]);
   const [page, setpage] = useState(1);

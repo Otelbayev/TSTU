@@ -1,21 +1,29 @@
 import React, { useEffect } from "react";
 import { Content } from "../Centers/style";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDepartment } from "../../hooks/useDepartment";
 import { Title } from "../../components/Generics";
+import { Pagination } from "antd";
+import Loading2 from "../../components/Loading2";
 
 const Department = () => {
   const naviagte = useNavigate();
   const { t, i18n } = useTranslation();
-  const { data, loading, error } = useDepartment("Bo'lim");
+  const { data, loading, error, page, setPage } = useDepartment("Bo'lim", true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [page]);
+
+  const pageChange = (e) => {
+    setPage(e);
+    const newUrl = `${window.location.pathname}?page=${e}`;
+    window.history.replaceState(null, null, newUrl);
+  };
 
   if (loading) {
-    return <h1 className="text-center">Loading...</h1>;
+    return <Loading2 />;
   }
 
   if (!loading && error) {
@@ -27,7 +35,7 @@ const Department = () => {
       <div className="root-wrapper">
         <Title title={t("department.b")} $border="none" />
         <Content data-aos="fade-up">
-          {data?.map((e) => (
+          {data?.list?.map((e) => (
             <Content.Item
               key={e.id}
               onClick={() =>
@@ -48,6 +56,13 @@ const Department = () => {
             </Content.Item>
           ))}
         </Content>
+        <div className="text-center my-4">
+          <Pagination
+            current={page}
+            onChange={pageChange}
+            total={data?.length}
+          />
+        </div>
       </div>
     </div>
   );

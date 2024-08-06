@@ -1,20 +1,25 @@
 import React, { useEffect } from "react";
 import { Content } from "./style";
 import FacultyCart from "../../components/Faculties/FacultyCart";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDepartment } from "../../hooks/useDepartment";
+import { Pagination } from "antd";
 
 const Faculties = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const { data } = useDepartment("Fakultet");
-
+  const naviagte = useNavigate();
+  const { data, page, setPage } = useDepartment("Fakultet", true);
   const { t, i18n } = useTranslation();
 
-  const naviagte = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page]);
+
+  const pageChange = (e) => {
+    setPage(e);
+    const newUrl = `${window.location.pathname}?page=${e}`;
+    window.history.replaceState(null, null, newUrl);
+  };
 
   return (
     <div className="root-container">
@@ -22,7 +27,7 @@ const Faculties = () => {
         <Content data-aos="fade-up">
           <div className="title">{t("faculties.all")}</div>
           <Content.Body>
-            {data?.map((item) => {
+            {data?.list?.map((item) => {
               return (
                 <FacultyCart
                   key={item?.id}
@@ -40,6 +45,13 @@ const Faculties = () => {
               );
             })}
           </Content.Body>
+          <div className="text-center mt-4">
+            <Pagination
+              total={data?.length}
+              current={page}
+              onChange={pageChange}
+            />
+          </div>
         </Content>
       </div>
     </div>

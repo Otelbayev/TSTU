@@ -48,7 +48,7 @@ const Talim = () => {
         >
           <div data-aos="fade-up">
             <Slider className="slider" {...settings}>
-              {data
+              {data?.list
                 ?.sort((a, b) => b?.id - a?.id)
                 ?.map((e) => (
                   <div className="slider__item" key={e.id}>

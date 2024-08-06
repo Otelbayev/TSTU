@@ -5,6 +5,7 @@ import { Grid } from "../Blog/style";
 import NewsCart from "../../components/News/NewsCart";
 import { useNavigate } from "react-router-dom";
 import { useBlog } from "./../../hooks/useBog";
+import Loading2 from "../../components/Loading2";
 
 const StudentLife = () => {
   const { i18n, t } = useTranslation();
@@ -14,10 +15,10 @@ const StudentLife = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { data, loading, error } = useBlog("Talaba hayoti", false);
+  const { data, loading, error } = useBlog("Talaba hayoti", false, true);
 
   if (loading) {
-    return <h1 className="text-center">Loading...</h1>;
+    return <Loading2 />;
   }
 
   if (!loading && error) {

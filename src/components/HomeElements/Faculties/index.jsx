@@ -16,12 +16,12 @@ const Faculties = () => {
   const [id, setId] = useState(null);
 
   useEffect(() => {
-    setId(faculties?.length ? faculties[0]?.id : null);
+    setId(faculties?.list?.length ? faculties?.list[0]?.id : null);
   }, [faculties]);
 
   const navigate = useNavigate();
 
-  const fac = faculties?.find((e) => e?.id === id);
+  const fac = faculties?.list?.find((e) => e?.id === id);
 
   return (
     <Fakultetlar className="root-container">
@@ -35,7 +35,7 @@ const Faculties = () => {
           <FakGrid>
             <div data-aos="fade-right" className="fak-left">
               <div className="fak-left__content">
-                {faculties?.map((e) => (
+                {faculties?.list?.map((e) => (
                   <FacultetCart
                     key={e?.id}
                     id={id}
@@ -61,7 +61,7 @@ const Faculties = () => {
                     }
                     prop={fac}
                   />
-                  {kafedras
+                  {kafedras?.list
                     ?.filter((e) => e?.parent_id === id)
                     ?.map((item) => (
                       <KafedraCart

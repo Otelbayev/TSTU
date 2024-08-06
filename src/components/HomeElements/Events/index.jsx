@@ -6,6 +6,7 @@ import { Layout } from "./style";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useBlog } from "../../../hooks/useBog";
+import Loading2 from "../../Loading2";
 
 const Events = ({ type }) => {
   const { t, i18n } = useTranslation();
@@ -13,9 +14,9 @@ const Events = ({ type }) => {
 
   const { data, loading, error } = useBlog("Kutilayotgan tadbirlar", true);
 
-  const d1 = data?.sort((a, b) => b.id - a.id);
+  const d1 = data?.list?.sort((a, b) => b.id - a.id);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading2 />;
   if (error) return <div>Error: {error?.message}</div>;
 
   return (

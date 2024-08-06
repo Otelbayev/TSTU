@@ -4,18 +4,26 @@ import { useNavigate } from "react-router-dom";
 import { Title } from "../../components/Generics";
 import { useTranslation } from "react-i18next";
 import { useDepartment } from "./../../hooks/useDepartment";
+import Loading2 from "../../components/Loading2";
+import { Pagination } from "antd";
 
 const Centers = () => {
   const naviagte = useNavigate();
   const { t, i18n } = useTranslation();
-  const { data, loading, error } = useDepartment("Markaz");
+  const { data, loading, error, page, setPage } = useDepartment("Markaz", true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [page]);
+
+  const pageChange = (e) => {
+    setPage(e);
+    const newUrl = `${window.location.pathname}?page=${e}`;
+    window.history.replaceState(null, null, newUrl);
+  };
 
   if (loading) {
-    return <h1 className="text-center">Loading...</h1>;
+    return <Loading2 />;
   }
 
   if (!loading && error) {
@@ -24,10 +32,10 @@ const Centers = () => {
 
   return (
     <div className="root-container">
-      <div className="root-wrapper">
+      <div className="root-wrapper my-5">
         <Title title={t("centers.centers")} $border="none" />
         <Content data-aos="fade-up">
-          {data?.map((e) => (
+          {data?.list?.map((e) => (
             <Content.Item
               key={e.id}
               onClick={() =>
@@ -48,6 +56,13 @@ const Centers = () => {
             </Content.Item>
           ))}
         </Content>
+        <div className="text-center mt-4">
+          <Pagination
+            current={page}
+            onChange={pageChange}
+            total={data?.length}
+          />
+        </div>
       </div>
     </div>
   );

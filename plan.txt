@@ -1,24 +1,11 @@
-admin panel 110 ball CRUD
-teacher profile 110ball
 
 filter by blog category
-
 blog pagination
-announcements pagination
-oav pagination
-events pagination
-faculty pagination
-kafedra pagination
-department pagination
-centers pagination
-college pagination
+
 
 structure
-
 history
-
 appeals
-
 responsive home page
 
 https://tstu.uz/blog/463

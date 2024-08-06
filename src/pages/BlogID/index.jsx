@@ -75,13 +75,13 @@ const BlogID = () => {
               />
             </div>
             <div className="content__right">
-              <TopNews data={news} dataAos="fade-left" />
+              <TopNews data={news?.list} dataAos="fade-left" />
               {/* <img loading="lazy" src={ads} alt="" data-aos="fade-left" /> */}
             </div>
           </div>
           <Title title={t("news.t")} button={t("news.btn")} to={`blog`}>
             <div className="newsid-bottom">
-              {news
+              {news?.list
                 ?.filter((e) => e.id != id)
                 ?.slice(0, 2)
                 .map((e) => (

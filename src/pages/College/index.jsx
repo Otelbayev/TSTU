@@ -5,15 +5,31 @@ import { useDepartment } from "../../hooks/useDepartment";
 import { useNavigate } from "react-router-dom";
 import { Content } from "../Faculties/style";
 import FacultyCart from "../../components/Faculties/FacultyCart";
+import Loading2 from "../../components/Loading2";
+import { Pagination } from "antd";
 
 const College = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const { data } = useDepartment("Texnikum");
+  const { data, loading, error, page, setPage } = useDepartment("Texnikum", true);
   const { t, i18n } = useTranslation();
   const naviagte = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page]);
+
+  const pageChange = (e) => {
+    setPage(e);
+    const newUrl = `${window.location.pathname}?page=${e}`;
+    window.history.replaceState(null, null, newUrl);
+  };
+
+  if (loading) {
+    return <Loading2 />;
+  }
+
+  if (!loading && error) {
+    return <h1 className="text-center">Error!</h1>;
+  }
 
   return (
     <div>
@@ -22,7 +38,7 @@ const College = () => {
         <div className="root-wrapper">
           <Content data-aos="fade-up">
             <Content.Body>
-              {data?.map((item) => {
+              {data?.list?.map((item) => {
                 return (
                   <FacultyCart
                     key={item?.id}
@@ -41,6 +57,13 @@ const College = () => {
                 );
               })}
             </Content.Body>
+            <div className="text-center mt-4">
+              <Pagination
+                total={data?.length}
+                current={page}
+                onChange={pageChange}
+              />
+            </div>
           </Content>
         </div>
       </div>

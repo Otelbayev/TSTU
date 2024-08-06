@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-export const useDepartment = (title, favo) => {
+export const useDepartment = (title, pagination) => {
   const { i18n } = useTranslation();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const url = new URLSearchParams(location.search);
+  const def = url.get("page");
+  const [page, setPage] = useState(def || 1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,15 +20,17 @@ export const useDepartment = (title, favo) => {
           i18n.language === "uz"
             ? `${
                 import.meta.env.VITE_BASE_URL_API
-              }/departament/getalldepartamenttypesite/${title}`
+              }/departament/getalldepartamenttypesite/${title}?${
+                pagination ? `&pageNum=${page}` : ""
+              }`
             : `${
                 import.meta.env.VITE_BASE_URL_API
               }/departament/getalldepartamenttranslationtypesite/${title}?language_code=${
                 i18n.language
-              }`
+              }${pagination ? `&pageNum=${page}` : ""}`
         );
         const result = await response.json();
-        setData(result?.list);
+        setData(result);
       } catch (err) {
         setError(err);
       } finally {
@@ -33,7 +39,7 @@ export const useDepartment = (title, favo) => {
     };
 
     fetchData();
-  }, [i18n.language, title]);
+  }, [i18n.language, title, page]);
 
-  return { data, loading, error };
+  return { data, loading, error, page, setPage };
 };

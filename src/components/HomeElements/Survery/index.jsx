@@ -68,7 +68,7 @@ const Survery = () => {
           to="scientific-center"
         >
           <div className="markaz">
-            {favoMarkaz
+            {favoMarkaz?.list
               ?.sort((a, b) => b.id - a.id)
               ?.slice(0, 4)
               ?.map((e) => (

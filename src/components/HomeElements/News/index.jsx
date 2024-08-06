@@ -15,17 +15,17 @@ const News = ({ type }) => {
     navigate(`/${i18n.language}/blog/${id}`);
   };
 
-  const { data: d1 } = useBlog("Yangiliklar", true);
-  const { data: d2 } = useBlog("Xalqaro hamkorlik", true);
-  const { data: d3 } = useBlog("Dissertatsiya ishi muhokamasi", true);
+  const { data: d1 } = useBlog("Yangiliklar", true, false);
+  const { data: d2 } = useBlog("Xalqaro hamkorlik", true, false);
+  const { data: d3 } = useBlog("Dissertatsiya ishi muhokamasi", true, false);
 
   const sortData = (data) => {
     return data?.sort((a, b) => b?.id - a?.id);
   };
 
-  const data1 = sortData(d1);
-  const data2 = sortData(d2);
-  const data3 = sortData(d3);
+  const data1 = sortData(d1?.list);
+  const data2 = sortData(d2?.list);
+  const data3 = sortData(d3?.list);
 
   return (
     <Layout className="root-container">

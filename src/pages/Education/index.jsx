@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 import { useBlog } from "./../../hooks/useBog";
 import BlogPage from "../../components/BlogPage";
+import Loading2 from "../../components/Loading2";
 
 const Education = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { data, loading, error } = useBlog("Ta'lim", false);
+  const { data, loading, error } = useBlog("Ta'lim", false, true);
 
   if (loading) {
-    return <h1 className="text-center">Loading...</h1>;
+    return <Loading2 />;
   }
 
   if (!loading && error) {

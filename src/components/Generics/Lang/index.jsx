@@ -30,16 +30,16 @@ const Lang = ({ mode, width }) => {
   const changeLanguage = (value) => {
     i18n.changeLanguage(value);
     if (window.location.pathname === "/") {
-      navigate(`/${value}${urlObject?.search ? urlObject?.search : ""}`, {
-        replace: true,
-      });
+      // navigate(`/${value}${urlObject?.search ? urlObject?.search : ""}`, {
+      //   replace: true,
+      // });
     } else {
-      const regex = new RegExp(`^/(${code.join("|")})`);
-      const newPath = location.pathname.replace(
-        regex,
-        `/${value}${urlObject?.search ? urlObject?.search : ""}`
-      );
-      navigate(newPath, { replace: true });
+      // const regex = new RegExp(`^/(${code.join("|")})`);
+      // const newPath = location.pathname.replace(
+      //   regex,
+      //   `/${value}${urlObject?.search ? urlObject?.search : ""}`
+      // );
+      // navigate(newPath, { replace: true });
     }
   };
 

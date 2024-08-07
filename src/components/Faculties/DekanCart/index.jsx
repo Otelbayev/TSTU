@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Content } from "./style";
 import { useTranslation } from "react-i18next";
-
+import noimg from "../../../assets/images/no.jpg";
 const DekanCart = ({ data }) => {
   const naviagte = useNavigate();
   const { i18n } = useTranslation();
@@ -17,10 +17,15 @@ const DekanCart = ({ data }) => {
           )
         }
         loading="lazy"
-        src={`${import.meta.env.VITE_BASE_URL_IMG}${
+        src={
           data?.persons_?.img_?.url ||
           data?.persons_translation_?.persons_?.img_?.url
-        }`}
+            ? `${import.meta.env.VITE_BASE_URL_IMG}${
+                data?.persons_?.img_?.url ||
+                data?.persons_translation_?.persons_?.img_?.url
+              }`
+            : noimg
+        }
       />
       <Content.Name
         onClick={() => naviagte(`/${i18n.language}/employee/${data?.id}`)}

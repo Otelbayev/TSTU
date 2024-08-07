@@ -93,7 +93,7 @@ const News = ({ type }) => {
                 type={type}
                 onClick={() =>
                   handleNavigation(
-                    i18n.language === "uz" ? data3[1]?.id : data3[2]?.blog_id
+                    i18n.language === "uz" ? data3[1]?.id : data3[1]?.blog_id
                   )
                 }
               />

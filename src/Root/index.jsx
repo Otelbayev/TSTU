@@ -21,7 +21,11 @@ const Root = () => {
   useEffect(() => {
     if (
       window.location.pathname !== "/" &&
-      window.location.pathname.split("/")[1] !== i18n.language
+      window.location.pathname.split("/")[1] !== "uz" &&
+      window.location.pathname.split("/")[1] !== "ru" &&
+      window.location.pathname.split("/")[1] !== "en" &&
+      window.location.pathname.split("/")[1] !== "sitemap.xml" &&
+      window.location.pathname.split("/")[1] !== "feed.xml"
     ) {
       navigate(`${i18n.language}${window.location.pathname}`);
     }

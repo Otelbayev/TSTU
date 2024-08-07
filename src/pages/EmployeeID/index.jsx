@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import "./style.css";
 import { useTranslation } from "react-i18next";
 import { Lang } from "../../components/Generics";
+import noimg from "../../assets/images/no.jpg";
 
 const EmployeeID = () => {
   const { id } = useParams();
@@ -36,10 +37,15 @@ const EmployeeID = () => {
           <div className="sidebar-text d-flex flex-column h-100 justify-content-center text-center">
             <img
               className="w-100 img-fluid mb-4"
-              src={`${import.meta.env.VITE_BASE_URL_IMG}${
+              src={
                 data?.persons_?.img_?.url ||
                 data?.persons_translation_?.persons_?.img_?.url
-              }`}
+                  ? `${import.meta.env.VITE_BASE_URL_IMG}${
+                      data?.persons_?.img_?.url ||
+                      data?.persons_translation_?.persons_?.img_?.url
+                    }`
+                  : noimg
+              }
               alt="Image"
             />
             <h2 className="mt-2">

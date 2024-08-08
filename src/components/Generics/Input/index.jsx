@@ -15,6 +15,8 @@ const Input = React.forwardRef(
       $borderRadius,
       margin,
       onFocus,
+      name,
+      id,
     },
     ref
   ) => {
@@ -32,6 +34,8 @@ const Input = React.forwardRef(
         margin={margin}
         ref={ref}
         onFocus={onFocus}
+        name={name}
+        id={id}
       />
     );
   }

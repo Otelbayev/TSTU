@@ -156,6 +156,8 @@
   "structure": "STRUCTURE OF TASHKENT STATE TRANSPORT UNIVERSITY",
   "rectorat": "Rectorate",
   "appeal": {
+    "res1": "raqamli murojaatga javob berilgan",
+    "res2": "raqamli murojaat ko‘rib chiqilmoqda",
     "title1": "Rector of Tashkent State Transport University",
     "title2": "Odil Kalandarovich Abdurakhmanov",
     "title3": "Virtual Reception",

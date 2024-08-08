@@ -7,6 +7,11 @@ const Color = ({ type }) => {
         background: "#507CFF",
         color: "var(--white)",
       };
+    case "submit":
+      return {
+        background: "#507CFF",
+        color: "var(--white)",
+      };
   }
 };
 

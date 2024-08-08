@@ -24,11 +24,24 @@ const Appeals = () => {
         edit={"appeals"}
         col={[
           { data: "id", title: "# " },
-          { data: "fio_", title: "FIO" },
+          { data: "fio_", title: "FISH" },
           { data: "email", title: "Email" },
-          { data: "telephone_number_one", title: "Phone" },
-          { data: "created_at", title: "Created" },
-          { data: "country_.title", title: "Country" },
+          { data: "telephone_number_one", title: "Telefon" },
+          { data: "country_.title", title: "Mamlakat" },
+          {
+            data: null,
+            title: "Sana",
+            render: function (data, type, row) {
+              return row?.created_at?.slice(0, 10);
+            },
+          },
+          {
+            data: null,
+            title: "Status",
+            render: function (data, type, row) {
+              return row?.confirm ? "Tasdiqlangan" : "Yangi";
+            },
+          },
         ]}
       />
     </Wrapper>

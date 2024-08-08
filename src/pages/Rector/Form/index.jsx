@@ -83,9 +83,9 @@ const Form = () => {
     const formData = new FormData();
 
     formData.append("country_id", body.country_id);
-    formData.append("territorie_id", body.territorie_id);
-    formData.append("district_id", body.district_id);
-    formData.append("neighborhood_id", body.neighborhood_id);
+    formData.append("territorie_id", body.territorie_id || "");
+    formData.append("district_id", body.district_id || "");
+    formData.append("neighborhood_id", body.neighborhood_id || "");
     formData.append("addres", manzilRef?.current?.value);
     formData.append("fio_", fioRef?.current?.value);
     formData.append("brithday", dateRef?.current?.value);
@@ -167,9 +167,7 @@ const Form = () => {
         url: `${import.meta.env.VITE_BASE_URL_API}/country/sitegetallcountry`,
       });
       setCountry(response?.data);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   const getGender = async () => {
@@ -179,9 +177,7 @@ const Form = () => {
         url: `${import.meta.env.VITE_BASE_URL_API}/gender/sitegetallgender`,
       });
       setGender(response?.data);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   const getEmployment = async () => {
@@ -193,9 +189,7 @@ const Form = () => {
         }/employment/sitegetallemployment`,
       });
       setEmployment(response?.data);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   const onCountryChange = async (value) => {
@@ -211,7 +205,6 @@ const Form = () => {
       setTeretoriy(response?.data);
       setBody({ ...body, country_id: value });
     } catch (err) {
-      
       setTeretoriy([]);
     }
   };
@@ -228,7 +221,6 @@ const Form = () => {
       setDistrict(response?.data);
       setBody({ ...body, territorie_id: value });
     } catch (err) {
-      
       setDistrict([]);
     }
   };
@@ -245,7 +237,6 @@ const Form = () => {
       setNeighbor(response?.data);
       setBody({ ...body, district_id: value });
     } catch (err) {
-      
       setNeighbor([]);
     }
   };
@@ -258,9 +249,7 @@ const Form = () => {
         headers,
       });
       setCapchaNums(response.data);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   const onNeighborChange = (value) => {

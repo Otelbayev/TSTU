@@ -92,7 +92,7 @@ export const Content = styled.div`
       &__left {
         width: 100%;
         height: auto;
-        &__title{
+        &__title {
           font-size: 22px;
         }
         &__img {
@@ -131,6 +131,7 @@ export const Content = styled.div`
 export const Btn = styled(Button)`
   width: 126px;
   padding: 16px 32px;
+  margin: 20px 0;
 `;
 
 export const Item = styled.div`

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./style.css";
 import logo from "../../../../../public/logo2.png";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import useAxios from "./../../../../hooks/useAxios";
 import { message } from "antd";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const File = () => {
   const { id } = useParams();
@@ -30,55 +31,41 @@ const File = () => {
     fetchData();
   }, []);
 
-  const confirm = () => {
-    navigate(`/${i18n.language}/admin/appeals`);
-    message.success("Muvofaqiyatli tastiqlandi!");
-  };
-
-  const handleDownload = (e) => {
+  const confirm = async (e) => {
     e.preventDefault();
+    try {
+      message.loading({ key: "confirm", content: "Tasdiqlanmoqda..." });
 
-    const header = `
-      <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-      <head><meta charset='utf-8'><title>Document</title>   <style>
-          body, table {
-            font-family: 'Times New Roman', serif;
-            font-size: 16px;
-          }
-                table {
-            border-collapse: collapse;
-            width: 100%;
-          }
-          table, th, td {
-            border: 1px solid black;
-          }
-          th, td {
-            padding: 8px;
-          }
-        </style> </head>
-      
-    
+      const res = await axios.put(
+        `${
+          import.meta.env.VITE_BASE_URL_API
+        }/appealtorector/updateappealtorector/${id}?confirm=true`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("_token")}`,
+          },
+        }
+      );
 
-      <body>`;
-    const footer = `</body></html>`;
-    const content = document.querySelector(".body.A4").innerHTML;
-    const html = header + content + footer;
-
-    const blob = new Blob(["\ufeff", html], {
-      type: "application/msword",
-    });
-
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "document.doc";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+      if (res.status === 200) {
+        navigate(`/${i18n.language}/admin/appeals`);
+        message.success({
+          key: "confirm",
+          content: "Muvofaqiyatli tasdiqlandi!",
+        });
+      }
+    } catch (err) {
+      message.error({ key: "confirm", content: "Xatolik" });
+    }
   };
+
+  const contentRef = useRef(null);
+
+  const handleDownload = () => {};
 
   return (
-    <div className="body A4">
+    <div className="body A4" ref={contentRef}>
       <section className="sheet padding-10mm">
         <table border={0} style={{ width: "100%" }}>
           <tbody>

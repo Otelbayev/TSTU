@@ -1,14 +1,9 @@
-filter by blog category
-blog pagination
-
-
-structure
+appeal download docx
 history
-appeals
+structure
 responsive home page
 
 https://tstu.uz/dep_page/385
-
 https://tstu.uz/blog/459
 https://tstu.uz/blog/463
 https://tstu.uz/blog/456

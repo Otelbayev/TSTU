@@ -11,9 +11,12 @@ export const useBlog = (title, favo, pagination) => {
 
   const url = new URLSearchParams(location.search);
   const def = url.get("page");
+  const defq = url.get("query");
+  const defb = url.get("category");
 
   const [page, setPage] = useState(def || 1);
-  const [query, setQuery] = useState(10);
+  const [query, setQuery] = useState(defq || 10);
+  const [category, setCategory] = useState(defb || "all");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,15 +27,19 @@ export const useBlog = (title, favo, pagination) => {
           i18n.language === "uz"
             ? `${
                 import.meta.env.VITE_BASE_URL_API
-              }/blogcontroller/sitegetallblog?blog_category=${title}&favorite=${favo}${
-                pagination ? `&pageNum=${page}` : ""
+              }/blogcontroller/sitegetallblog?blog_category=${
+                title === "all" ? "" : title
+              }&favorite=${favo}${pagination ? `&pageNum=${page}` : ""}${
+                query === 10 ? "" : `&queryNum=${query}`
               }`
             : `${
                 import.meta.env.VITE_BASE_URL_API
               }/blogcontroller/sitegetallblogtranslation?language_code=${
                 i18n.language
-              }&blog_category_uz=${title}${favo ? "&favorite=true" : ""}${
-                pagination ? `&pageNum=${page}` : ""
+              }&blog_category_uz=${title === "all" ? "" : title}${
+                favo ? "&favorite=true" : ""
+              }${pagination ? `&pageNum=${page}` : ""}${
+                query === 10 ? "" : `&queryNum=${query}`
               }`
         );
         const result = await response.json();
@@ -45,7 +52,17 @@ export const useBlog = (title, favo, pagination) => {
     };
 
     fetchData();
-  }, [i18n.language, title, favo, page, query]);
+  }, [i18n.language, title, favo, page, query, category]);
 
-  return { data, loading, error, page, setPage, query, setQuery };
+  return {
+    data,
+    loading,
+    error,
+    page,
+    setPage,
+    query,
+    setQuery,
+    category,
+    setCategory,
+  };
 };

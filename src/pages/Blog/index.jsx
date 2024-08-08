@@ -3,55 +3,77 @@ import { Center, Content, Flex, Grid, Layout } from "./style";
 import NewsItem from "../../components/News/NewsItem";
 import { useNavigate } from "react-router-dom";
 import MiniItem from "../../components/News/MiniItem";
-import RadioButton from "../../components/RadioButton";
 import { Title } from "../../components/Generics";
 import NewsCart from "../../components/News/NewsCart";
-import axios from "axios";
 import { useTranslation } from "react-i18next";
-import { Pagination } from "antd";
+import { Empty, Pagination, Radio } from "antd";
 import { useBlog } from "../../hooks/useBog";
+import axios from "axios";
 
 const Blog = () => {
+  const queryParams = new URLSearchParams(location.search);
+  const [category, setCategory] = useState([]);
+  const [top, setTop] = useState([]);
+  const [cat, setCat] = useState(queryParams.get("category") || "all");
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const { data, page, setPage, query, setQuery } = useBlog(cat, false, true);
 
-  const [allData, setAllData] = useState([]);
-  const [types, setTypes] = useState([]);
-  const [page, setpage] = useState(1);
-
-  const getData = async () => {
+  const getCategory = async () => {
     const res = await axios.get(
       i18n.language === "uz"
-        ? `${import.meta.env.VITE_BASE_URL_API}/blogcontroller/sitegetallblog`
+        ? `${
+            import.meta.env.VITE_BASE_URL_API
+          }/blogcategorycontroller/sitegetallblogcategory`
         : `${
             import.meta.env.VITE_BASE_URL_API
-          }/blogcontroller/sitegetallblogtranslation&language_code=${
+          }/blogcategorycontroller/sitegetallblogcategorytranslation?language_code=${
             i18n.language
           }`
     );
-    res.status === 200 && setAllData(res.data.list);
+    res.status === 200 && setCategory(res?.data);
+  };
+
+  const getTop = async () => {
+    const res = await axios.get(
+      i18n.language === "uz"
+        ? `${
+            import.meta.env.VITE_BASE_URL_API
+          }/blogcontroller/sitegetallblog?pageNum=1&blog_category=Yangiliklar&favorite=true`
+        : `${
+            import.meta.env.VITE_BASE_URL_API
+          }/blogcontroller/sitegetallblogtranslation?language_code=${
+            i18n.language
+          }&blog_category_uz=Yangiliklar&favorite=true`
+    );
+
+    res.status === 200 && setTop(res?.data);
+  };
+
+  const radioChange = (e) => {
+    setCat(e.target.value);
+    queryParams.set("category", e.target.value);
+    const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
+    window.history.replaceState(null, null, newUrl);
   };
 
   useEffect(() => {
-    getData();
-  }, [i18n.language, page]);
+    getCategory();
+    getTop();
+  }, [i18n.language]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [page]);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(9);
-
-  const handlePageChange = (page, size) => {
-    setCurrentPage(page);
-    setPageSize(size);
+  const pageChange = (a, b) => {
+    setPage(a);
+    setQuery(b);
+    queryParams.set("page", a);
+    queryParams.set("query", b);
+    const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
+    window.history.replaceState(null, null, newUrl);
   };
-
-  const currentData = allData.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize
-  );
 
   return (
     <div className="root-container">
@@ -65,15 +87,15 @@ const Blog = () => {
                   navigate(
                     `/${i18n.language}/blog/${
                       i18n.language === "uz"
-                        ? allData[0]?.id
-                        : allData[0]?.blog_id
+                        ? top?.list[0]?.id
+                        : top?.list[0]?.blog_id
                     }`
                   )
                 }
-                prop={allData?.length ? allData[0] : []}
+                prop={top?.list?.length ? top?.list[0] : []}
               />
               <Layout.Second>
-                {allData?.slice(1, 5).map((item) => (
+                {top?.list?.slice(1, 5).map((item) => (
                   <MiniItem
                     key={item.id}
                     prop={item}
@@ -94,15 +116,15 @@ const Blog = () => {
                   navigate(
                     `/${i18n.language}/blog/${
                       i18n.language === "uz"
-                        ? allData[6]?.id
-                        : allData[6]?.blog_id
+                        ? top?.list[6]?.id
+                        : top?.list[6]?.blog_id
                     }`
                   )
                 }
-                prop={allData?.length ? allData[6] : []}
+                prop={top?.list?.length ? top?.list[6] : []}
               />
               <Layout.Second>
-                {allData?.slice(7, 11).map((item) => (
+                {top?.list?.slice(7, 11).map((item) => (
                   <MiniItem
                     key={item.id}
                     prop={item}
@@ -119,30 +141,50 @@ const Blog = () => {
             </Layout.Item>
           </Layout>
           <Center>
-            <RadioButton prop={types} dataAos="fade-left" />
+            <Radio.Group value={cat} onChange={radioChange}>
+              <Radio value="all" checked={"all" === cat}>
+                <div className="radio">{t("news.b")}</div>
+              </Radio>
+              {category?.map((e) => (
+                <Radio
+                  key={e.id}
+                  value={
+                    i18n.language === "uz" ? e.title : e?.blog_category_?.title
+                  }
+                  checked={e.id === cat}
+                >
+                  <div className="radio">{e.title}</div>
+                </Radio>
+              ))}
+            </Radio.Group>
           </Center>
-          <Grid>
-            {currentData.map((e) => (
-              <NewsCart
-                dataAos="zoom-in"
-                onClick={() =>
-                  navigate(
-                    `/${i18n.language}/blog/${
-                      i18n.language === "uz" ? e.id : e?.blog_id
-                    }`
-                  )
-                }
-                key={e.id}
-                prop={e}
-              />
-            ))}
-          </Grid>
-          {allData?.length ? (
+          {data?.list?.length ? (
+            <Grid>
+              {data?.list.map((e) => (
+                <NewsCart
+                  dataAos="zoom-in"
+                  onClick={() =>
+                    navigate(
+                      `/${i18n.language}/blog/${
+                        i18n.language === "uz" ? e.id : e?.blog_id
+                      }`
+                    )
+                  }
+                  key={e.id}
+                  prop={e}
+                />
+              ))}
+            </Grid>
+          ) : (
+            <Empty data-aos="zoom-in" />
+          )}
+          {data?.length ? (
             <Pagination
-              total={allData?.length}
-              current={currentPage}
-              pageSize={pageSize}
-              onChange={handlePageChange}
+              total={data?.length}
+              className="my-3"
+              current={page}
+              pageSize={query}
+              onChange={pageChange}
               style={{ textAlign: "center", marginBottom: "20px" }}
             />
           ) : null}

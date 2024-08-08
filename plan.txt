@@ -7,11 +7,9 @@ history
 appeals
 responsive home page
 
-https://tstu.uz/blog/463
-https://tstu.uz/blog/459
-https://tstu.uz/blog/459
-https://tstu.uz/blog/457
-https://tstu.uz/blog/456
-
-
 https://tstu.uz/dep_page/385
+
+https://tstu.uz/blog/459
+https://tstu.uz/blog/463
+https://tstu.uz/blog/456
+https://tstu.uz/blog/457

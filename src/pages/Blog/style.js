@@ -19,6 +19,7 @@ Layout.Item = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 1;
   @media (max-width: 1000px) {
     flex-direction: column;
     width: 100%;
@@ -36,6 +37,11 @@ export const Center = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 20px 0;
+  .radio {
+    padding: 10px 0;
+    font-size: 16px;
+    color: var(--titleDark);
+  }
   @media (max-width: 700px) {
     flex-direction: column;
     /* align-items: flex-start; */

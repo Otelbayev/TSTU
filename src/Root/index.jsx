@@ -28,6 +28,8 @@ const Root = () => {
       window.location.pathname.split("/")[1] !== "feed.xml"
     ) {
       navigate(`${i18n.language}${window.location.pathname}`);
+    } else {
+      i18n.changeLanguage(window.location.pathname.split("/")[1]);
     }
   }, []);
 

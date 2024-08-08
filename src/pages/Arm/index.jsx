@@ -21,7 +21,6 @@ import SliderItem from "../../components/Arm/SliderItem";
 import coworking from "../../assets/ARM/coworking.png";
 import phone from "../../assets/ARM/Phone.png";
 import Tadbir from "../../components/Arm/Tadbir";
-import Pagination from "../../components/Pagination";
 import NewsBanner from "../../components/Arm/NewsBanner";
 import bg from "../../assets/ARM/bgGroup.png";
 import videoBanner from "../../assets/ARM/bgRector.png";

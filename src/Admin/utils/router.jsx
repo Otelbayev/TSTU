@@ -237,19 +237,19 @@ export const routes = [
     id: useId(),
     path: "/blog/:type",
     element: <Blog />,
-    roles: ["admin"],
+    roles: ["admin", "moderatorcontent"],
   },
   {
     id: useId(),
     path: "/blogs/create",
     element: <CreateBlog />,
-    roles: ["admin"],
+    roles: ["admin", "moderatorcontent"],
   },
   {
     id: useId(),
     path: "/blogs/edit/:id",
     element: <EditBlog />,
-    roles: ["admin"],
+    roles: ["admin", "moderatorcontent"],
   },
   {
     id: useId(),
@@ -261,7 +261,7 @@ export const routes = [
     id: useId(),
     path: "/appeals",
     element: <Appeals />,
-    roles: ["admin"],
+    roles: ["admin", "virtualreception"],
   },
   //DepartmentType
   {
@@ -363,19 +363,19 @@ export const routes = [
     id: useId(),
     path: "/blogcategory",
     element: <BlogCategory />,
-    roles: ["admin"],
+    roles: ["admin", "moderatorcontent"],
   },
   {
     id: useId(),
     path: "/blogcategory/create",
     element: <BlogCategoryCreate />,
-    roles: ["admin"],
+    roles: ["admin", "moderatorcontent"],
   },
   {
     id: useId(),
     path: "/blogcategory/edit/:id",
     element: <BlogCategoryEdit />,
-    roles: ["admin"],
+    roles: ["admin", "moderatorcontent"],
   },
   //Status
   {

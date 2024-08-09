@@ -33,7 +33,7 @@ export const admin = () => {
     {
       id: 3,
       title: "Blog",
-      roles: ["admin"],
+      roles: ["admin", "moderatorcontent"],
       icon: "nav-icon fas fa-blog",
       data: blog,
     },
@@ -86,6 +86,13 @@ export const admin = () => {
       title: "O'qituvchilarni baholash",
       roles: ["studydepartment"],
       icon: "nav-icon fa-solid fa-ranking-star",
+    },
+    {
+      id: 11,
+      path: "appeals",
+      title: "Murojaatlar",
+      roles: ["virtualreception", "admin"],
+      icon: "nav-icon fa-solid fa-users",
     },
   ];
 };

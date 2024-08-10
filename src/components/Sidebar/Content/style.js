@@ -10,6 +10,7 @@ export const Container = styled.div`
   visibility: ${({ $hover }) => ($hover ? "visible" : "hidden")};
   display: flex;
   gap: 50px;
+  overflow-x: auto;
   .left {
     width: 25%;
     &__top {
@@ -53,6 +54,7 @@ export const Container = styled.div`
     &__link {
       a {
         display: block;
+        max-width: 300px;
         transition: 0.3s;
         border-radius: 2px;
         padding: 0px 8px;
@@ -66,6 +68,18 @@ export const Container = styled.div`
         }
       }
     }
+  }
+  &::-webkit-scrollbar {
+    height: 4px;
+    border-radius: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #d2d2d2;
+    border-radius: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: var(--bgHover);
   }
 `;
 

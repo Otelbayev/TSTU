@@ -3,8 +3,12 @@ import { useParams } from "react-router-dom";
 import useAxios from "../../../../hooks/useAxios";
 import DataTable from "../../../components/DataTable";
 import Wrapper from "../../../components/Wrapper";
+import Cookies from "js-cookie";
 
 const Pages = () => {
+  const role = Cookies.get("role");
+
+  console.log(role);
   const { sendRequest, loading, error } = useAxios();
   const [data, setData] = useState([]);
   const [isDelete, setIsDelete] = useState(false);
@@ -40,14 +44,16 @@ const Pages = () => {
 
     if (obj[type]) {
       return data
-        .filter((item) => obj[type].includes(item?.blog_category_?.title))
-        .sort((a, b) => b.id - a.id);
+        ?.filter((item) => obj[type].includes(item?.blog_category_?.title))
+        ?.sort((a, b) => b.id - a.id);
     }
 
-    return data.sort((a, b) => b.id - a.id);
+    return data?.sort((a, b) => b.id - a.id);
   }
 
   const fdata = filterData(type);
+
+  console.log(data);
 
   return (
     <Wrapper
@@ -57,7 +63,11 @@ const Pages = () => {
       setData={setData}
       sendRequest={sendRequest}
       isDelete={isDelete}
-      url="/blogcontroller/getallblog"
+      url={
+        role === "admin"
+          ? "/blogcontroller/getallblog"
+          : "/blogcontroller/sitegetallblog"
+      }
     >
       <DataTable
         data={fdata}
@@ -66,13 +76,22 @@ const Pages = () => {
         del={`${import.meta.env.VITE_BASE_URL_API}/blogcontroller/deleteblog`}
         edit={"blogs/edit"}
         setIsDelete={setIsDelete}
-        col={[
-          { data: "id", title: "# " },
-          { data: "title", title: "Title" },
-          { data: "title_short", title: "Short Title" },
-          { data: "blog_category_.title", title: "Katigoriya" },
-          { data: "status_.status", title: "Status" },
-        ]}
+        col={
+          role === "admin"
+            ? [
+                { data: "id", title: "# " },
+                { data: "title", title: "Title" },
+                { data: "title_short", title: "Short Title" },
+                { data: "blog_category_.title", title: "Katigoriya" },
+                { data: "status_.status", title: "Status" },
+              ]
+            : [
+                { data: "id", title: "# " },
+                { data: "title", title: "Title" },
+                { data: "title_short", title: "Short Title" },
+                { data: "blog_category_.title", title: "Katigoriya" },
+              ]
+        }
       />
     </Wrapper>
   );

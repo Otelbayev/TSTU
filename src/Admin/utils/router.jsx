@@ -153,13 +153,13 @@ export const routes = [
     id: useId(),
     path: "/",
     element: <Navigate to="home" />,
-    roles: ["admin", "teacher", "headdepartment", "studydepartment"],
+    roles: ["*"],
   },
   {
     id: useId(),
     path: "/home",
     element: <Home />,
-    roles: ["admin", "teacher", "headdepartment", "studydepartment"],
+    roles: ["*"],
   },
   {
     id: useId(),
@@ -236,7 +236,7 @@ export const routes = [
   {
     id: useId(),
     path: "/blog/:type",
-    element: <Blog />,
+    element: <Blog role={["admin", "moderatorcontent"]} />,
     roles: ["admin", "moderatorcontent"],
   },
   {
@@ -255,7 +255,7 @@ export const routes = [
     id: useId(),
     path: "/profile",
     element: <Profile />,
-    roles: ["admin", "teacher", "headdepartment", "studydepartment"],
+    roles: ["*"],
   },
   {
     id: useId(),

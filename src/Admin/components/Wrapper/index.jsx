@@ -16,6 +16,8 @@ const Wrapper = ({
 }) => {
   const { i18n } = useTranslation();
 
+  const role = Cookies.get("role");
+
   function getCurrentDate() {
     const date = new Date();
     const year = date.getFullYear();
@@ -38,7 +40,11 @@ const Wrapper = ({
         Authorization: `Bearer ${Cookies.get("_token")}`,
       },
     });
-    setData(response?.data.sort((a, b) => a.id - b.id));
+    setData(
+      role === "moderatorcontent"
+        ? response?.data?.list?.sort((a, b) => a.id - b.id)
+        : response?.data.sort((a, b) => a.id - b.id)
+    );
   };
 
   useEffect(() => {

@@ -23,6 +23,7 @@ const Edit = () => {
   const [value, setValue] = useState("uz");
   const { id } = useParams();
   const { sendRequest } = useAxios();
+  const { role } = Cookies.get("role");
 
   const { options } = useLanguageContext();
   const { blogCategoryOptions, getBlogCategorySelect } = useBlogContext();
@@ -50,12 +51,14 @@ const Edit = () => {
       method: "get",
       url:
         value === "uz"
-          ? `${
-              import.meta.env.VITE_BASE_URL_API
-            }/blogcontroller/getbyidblog/${id}`
-          : `${
-              import.meta.env.VITE_BASE_URL_API
-            }/blogcontroller/getbyuzidblogtranslation/${id}?language_code=${value}`,
+          ? `${import.meta.env.VITE_BASE_URL_API}/blogcontroller/${
+              role === "admin" ? "getbyidblog" : "sitegetbyidblog"
+            }/${id}`
+          : `${import.meta.env.VITE_BASE_URL_API}/blogcontroller/${
+              role === "admin"
+                ? "getbyuzidblogtranslation"
+                : "sitegetbyuzidblogtranslation"
+            }/${id}?language_code=${value}`,
       headers: {
         Authorization: `Bearer ${Cookies.get("_token")}`,
       },
@@ -71,7 +74,6 @@ const Edit = () => {
         setDate2(res.data?.event_end_date?.split("T")[0] || "2004-04-16");
         setBlogValue(res?.data?.blog_category_?.id);
       }
-
       setTransId(res?.data?.id);
       setTitle(res?.data?.title);
       setShort(res?.data?.title_short);
@@ -94,7 +96,9 @@ const Edit = () => {
   useEffect(() => {
     getBlogCategorySelect(value);
     getData(value);
-    getStatus(value);
+    if (role === "admin") {
+      getStatus(value);
+    }
   }, [value, isCreate]);
 
   const onHandleSubmit = async (e) => {
@@ -105,7 +109,9 @@ const Edit = () => {
     formData.append("title", title);
     formData.append("description", desc);
     formData.append("text", $(editorRef.current)?.summernote("code") || null);
-    formData.append("status_id", status);
+    if (role === "admin") {
+      formData.append("status_id", status);
+    }
     formData.append("position", position);
     formData.append("favorite", favorite);
     formData.append("img_up", imgRef.current?.files[0] || null);
@@ -126,10 +132,14 @@ const Edit = () => {
       id,
       transId,
       formData,
-      `${import.meta.env.VITE_BASE_URL_API}/blogcontroller/updateblog`,
+      `${import.meta.env.VITE_BASE_URL_API}/blogcontroller/updateblog${
+        role !== "admin" ? "moderatorcontent" : ""
+      }`,
       `${
         import.meta.env.VITE_BASE_URL_API
-      }/blogcontroller/updateblogtranslation`,
+      }/blogcontroller/updateblogtranslation${
+        role !== "admin" ? "moderatorcontent" : ""
+      }`,
       [
         { blog_id: id },
         { language_id },
@@ -237,7 +247,7 @@ const Edit = () => {
             onChange={(e) => setFavorite(e)}
           />
         )}
-        {!isCreate && (
+        {!isCreate && role === "admin" && (
           <Select
             label="Status"
             className="col-md-4"

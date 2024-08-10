@@ -30,6 +30,10 @@ const Sidebar = () => {
         return "O'quv bo'lim";
       case "headdepartment":
         return "Kafedra mudiri";
+      case "virtualreception":
+        return "Virtual qabulxona (Virtual)";
+      case "moderatorcontent":
+        return "Moderator content (Admin)";
     }
   };
 

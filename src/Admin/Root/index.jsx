@@ -17,7 +17,7 @@ const Root = () => {
       <Routes>
         <Route element={<Uni />}>
           {routes.map(({ id, path, element, roles }) => {
-            if (roles?.includes(role)) {
+            if (roles?.includes(role) || roles[0] === "*") {
               return (
                 <Route key={id} element={<PrivateRoute />}>
                   <Route

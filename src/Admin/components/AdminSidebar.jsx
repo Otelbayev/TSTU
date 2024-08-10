@@ -33,9 +33,30 @@ export const admin = () => {
     {
       id: 3,
       title: "Blog",
-      roles: ["admin", "moderatorcontent"],
+      roles: ["admin"],
       icon: "nav-icon fas fa-blog",
       data: blog,
+    },
+    {
+      id: "3-1",
+      title: "Yangiliklar",
+      roles: ["moderatorcontent"],
+      icon: "nav-icon fas fa-newspaper",
+      path: "blog/news",
+    },
+    {
+      id: "3-2",
+      title: "Blog",
+      roles: ["moderatorcontent"],
+      icon: "nav-icon fas fa-bold",
+      path: "blog/blog",
+    },
+    {
+      id: "3-3",
+      title: "Tadbirlar",
+      roles: ["moderatorcontent"],
+      icon: "nav-icon fas fa-list",
+      path: "blog/events",
     },
     {
       id: 4,

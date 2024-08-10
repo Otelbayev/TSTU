@@ -43,7 +43,7 @@ const Aboutus = () => {
             <div className="cart">
               <img src={img1} alt="" />
               <ul>
-                {data?.slice(0, 4)?.map((e) => (
+                {data?.list?.slice(0, 4)?.map((e) => (
                   <li>{e.title}</li>
                 ))}
               </ul>
@@ -51,7 +51,7 @@ const Aboutus = () => {
             <div className="cart">
               <img src={img2} alt="" />
               <ul>
-                {data?.slice(4)?.map((e) => (
+                {data?.list?.slice(4)?.map((e) => (
                   <li>{e.title}</li>
                 ))}
               </ul>

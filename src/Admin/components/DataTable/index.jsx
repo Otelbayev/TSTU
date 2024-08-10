@@ -37,6 +37,7 @@ const DataTable = ({
   const navigate = useNavigate();
   const location = useLocation();
   const { i18n } = useTranslation();
+  const role = Cookies.get("role");
 
   useEffect(() => {
     if (data?.length) {
@@ -64,7 +65,9 @@ const DataTable = ({
                     <i class="fa fa-edit"></i>
                   </button>
                   ${
-                    data?.status_?.id === 1 || data?.is_deleted === false
+                    data?.status_?.id === 1 ||
+                    data?.is_deleted === false ||
+                    role === "moderatorcontent"
                       ? `<button class="btn btn-outline-danger delete-btn" data-id="${data?.id}">
                     <i class="fa fa-trash"></i>
                   </button> `

@@ -17,7 +17,7 @@ const NotFound = () => {
           <Desc>sahifa topilmadi</Desc>
           <Button
             type={"primary"}
-            onClick={() => navigate(`/${i18n.language}/admin/home`)}
+            onClick={() => navigate(`/${i18n.language}/`)}
             $padding={"13px 15px"}
             fontSize={"14px"}
           >

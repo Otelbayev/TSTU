@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../../assets/icons/logo1.png";
+import logo from "../../assets/icons/ffflogo.png";
 
 const Div = styled.div`
   width: 100%;
@@ -9,8 +9,7 @@ const Div = styled.div`
   place-items: center;
   background-color: var(--darkBg);
   img {
-    width: 154px;
-    height: 40px;
+    width: 250px;
   }
 `;
 const Loading = () => {

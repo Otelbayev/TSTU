@@ -247,7 +247,7 @@ const Header = ({ uni }) => {
         <div className="root-container">
           <div className="root-wrapper">
             <Wrapper>
-              <Menus style={{ width: "70px" }}>
+              <Menus >
                 <Menu
                   loading="lazy"
                   src={menu}

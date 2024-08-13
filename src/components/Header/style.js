@@ -14,7 +14,7 @@ export const Container = styled.div`
   left: 0;
   width: 100%;
   height: ${({ $uni }) => ($uni ? "130px" : "55px")};
-  padding: 7px 0 ;
+  padding: 7px 0;
   @media (max-width: 1000px) {
     height: auto;
     padding: 11px 0;
@@ -146,8 +146,9 @@ export const Link = styled(NavLink)`
 `;
 
 export const Menus = styled.div`
-  width: 70px;
+  width: 63px;
   display: none;
+  width: 10%;
   @media screen and (max-width: 1000px) {
     display: block;
   }

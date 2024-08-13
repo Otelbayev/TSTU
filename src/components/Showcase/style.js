@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: calc(100dvh - 50px);
+  height: calc(100vh - 50px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +43,7 @@ export const TitleImg = styled.img`
   display: ${({ display }) => (display === "desktop" ? "block" : "none")};
   @media (max-width: 650px) {
     display: ${({ display }) => (display === "mobile" ? "block" : "none")};
-    width: 380px;
+    width: 330px;
   }
 `;
 

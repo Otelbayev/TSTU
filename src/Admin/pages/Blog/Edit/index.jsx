@@ -23,7 +23,7 @@ const Edit = () => {
   const [value, setValue] = useState("uz");
   const { id } = useParams();
   const { sendRequest } = useAxios();
-  const { role } = Cookies.get("role");
+  const role = Cookies.get("role");
 
   const { options } = useLanguageContext();
   const { blogCategoryOptions, getBlogCategorySelect } = useBlogContext();
@@ -247,7 +247,7 @@ const Edit = () => {
             onChange={(e) => setFavorite(e)}
           />
         )}
-        {!isCreate && role === "admin" && (
+        {role === "admin" && (
           <Select
             label="Status"
             className="col-md-4"

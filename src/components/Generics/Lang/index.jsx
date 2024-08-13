@@ -34,21 +34,12 @@ const Lang = ({ mode, width }) => {
         replace: true,
       });
     } else {
-      // const regex = new RegExp(`^/(${code.join("|")})`);
-      // const newPath = location.pathname.replace(
-      //   regex,
-      //   `/${value}${urlObject?.search ? urlObject?.search : ""}`
-      // );
-
-      // console.log(newPath);
-      // navigate(newPath, { replace: true });
+  
 
       const regex = new RegExp(`^/(${code.join("|")})`);
       const newPath =
         location.pathname.replace(regex, `/${value}`) +
         (urlObject?.search ? urlObject?.search : "");
-
-      console.log(newPath);
       navigate(newPath, { replace: true });
     }
   };

@@ -7,7 +7,7 @@ const Appeals = () => {
   const { sendRequest, error, loading } = useAxios();
   const [data, setData] = useState([]);
 
-  console.log(data);
+
 
   return (
     <Wrapper

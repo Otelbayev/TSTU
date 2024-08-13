@@ -113,12 +113,48 @@ const DataTable = ({
   const handleDelete = async (id) => {
     const check = confirm("Are you sure?");
     if (check) {
-      const res = await sendRequest({
-        method: "delete",
-        url: `${del}/${id}`,
-        headers: { Authorization: `Bearer ${Cookies.get("_token")}` },
-      });
-      res.status === 200 && setIsDelete({ name: "none" });
+      try {
+        const [en, ru] = await Promise.all([
+          sendRequest({
+            method: "get",
+            url: `${
+              import.meta.env.VITE_BASE_URL_API
+            }/blogcontroller/sitegetbyuzidblogtranslation/${id}?language_code=en`,
+            headers: { Authorization: `Bearer ${Cookies.get("_token")}` },
+          }),
+          sendRequest({
+            method: "get",
+            url: `${
+              import.meta.env.VITE_BASE_URL_API
+            }/blogcontroller/sitegetbyuzidblogtranslation/${id}?language_code=ru`,
+            headers: { Authorization: `Bearer ${Cookies.get("_token")}` },
+          }),
+        ]);
+
+        const [res2, res3, res] = await Promise.all([
+          sendRequest({
+            method: "delete",
+            url: `${del}translation/${en.data.id}`,
+            headers: { Authorization: `Bearer ${Cookies.get("_token")}` },
+          }),
+          sendRequest({
+            method: "delete",
+            url: `${del}translation/${ru.data.id}`,
+            headers: { Authorization: `Bearer ${Cookies.get("_token")}` },
+          }),
+          sendRequest({
+            method: "delete",
+            url: `${del}/${id}`,
+            headers: { Authorization: `Bearer ${Cookies.get("_token")}` },
+          }),
+        ]);
+
+        if (res.status === 200) {
+          setIsDelete({ none: "none" });
+        }
+      } catch (err) {
+        alert("Error");
+      }
     }
   };
 

@@ -13,8 +13,8 @@ export const Container = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: ${({ $uni }) => ($uni ? "130px" : "60px")};
-  padding: 7px 0;
+  height: ${({ $uni }) => ($uni ? "130px" : "55px")};
+  padding: 7px 0 ;
   @media (max-width: 1000px) {
     height: auto;
     padding: 11px 0;
@@ -58,6 +58,9 @@ export const Mobile = styled.div`
       color: #fff;
       background-color: rgba(255, 255, 255, 0.1);
     }
+    @media screen and (max-width: 500px) {
+      top: 100px;
+    }
   }
 `;
 
@@ -88,8 +91,8 @@ export const Img = styled.img`
   background: ${(props) => props.$last && "var(--white)"};
   border-radius: ${(props) => props.$last && "5px"};
   padding: ${(props) => props.$last && "2px"};
+  height: 32px;
   @media screen and (max-width: 500px) {
-    height: 32px;
     width: 129px;
   }
 `;

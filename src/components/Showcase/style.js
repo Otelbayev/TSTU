@@ -38,12 +38,12 @@ export const Wrapper = styled.div`
 `;
 
 export const TitleImg = styled.img`
-  /* max-width: 00px; */
-  width: 300px;
+  width: 100%;
   height: auto;
   display: ${({ display }) => (display === "desktop" ? "block" : "none")};
   @media (max-width: 650px) {
     display: ${({ display }) => (display === "mobile" ? "block" : "none")};
+    width: 380px;
   }
 `;
 

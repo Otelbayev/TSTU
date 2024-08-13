@@ -264,17 +264,17 @@ const Header = ({ uni }) => {
                     navigate(window.location.pathname, { replace: true })
                   }
                 >
-                  <Img loading="lazy" src={logo1} />
+                  <img loading="lazy" src={logo1} alt="" />
                 </Link>
                 <Div>
                   <Link to={`/${i18n.language}`}>
-                    <Img loading="lazy" src={logo2} />
+                    <img loading="lazy" src={logo2} alt="" />
                   </Link>
                   <Link
                     target="_blank"
                     to="https://www.timeshighereducation.com/world-university-rankings/tashkent-state-transport-university"
                   >
-                    <Img loading="lazy" src={logo3} />
+                    <img loading="lazy" src={logo3} />
                   </Link>
                   <Link target="_blank" to="https://www.4icu.org/uz/">
                     <Img loading="lazy" src={logo4} $last="true" />

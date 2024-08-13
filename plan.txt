@@ -1,7 +1,6 @@
 appeal download docx
 history
 structure
-responsive home page
 
 https://tstu.uz/dep_page/385
 https://tstu.uz/blog/459

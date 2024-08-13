@@ -70,7 +70,7 @@ export const Container = styled.div`
     }
   }
   &::-webkit-scrollbar {
-    height: 4px;
+    height: 10px;
     border-radius: 5px;
   }
   &::-webkit-scrollbar-track {
@@ -80,6 +80,7 @@ export const Container = styled.div`
   &::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background: var(--bgHover);
+    cursor: pointer;
   }
 `;
 

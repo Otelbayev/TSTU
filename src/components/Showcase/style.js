@@ -38,8 +38,9 @@ export const Wrapper = styled.div`
 `;
 
 export const TitleImg = styled.img`
-  max-width: 900px;
-  width: 100%;
+  /* max-width: 00px; */
+  width: 300px;
+  height: auto;
   display: ${({ display }) => (display === "desktop" ? "block" : "none")};
   @media (max-width: 650px) {
     display: ${({ display }) => (display === "mobile" ? "block" : "none")};

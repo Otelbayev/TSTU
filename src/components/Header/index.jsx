@@ -241,10 +241,6 @@ const Header = ({ uni }) => {
     setIsSearchOpen(false);
   }, [window.location.pathname]);
 
-  const url = window.location.href;
-  const objectURL = new URL(url);
-  const param = new URLSearchParams(objectURL.search);
-
   return (
     <div style={{ position: "relative" }}>
       <Container $uni={uni}>
@@ -287,12 +283,7 @@ const Header = ({ uni }) => {
                     target="_blank"
                     to="https://www.topuniversities.com/universities/tashkent-state-transport-university"
                   >
-                    <Img
-                      loading="lazy"
-                      style={{ height: "40px" }}
-                      src={logo5}
-                      $last="true"
-                    />
+                    <Img loading="lazy" src={logo5} $last="true" />
                   </Link>
                 </Div>
               </Left>

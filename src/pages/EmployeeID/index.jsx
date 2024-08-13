@@ -1,17 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./style.css";
 import { useTranslation } from "react-i18next";
 import { Lang } from "../../components/Generics";
 import noimg from "../../assets/images/no.jpg";
+import axios from "axios";
+import { message } from "antd";
 
 const EmployeeID = () => {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
   const [data, setData] = useState([]);
+  const [captcha, setCaptcha] = useState({});
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  const getCaptcha = () => {
+    fetch(`${import.meta.env.VITE_BASE_URL_API}/captcha/getcaptchanumbers`, {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_CAPCHA_TOKEN}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => setCaptcha(res));
+  };
+
+  useEffect(() => {
+    getCaptcha();
   }, []);
 
   useEffect(() => {
@@ -29,6 +46,52 @@ const EmployeeID = () => {
       .then((res) => res.json())
       .then((res) => setData(res));
   }, [i18n.language]);
+
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const subjectRef = useRef();
+  const messageRef = useRef();
+  const captchaRef = useRef();
+
+  const onFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      message.loading({ key: "appeal", content: "Yuborilmoqda..." });
+      const res = await axios.post(
+        `${
+          import.meta.env.VITE_BASE_URL_API
+        }/appealtoemployee/createappealtoemployee/${id}`,
+        {
+          full_name: nameRef.current.value,
+          email: emailRef.current.value,
+          subject: subjectRef.current.value,
+          message: messageRef.current.value,
+          captcha_numbers_sum: Number(captchaRef.current.value),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_CAPCHA_TOKEN}`,
+          },
+        }
+      );
+
+      if (res.status === 200) {
+        message.success({ key: "appeal", content: "Muvofaqiyatli yuborlidi!" });
+        nameRef.current.value = "";
+        emailRef.current.value = "";
+        captchaRef.current.value = "";
+        subjectRef.current.value = "";
+        messageRef.current.value = "";
+        getCaptcha();
+      } else {
+        throw new Error();
+      }
+    } catch (err) {
+      message.error({ key: "appeal", content: "Xatolik!" });
+      captchaRef.current.value = "";
+      getCaptcha();
+    }
+  };
 
   return (
     <div className="body">
@@ -332,32 +395,34 @@ const EmployeeID = () => {
               />
             </div>
           </div>
-
+          {/* Form */}
           <div className="container bg-white py-5" id="contact">
             <div className="row px-3">
               <div className="col-12">
                 <h2 className="title position-relative pb-2 mb-4">
-                  {t("employee.appeal")}
+                  Murojaat yuboring
                 </h2>
               </div>
               <div className="col-12">
                 <div className="contact-form">
                   <div id="success" />
-                  <form
-                    name="sentMessage"
-                    id="contactForm"
-                    noValidate="novalidate"
-                    onSubmit={(e) => e.preventDefault()}
-                  >
+                  <form onSubmit={onFormSubmit}>
+                    <input
+                      type="hidden"
+                      name="_token"
+                      defaultValue="hQdMwPQM32APAUMopE0csHDDsU5KzEqVeNEnkBrQ"
+                    />
                     <div className="form-row">
                       <div className="control-group col-sm-6">
                         <input
                           type="text"
                           className="form-control p-4"
                           id="name"
+                          name="name"
                           placeholder="Your Name"
                           required="required"
                           data-validation-required-message="Please enter your name"
+                          ref={nameRef}
                         />
                         <p className="help-block text-danger" />
                       </div>
@@ -366,33 +431,54 @@ const EmployeeID = () => {
                           type="email"
                           className="form-control p-4"
                           id="email"
+                          name="email"
                           placeholder="Your Email"
                           required="required"
                           data-validation-required-message="Please enter your email"
+                          ref={emailRef}
                         />
                         <p className="help-block text-danger" />
                       </div>
                     </div>
-                    <div className="control-group">
-                      <input
-                        type="text"
-                        className="form-control p-4"
-                        id="subject"
-                        placeholder="Subject"
-                        required="required"
-                        data-validation-required-message="Please enter a subject"
-                      />
-                      <p className="help-block text-danger" />
+                    <div className="form-row">
+                      <div className="control-group col-sm-6">
+                        <input
+                          type="text"
+                          className="form-control p-4"
+                          id="subject"
+                          name="subject"
+                          placeholder="Subject"
+                          required="required"
+                          data-validation-required-message="Please enter a subject"
+                          ref={subjectRef}
+                        />
+                        <p className="help-block text-danger" />
+                      </div>
+                      <div className="control-group col-sm-6">
+                        <input
+                          type="text"
+                          className="form-control p-4"
+                          id="cp"
+                          name="cp"
+                          placeholder={`${captcha.num1} + ${captcha.num2}`}
+                          required="required"
+                          data-validation-required-message="Please enter answer"
+                          ref={captchaRef}
+                        />
+                        <p className="help-block text-danger" />
+                      </div>
                     </div>
                     <div className="control-group">
                       <textarea
                         className="form-control py-3 px-4"
                         rows={5}
                         id="message"
+                        name="message"
                         placeholder="Message"
                         required="required"
                         data-validation-required-message="Please enter your message"
                         defaultValue={""}
+                        ref={messageRef}
                       />
                       <p className="help-block text-danger" />
                     </div>
@@ -402,7 +488,7 @@ const EmployeeID = () => {
                         type="submit"
                         id="sendMessageButton"
                       >
-                        {t("employee.appeal")}
+                        Murojaat yuboring
                       </button>
                     </div>
                   </form>

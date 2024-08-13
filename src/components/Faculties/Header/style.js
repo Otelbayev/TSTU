@@ -14,10 +14,7 @@ export const Content = styled.div`
   .menu {
     display: none;
   }
-  .logo {
-    width: 164px;
-    height: 42px;
-  }
+
   .right {
     display: flex;
     align-items: center;

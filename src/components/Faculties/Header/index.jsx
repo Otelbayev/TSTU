@@ -21,7 +21,7 @@ const Header = ({ links }) => {
             <img src={menu} alt="" />
           </div>
           <NavLink to={`/${i18n.language}`}>
-            <img src={logo1} alt="" className="logo" />
+            <img src={logo1} alt="" />
           </NavLink>
           <div className="right">
             <ul className="ul">

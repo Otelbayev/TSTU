@@ -29,9 +29,7 @@ const IlmiyMarkazCart = ({ $border, to, item, dataAos, style }) => {
             {item?.description?.split(" ")?.slice(0, 10)?.join(" ")}...{" "}
           </div>
         </div>
-        <div className="item__button">
-          {t("centers.kop")} <Icons.LightArrow />
-        </div>
+        <div className="item__button">{t("centers.kop")}</div>
       </div>
     </Contianer>
   );

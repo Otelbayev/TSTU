@@ -21,7 +21,6 @@ const KafedraCart = ({ prop, dataAos, $slider, onClick, arrow, fac }) => {
             ? prop.title
             : prop?.title?.split(" ")?.slice(0, 3)?.join(" ") + "..."}
           {fac ? t("faculties.in") : ""}
-          {arrow === false ? "" : <i className="fa-solid fa-arrow-right"></i>}
         </NavLink>
       </div>
     </Content>

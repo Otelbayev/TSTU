@@ -20,14 +20,14 @@ const About = () => {
             <div className="about__boxes__box">
               <Icons.Icon1 />
               <div className="about__boxes__box__count">
-                {counterOn && <CountUp end={18700} duration={2} />}+
+                {counterOn && <CountUp end={21453} duration={2} />}+
               </div>
               <div className="about__boxes__box__min">{t("about.talaba")}</div>
             </div>
             <div className="about__boxes__box">
               <Icons.Icon2 />
               <div className="about__boxes__box__count">
-                {counterOn && <CountUp end={11900} duration={2} />}+
+                {counterOn && <CountUp end={1193} duration={2} />}+
               </div>
               <div className="about__boxes__box__min">
                 {t("about.professor")}
@@ -36,7 +36,7 @@ const About = () => {
             <div className="about__boxes__box">
               <Icons.Icon3 />
               <div className="about__boxes__box__count">
-                {counterOn && <CountUp end={140} duration={2} />}+
+                {counterOn && <CountUp end={148} duration={2} />}+
               </div>
               <div className="about__boxes__box__min">
                 {t("about.doktarant")}

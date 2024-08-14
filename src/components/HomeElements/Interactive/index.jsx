@@ -54,7 +54,6 @@ const Interactive = () => {
                   className="first__left__title"
                 >
                   {t("interactive.desc")}
-                  <Icons.DarkArrow />
                 </NavLink>
               </div>
               <div className="first__right">

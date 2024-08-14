@@ -5,14 +5,18 @@ import { getDate } from "../../../utils/month";
 const Cart = ({ onClick, item }) => {
   return (
     <Wrap onClick={onClick}>
-      <Wrap.Img>
-        <img
+      <Wrap.Img
+        src={`${import.meta.env.VITE_BASE_URL_IMG}${
+          item?.img_?.url || item?.img_translation_?.url
+        }`}
+      >
+        {/* <img
           loading="lazy"
           src={`${import.meta.env.VITE_BASE_URL_IMG}${
             item?.img_?.url || item?.img_translation_?.url
           }`}
           alt=""
-        />
+        /> */}
       </Wrap.Img>
       <Wrap.Content>
         <Wrap.Date>
@@ -28,7 +32,6 @@ const Cart = ({ onClick, item }) => {
           {item?.title?.split(" ")?.length <= 4
             ? item.title
             : item?.title?.split(" ")?.slice(0, 3)?.join(" ") + "..."}
-          <i className="fa-solid fa-arrow-right icon"></i>
           <div className="bottom"></div>
         </Wrap.Title>
       </Wrap.Content>

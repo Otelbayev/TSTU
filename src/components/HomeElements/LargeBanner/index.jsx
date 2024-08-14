@@ -31,10 +31,6 @@ const LargeBanner = ({ onClick, item, type }) => {
         </Large.Date>
         <Large.Title className="bannner-title">
           {item?.title}
-          <i
-            className="fa-solid fa-arrow-right"
-            style={{ color: "#fff", marginLeft: "5px" }}
-          ></i>
           <div className="bottom"></div>
         </Large.Title>
         <Large.Desc className="bannner-desc">{item?.description}</Large.Desc>

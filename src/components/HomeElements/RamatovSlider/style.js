@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-
   .item {
     padding: 0 10px;
     &__content {
+      height: 170px;
       background: #e9e9e9;
       padding: 5px 10px;
       .slider-top {

@@ -6,7 +6,7 @@ export const News = styled.div`
   border: 1px solid #e5e7eb;
   background: var(--grayBg);
   display: flex;
-  justify-content: space-between;
+  position: relative;
   .item-left {
     display: flex;
     flex-direction: column;
@@ -46,6 +46,9 @@ export const News = styled.div`
     }
   }
   .item-right {
+    position: absolute;
+    right: 15px;
+    top: 15px;
     &__link {
       color: var(--bgHover);
       font-size: 14px;

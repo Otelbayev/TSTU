@@ -36,9 +36,6 @@ const Title = React.forwardRef(
             >
               {button}
               <div className="abs"></div>
-              <div className="arrow">
-                <Light />
-              </div>
             </Content.Button>
           )}
           {component && <Component display="top">{component}</Component>}
@@ -58,9 +55,6 @@ const Title = React.forwardRef(
           >
             {button}
             <div className="abs"></div>
-            <div className="arrow">
-              <Light />
-            </div>
           </Content.Button>
         )}
         {component && <Component display="bottom">{component}</Component>}

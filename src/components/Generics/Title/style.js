@@ -52,6 +52,7 @@ Content.Button = styled("button")`
   font-weight: 700;
   line-height: 18.2px;
   position: relative;
+  padding: 0 5px;
   z-index: 0;
   cursor: pointer;
   display: ${({ display }) => (display === "bottom" ? "none" : "flex")};
@@ -70,7 +71,7 @@ Content.Button = styled("button")`
     transform: translateY(-50%);
     height: 25px;
     bottom: 0;
-    width: 70px;
+    width: 100%;
     background: var(--btnBg);
     z-index: -1;
     transition: 0.5s;
@@ -80,7 +81,7 @@ Content.Button = styled("button")`
   }
   &:hover {
     .abs {
-      width: 25px;
+      width: 0px;
       border-radius: 2px;
     }
     .arrow {

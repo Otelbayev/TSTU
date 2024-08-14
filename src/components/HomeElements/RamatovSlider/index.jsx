@@ -29,7 +29,9 @@ const RamatovSlider = ({ prop }) => {
           </div>
           <div
             className="slider-bottom"
-            dangerouslySetInnerHTML={{ __html: prop?.biography_json }}
+            dangerouslySetInnerHTML={{
+              __html: prop.biography_json,
+            }}
           />
         </div>
       </div>

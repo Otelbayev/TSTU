@@ -15,7 +15,11 @@ const NewsItem = ({ item }) => {
         <div className="dek">{date1?.length && date1[0]}</div>
       </div>
       <div className="item-center">
-        <div className="item-center__title">{item?.title}</div>
+        <div className="item-center__title">
+          {item?.title?.split(" ")?.length <= 4
+            ? item.title
+            : item?.title?.split(" ")?.slice(0, 3)?.join(" ") + "..."}
+        </div>
         <div className="item-center__subtitle">{date} | TSTU Universiteti</div>
       </div>
       <div className="item-right">

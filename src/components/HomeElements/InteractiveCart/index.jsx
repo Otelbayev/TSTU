@@ -12,7 +12,7 @@ const InteractiveCart = ({ prop, no }) => {
         alt=""
       />
       <NavLink className={"title"} to={`${prop?.url_}`} target="_blank">
-        {prop?.title} <i className="fa-solid fa-arrow-right"></i>
+        {prop?.title}
       </NavLink>
     </Wrap>
   );

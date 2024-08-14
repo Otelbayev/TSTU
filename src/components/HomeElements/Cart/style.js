@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import icon from "../../../assets/icons/arrow-dark.svg";
 
 export const Wrap = styled.div`
   cursor: pointer;
@@ -13,22 +12,17 @@ export const Wrap = styled.div`
     align-items: center;
     justify-content: space-between;
   }
+  overflow: hidden;
 `;
 
 Wrap.Img = styled.div`
-  overflow: hidden;
   height: 60%;
-  object-fit: cover;
-  img {
-    width: 100%;
-    height: 100%;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-    transition: transform 0.3s;
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
+  overflow: hidden;
+  background: ${({ src }) => `url(${src})`};
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: 0.3s;
   @media (max-width: 650px) {
     width: 45%;
     height: 100%;
@@ -36,6 +30,7 @@ Wrap.Img = styled.div`
 `;
 
 Wrap.Content = styled.div`
+  overflow: hidden;
   background: #fff;
   padding: 5px 18px;
   display: flex;
@@ -64,6 +59,7 @@ Wrap.Date = styled.div`
     font-style: normal;
     font-weight: 600;
     line-height: 140%;
+    white-space: nowrap;
   }
 `;
 

@@ -26,7 +26,7 @@ export const Container = styled.div`
       }
       img {
         width: 100% !important;
-        max-height: 700px;
+        /* max-height: 700px; */
       }
       &__img2 {
         width: 400px;

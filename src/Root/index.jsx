@@ -18,18 +18,30 @@ const Root = () => {
 
   const navigate = useNavigate();
 
+  const paths = window.location.pathname.split("/");
+
   useEffect(() => {
     if (
       window.location.pathname !== "/" &&
-      window.location.pathname.split("/")[1] !== "uz" &&
-      window.location.pathname.split("/")[1] !== "ru" &&
-      window.location.pathname.split("/")[1] !== "en" &&
-      window.location.pathname.split("/")[1] !== "sitemap.xml" &&
-      window.location.pathname.split("/")[1] !== "feed.xml"
+      paths[1] !== "uz" &&
+      paths[1] !== "ru" &&
+      paths[1] !== "en" &&
+      paths[1] !== "sitemap.xml" &&
+      paths[1] !== "feed.xml"
     ) {
       navigate(`${i18n.language}${window.location.pathname}`);
     } else {
-      i18n.changeLanguage(window.location.pathname.split("/")[1]);
+      i18n.changeLanguage(paths[1]);
+    }
+
+    if (paths.includes("admission")) {
+      window.location.href = `http://sayt.tstu.uz/admission`;
+    }
+    if (paths.includes("admission_foreign")) {
+      window.location.href = `http://sayt.tstu.uz/admission_foreign`;
+    }
+    if (paths.includes("rentapartment")) {
+      window.location.href = `http://sayt.tstu.uz/rentapartment`;
     }
   }, []);
 

@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect } from "react";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { navbar, noshowcase, routes } from "../utils/navbar";
 import Universal from "../components/Universal";
 import "slick-carousel/slick/slick.css";
@@ -8,32 +8,14 @@ import Loading from "../components/Loading";
 const HomePage = lazy(() => import("../pages/Home"));
 import Admin from "../Admin";
 import Loading2 from "../components/Loading2";
-import { useTranslation } from "react-i18next";
 
 const Root = () => {
   const url = window.location.href;
   const urlObject = new URL(url);
 
-  const { i18n } = useTranslation();
-
-  const navigate = useNavigate();
-
   const paths = window.location.pathname.split("/");
 
   useEffect(() => {
-    if (
-      window.location.pathname !== "/" &&
-      paths[1] !== "uz" &&
-      paths[1] !== "ru" &&
-      paths[1] !== "en" &&
-      paths[1] !== "sitemap.xml" &&
-      paths[1] !== "feed.xml"
-    ) {
-      navigate(`${i18n.language}${window.location.pathname}`);
-    } else {
-      i18n.changeLanguage(paths[1]);
-    }
-
     if (paths.includes("admission")) {
       window.location.href = `http://sayt.tstu.uz/admission`;
     }

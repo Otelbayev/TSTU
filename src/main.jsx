@@ -11,6 +11,8 @@ import { HelmetProvider } from "react-helmet-async";
 import "./i18n";
 import "../public/fontawesome/css/all.min.css";
 import { BrowserRouter } from "react-router-dom";
+import LanguageRedirectHandler from "./hooks/languageRedirectHandler";
+
 AOS.init({
   duration: 800,
 });
@@ -20,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <HelmetProvider>
       <Context>
         <BrowserRouter>
+          <LanguageRedirectHandler />
           <Root />
         </BrowserRouter>
       </Context>

@@ -15,12 +15,14 @@ const LanguageRedirectHandler = () => {
     // Check if the first segment is a language code
     const hasLanguagePrefix = supportedLanguages.includes(pathSegments[0]);
 
-    if (!hasLanguagePrefix) {
-      // Redirect to default language route (you can customize this logic)
+    // Only redirect if no language is present in the URL
+    if (!hasLanguagePrefix && pathSegments.length > 0) {
       const newPath = `/${defaultLanguage}${currentPath}`;
-      navigate(newPath, { replace: true });
+      if (newPath !== currentPath) {
+        navigate(newPath, { replace: true });
+      }
     }
-  }, [location, navigate]);
+  }, [location.pathname, navigate]); // Only trigger effect when `location.pathname` changes
 
   return null; // No UI needed for this component
 };

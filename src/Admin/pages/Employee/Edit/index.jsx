@@ -4,7 +4,6 @@ import {
   Editor,
   Input,
   Select,
-  TextArea,
   Image,
 } from "../../../components/Generics";
 import LanguageSelect from "../../../components/Generics/LanguageSelect";
@@ -18,6 +17,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { message } from "antd";
 import { useStatusContext } from "./../../../context/Status/index";
+import Experience from "../Create/experience";
 
 const Edit = () => {
   const [value, setValue] = useState("uz");
@@ -45,6 +45,7 @@ const Edit = () => {
   const [employee, setEmployee] = useState(null);
   const [date, setDate] = useState("2000-01-01");
   const [degree, setDegree] = useState("");
+  const [scientific_title, setScientific_title] = useState("");
   const [experience, setExperience] = useState("");
   const [tel1, setTel1] = useState("");
   const [tel2, setTel2] = useState("");
@@ -106,6 +107,8 @@ const Edit = () => {
           setRus(res?.data?.languages_ru);
         }
 
+        console.log(res.data.scientific_title);
+
         setName(
           res?.data?.persons_?.firstName ||
             res?.data?.persons_translation_?.firstName
@@ -136,6 +139,7 @@ const Edit = () => {
         setLogin(res.data?.login);
         setAddress(res?.data?.address);
         setDegree(res?.data?.degree);
+        setScientific_title(res?.data?.scientific_title);
         setOther(res?.data?.languages_any_title);
         setOther2(res?.data?.languages_any);
       } else {
@@ -147,6 +151,10 @@ const Edit = () => {
       setName("");
       setSurname("");
       setPatronymic("");
+      setAddress("");
+      setDegree("");
+      setScientific_title("");
+      setOther("");
       $(bioRef.current)?.summernote("code", "");
       $(exRef.current)?.summernote("code", "");
       $(ilmRef.current)?.summernote("code", "");
@@ -188,10 +196,7 @@ const Edit = () => {
         languages_ru: Number(rus),
         languages_any_title: other,
         languages_any: Number(other2),
-        experience_json: $(exRef.current)?.summernote("code"),
-        scientific_activity_json: $(ilmRef.current)?.summernote("code"),
-        portfolio_json: $(portfolioRef.current)?.summernote("code"),
-        blog_json: $(blogRef.current)?.summernote("code"),
+        scientific_title,
         language_id,
         status_translation_id: status,
       };
@@ -227,26 +232,11 @@ const Edit = () => {
         formData.append("languages_ru", rus || "");
         formData.append("languages_any_title", other || "");
         formData.append("languages_any", other2 || "");
-        formData.append(
-          "experience_json",
-          $(exRef.current)?.summernote("code") || ""
-        );
-        formData.append(
-          "scientific_activity_json",
-          $(ilmRef.current)?.summernote("code") || ""
-        );
-        formData.append(
-          "portfolio_json",
-          $(portfolioRef.current)?.summernote("code") || ""
-        );
-        formData.append(
-          "blog_json",
-          $(blogRef.current)?.summernote("code") || ""
-        );
         formData.append("img_up", img);
         formData.append("status_id", status || "");
         formData.append("login", login || "");
         formData.append("password", pwRef.current?.value || null);
+        formData.append("scientific_title", scientific_title);
 
         const res = await axios.put(
           `${
@@ -434,14 +424,19 @@ const Edit = () => {
           label={`Ilmiy daraja (${value})`}
           placeholder="type"
           className={
-            value == "uz"
-              ? "form-group col-md-3"
-              : isCreate
-              ? "form-group col-md-4"
-              : "form-group col-md-3"
+            value == "uz" ? "form-group col-md-3" : "form-group col-md-4"
           }
           value={degree || ""}
           onChange={(e) => setDegree(e.target.value)}
+        />
+        <Input
+          label={`Ilmiy unvon (${value})`}
+          placeholder="type"
+          className={
+            value == "uz" ? "form-group col-md-3" : "form-group col-md-4"
+          }
+          value={scientific_title || ""}
+          onChange={(e) => setScientific_title(e.target.value)}
         />
         {value === "uz" && (
           <Input
@@ -546,11 +541,7 @@ const Edit = () => {
         <Input
           label="Boshqa til nomi"
           className={
-            value === "uz"
-              ? "form-group col-md-3"
-              : isCreate
-              ? "form-group col-md-4"
-              : "form-group col-md-3"
+            value === "uz" ? "form-group col-md-3" : "form-group col-md-4"
           }
           placeholder="Koreys tili"
           value={other || ""}
@@ -574,7 +565,7 @@ const Edit = () => {
           <Select
             label={"Status"}
             className={
-              value === "uz" ? "form-group col-md-4" : "form-group col-md-2"
+              value === "uz" ? "form-group col-md-3" : "form-group col-md-4"
             }
             value={status}
             onChange={(e) => setStatus(e)}
@@ -598,47 +589,19 @@ const Edit = () => {
         {value === "uz" && (
           <Input
             label="Login"
-            className={isCreate ? "form-group col-md-3" : "form-group col-md-6"}
+            className={"form-group col-md-4"}
             value={login}
             onChange={(e) => setLogin(e?.target?.value)}
           />
         )}
         {value === "uz" && (
-          <Input
-            label="Parol"
-            className={isCreate ? "form-group col-md-3" : "form-group col-md-6"}
-            ref={pwRef}
-          />
+          <Input label="Parol" className={"form-group col-md-4"} ref={pwRef} />
         )}
         <Editor
           lan={value}
           ref={bioRef}
           label="Biografiya"
           className="form-group col-md-4"
-        />
-        <Editor
-          lan={value}
-          ref={ilmRef}
-          label="Ilmiy Faoliyati"
-          className="form-group col-md-4"
-        />
-        <Editor
-          lan={value}
-          ref={exRef}
-          label="Tajribasi"
-          className="form-group col-md-4"
-        />
-        <Editor
-          ref={portfolioRef}
-          label="Portfolio"
-          className="form-group col-md-6"
-          lan={value}
-        />
-        <Editor
-          label="Blog"
-          className="form-group col-md-6"
-          lan={value}
-          ref={blogRef}
         />
         <div className="form-group col-md-12">
           <div className="col-sm-2">
@@ -654,6 +617,21 @@ const Edit = () => {
           </div>
         </div>
       </form>
+      <hr />
+      <Experience
+        title="Tadjribasi"
+        value={value}
+        id={id}
+        language_id={language_id}
+        url={`${
+          import.meta.env.VITE_BASE_URL_API
+        }/personexperience/createpersonexperienceadmin`}
+        translationUrl={`${
+          import.meta.env.VITE_BASE_URL_API
+        }/personexperience/createpersonexperiencetranslationadmin`}
+      />
+      <Experience title="Portfolio" />
+      <Experience title="Blog" />
     </Wrapper>
   );
 };

@@ -247,7 +247,7 @@ const Edit = () => {
             onChange={(e) => setFavorite(e)}
           />
         )}
-        {role === "admin" && (
+        {role === "admin" && !isCreate && (
           <Select
             label="Status"
             className="col-md-4"

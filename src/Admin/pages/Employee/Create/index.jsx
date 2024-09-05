@@ -42,6 +42,7 @@ const Create = () => {
   const [employee, setEmployee] = useState(null);
   const [date, setDate] = useState("2000-01-01");
   const [degree, setDegree] = useState("");
+  const [scientific_title, setScientific_title] = useState("");
   const [experience, setExperience] = useState("");
   const [tel1, setTel1] = useState("");
   const [tel2, setTel2] = useState("");
@@ -56,10 +57,6 @@ const Create = () => {
   const [img, setImg] = useState(null);
 
   const bioRef = useRef();
-  const exRef = useRef();
-  const ilmRef = useRef();
-  const portfolioRef = useRef(null);
-  const blogRef = useRef(null);
 
   const [login, setLogin] = useState("");
   const pwRef = useRef();
@@ -99,6 +96,7 @@ const Create = () => {
     formData.append("biography_json", $(bioRef.current).summernote("code"));
     formData.append("birthday", date);
     formData.append("degree", degree);
+    formData.append("scientific_title", scientific_title);
     formData.append("experience_year", experience);
     formData.append("phone_number1", tel1);
     formData.append("phone_number2", tel2);
@@ -110,16 +108,6 @@ const Create = () => {
     formData.append("languages_ru", rus);
     formData.append("languages_any_title", other);
     formData.append("languages_any", other2);
-    formData.append("experience_json", $(exRef.current).summernote("code"));
-    formData.append(
-      "scientific_activity_json",
-      $(ilmRef.current).summernote("code")
-    );
-    formData.append(
-      "portfolio_json",
-      $(portfolioRef.current).summernote("code")
-    );
-    formData.append("blog_json", $(blogRef.current).summernote("code"));
     formData.append("img_up", img || null);
 
     if (value === "uz") {
@@ -169,7 +157,8 @@ const Create = () => {
             persons_data_id: res1?.data?.id,
             biography_json: $(bioRef.current).summernote("code"),
             birthday: `${date}T00:31:01.134Z`,
-            degree: degree,
+            degree,
+            scientific_title,
             experience_year: Number(experience),
             phone_number1: tel1,
             phone_number2: tel2,
@@ -181,10 +170,6 @@ const Create = () => {
             languages_ru: Number(rus),
             languages_any_title: other,
             languages_any: Number(other2),
-            experience_json: $(exRef.current).summernote("code"),
-            scientific_activity_json: $(ilmRef.current).summernote("code"),
-            portfolio_json: $(portfolioRef.current).summernote("code"),
-            blog_json: $(blogRef.current).summernote("code"),
             language_id: id,
           },
           {
@@ -339,6 +324,13 @@ const Create = () => {
           onChange={(e) => setDegree(e.target.value)}
         />
         <Input
+          label={`Ilmiy Unvoni (${value})`}
+          placeholder="type"
+          className="form-group col-md-3"
+          value={scientific_title}
+          onChange={(e) => setScientific_title(e.target.value)}
+        />
+        <Input
           className={"form-group col-md-3"}
           label="Tajribasi (yil)"
           placeholder="0"
@@ -415,14 +407,14 @@ const Create = () => {
         />
         <Input
           label="Boshqa til nomi"
-          className="form-group col-md-2"
+          className="form-group col-md-3"
           placeholder="Koreys tili"
           value={other}
           onChange={(e) => setOther(e.target.value)}
         />
         <Input
           label="Boshqa til (1-99)%"
-          className="form-group col-md-2"
+          className="form-group col-md-4"
           placeholder="80%"
           minLength={2}
           maxLength={2}
@@ -431,40 +423,16 @@ const Create = () => {
         />
         <Input
           label="Login"
-          className="form-group col-md-6"
+          className="form-group col-md-4"
           value={login}
           onChange={(e) => setLogin(e?.target?.value)}
         />
-        <Input label="Parol" className="form-group col-md-6" ref={pwRef} />
+        <Input label="Parol" className="form-group col-md-4" ref={pwRef} />
         <Editor
           lan={value}
           label="Biografiya"
-          className="form-group col-md-4"
+          className="form-group col-md-12"
           ref={bioRef}
-        />
-        <Editor
-          lan={value}
-          label="Ilmiy Faoliyati"
-          className="form-group col-md-4"
-          ref={ilmRef}
-        />
-        <Editor
-          lan={value}
-          ref={exRef}
-          label="Tajribasi"
-          className="form-group col-md-4"
-        />
-        <Editor
-          ref={portfolioRef}
-          label="Portfolio"
-          className="form-group col-md-6"
-          lan={value}
-        />
-        <Editor
-          label="Blog"
-          className="form-group col-md-6"
-          lan={value}
-          ref={blogRef}
         />
         <div className="form-group col-md-12">
           <div className="col-sm-2">

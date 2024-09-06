@@ -442,8 +442,8 @@ const Create = () => {
           </div>
         </div>
       </form>
-      <hr />
-      <Experience
+      {/* <hr /> */}
+      {/* <Experience
         title="Tadjribasi"
         value={value}
         id={id}
@@ -454,7 +454,7 @@ const Create = () => {
         translationUrl={`${
           import.meta.env.VITE_BASE_URL_API
         }/personexperience/createpersonexperiencetranslationadmin`}
-      />
+      /> */}
     </Wrapper>
   );
 };

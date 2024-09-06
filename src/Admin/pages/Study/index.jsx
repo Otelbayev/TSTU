@@ -61,7 +61,7 @@ const Study = () => {
                     <DataTable
                       data={data}
                       loading={loading}
-                      error={error}
+                      error={error} 
                       col={[
                         { data: "id", title: "# " },
                         {

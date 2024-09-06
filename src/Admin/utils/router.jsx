@@ -141,12 +141,20 @@ const Edit110 = lazy(() => import("../pages/Crud/Crud110/Edit110"));
 
 const Teacher110 = lazy(() => import("../pages/Crud/Crud110/all-teacher"));
 const Teacher110ID = lazy(() => import("../pages/Crud/Crud110/all-teacher-id"));
+const TeacherPortfolio = lazy(() => import("../pages/Teacher/portfolio"));
+const TeacherBlog = lazy(() => import("../pages/Teacher/portfolio"));
+const TeacherEx = lazy(() => import("../pages/Teacher/portfolio"));
+const TeacherSa = lazy(() => import("../pages/Teacher/portfolio"));
 
 const Mudir = lazy(() => import("../pages/Mudir/mudir"));
 const ConfirmTeacher = lazy(() => import("../pages/Mudir/confirm"));
 
 const StudyDepartment = lazy(() => import("../pages/Study"));
 const StudyDepartmentID = lazy(() => import("../pages/Study/study-dep"));
+const FacultyCouncil = lazy(() => import("../pages/FacultyCouncil"));
+const FacultyCouncilID = lazy(() =>
+  import("../pages/FacultyCouncil/concil-id")
+);
 
 export const routes = [
   {
@@ -749,5 +757,41 @@ export const routes = [
     path: "study-department/:id",
     element: <StudyDepartmentID />,
     roles: ["studydepartment"],
+  },
+  {
+    id: useId(),
+    path: "faculty-council",
+    element: <FacultyCouncil />,
+    roles: ["facultycouncil"],
+  },
+  {
+    id: useId(),
+    path: "faculty-council/:id",
+    element: <FacultyCouncilID />,
+    roles: ["facultycouncil"],
+  },
+  {
+    id: useId(),
+    path: "portfolio",
+    element: <TeacherPortfolio />,
+    roles: ["techer"],
+  },
+  {
+    id: useId(),
+    path: "blog",
+    element: <TeacherBlog />,
+    roles: ["techer"],
+  },
+  {
+    id: useId(),
+    path: "experience",
+    element: <TeacherEx />,
+    roles: ["techer"],
+  },
+  {
+    id: useId(),
+    path: "scientific-activity",
+    element: <TeacherSa />,
+    roles: ["techer"],
   },
 ];

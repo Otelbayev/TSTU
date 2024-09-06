@@ -8,8 +8,8 @@ import { Select } from "../../components/Generics";
 import { useDateContext } from "../../context/DateContext";
 import { studyYears } from "../../utils/mock";
 
-const getSize = (id, italic) => {
-  if (!italic) {
+const getSize = (id, $italic) => {
+  if (!$italic) {
     return "14px";
   }
   switch (id) {
@@ -31,14 +31,14 @@ const Space = styled.div`
   gap: 20px;
   .ball {
     white-space: nowrap;
-    font-style: ${({ italic }) => (italic ? "" : "italic")};
-    font-weight: ${({ italic }) => (italic ? "" : "400")};
-    font-size: ${({ italic, id }) => getSize(id, italic)};
+    font-style: ${({ $italic }) => ($italic ? "" : "italic")};
+    font-weight: ${({ $italic }) => ($italic ? "" : "400")};
+    font-size: ${({ $italic, id }) => getSize(id, $italic)};
   }
   .panel-title {
-    font-style: ${({ italic }) => (italic ? "" : "italic")};
-    font-weight: ${({ italic }) => (italic ? "" : "400")};
-    font-size: ${({ italic, id }) => getSize(id, italic)};
+    font-style: ${({ $italic }) => ($italic ? "" : "italic")};
+    font-weight: ${({ $italic }) => ($italic ? "" : "400")};
+    font-size: ${({ $italic, id }) => getSize(id, $italic)};
   }
 `;
 
@@ -65,20 +65,27 @@ const FileImport = () => {
     );
 
     res.status === 200 && setRawData(res.data);
+  };
 
+  const getBall = async () => {
     const res2 = await axios.get(
       `${
         import.meta.env.VITE_BASE_URL_API
-      }/documentteacher110setcontroller/getalldocumentteacher110set?oldYear=2023&newYear=2024`,
+      }/documentteacher110setcontroller/getteacherdocumentscore?oldYear=${old_year}&newYear=${
+        old_year + 1
+      }`,
       {
         headers: {
           Authorization: `Bearer ${Cookies.get("_token")}`,
         },
       }
     );
-    res2.status === 200 &&
-      setCount(res2.data?.reduce((a, b) => (a += b.score), 0));
+    setCount(res2.data?.summ_score || 0);
   };
+
+  useEffect(() => {
+    getBall();
+  }, [old_year]);
 
   useEffect(() => {
     getData();
@@ -89,7 +96,7 @@ const FileImport = () => {
       <Panel
         key={item.id}
         header={
-          <Space italic={item.indicator} id={item.parent_id}>
+          <Space $italic={item.indicator} id={item.parent_id}>
             <div className="panel-title">{item.title}</div>
             <div className="ball">
               {item.max_score ? `${item.max_score} ball` : ""}

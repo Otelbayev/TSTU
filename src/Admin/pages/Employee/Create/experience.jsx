@@ -9,40 +9,33 @@ const Experience = ({ title, value, id, language_id, url, translationUrl }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (value === "uz") {
-        const res = await axios.post(
-          url,
-          {
-            title: "string",
-            description: "string",
-            text: "string",
-            person_data_id: id,
-          },
-          {
-            headers: {
-              Authorization: ` Bearer ${Cookies.get("token_")}`,
+      message.loading({ key: "key", content: "Loading..." });
+      const res = await axios.post(
+        value === "uz" ? url : translationUrl,
+        value === "uz"
+          ? {
+              title: "string",
+              description: "string",
+              text: "string",
+              person_data_id: id,
+            }
+          : {
+              id: 0,
+              title: "string",
+              description: "string",
+              text: "string",
+              person_data_id: id,
+              language_id,
+              person_experience_id: 0,
             },
-          }
-        );
-      } else {
-        const res = await axios.post(
-          translationUrl,
-          {
-            id: 0,
-            title: "string",
-            description: "string",
-            text: "string",
-            person_data_id: id,
-            language_id,
-            person_experience_id: 0,
+        {
+          headers: {
+            Authorization: ` Bearer ${Cookies.get("token_")}`,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${Cookies.get("token")}`,
-            },
-          }
-        );
-      }
+        }
+      );
+      res.status === 200 &&
+        message.success({ key: "key", content: "Success!" });
     } catch (err) {
       message.error({ key: "key", content: "Somthing wend wrong!" });
     }

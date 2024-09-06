@@ -14,13 +14,10 @@ import {
   Survery,
   Alumni,
 } from "../../components/HomeElements";
-import { Helmet } from "react-helmet-async";
-import { useTranslation } from "react-i18next";
 import PageID from "../PageID";
 import { oldPages } from "../../mock";
 
 const HomePage = () => {
-  const { t } = useTranslation();
   const url = window.location.href;
   const urlObject = new URL(url);
   const params = new URLSearchParams(urlObject.search);
@@ -36,9 +33,6 @@ const HomePage = () => {
   }
   return (
     <div style={{ overflow: "hidden" }}>
-      <Helmet>
-        <title>{t("head")}</title>
-      </Helmet>
       <Header />
       <Showcase />
       <About />

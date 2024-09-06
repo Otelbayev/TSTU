@@ -4,7 +4,6 @@ import {
   Editor,
   Input,
   Select,
-  TextArea,
 } from "../../../components/Generics";
 import LanguageSelect from "../../../components/Generics/LanguageSelect";
 import { useLanguageContext } from "../../../../context/LanguageContext";
@@ -17,6 +16,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { message } from "antd";
 import { useTranslation } from "react-i18next";
+import Experience from "./experience";
 
 const Create = () => {
   const [value, setValue] = useState("uz");
@@ -442,6 +442,19 @@ const Create = () => {
           </div>
         </div>
       </form>
+      <hr />
+      <Experience
+        title="Tadjribasi"
+        value={value}
+        id={id}
+        language_id={id}
+        url={`${
+          import.meta.env.VITE_BASE_URL_API
+        }/personexperience/createpersonexperienceadmin`}
+        translationUrl={`${
+          import.meta.env.VITE_BASE_URL_API
+        }/personexperience/createpersonexperiencetranslationadmin`}
+      />
     </Wrapper>
   );
 };

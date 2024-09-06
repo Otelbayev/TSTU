@@ -7,7 +7,6 @@ import "slick-carousel/slick/slick-theme.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Context from "./context";
-import { HelmetProvider } from "react-helmet-async";
 import "./i18n";
 import "../public/fontawesome/css/all.min.css";
 import { BrowserRouter } from "react-router-dom";
@@ -19,13 +18,11 @@ AOS.init({
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <HelmetProvider>
-      <Context>
-        <BrowserRouter>
-          <LanguageRedirectHandler />
-          <Root />
-        </BrowserRouter>
-      </Context>
-    </HelmetProvider>
+    <Context>
+      <BrowserRouter>
+        <LanguageRedirectHandler />
+        <Root />
+      </BrowserRouter>
+    </Context>
   </React.StrictMode>
 );

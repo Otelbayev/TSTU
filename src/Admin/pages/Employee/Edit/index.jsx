@@ -617,21 +617,8 @@ const Edit = () => {
           </div>
         </div>
       </form>
-      <hr />
-      <Experience
-        title="Tadjribasi"
-        value={value}
-        id={id}
-        language_id={language_id}
-        url={`${
-          import.meta.env.VITE_BASE_URL_API
-        }/personexperience/createpersonexperienceadmin`}
-        translationUrl={`${
-          import.meta.env.VITE_BASE_URL_API
-        }/personexperience/createpersonexperiencetranslationadmin`}
-      />
-      <Experience title="Portfolio" />
-      <Experience title="Blog" />
+      
+
     </Wrapper>
   );
 };

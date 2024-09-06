@@ -774,24 +774,24 @@ export const routes = [
     id: useId(),
     path: "portfolio",
     element: <TeacherPortfolio />,
-    roles: ["techer"],
+    roles: ["teacher"],
   },
   {
     id: useId(),
     path: "blog",
     element: <TeacherBlog />,
-    roles: ["techer"],
+    roles: ["teacher"],
   },
   {
     id: useId(),
     path: "experience",
     element: <TeacherEx />,
-    roles: ["techer"],
+    roles: ["teacher"],
   },
   {
     id: useId(),
     path: "scientific-activity",
     element: <TeacherSa />,
-    roles: ["techer"],
+    roles: ["teacher"],
   },
 ];

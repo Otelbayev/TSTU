@@ -69,7 +69,7 @@ const Concil = () => {
       const page = parseInt(queryParams.get("page")) || 1;
 
       const table = $("#example")?.DataTable({
-        data: data?.documents_teacher_,
+        data: data?.documents_teacher_.sort((a, b) => a.id - b.id),
         columns: [
           { data: "id", title: "#" },
           { data: "comment", title: "title" },
@@ -79,17 +79,23 @@ const Concil = () => {
             title: "Actions",
             orderable: false,
             render: function (data) {
-              return `<div style="display: flex; gap:5px"> 
-              <button class="btn btn-outline-primary show" data-id="${data?.id}">
-                            <i class="fa fa-eye"></i>
-                    </button>      
-              <button class="btn btn-outline-success confirm" data-toggle="modal" data-target=".modal1" data-id="${data?.id}">
-                            <i class="fa fa-check"></i>
-                    </button>
-                    <button class="btn btn-outline-danger reject" data-toggle="modal" data-target=".modal2" data-id="${data?.id}">
-                            <i class="fa fa-times"></i>
-                    </button>
+              if (data.sequence_status === 3) {
+                return `<div style="display: flex; gap:5px"> 
+                <button class="btn btn-outline-primary show" data-id="${data?.id}">
+                <i class="fa fa-eye"></i>
+                </button>      
+                <button class="btn btn-outline-success confirm" data-toggle="modal" data-target=".modal1" data-id="${data?.id}">
+                <i class="fa fa-check"></i>
+                </button>
+                <button class="btn btn-outline-danger reject" data-toggle="modal" data-target=".modal2" data-id="${data?.id}">
+                <i class="fa fa-times"></i>
+                </button>
                 </div> `;
+              } else {
+                return `<button class="btn btn-outline-success">
+                Tasdiqlangan
+                </button>`;
+              }
             },
           },
         ],

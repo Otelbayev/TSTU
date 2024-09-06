@@ -28,6 +28,7 @@ const Mudir = () => {
     });
 
     res.status === 200 && setData(res.data);
+  
   };
 
   useEffect(() => {

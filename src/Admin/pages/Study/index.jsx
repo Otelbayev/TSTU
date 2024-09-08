@@ -5,6 +5,7 @@ import DataTable from "../../components/DataTable";
 import useAxios from "../../../hooks/useAxios";
 import { useDateContext } from "../../context/DateContext";
 import { studyYears } from "../../utils/mock";
+import DownloadFile from "../../components/file-download";
 
 const Study = () => {
   const { loading, error, sendRequest } = useAxios();
@@ -55,13 +56,14 @@ const Study = () => {
                           setOldYear(e);
                         }}
                       />
+                      <DownloadFile />
                     </div>
                   </div>
                   <div className="card-body">
                     <DataTable
                       data={data}
                       loading={loading}
-                      error={error} 
+                      error={error}
                       col={[
                         { data: "id", title: "# " },
                         {
@@ -70,6 +72,7 @@ const Study = () => {
                             return `${row?.firstName} ${row?.fathers_name}`;
                           },
                         },
+                        { data: "id", title: "Ball" },
                       ]}
                       appeal={true}
                       edit={"study-department"}

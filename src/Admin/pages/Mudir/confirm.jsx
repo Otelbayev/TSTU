@@ -62,6 +62,8 @@ const ConfirmTeacher = () => {
     getData();
   }, []);
 
+  console.log(data);
+
   useEffect(() => {
     if (data?.documents_teacher_?.length) {
       const queryParams = new URLSearchParams(location.search);
@@ -71,11 +73,24 @@ const ConfirmTeacher = () => {
         data: data?.documents_teacher_.sort((a, b) => a.id - b.id),
         columns: [
           { data: "id", title: "#" },
-          { data: "comment", title: "title" },
-          { data: "document_.title", title: "Document" },
+          { data: "comment", title: "Tarif" },
+          { data: "document_.title", title: "Hujjat" },
           {
             data: null,
-            title: "Actions",
+            title: "Holati",
+            orderable: false,
+            render: function (data) {
+              if (data.sequence_status === 2) {
+                return `Tasdiqlangan`;
+              } else {
+                return "Tasdiqlanmagan";
+              }
+            },
+          },
+          { data: "score", title: "Ball" },
+          {
+            data: null,
+            title: "Tasdiqlash",
             orderable: false,
             render: function (data) {
               if (data.sequence_status === 2) {
@@ -91,9 +106,9 @@ const ConfirmTeacher = () => {
                 </button>
                 </div> `;
               } else {
-                return `<button class="btn btn-outline-success">
-                Tasdiqlangan
-                </button>`;
+                return `<button class="btn btn-outline-primary show" data-id="${data?.id}">
+                <i class="fa fa-eye"></i>
+                </button> `;
               }
             },
           },
@@ -201,6 +216,7 @@ const ConfirmTeacher = () => {
   return (
     <Wrapper
       title={`${data.person_?.lastName} ${data.person_?.firstName} ${data.person_?.fathers_name}`}
+      back={true}
     >
       <div
         className="modal fade bd-example-modal-sm modal1"

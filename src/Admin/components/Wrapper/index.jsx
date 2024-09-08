@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const Wrapper = ({
@@ -13,6 +13,7 @@ const Wrapper = ({
   sendRequest,
   isDelete,
   url,
+  back,
 }) => {
   const { i18n } = useTranslation();
 
@@ -57,6 +58,8 @@ const Wrapper = ({
     e.preventDefault();
     getData();
   }
+
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -189,6 +192,14 @@ const Wrapper = ({
                             className="btn btn-primary"
                           >
                             Create
+                          </NavLink>
+                        )}
+                        {back && (
+                          <NavLink
+                            onClick={() => navigate(-1)}
+                            className="btn btn-primary"
+                          >
+                            Orqaga
                           </NavLink>
                         )}
                       </div>

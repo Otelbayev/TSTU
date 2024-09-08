@@ -65,20 +65,27 @@ const StudyDep = () => {
         data: data.documents_teacher_.sort((a, b) => a.id - b.id),
         columns: [
           { data: "id", title: "#" },
-          { data: "comment", title: "title" },
-          { data: "document_.title", title: "Document" },
+          { data: "comment", title: "Tarif" },
+          { data: "document_.title", title: "Hujjat" },
+          {
+            title: "Holati",
+            render: function (data, type, row) {
+              if (row.score) {
+                return "Tastiqlangan";
+              } else {
+                return "Tasdiqlanmagan";
+              }
+            },
+          },
           {
             title: "Ball",
             render: function (data, type, row) {
-              if (!row?.score) {
-                return `<button class="btn btn-outline-danger">Tasdiqlanmagan</button>`;
-              }
               return `<div class="text-center"><h4>${row?.score}</h4> (${row?.assessor_?.person_?.firstName} ${row?.assessor_?.person_?.lastName} ${row?.assessor_?.person_?.fathers_name})</div>`;
             },
           },
           {
             data: null,
-            title: "Actions",
+            title: "Tahrirlash",
             orderable: false,
             render: function (data) {
               return `<div style="display: flex; gap:5px"> 
@@ -124,6 +131,7 @@ const StudyDep = () => {
   return (
     <Wrapper
       title={`${data.person_?.lastName} ${data.person_?.firstName} ${data.person_?.fathers_name}`}
+      back={true}
     >
       {data.documents_teacher_?.length ? (
         <Div>

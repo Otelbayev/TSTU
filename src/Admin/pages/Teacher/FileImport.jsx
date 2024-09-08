@@ -7,6 +7,7 @@ import Upload from "./upload-content";
 import { Select } from "../../components/Generics";
 import { useDateContext } from "../../context/DateContext";
 import { studyYears } from "../../utils/mock";
+import DownloadFile from "../../components/file-download";
 
 const getSize = (id, $italic) => {
   if (!$italic) {
@@ -155,24 +156,26 @@ const FileImport = () => {
                 <div className="card">
                   <div className="card-header pl-4">
                     <div className="row">
-                      <h4 className="py-2">O'quv yili:</h4>
-                      <Select
-                        value={old_year}
-                        options={studyYears}
-                        className={"col-md-2 py-2"}
-                        onChange={(e) => {
-                          setOldYear(e);
-                          setUpdateData({ name: "Jasurbek" });
-                        }}
-                      />
-                      <h4 className="col-md-4 py-2">
+                      <div className="col row">
+                        <h5 className="col-5 py-2">O'quv yili:</h5>
+                        <Select
+                          value={old_year}
+                          options={studyYears}
+                          className={"col-7 py-2"}
+                          onChange={(e) => {
+                            setOldYear(e);
+                            setUpdateData({ name: "Jasurbek" });
+                          }}
+                        />
+                      </div>
+                      <h5 className="col py-2">
                         Maksimal Ball :{" "}
                         <span className="bg-success p-1 rounded">{all}</span>
-                      </h4>
-                      <h4 className="col-md-4 py-2">
+                      </h5>
+                      <h5 className="col py-2">
                         To'plangan Ball :{" "}
                         <span className="bg-warning p-1 rounded">{count}</span>
-                      </h4>
+                      </h5>
                     </div>
                   </div>
                   <div className="card-body">

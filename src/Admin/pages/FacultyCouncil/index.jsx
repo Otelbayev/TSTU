@@ -5,6 +5,7 @@ import DataTable from "../../components/DataTable";
 import useAxios from "../../../hooks/useAxios";
 import { useDateContext } from "../../context/DateContext";
 import { studyYears } from "../../utils/mock";
+import DownloadFile from "./../../components/file-download";
 
 const FacultyCouncil = () => {
   const { loading, error, sendRequest } = useAxios();
@@ -55,6 +56,7 @@ const FacultyCouncil = () => {
                           setOldYear(e);
                         }}
                       />
+                      <DownloadFile />
                     </div>
                   </div>
                   <div className="card-body">
@@ -70,6 +72,7 @@ const FacultyCouncil = () => {
                             return `${row?.firstName} ${row?.fathers_name}`;
                           },
                         },
+                        { data: "id", title: "Ball" },
                       ]}
                       appeal={true}
                       edit={"faculty-council"}

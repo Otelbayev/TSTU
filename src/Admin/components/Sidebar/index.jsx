@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import { admin } from "../AdminSidebar";
+import avatar from "../../assets/icons/avatar.png";
 
 const Link = styled(NavLink)`
   background: transparent !important;
@@ -19,6 +20,9 @@ const Sidebar = () => {
 
   const sidebarItems = admin();
   const role = Cookies.get("role");
+  const userData = JSON.parse(Cookies.get("_userDetails"));
+
+  console.log(userData);
 
   const getName = (role) => {
     switch (role) {
@@ -45,14 +49,31 @@ const Sidebar = () => {
             <div className="image">
               <img
                 loading="lazy"
-                src="https://tstu.uz/storage/app/public/images/2023-11-02/lkYrosoK1KkBQCu3syj1kgkyJYMLAcuH6bKRWre1.jpeg"
+                src={
+                  userData.person_?.img_?.url
+                    ? `${import.meta.env.VITE_BASE_URL_IMG}${
+                        userData.person_?.img_?.url
+                      }`
+                    : avatar
+                }
                 className="img-circle elevation-2"
                 alt="User Image"
               />
             </div>
             <div className="info" style={{ whiteSpace: "initial" }}>
               <NavLink to="profile" className="d-block">
-                {getName(role)}
+                {userData.person_?.employee_type_?.title
+                  ? userData.person_?.employee_type_?.title
+                  : ""}
+                - (
+                {userData?.person_?.lastName ? userData?.person_?.lastName : ""}
+                {userData?.person_?.firstName
+                  ? userData?.person_?.firstName
+                  : ""}
+                {userData?.person_?.fathers_name
+                  ? userData?.person_?.fathers_name
+                  : ""}
+                )
               </NavLink>
             </div>
           </div>

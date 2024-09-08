@@ -72,30 +72,27 @@ const Concil = () => {
         data: data?.documents_teacher_.sort((a, b) => a.id - b.id),
         columns: [
           { data: "id", title: "#" },
-          { data: "comment", title: "title" },
-          { data: "document_.title", title: "Document" },
+          { data: "comment", title: "Tarif" },
+          { data: "document_.title", title: "Hujjat" },
+          { data: "score", title: "Ball" },
           {
             data: null,
-            title: "Actions",
+            title: "Holati",
             orderable: false,
             render: function (data) {
-              if (data.sequence_status === 3) {
-                return `<div style="display: flex; gap:5px"> 
+              return ``;
+            },
+          },
+          {
+            data: null,
+            title: "Ko'rish",
+            orderable: false,
+            render: function (data) {
+              return `<div style="display: flex; gap:5px"> 
                 <button class="btn btn-outline-primary show" data-id="${data?.id}">
                 <i class="fa fa-eye"></i>
                 </button>      
-                <button class="btn btn-outline-success confirm" data-toggle="modal" data-target=".modal1" data-id="${data?.id}">
-                <i class="fa fa-check"></i>
-                </button>
-                <button class="btn btn-outline-danger reject" data-toggle="modal" data-target=".modal2" data-id="${data?.id}">
-                <i class="fa fa-times"></i>
-                </button>
-                </div> `;
-              } else {
-                return `<button class="btn btn-outline-success">
-                Tasdiqlangan
-                </button>`;
-              }
+                `;
             },
           },
         ],
@@ -206,6 +203,7 @@ const Concil = () => {
   return (
     <Wrapper
       title={`${data.person_?.lastName} ${data.person_?.firstName} ${data.person_?.fathers_name}`}
+      back={true}
     >
       <div
         className="modal fade bd-example-modal-sm modal1"

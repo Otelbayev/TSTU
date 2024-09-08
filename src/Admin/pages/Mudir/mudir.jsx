@@ -5,6 +5,7 @@ import DataTable from "../../components/DataTable";
 import useAxios from "../../../hooks/useAxios";
 import { useDateContext } from "../../context/DateContext";
 import { studyYears } from "../../utils/mock";
+import DownloadFile from "../../components/file-download";
 
 const Mudir = () => {
   const { loading, error, sendRequest } = useAxios();
@@ -28,7 +29,6 @@ const Mudir = () => {
     });
 
     res.status === 200 && setData(res.data);
-  
   };
 
   useEffect(() => {
@@ -66,6 +66,9 @@ const Mudir = () => {
                           setUpdateData({ name: "Jasurbek" });
                         }}
                       />
+                      <div>
+                        <DownloadFile />
+                      </div>
                     </div>
                   </div>
                   <div className="card-body">
@@ -81,6 +84,7 @@ const Mudir = () => {
                             return `${row?.firstName} ${row?.fathers_name}`;
                           },
                         },
+                        { data: "id", title: "Ball" },
                       ]}
                       appeal={true}
                       edit={"confirm-teacher-110"}

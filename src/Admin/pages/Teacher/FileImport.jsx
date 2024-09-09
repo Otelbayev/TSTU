@@ -7,7 +7,6 @@ import Upload from "./upload-content";
 import { Select } from "../../components/Generics";
 import { useDateContext } from "../../context/DateContext";
 import { studyYears } from "../../utils/mock";
-import DownloadFile from "../../components/file-download";
 
 const getSize = (id, $italic) => {
   if (!$italic) {

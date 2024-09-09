@@ -62,8 +62,6 @@ const ConfirmTeacher = () => {
     getData();
   }, []);
 
-  console.log(data);
-
   useEffect(() => {
     if (data?.documents_teacher_?.length) {
       const queryParams = new URLSearchParams(location.search);
@@ -81,9 +79,12 @@ const ConfirmTeacher = () => {
             orderable: false,
             render: function (data) {
               if (data.sequence_status === 2) {
-                return `Tasdiqlangan`;
-              } else {
-                return "Tasdiqlanmagan";
+                return `<p class="text-primary">Jarayonda</p>`;
+              } else if (data.sequence_status > 2) {
+                return `<p class="text-success">Tasdiqlangan</p>`;
+              } 
+              if (data.rejection) {
+                return `<p class="text-danger">Rad etilgan</p>`;
               }
             },
           },
@@ -118,6 +119,20 @@ const ConfirmTeacher = () => {
         ordering: false,
         pageLength: 10,
         displayStart: (page - 1) * 10,
+        language: {
+          search: "Qidirish:",
+          lengthMenu: "Har sahifada _MENU_ ta yozuv ko'rsatiladi",
+          zeroRecords: "Hech qanday mos yozuv topilmadi",
+          info: "Jami _TOTAL_ yozuvdan _START_ dan _END_ gacha bo'lgan yozuvlar ko'rsatilmoqda",
+          infoEmpty: "Yozuvlar mavjud emas",
+          infoFiltered: "(_MAX_ yozuvlar ichidan filtrlangan)",
+          paginate: {
+            first: "Birinchi",
+            last: "Oxirgi",
+            next: "Keyingi",
+            previous: "Oldingi",
+          },
+        },
       });
 
       table.on("page.dt", function () {

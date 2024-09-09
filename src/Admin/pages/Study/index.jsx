@@ -47,16 +47,20 @@ const Study = () => {
                 <div className="card">
                   <div className="card-header">
                     <div className="row">
-                      <h4>O'quv yili:</h4>
-                      <Select
-                        value={old_year}
-                        options={studyYears}
-                        className={"col-md-3"}
-                        onChange={(e) => {
-                          setOldYear(e);
-                        }}
-                      />
-                      <DownloadFile />
+                      <div className="col-6 d-flex gap-5">
+                        <h4 className="py-2 ">O'quv yili:</h4>
+                        <Select
+                          value={old_year}
+                          options={studyYears}
+                          className={"py-2 mx-2"}
+                          onChange={(e) => {
+                            setOldYear(e);
+                          }}
+                        />
+                      </div>
+                      <div className="text-right col-6">
+                        <DownloadFile />
+                      </div>
                     </div>
                   </div>
                   <div className="card-body">

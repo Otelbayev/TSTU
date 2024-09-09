@@ -56,17 +56,19 @@ const Mudir = () => {
                 <div className="card">
                   <div className="card-header pl-4">
                     <div className="row">
-                      <h4 className="py-2">O'quv yili:</h4>
-                      <Select
-                        value={old_year}
-                        options={studyYears}
-                        className={"col-md-2 py-2"}
-                        onChange={(e) => {
-                          setOldYear(e);
-                          setUpdateData({ name: "Jasurbek" });
-                        }}
-                      />
-                      <div>
+                      <div className="col-6 d-flex gap-5">
+                        <h4 className="py-2 ">O'quv yili:</h4>
+                        <Select
+                          value={old_year}
+                          options={studyYears}
+                          className={"py-2 mx-2"}
+                          onChange={(e) => {
+                            setOldYear(e);
+                            setUpdateData({ name: "Jasurbek" });
+                          }}
+                        />
+                      </div>
+                      <div className="text-right col-6">
                         <DownloadFile />
                       </div>
                     </div>

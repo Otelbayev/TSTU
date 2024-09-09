@@ -70,16 +70,22 @@ const StudyDep = () => {
           {
             title: "Holati",
             render: function (data, type, row) {
-              if (row.score) {
-                return "Tastiqlangan";
+              if (row.rejection) {
+                return `<p class="text-danger">Rad etilgan</p>`;
+              }
+              if (row.sequence_status === 4) {
+                return `<p class="text-success">Tastiqlangan</p>`;
               } else {
-                return "Tasdiqlanmagan";
+                return `<p class="text-primary">Jarayonda</p>`;
               }
             },
           },
           {
             title: "Ball",
             render: function (data, type, row) {
+              if (!row?.score) {
+                return "";
+              }
               return `<div class="text-center"><h4>${row?.score}</h4> (${row?.assessor_?.person_?.firstName} ${row?.assessor_?.person_?.lastName} ${row?.assessor_?.person_?.fathers_name})</div>`;
             },
           },

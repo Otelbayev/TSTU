@@ -5,6 +5,7 @@ import { message } from "antd";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import avatar from "../../assets/icons/avatar.png";
 
 const Profile = () => {
   const userData = JSON.parse(Cookies.get("_userDetails"));
@@ -82,9 +83,13 @@ const Profile = () => {
                         loading="lazy"
                         className="profile-user-img img-fluid img-circle elevation-2"
                         style={{ width: "150px", height: "150px" }}
-                        src={`${import.meta.env.VITE_BASE_URL_IMG}${
+                        src={
                           userData?.person_?.img_?.url
-                        }`}
+                            ? `${import.meta.env.VITE_BASE_URL_IMG}${
+                                userData?.person_?.img_?.url
+                              }`
+                            : avatar
+                        }
                         alt="User profile picture"
                       />
                     </div>

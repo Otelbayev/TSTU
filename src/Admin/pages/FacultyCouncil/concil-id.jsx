@@ -80,7 +80,15 @@ const Concil = () => {
             title: "Holati",
             orderable: false,
             render: function (data) {
-              return ``;
+              if (data.sequence_status === 4) {
+                return "<p class='text-success'>Tasdiqlangan</p>";
+              }
+              if (!data.score && data.rejection) {
+                return "<p class='text-danger'>Rad etilgan</p>";
+              }
+              if (data.sequence_status !== 4 && !data.rejection) {
+                return "<p class='text-primary'>Jarayonda</p>";
+              }
             },
           },
           {
@@ -88,14 +96,42 @@ const Concil = () => {
             title: "Ko'rish",
             orderable: false,
             render: function (data) {
-              return `<div style="display: flex; gap:5px"> 
+              if (data.sequence_status === 3) {
+                return `<div style="display: flex; gap:5px"> 
                 <button class="btn btn-outline-primary show" data-id="${data?.id}">
                 <i class="fa fa-eye"></i>
                 </button>      
-                `;
+                <button class="btn btn-outline-success confirm" data-toggle="modal" data-target=".modal1" data-id="${data?.id}">
+                <i class="fa fa-check"></i>
+                </button>
+                <button class="btn btn-outline-danger reject" data-toggle="modal" data-target=".modal2" data-id="${data?.id}">
+                <i class="fa fa-times"></i>
+                </button>
+                </div> `;
+              }
+              return `
+              <button class="btn btn-outline-primary show" data-id="${data?.id}">
+              <i class="fa fa-eye"></i>
+              </button>
+              
+              `;
             },
           },
         ],
+        language: {
+          search: "Qidirish:",
+          lengthMenu: "Har sahifada _MENU_ ta yozuv ko'rsatiladi",
+          zeroRecords: "Hech qanday mos yozuv topilmadi",
+          info: "Jami _TOTAL_ yozuvdan _START_ dan _END_ gacha bo'lgan yozuvlar ko'rsatilmoqda",
+          infoEmpty: "Yozuvlar mavjud emas",
+          infoFiltered: "(_MAX_ yozuvlar ichidan filtrlangan)",
+          paginate: {
+            first: "Birinchi",
+            last: "Oxirgi",
+            next: "Keyingi",
+            previous: "Oldingi",
+          },
+        },
         destroy: true,
         responsive: true,
         ordering: false,

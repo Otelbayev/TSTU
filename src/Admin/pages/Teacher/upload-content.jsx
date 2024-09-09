@@ -8,7 +8,6 @@ import loadingGif from "../../../assets/icons/loading.gif";
 import useAxios from "../../../hooks/useAxios";
 
 const Upload = ({ id, old_year, new_year, upd }) => {
-  const fileRef = useRef();
   const commentRef = useRef();
   const editFileRef = useRef();
 
@@ -35,7 +34,8 @@ const Upload = ({ id, old_year, new_year, upd }) => {
   };
 
   const handleSubmit = async (e) => {
-    if (!fileRef?.current?.files[0] || !commentRef.current.value) {
+    e.preventDefault();
+    if (!editFileRef?.current?.files[0] || !commentRef.current.value) {
       message.error("All files are required");
       return;
     }
@@ -47,7 +47,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
       formData.append("new_year", new_year);
       formData.append("document_id", id);
       formData.append("comment", commentRef?.current?.value);
-      formData.append("file_up", fileRef?.current?.files[0]);
+      formData.append("file_up", editFileRef?.current?.files[0]);
 
       const res = await axios.post(
         `${
@@ -70,7 +70,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
       if (res.status === 200) {
         message.success({ key: "form", content: "Succesfully uploaded!" });
         commentRef.current.value = "";
-        fileRef.current.value = "";
+        editFileRef.current.value = "";
         getData(id);
       }
     } catch (err) {
@@ -79,8 +79,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
   };
 
   const onSave = async (key) => {
-    console.log(editFileRef?.current?.files[0], commentRef.current?.value);
-    if (!editFileRef?.current?.files[0] || !commentRef.current?.value) {
+    if (!commentRef.current?.value) {
       message.error("All files are required");
       return;
     }
@@ -92,7 +91,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
       formData.append("new_year", Number(new_year));
       formData.append("document_id", Number(id));
       formData.append("comment", commentRef.current.value);
-      formData.append("file_up", editFileRef?.current?.files[0]);
+      formData.append("file_up", editFileRef?.current?.files[0] || "null");
 
       const res = await axios.put(
         `${
@@ -177,7 +176,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
             {data
               .sort((a, b) => b.id - a.id)
               .map((item) => (
-                <tr>
+                <tr key={item.id}>
                   <td>
                     {item.id === isEdit ? (
                       <Input defaultValue={item.comment} ref={commentRef} />
@@ -190,7 +189,64 @@ const Upload = ({ id, old_year, new_year, upd }) => {
                       <ChooseFile ref={editFileRef} />
                     </td>
                   ) : null}
-                  {item.id !== isEdit ? <td>holati</td> : null}
+                  {item.id !== isEdit ? (
+                    <td>
+                      {item.score ? (
+                        <p className="text-success">Tasdiqlangan</p>
+                      ) : item.rejection ? (
+                        <button
+                          data-toggle="modal"
+                          data-target={`#exampleModal${item.id}`}
+                          className="btn btn-danger"
+                        >
+                          Rad etildi
+                        </button>
+                      ) : (
+                        <p className="text-primary">Jarayonda</p>
+                      )}
+                      <div
+                        className="modal fade"
+                        id={`exampleModal${item.id}`}
+                        tabIndex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                      >
+                        <div className="modal-dialog" role="document">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h5
+                                className="modal-title"
+                                id="exampleModalLabel"
+                              >
+                                Rad edilgan
+                              </h5>
+                              <button
+                                type="button"
+                                className="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                              >
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div className="modal-body">
+                              {item.reason_for_rejection || "Rad etilgan"}
+                            </div>
+                            <div className="modal-footer">
+                              <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-dismiss="modal"
+                              >
+                                Yopish
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  ) : null}
                   {item.id !== isEdit ? (
                     <td>{item.score ? `${item.score} ball` : ""} </td>
                   ) : null}

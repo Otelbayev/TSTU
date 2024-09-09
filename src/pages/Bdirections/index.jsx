@@ -15,6 +15,17 @@ const Bdirections = () => {
   const [fak, setFak] = useState("");
 
   useEffect(() => {
+    setValue(
+      data?.list?.length
+        ? i18n.language === "uz"
+          ? data?.list[0].id
+          : data?.list[0]?.departament_?.id
+        : null
+    );
+    setFak(data?.length ? data?.list[0]?.title : null);
+  }, [i18n.language, data]);
+
+  useEffect(() => {
     fetch(
       i18n.language === "uz"
         ? `${
@@ -27,7 +38,8 @@ const Bdirections = () => {
           }`
     )
       .then((res) => res.json())
-      .then((res) =>
+      .then((res) => {
+        console.log(res);
         setDep(
           res?.filter(
             (e) =>
@@ -35,20 +47,11 @@ const Bdirections = () => {
               e?.departament_type_translation_?.departament_type_?.type ===
                 "Bakalavriat yo'nalishlari"
           )
-        )
-      );
+        );
+      });
   }, [value]);
 
-  useEffect(() => {
-    setValue(
-      data?.length
-        ? i18n.language === "uz"
-          ? data[0].id
-          : data[0]?.departament_?.id
-        : null
-    );
-    setFak(data?.length ? data[0]?.title : null);
-  }, [i18n.language, data]);
+  console.log(data);
 
   return (
     <Content>
@@ -56,7 +59,7 @@ const Bdirections = () => {
       <div className="root-container">
         <div className="root-wrapper py-3">
           <div className="buttons">
-            {data?.map((e, index) => (
+            {data?.list?.map((e, index) => (
               <button
                 key={index}
                 onClick={() => {

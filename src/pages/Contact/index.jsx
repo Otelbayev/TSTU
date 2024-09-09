@@ -64,7 +64,7 @@ const Contact = () => {
         setDesc("");
       })
       .catch((error) => {
-        message.error({ key: "msg", content: "Error!" });
+        message.error({ key: "msg", content: "Xatolik!" });
       });
   };
 

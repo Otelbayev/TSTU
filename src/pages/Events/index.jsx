@@ -6,7 +6,8 @@ import Loading2 from "../../components/Loading2";
 const Events = () => {
   const { data, loading, error, page, setPage } = useBlog(
     "Kutilayotgan tadbirlar",
-    false, true
+    false,
+    true
   );
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const Events = () => {
   }
 
   if (!loading && error) {
-    return <h1 className="text-center">Error!</h1>;
+    return <h1 className="text-center">Xatolik!</h1>;
   }
 
   return (

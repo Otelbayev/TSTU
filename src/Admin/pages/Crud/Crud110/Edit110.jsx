@@ -70,7 +70,7 @@ const Edit110 = () => {
       res.status === 200 &&
         message.success({ key: "sub", content: "Succesfully updated!s" });
     } catch (err) {
-      message.error({ key: "sub", content: "Error!" });
+      message.error({ key: "sub", content: "Xatolik!" });
     }
   }
 

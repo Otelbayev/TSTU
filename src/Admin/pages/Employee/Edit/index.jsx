@@ -252,7 +252,7 @@ const Edit = () => {
         res.status === 200 &&
           message.success({
             key: "key",
-            content: "Successfully updated!",
+            content: "Muvaffaqiyatli o'zgartirildi!",
           });
       } else if (value !== "uz" && !isCreate) {
         obj.persons_data_id = id;
@@ -270,7 +270,7 @@ const Edit = () => {
         res.status === 200 &&
           message.success({
             key: "key",
-            content: "Successfully updated!",
+            content: "Muvaffaqiyatli o'zgartirildi!",
           });
       } else if (isCreate) {
         delete obj.status_translation_id;
@@ -290,7 +290,7 @@ const Edit = () => {
           setIsCreate(false);
           message.success({
             key: "key",
-            content: "Successfully updated!",
+            content: "Muvaffaqiyatli o'zgartirildi!",
           });
         }
       }
@@ -617,8 +617,6 @@ const Edit = () => {
           </div>
         </div>
       </form>
-      
-
     </Wrapper>
   );
 };

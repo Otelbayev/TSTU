@@ -55,7 +55,7 @@ const Profile = () => {
     } else {
       message.error({
         key: "dfkv",
-        content: "Error!",
+        content: "Xatolik!",
       });
     }
   };

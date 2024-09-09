@@ -104,7 +104,7 @@ export const useEdit = async (
       return res;
     }
   } catch (err) {
-    message.error({ key: "key", content: "Error!" });
+    message.error({ key: "key", content: "Xatolik!" });
   }
 };
 
@@ -123,7 +123,7 @@ async function fetchRequest(url, data, method, params) {
 
 function handleResponse(response) {
   if (response?.status === 200) {
-    message.success({ key: "key", content: "Successfully Updated!" });
+    message.success({ key: "key", content: "Muvaffaqiyatli o'zgartirildi!" });
   } else {
     throw new Error("Error in response");
   }

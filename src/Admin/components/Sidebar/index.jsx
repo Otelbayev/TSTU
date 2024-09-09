@@ -24,22 +24,22 @@ const Sidebar = () => {
 
   console.log(userData);
 
-  const getName = (role) => {
-    switch (role) {
-      case "admin":
-        return "Super Admin";
-      case "teacher":
-        return "O'qituvchi";
-      case "studydepartment":
-        return "O'quv bo'lim";
-      case "headdepartment":
-        return "Kafedra mudiri";
-      case "virtualreception":
-        return "Virtual qabulxona (Virtual)";
-      case "moderatorcontent":
-        return "Moderator content (Admin)";
-    }
-  };
+  // const getName = (role) => {
+  //   switch (role) {
+  //     case "admin":
+  //       return "Super Admin";
+  //     case "teacher":
+  //       return "O'qituvchi";
+  //     case "studydepartment":
+  //       return "O'quv bo'lim";
+  //     case "headdepartment":
+  //       return "Kafedra mudiri";
+  //     case "virtualreception":
+  //       return "Virtual qabulxona (Virtual)";
+  //     case "moderatorcontent":
+  //       return "Moderator content (Admin)";
+  //   }
+  // };
 
   return (
     <div>
@@ -66,10 +66,10 @@ const Sidebar = () => {
                   ? userData.person_?.employee_type_?.title
                   : ""}
                 - (
-                {userData?.person_?.lastName ? userData?.person_?.lastName : ""}
                 {userData?.person_?.firstName
                   ? userData?.person_?.firstName
-                  : ""}
+                  : ""}{" "}
+                {userData?.person_?.lastName ? userData?.person_?.lastName : ""}{" "}
                 {userData?.person_?.fathers_name
                   ? userData?.person_?.fathers_name
                   : ""}

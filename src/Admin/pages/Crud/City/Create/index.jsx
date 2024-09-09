@@ -50,7 +50,9 @@ const Create = () => {
       if (res.status === 200 && value !== "uz") {
         await sendRequest({
           method: "post",
-          url: `${import.meta.env.VITE_BASE_URL_API}/district/createdistricttranslation`,
+          url: `${
+            import.meta.env.VITE_BASE_URL_API
+          }/district/createdistricttranslation`,
           data: {
             title: titleValue,
             language_id,
@@ -61,7 +63,7 @@ const Create = () => {
         });
       }
 
-      message.success({ key: "key", content: "Success!" });
+      message.success({ key: "key", content: "Muvaffaqiyatli!" });
       // navigate(`/${language}/admin/city`);
     } catch (err) {
       message.error({

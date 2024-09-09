@@ -120,7 +120,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
         getData(id);
       }
     } catch (err) {
-      message.error({ key: "error", content: "Error!" });
+      message.error({ key: "error", content: "Xatolik!" });
     }
   };
 
@@ -326,7 +326,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
                 ) : error ? (
                   "Error"
                 ) : (
-                  "No data"
+                  "Ma'lumot yo'q"
                 )}
               </td>
             </tr>

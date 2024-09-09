@@ -63,7 +63,7 @@ const Create110 = () => {
       );
 
       if (res.status === 200) {
-        message.success({ key: "sub", content: "Success!" });
+        message.success({ key: "sub", content: "Muvaffaqiyatli!" });
         setTitle("");
         setDesc("");
         setParent(parentOptions[0].value);
@@ -77,7 +77,7 @@ const Create110 = () => {
         ]);
       }
     } catch (err) {
-      message.error({ key: "sub", content: "Error!" });
+      message.error({ key: "sub", content: "Xatolik!" });
     }
   }
 

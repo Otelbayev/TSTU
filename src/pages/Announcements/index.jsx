@@ -15,7 +15,7 @@ const Announcements = () => {
   }
 
   if (!loading && error) {
-    return <h1 className="text-center">Error!</h1>;
+    return <h1 className="text-center">Xatolik!</h1>;
   }
 
   return <BlogPage title="elon" data={data} page={page} setPage={setPage} />;

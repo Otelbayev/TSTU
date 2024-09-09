@@ -7,7 +7,8 @@ import Loading2 from "../../components/Loading2";
 const Oav = () => {
   const { data, loading, error, page, setPage } = useBlog(
     "OAV biz haqimizda",
-    false, true
+    false,
+    true
   );
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const Oav = () => {
   }
 
   if (!loading && error) {
-    return <h1 className="text-center">Error!</h1>;
+    return <h1 className="text-center">Xatolik!</h1>;
   }
 
   return <BlogPage data={data} page={page} setPage={setPage} title={"oav"} />;

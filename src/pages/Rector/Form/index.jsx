@@ -155,7 +155,7 @@ const Form = () => {
         throw new Error();
       }
     } catch (er) {
-      message.error({ key: "key", content: "Error!" });
+      message.error({ key: "key", content: "Xatolik!" });
     }
     getCapchaNums();
   };

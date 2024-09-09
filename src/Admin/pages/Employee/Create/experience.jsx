@@ -35,7 +35,7 @@ const Experience = ({ title, value, id, language_id, url, translationUrl }) => {
         }
       );
       res.status === 200 &&
-        message.success({ key: "key", content: "Success!" });
+        message.success({ key: "key", content: "Muvaffaqiyatli!" });
     } catch (err) {
       message.error({ key: "key", content: "Somthing wend wrong!" });
     }

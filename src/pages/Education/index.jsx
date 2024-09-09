@@ -15,7 +15,7 @@ const Education = () => {
   }
 
   if (!loading && error) {
-    return <h1 className="text-center">Error!</h1>;
+    return <h1 className="text-center">Xatolik!</h1>;
   }
 
   return <BlogPage title="talim.title" data={data} />;

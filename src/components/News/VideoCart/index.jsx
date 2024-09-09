@@ -1,13 +1,16 @@
 import React from "react";
 import { Content } from "./style";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const VideoCart = ({ prop, dataAos, to }) => {
   const { i18n } = useTranslation();
-
+  const navigate = useNavigate();
   return (
-    <Content data-aos={dataAos}>
+    <Content
+      data-aos={dataAos}
+      onClick={() => navigate(`/${i18n.language}/${to}`)}
+    >
       <div className="video-cart-left">
         <img
           loading="lazy"
@@ -24,7 +27,7 @@ const VideoCart = ({ prop, dataAos, to }) => {
         </div>
         <div className="video-cart-right__title">{prop?.title}</div>
         <div className="video-cart-right__desc">{prop?.description}</div>
-        <NavLink
+        {/* <NavLink
           to={`/${i18n.language}/${to}`}
           className="video-cart-right__button"
         >
@@ -33,7 +36,7 @@ const VideoCart = ({ prop, dataAos, to }) => {
             : i18n.language === "ru"
             ? "Подробнее"
             : "More"}
-        </NavLink>
+        </NavLink> */}
       </div>
     </Content>
   );

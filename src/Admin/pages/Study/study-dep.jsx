@@ -163,7 +163,7 @@ const StudyDep = () => {
                 ) : error ? (
                   "Error"
                 ) : (
-                  "No data"
+                  "Ma'lumot yo'q"
                 )}
               </td>
             </tr>

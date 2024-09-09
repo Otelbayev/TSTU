@@ -30,7 +30,7 @@ const Portfolio = () => {
         }
       );
       res.status === 200 &&
-        message.success({ key: "key", content: "Success!" });
+        message.success({ key: "key", content: "Muvaffaqiyatli!" });
     } catch (err) {
       message.error({ key: "key", content: "Xatolik" });
     }

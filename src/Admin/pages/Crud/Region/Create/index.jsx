@@ -46,7 +46,9 @@ const Create = () => {
       if (res.status === 200 && value !== "uz") {
         await sendRequest({
           method: "post",
-          url: `${import.meta.env.VITE_BASE_URL_API}/territorie/createterritorietranslation`,
+          url: `${
+            import.meta.env.VITE_BASE_URL_API
+          }/territorie/createterritorietranslation`,
           data: {
             title: titleValue,
             language_id,
@@ -57,7 +59,7 @@ const Create = () => {
         });
       }
 
-      message.success({ key: "key", content: "Success!" });
+      message.success({ key: "key", content: "Muvaffaqiyatli!" });
       navigate(`/${i18n.language}/admin/region`);
     } catch (err) {
       message.error({

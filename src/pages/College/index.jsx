@@ -9,7 +9,10 @@ import Loading2 from "../../components/Loading2";
 import { Pagination } from "antd";
 
 const College = () => {
-  const { data, loading, error, page, setPage } = useDepartment("Texnikum", true);
+  const { data, loading, error, page, setPage } = useDepartment(
+    "Texnikum",
+    true
+  );
   const { t, i18n } = useTranslation();
   const naviagte = useNavigate();
 
@@ -28,7 +31,7 @@ const College = () => {
   }
 
   if (!loading && error) {
-    return <h1 className="text-center">Error!</h1>;
+    return <h1 className="text-center">Xatolik!</h1>;
   }
 
   return (

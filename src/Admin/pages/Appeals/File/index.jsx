@@ -82,7 +82,7 @@ const File = () => {
     var blob = new Blob([updatedHtmlContent], { type: "application/msword" });
 
     // Save the Blob object as a Word file
-    saveAs(blob, `appeal-RV${id}.docx`);
+    saveAs(blob, `appeal-RV${id}.doc`);
 
     document.querySelectorAll(".no_dw").forEach((element) => {
       element.style.display = "block";

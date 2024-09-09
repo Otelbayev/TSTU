@@ -78,11 +78,11 @@ const ConfirmTeacher = () => {
             title: "Holati",
             orderable: false,
             render: function (data) {
-              if (data.sequence_status === 2) {
+              if (data.sequence_status === 2 && !data.rejection) {
                 return `<p class="text-primary">Jarayonda</p>`;
-              } else if (data.sequence_status > 2) {
+              } else if (data.sequence_status > 2 && !data.rejection) {
                 return `<p class="text-success">Tasdiqlangan</p>`;
-              } 
+              }
               if (data.rejection) {
                 return `<p class="text-danger">Rad etilgan</p>`;
               }
@@ -94,7 +94,7 @@ const ConfirmTeacher = () => {
             title: "Tasdiqlash",
             orderable: false,
             render: function (data) {
-              if (data.sequence_status === 2) {
+              if (data.sequence_status === 2 && !data.rejection) {
                 return `<div style="display: flex; gap:5px"> 
                 <button class="btn btn-outline-primary show" data-id="${data?.id}">
                 <i class="fa fa-eye"></i>

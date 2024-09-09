@@ -1,14 +1,15 @@
 import React from "react";
 import bg from "../../assets/images/image.png";
+import mobi from "../../assets/images/mbg.png";
 import title from "../../assets/images/title.png";
 import mobile from "../../assets/images/mobiletitle.png";
-import { Container, Img, Wrapper, Title, TitleImg } from "./style";
+import { Container, Wrapper, Title, TitleImg } from "./style";
 import { useTranslation } from "react-i18next";
 
 const Showcase = () => {
   const { t, i18n } = useTranslation();
   return (
-    <Container $bg={bg}>
+    <Container $bg={bg} $bgmob={mobi}>
       <Wrapper>
         {i18n.language === "uz" ? (
           <>

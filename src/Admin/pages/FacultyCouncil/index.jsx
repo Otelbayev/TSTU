@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import { Select } from "../../components/Generics";
 import Cookies from "js-cookie";
 import DataTable from "../../components/DataTable";
 import useAxios from "../../../hooks/useAxios";
 import { useDateContext } from "../../context/DateContext";
 import { studyYears } from "../../utils/mock";
 import DownloadFile from "./../../components/file-download";
+import { Select } from "../../components/Generics";
 
 const FacultyCouncil = () => {
   const { loading, error, sendRequest } = useAxios();
 
   const { old_year, setOldYear } = useDateContext();
   const [data, setData] = useState([]);
+  const [kaf, setKaf] = useState([]);
+  const [kafId, setKafId] = useState(0);
 
-  const getData = async (old_year) => {
+  const getData = async (old_year, kafId) => {
     const res = await sendRequest({
       method: "get",
       url: `${
@@ -25,14 +27,37 @@ const FacultyCouncil = () => {
       params: {
         oldYear: old_year,
         newYear: Number(old_year) + 1,
+        departament_id: kafId,
       },
     });
 
     res.status === 200 && setData(res.data);
   };
+
+  const getKaf = async () => {
+    const res = await sendRequest({
+      method: "get",
+      url: `${
+        import.meta.env.VITE_BASE_URL_API
+      }/departament/selectedallfacultydepartament`,
+      headers: {
+        Authorization: `Bearer ${Cookies.get("_token")}`,
+      },
+    });
+
+    res.status === 200 &&
+      setKaf(res.data.map((e) => ({ label: e.title, value: e.id })));
+
+    setKafId(res.data[0].id);
+  };
+
   useEffect(() => {
-    getData(old_year);
-  }, [old_year]);
+    getData(old_year, kafId);
+  }, [old_year, kafId]);
+
+  useEffect(() => {
+    getKaf();
+  }, []);
 
   return (
     <div>
@@ -46,19 +71,28 @@ const FacultyCouncil = () => {
               <div className="col-md-12">
                 <div className="card">
                   <div className="card-header">
-                    <div className="row">
-                      <div className="col-6 d-flex gap-5">
-                        <h4 className="py-2 ">O'quv yili:</h4>
+                    <div className="row d-flex align-items-center">
+                      <div className="col-md-2">
                         <Select
                           value={old_year}
                           options={studyYears}
-                          className={"py-2 mx-2"}
+                          className={"w-100"}
+                          label="O'qiv yili"
                           onChange={(e) => {
                             setOldYear(e);
-                          }} 
+                          }}
                         />
                       </div>
-                      <div className="text-right col-6">
+                      <div className="col-md-3">
+                        <Select
+                          label={"Kafedra"}
+                          className={"w-100"}
+                          options={kaf}
+                          value={kafId}
+                          onChange={(e) => setKafId(e)}
+                        />
+                      </div>
+                      <div className="text-right col-md-7">
                         <DownloadFile />
                       </div>
                     </div>
@@ -76,7 +110,7 @@ const FacultyCouncil = () => {
                             return `${row?.firstName} ${row?.fathers_name}`;
                           },
                         },
-                        { data: "id", title: "Ball" },
+                        { data: "summ_score", title: "Ball" },
                       ]}
                       appeal={true}
                       edit={"faculty-council"}

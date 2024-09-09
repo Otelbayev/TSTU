@@ -196,7 +196,7 @@ const Concil = () => {
         getData();
       }
     } catch (err) {
-      message.error({ key: "confirm", content: "Xatokil!" });
+      message.error({ key: "confirm", content: err?.response?.data });
     }
   };
 

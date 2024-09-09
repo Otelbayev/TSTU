@@ -6,14 +6,24 @@ import useAxios from "../../../hooks/useAxios";
 import { useDateContext } from "../../context/DateContext";
 import { studyYears } from "../../utils/mock";
 import DownloadFile from "../../components/file-download";
+import { useSearchParams } from "react-router-dom";
 
 const Study = () => {
   const { loading, error, sendRequest } = useAxios();
-
   const { old_year, setOldYear } = useDateContext();
   const [data, setData] = useState([]);
+  const [kaf, setKaf] = useState([]);
+  const [fak, setFak] = useState([]);
 
-  const getData = async (old_year) => {
+  // Query params handling
+  const [searchParams, setSearchParams] = useSearchParams();
+  const kafIdFromUrl = searchParams.get("kafedra_id");
+  const fakIdFromUrl = searchParams.get("faculty_id");
+
+  const [kafId, setKafId] = useState(kafIdFromUrl || 0);
+  const [fakId, setFakId] = useState(fakIdFromUrl || 0);
+
+  const getData = async (old_year, kafId) => {
     const res = await sendRequest({
       method: "get",
       url: `${
@@ -25,15 +35,72 @@ const Study = () => {
       params: {
         oldYear: old_year,
         newYear: Number(old_year) + 1,
+        departament_id: kafId,
       },
     });
 
-    res.status === 200 && setData(res.data);
+    if (res.status === 200) {
+      setData(res.data);
+    }
   };
-  useEffect(() => {
-    getData(old_year);
-  }, [old_year]);
 
+  const getFak = async () => {
+    const res = await sendRequest({
+      method: "get",
+      url: `${
+        import.meta.env.VITE_BASE_URL_API
+      }/departament/selectedallfaculty`,
+      headers: {
+        Authorization: `Bearer ${Cookies.get("_token")}`,
+      },
+    });
+    if (res.status === 200) {
+      const faculties = res.data.map((e) => ({ label: e.title, value: e.id }));
+      setFak(faculties);
+      setFakId(Number(fakIdFromUrl) || faculties[0].value);
+    }
+  };
+
+  const getKaf = async (facultyId) => {
+    const res = await sendRequest({
+      method: "get",
+      url: `${
+        import.meta.env.VITE_BASE_URL_API
+      }/departament/selectedallfacultydepartament`,
+      headers: {
+        Authorization: `Bearer ${Cookies.get("_token")}`,
+      },
+      params: {
+        faculty_id: facultyId,
+      },
+    });
+    if (res.status === 200) {
+      const kafedras = res.data.map((e) => ({ label: e.title, value: e.id }));
+      setKaf(kafedras);
+      setKafId(Number(kafIdFromUrl) || kafedras[0]?.value);
+    }
+  };
+
+  useEffect(() => {
+    getFak();
+  }, []);
+
+  useEffect(() => {
+    if (fakId) {
+      getKaf(fakId);
+    }
+  }, [fakId]);
+
+  useEffect(() => {
+    if (kafId) {
+      getData(old_year, kafId);
+    }
+  }, [old_year, kafId]);
+
+  // Sync fakId and kafId to the URL as query parameters
+  useEffect(() => {
+    setSearchParams({ faculty_id: fakId, kafedra_id: kafId });
+  }, [fakId, kafId]);
   return (
     <div>
       <div className="content-wrapper wrapper-min-height">
@@ -46,19 +113,37 @@ const Study = () => {
               <div className="col-md-12">
                 <div className="card">
                   <div className="card-header">
-                    <div className="row">
-                      <div className="col-6 d-flex gap-5">
-                        <h4 className="py-2 ">O'quv yili:</h4>
+                    <div className="row d-flex align-items-center">
+                      <div className="col-md-2">
                         <Select
                           value={old_year}
                           options={studyYears}
-                          className={"py-2 mx-2"}
+                          className={"w-100"}
+                          label="O'qiv yili"
                           onChange={(e) => {
                             setOldYear(e);
                           }}
                         />
                       </div>
-                      <div className="text-right col-6">
+                      <div className="col-md-3">
+                        <Select
+                          label={"Fakultet"}
+                          value={fakId}
+                          onChange={(e) => setFakId(e)}
+                          options={fak}
+                          className={"w-100"}
+                        />
+                      </div>
+                      <div className="col-md-3">
+                        <Select
+                          label={"Kafedra"}
+                          value={kafId}
+                          onChange={(e) => setKafId(e)}
+                          options={kaf}
+                          className={"w-100"}
+                        />
+                      </div>
+                      <div className="text-right col-md-4">
                         <DownloadFile />
                       </div>
                     </div>

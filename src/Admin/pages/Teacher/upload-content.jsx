@@ -10,6 +10,8 @@ import useAxios from "../../../hooks/useAxios";
 const Upload = ({ id, old_year, new_year, upd }) => {
   const commentRef = useRef();
   const editFileRef = useRef();
+  const fileRef = useRef();
+  const textRef = useRef();
 
   const [isEdit, setIsEdit] = useState(false);
   const [data, setData] = useState([]);
@@ -35,7 +37,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!editFileRef?.current?.files[0] || !commentRef.current.value) {
+    if (!fileRef?.current?.files[0] || !textRef.current.value) {
       message.error("All files are required");
       return;
     }
@@ -46,8 +48,8 @@ const Upload = ({ id, old_year, new_year, upd }) => {
       formData.append("old_year", old_year);
       formData.append("new_year", new_year);
       formData.append("document_id", id);
-      formData.append("comment", commentRef?.current?.value);
-      formData.append("file_up", editFileRef?.current?.files[0]);
+      formData.append("comment", textRef?.current?.value);
+      formData.append("file_up", fileRef?.current?.files[0]);
 
       const res = await axios.post(
         `${
@@ -62,19 +64,20 @@ const Upload = ({ id, old_year, new_year, upd }) => {
             old_year,
             new_year,
             document_id: id,
-            comment: commentRef?.current?.value,
+            comment: textRef?.current?.value,
           },
         }
       );
 
       if (res.status === 200) {
         message.success({ key: "form", content: "Succesfully uploaded!" });
-        commentRef.current.value = "";
-        editFileRef.current.value = "";
+        textRef.current.value = "";
+        fileRef.current.value = "";
         getData(id);
       }
     } catch (err) {
-      message.error({ key: "form", content: "Error to Create!" });
+      message.error({ key: "form", content: err?.response?.data });
+      console.log(err);
     }
   };
 
@@ -146,11 +149,11 @@ const Upload = ({ id, old_year, new_year, upd }) => {
     <div>
       <form className="row" onSubmit={handleSubmit}>
         <Input
-          ref={commentRef}
+          ref={textRef}
           placeholder="Izoh"
           className="form-group col-md-5"
         />
-        <ChooseFile ref={editFileRef} className="form-group col-md-5" />
+        <ChooseFile ref={fileRef} className="form-group col-md-5" />
         <div className="col-md-2">
           <button className="btn btn-primary w-100" type="submit">
             Yulash
@@ -174,7 +177,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
           </thead>
           <tbody>
             {data
-              .sort((a, b) => b.id - a.id)
+              .sort((a, b) => a.id - b.id)
               .map((item) => (
                 <tr key={item.id}>
                   <td>
@@ -194,13 +197,20 @@ const Upload = ({ id, old_year, new_year, upd }) => {
                       {item.score ? (
                         <p className="text-success">Tasdiqlangan</p>
                       ) : item.rejection ? (
-                        <button
-                          data-toggle="modal"
-                          data-target={`#exampleModal${item.id}`}
-                          className="btn btn-danger"
-                        >
-                          Rad etildi
-                        </button>
+                        <div class="d-flex justify-content-center align-items-center">
+                          <p class="text-danger my-0 mx-3">Rad etildi</p>
+                          <a
+                            className="btn btn-outline-primary py-1 px-2"
+                            data-toggle="modal"
+                            data-target={`#exampleModal${item.id}`}
+                            // style={{
+                            //   textDecoration: "underline",
+                            //   fontStyle: "italic",
+                            // }}
+                          >
+                            Izoh...
+                          </a>
+                        </div>
                       ) : (
                         <p className="text-primary">Jarayonda</p>
                       )}

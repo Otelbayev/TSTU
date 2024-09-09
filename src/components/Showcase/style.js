@@ -10,6 +10,13 @@ export const Container = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  @media screen and (max-width: 1000px) {
+    height: calc(100vh - 112px);
+  }
+  @media screen and (max-width: 500px) {
+    height: calc(100vh - 100px);
+    background-image: ${({ $bgmob }) => `url(${$bgmob})`};
+  }
 `;
 
 export const Img = styled.img`
@@ -43,7 +50,11 @@ export const TitleImg = styled.img`
   display: ${({ display }) => (display === "desktop" ? "block" : "none")};
   @media (max-width: 650px) {
     display: ${({ display }) => (display === "mobile" ? "block" : "none")};
-    width: 330px;
+    width: 400px;
+  }
+  @media (max-width: 450px) {
+    display: ${({ display }) => (display === "mobile" ? "block" : "none")};
+    width: 350px;
   }
 `;
 

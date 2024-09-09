@@ -7,6 +7,7 @@ import useAxios from "./../../../../hooks/useAxios";
 import { message } from "antd";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { saveAs } from "file-saver";
 
 const File = () => {
   const { id } = useParams();
@@ -62,7 +63,31 @@ const File = () => {
 
   const contentRef = useRef(null);
 
-  const handleDownload = () => {};
+  function downloadWebPageAsWord(e) {
+    e.preventDefault();
+    document.querySelectorAll(".no_dw").forEach((element) => {
+      element.style.display = "none";
+    });
+    // Get the HTML content of the web page
+    var htmlContent = document.documentElement.outerHTML;
+
+    // Create a new HTML element to hold the resized images
+    var tempContainer = document.createElement("div");
+    tempContainer.innerHTML = htmlContent;
+
+    // Get the updated HTML content with resized images
+    var updatedHtmlContent = tempContainer.innerHTML;
+
+    // Create a Blob object with the updated HTML content
+    var blob = new Blob([updatedHtmlContent], { type: "application/msword" });
+
+    // Save the Blob object as a Word file
+    saveAs(blob, `appeal-RV${id}.docx`);
+
+    document.querySelectorAll(".no_dw").forEach((element) => {
+      element.style.display = "block";
+    });
+  }
 
   return (
     <div className="body A4" ref={contentRef}>
@@ -183,12 +208,20 @@ const File = () => {
               <td>11</td>
               <td className="td-l">Fayl</td>
               <td className="td-l">
-                <NavLink
-                  target="_blank"
-                  to={`${import.meta.env.VITE_BASE_URL_IMG}${data?.file_?.url}`}
-                >
-                  {`${import.meta.env.VITE_BASE_URL_IMG}/${data?.file_?.title}`}
-                </NavLink>
+                {data?.file_?.url ? (
+                  <NavLink
+                    target="_blank"
+                    to={`${import.meta.env.VITE_BASE_URL_IMG}${
+                      data?.file_?.url
+                    }`}
+                  >
+                    {`${import.meta.env.VITE_BASE_URL_IMG}/${
+                      data?.file_?.title
+                    }`}
+                  </NavLink>
+                ) : (
+                  "Mavjud emas"
+                )}
               </td>
             </tr>
             <tr className="b-all">
@@ -214,7 +247,7 @@ const File = () => {
               </button>
               <br />
               <br />
-              <NavLink href="#" onClick={handleDownload}>
+              <NavLink href="#" onClick={downloadWebPageAsWord}>
                 Yuklab olish
               </NavLink>
             </center>

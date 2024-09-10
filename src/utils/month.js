@@ -48,6 +48,10 @@ const monthRu = {
 export const getDate = (date) => {
   const { i18n } = useTranslation();
 
+  if (!date) {
+    return ".......";
+  }
+
   if (date) {
     let [year, month, day] = date?.split("-");
     const months = {

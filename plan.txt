@@ -1,9 +1,15 @@
-appeal download docx
-history
-structure
 
 https://tstu.uz/dep_page/385
 https://tstu.uz/blog/459
 https://tstu.uz/blog/463
 https://tstu.uz/blog/456
 https://tstu.uz/blog/457
+
+
+edit new cart
+structure
+lazy load to blog
+techer appeal
+techer blog, portfolio, ..
+Blog page last date, edit cart
+appeal download docx

@@ -28,6 +28,7 @@ const Edit = () => {
   const language_id = options.find((e) => e.code === value)?.id;
 
   const editorRef = useRef(null);
+  const imgRef = useRef();
 
   const [title, setTitle] = useState("");
   const [short, setShort] = useState("");
@@ -89,7 +90,7 @@ const Edit = () => {
     formData.append("status_id", status);
     formData.append("position", 1);
     formData.append("favorite", false);
-    formData.append("img_up", img);
+    formData.append("img_up", imgRef?.current?.files[0]);
 
     const res = await useEdit(
       isCreate,
@@ -158,7 +159,7 @@ const Edit = () => {
         <ChooseFile
           label="Image"
           className={"form-group col-md-3"}
-          onChange={(e) => setImg(e.target.files[0])}
+          ref={imgRef}
         />
         {!isCreate && (
           <Image

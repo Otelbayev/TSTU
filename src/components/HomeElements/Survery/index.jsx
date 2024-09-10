@@ -73,7 +73,7 @@ const Survery = () => {
               ?.slice(0, 4)
               ?.map((e) => (
                 <IlmiyMarkazCart
-                  dataAos={"zoom-in"}
+                  dataAos={"fade-up"}
                   key={e.id}
                   to={`department/${
                     i18n.language === "uz" ? e?.id : e?.departament_?.id

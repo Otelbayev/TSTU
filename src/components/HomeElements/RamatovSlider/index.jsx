@@ -3,7 +3,7 @@ import { Container } from "./style";
 
 const RamatovSlider = ({ prop }) => {
   return (
-    <Container data-aos="zoom-in">
+    <Container data-aos="fade-up">
       <div className="item">
         <div className="item__content">
           <div className="slider-top">

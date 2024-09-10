@@ -24,7 +24,7 @@ const Events = ({ type }) => {
       <div className="root-wrapper">
         <Title title={t("events.title")} to="news">
           <div className="grid">
-            <div className="grid__item first" data-aos="fade-right">
+            <div className="grid__item first" data-aos="fade-up">
               <LargeBanner
                 onClick={() =>
                   navigate(
@@ -61,7 +61,7 @@ const Events = ({ type }) => {
                 type={type}
               />
             </div>
-            <div className="grid__news thrid" data-aos="fade-left">
+            <div className="grid__news thrid" data-aos="fade-up">
               {d1?.slice(3)?.map((e) => (
                 <NewsItem item={e} key={e.id} />
               ))}

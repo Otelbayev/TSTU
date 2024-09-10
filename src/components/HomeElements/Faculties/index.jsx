@@ -33,7 +33,7 @@ const Faculties = () => {
           $type={"light"}
         >
           <FakGrid>
-            <div data-aos="fade-right" className="fak-left">
+            <div data-aos="fade-up" className="fak-left">
               <div className="fak-left__content">
                 {faculties?.list?.map((e) => (
                   <FacultetCart
@@ -45,7 +45,7 @@ const Faculties = () => {
                 ))}
               </div>
             </div>
-            <div data-aos="fade-left" className="wrap">
+            <div data-aos="fade-up" className="wrap">
               <div className="fak-right">
                 <div className="fak-right__title">{t("faculties.kafedra")}</div>
                 <div className="fak-right__cards">

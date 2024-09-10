@@ -2,9 +2,9 @@ import React from "react";
 import { Wrap } from "./style";
 import { NavLink } from "react-router-dom";
 
-const InteractiveCart = ({ prop, no }) => {
+const InteractiveCart = ({ prop, aos }) => {
   return (
-    <Wrap data-aos={!no && "zoom-in"}>
+    <Wrap data-aos={aos}>
       <img
         src={`${import.meta.env.VITE_BASE_URL_IMG}${
           prop?.icon_?.url || prop?.icon_translation_?.url

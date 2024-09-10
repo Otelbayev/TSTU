@@ -32,7 +32,7 @@ const Talaba = () => {
         >
           <Layout $type="talaba">
             <div className="grid">
-              <div className="grid__item" data-aos="fade-right">
+              <div className="grid__item" data-aos="fade-up">
                 <LargeBanner
                   item={d && d[0]}
                   onClick={() =>
@@ -66,7 +66,7 @@ const Talaba = () => {
                   }
                 />
               </div>
-              <div className="grid__large" data-aos="fade-left">
+              <div className="grid__large" data-aos="fade-up">
                 <img
                   className="grid__large__img"
                   loading="lazy"

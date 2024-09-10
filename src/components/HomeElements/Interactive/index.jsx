@@ -76,7 +76,7 @@ const Interactive = () => {
                 ?.sort((a, b) => b.id - a.id)
                 ?.slice(0, 4)
                 ?.map((e) => (
-                  <InteractiveCart aos={"zoom-in"} key={e?.id} prop={e} />
+                  <InteractiveCart aos={"fade-up"} key={e?.id} prop={e} />
                 ))}
             </div>
           </InteraktiveCarts>

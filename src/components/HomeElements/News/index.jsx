@@ -32,7 +32,7 @@ const News = ({ type }) => {
       <div className="root-wrapper">
         <Title title={t("news.title")} button={t("news.btn")} to="blog">
           <div className="grid">
-            <div data-aos="fade-right" className="grid__item1">
+            <div data-aos="fade-up" className="grid__item1">
               <LargeBanner
                 item={data1 && data1[0]}
                 type={type}
@@ -43,7 +43,7 @@ const News = ({ type }) => {
                 }
               />
             </div>
-            <div data-aos="fade-left" className="grid__item2">
+            <div data-aos="fade-up" className="grid__item2">
               <Cart
                 item={data1 && (data1[1] ? data1[1] : data2 && data2[2])}
                 type={type}
@@ -54,7 +54,7 @@ const News = ({ type }) => {
                 }
               />
             </div>
-            <div data-aos="fade-left" className="grid__item3">
+            <div data-aos="fade-up" className="grid__item3">
               <Cart
                 item={data2 && data2[0]}
                 type={type}
@@ -65,7 +65,7 @@ const News = ({ type }) => {
                 }
               />
             </div>
-            <div data-aos="fade-right" className="grid__item4">
+            <div data-aos="fade-up" className="grid__item4">
               <Cart
                 item={data2 && data2[1]}
                 type={type}
@@ -76,7 +76,7 @@ const News = ({ type }) => {
                 }
               />
             </div>
-            <div data-aos="fade-right" className="grid__item5">
+            <div data-aos="fade-up" className="grid__item5">
               <Cart
                 item={data3 && data3[0]}
                 type={type}
@@ -87,7 +87,7 @@ const News = ({ type }) => {
                 }
               />
             </div>
-            <div data-aos="fade-left" className="grid__item6">
+            <div data-aos="fade-up" className="grid__item6">
               <LargeBanner
                 item={data3 && data3[1]}
                 type={type}

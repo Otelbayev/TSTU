@@ -94,7 +94,7 @@ export const Large = styled.div`
     &__abs {
       position: absolute;
       transition: 0.3s;
-      bottom: ${({ $w }) => ($w ? `-${$w + 20}px` : "-50px")};
+      bottom: ${({ $w }) => ($w ? `-${$w + 15}px` : "-40px")};
       left: 0;
       width: 100%;
       padding: 40px 10px 10px 10px;
@@ -170,6 +170,11 @@ export const Large = styled.div`
       &__abs {
         bottom: 0;
       }
+    }
+  }
+  @media screen and (max-width: 700px) {
+    .ccontent {
+      height: 350px;
     }
   }
 `;

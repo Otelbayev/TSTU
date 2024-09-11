@@ -9,6 +9,7 @@ const Image = ({ src, alt, className }) => {
       onLoad={() => setLoading(false)}
       alt={alt || "image"}
       className={className}
+      loading="lazy"
       style={{
         filter: loading ? "blur(10px)" : "none",
         transform: loading ? "scale(1.5)" : "scale(1)",

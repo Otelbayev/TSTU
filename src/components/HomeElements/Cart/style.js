@@ -83,7 +83,7 @@ export const Wrap = styled.div`
     height: 100%;
     overflow: hidden;
     &__image {
-      height: 70%;
+      height: 67%;
       position: relative;
       transition: 0.3s;
       &--img {
@@ -98,7 +98,7 @@ export const Wrap = styled.div`
     }
     &__bottom {
       background: var(--titleLight);
-      height: 30%;
+      height: 33%;
       padding: 10px 10px 5px;
       transform: translateY(-10px);
       &--date {
@@ -127,6 +127,32 @@ export const Wrap = styled.div`
         font-style: normal;
         font-weight: 700;
         padding-top: 10px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    height: 100%;
+    .ccontent {
+      display: flex;
+      height: 100%;
+      &__image {
+        height: 100%;
+        width: 40%;
+      }
+      &__bottom {
+        width: 60%;
+        height: 100%;
+        transform: translateY(0);
+        padding: 10px;
+        &--date {
+          .left {
+            font-size: 12px;
+          }
+          .date {
+            font-size: 12px;
+          }
+        }
       }
     }
   }

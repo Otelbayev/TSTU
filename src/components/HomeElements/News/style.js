@@ -4,7 +4,7 @@ export const Layout = styled.div`
   margin: 40px 0 20px;
   .grid {
     display: grid;
-    grid-template-columns: 300px 300px 300px;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 300px 300px;
     gap: 10px;
     margin: 20px 0;

@@ -98,24 +98,6 @@ const News = ({ type }) => {
                 }
               />
             </div>
-            {/* {data2?.map((item, index) => {
-              const Component = index === 0 || index === 5 ? LargeBanner : Cart;
-              const gridClass = `grid__item${index + 1}`;
-
-              return (
-                <div className={gridClass} key={item?.id}>
-                  <Component
-                    item={item}
-                    type={type}
-                    onClick={() =>
-                      handleNavigation(
-                        i18n.language === "uz" ? item?.id : item?.blog_id
-                      )
-                    }
-                  />
-                </div>
-              );
-            })} */}
           </div>
         </Title>
       </div>

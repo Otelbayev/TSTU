@@ -150,6 +150,7 @@ export const Large = styled.div`
         }
       }
       &--desc {
+        opacity: 0;
         font-family: "Poppins";
         color: #fdfdfd;
         padding-top: 20px;
@@ -169,6 +170,9 @@ export const Large = styled.div`
       }
       &__abs {
         bottom: 0;
+        &--desc {
+          opacity: 1;
+        }
       }
     }
   }

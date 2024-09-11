@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Large } from "./style";
 import { getDate } from "../../../utils/month";
 import Image from "../../Image";
@@ -41,10 +41,17 @@ const LargeBanner = ({ onClick, item, type }) => {
   //   </Large>
   // );
 
-  console.log(descRef);
+  const textRef = useRef(null); // Reference to the <p> element
+  const [textHeight, setTextHeight] = useState(0);
+
+  useEffect(() => {
+    if (textRef.current) {
+      setTextHeight(textRef.current.clientHeight);
+    }
+  }, []);
 
   return (
-    <Large $w={descRef?.current?.clientHeight} onClick={onClick}>
+    <Large $w={textHeight} onClick={onClick}>
       <div className="ccontent">
         <div className="ccontent__bg">
           <Image
@@ -84,7 +91,7 @@ const LargeBanner = ({ onClick, item, type }) => {
                 "........"}
             <div className="bottom"></div>
           </div>
-          <div ref={descRef} className="ccontent__abs--desc">
+          <div ref={textRef} className="ccontent__abs--desc">
             {item?.description || "........"}
           </div>
         </div>

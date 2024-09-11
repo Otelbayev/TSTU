@@ -41,6 +41,8 @@ const LargeBanner = ({ onClick, item, type }) => {
   //   </Large>
   // );
 
+  console.log(descRef);
+
   return (
     <Large $w={descRef?.current?.clientHeight} onClick={onClick}>
       <div className="ccontent">

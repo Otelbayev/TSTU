@@ -94,7 +94,7 @@ export const Large = styled.div`
     &__abs {
       position: absolute;
       transition: 0.3s;
-      bottom: ${({ $w }) => ($w ? `-${$w + 15}px` : "-40px")};
+      bottom: ${({ $w }) => `-${$w}px`};
       left: 0;
       width: 100%;
       padding: 40px 10px 10px 10px;
@@ -152,7 +152,7 @@ export const Large = styled.div`
       &--desc {
         font-family: "Poppins";
         color: #fdfdfd;
-        margin-top: 20px;
+        padding-top: 20px;
         font-size: 16px;
         font-weight: 400;
         line-height: 19px;

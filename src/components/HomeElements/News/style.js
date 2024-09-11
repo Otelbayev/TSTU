@@ -4,9 +4,9 @@ export const Layout = styled.div`
   margin: 40px 0 20px;
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 300px 300px;
-    gap: 10px;
+    gap: 8px;
     margin: 20px 0;
     &__item1 {
       grid-column: 1/3;
@@ -67,6 +67,7 @@ export const Layout = styled.div`
     .grid {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr;
+      gap: 5px;
       &__item1 {
         grid-column: 1/3;
         grid-row: 1/2;

@@ -133,6 +133,7 @@ export const Wrap = styled.div`
 
   @media screen and (max-width: 700px) {
     height: 100%;
+    min-height: 120px;
     .ccontent {
       display: flex;
       height: 100%;

@@ -10,6 +10,10 @@ export const Container = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  filter: ${({ isLoaded }) => (isLoaded ? "blur(0px)" : "blur(5px)")};
+  transition: filter 0.5s ease-in-out;
+  z-index: -1;
+
   @media screen and (max-width: 1000px) {
     height: calc(100vh - 112px);
   }

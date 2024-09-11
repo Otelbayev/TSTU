@@ -74,6 +74,8 @@ export const FakGrid = styled.div`
     }
   }
   @media only screen and (max-width: 599px) {
+    grid-template-rows: 2fr 3fr;
+    height: 900px;
     .fak-left {
       &__content {
         padding-left: 5px;
@@ -87,6 +89,7 @@ export const FakGrid = styled.div`
     .wrap {
       padding-right: 5px;
       .fak-right {
+        padding: 10px;
         &__cards {
           grid-template-columns: repeat(2, 1fr);
         }

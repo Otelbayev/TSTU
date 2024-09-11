@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Title } from "../../Generics";
 import { Container } from "./style";
 import { useTranslation } from "react-i18next";
+import Image from "../../Image";
 
 const Faxriy = () => {
   const { t, i18n } = useTranslation();
 
   const [data, setData] = useState({});
-
-
 
   useEffect(() => {
     fetch(
@@ -43,8 +42,7 @@ const Faxriy = () => {
         <div className="root-container">
           <div className="root-wrapper" data-aos="fade-up">
             <div className="content">
-              <img
-                loading="lazy"
+              <Image
                 src={`${import.meta.env.VITE_BASE_URL_IMG}${
                   data?.persons_?.img_?.url ||
                   data?.persons_translation_?.persons_?.img_?.url

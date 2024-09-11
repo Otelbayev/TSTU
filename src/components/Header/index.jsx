@@ -31,6 +31,7 @@ import {
   Desktop,
   SearchBox,
 } from "./style";
+import Image from "../Image";
 
 const Header = ({ uni }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -247,7 +248,7 @@ const Header = ({ uni }) => {
         <div className="root-container">
           <div className="root-wrapper">
             <Wrapper>
-              <Menus >
+              <Menus>
                 <Menu
                   loading="lazy"
                   src={menu}
@@ -264,26 +265,26 @@ const Header = ({ uni }) => {
                     navigate(window.location.pathname, { replace: true })
                   }
                 >
-                  <img loading="lazy" src={logo1} alt="" />
+                  <Image src={logo1} alt="" />
                 </Link>
                 <Div>
                   <Link to={`/${i18n.language}`}>
-                    <img loading="lazy" src={logo2} alt="" />
+                    <Image src={logo2} alt="" />
                   </Link>
                   <Link
                     target="_blank"
                     to="https://www.timeshighereducation.com/world-university-rankings/tashkent-state-transport-university"
                   >
-                    <img loading="lazy" src={logo3} />
+                    <Image src={logo3} />
                   </Link>
                   <Link target="_blank" to="https://www.4icu.org/uz/">
-                    <Img loading="lazy" src={logo4} $last="true" />
+                    <Image src={logo4} $last="true" />
                   </Link>
                   <Link
                     target="_blank"
                     to="https://www.topuniversities.com/universities/tashkent-state-transport-university"
                   >
-                    <Img loading="lazy" src={logo5} $last="true" />
+                    <Image src={logo5} $last="true" />
                   </Link>
                 </Div>
               </Left>

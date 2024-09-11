@@ -80,10 +80,13 @@ export const Left = styled.div`
 export const Div = styled.div`
   ${flex}
   gap:10px;
+  img {
+    height: 32px;
+  }
   @media screen and (max-width: 500px) {
     img {
-      width: auto;
       height: 28px;
+      width: auto;
     }
   }
 `;

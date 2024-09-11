@@ -2,6 +2,7 @@ import React from "react";
 import { Contianer, Icons } from "./style";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Image from "../Image";
 
 const IlmiyMarkazCart = ({ $border, to, item, dataAos, style }) => {
   const navigate = useNavigate();
@@ -15,8 +16,7 @@ const IlmiyMarkazCart = ({ $border, to, item, dataAos, style }) => {
       style={style}
     >
       <div className="item">
-        <img
-          loading="lazy"
+        <Image
           src={`${import.meta.env.VITE_BASE_URL_IMG}${item?.img_?.url}`}
           alt=""
           className="item__img"

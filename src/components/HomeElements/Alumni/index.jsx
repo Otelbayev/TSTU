@@ -4,6 +4,7 @@ import { Ramatov } from "./style";
 import Slider from "react-slick";
 import RamatovSlider from "../RamatovSlider";
 import { useTranslation } from "react-i18next";
+import Image from "../../Image";
 
 const ramatovSetting = {
   dots: false,
@@ -90,8 +91,7 @@ const Alumni = () => {
                   return (
                     <div key={e?.id}>
                       <div className="content">
-                        <img
-                          loading="lazy"
+                        <Image
                           src={`${import.meta.env.VITE_BASE_URL_IMG}${
                             e?.persons_?.img_?.url ||
                             e?.persons_translation_?.persons_?.img_?.url

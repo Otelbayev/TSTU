@@ -1,5 +1,6 @@
 import React from "react";
 import { Container } from "./style";
+import Image from "../../Image";
 
 const RamatovSlider = ({ prop }) => {
   return (
@@ -7,8 +8,7 @@ const RamatovSlider = ({ prop }) => {
       <div className="item">
         <div className="item__content">
           <div className="slider-top">
-            <img
-              loading="lazy"
+            <Image
               src={`${import.meta.env.VITE_BASE_URL_IMG}${
                 prop?.persons_?.img_?.url ||
                 prop?.persons_translation_?.persons_?.img_?.url

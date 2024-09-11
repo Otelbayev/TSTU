@@ -2,13 +2,14 @@ import React from "react";
 import { Content } from "./style";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Image from "../../Image";
 
 const KafedraCart = ({ prop, dataAos, $slider, onClick, arrow, fac }) => {
   const { t, i18n } = useTranslation();
 
   return (
     <Content data-aos={dataAos} onClick={onClick} $slider={$slider}>
-      <img
+      <Image
         src={`${import.meta.env.VITE_BASE_URL_IMG}${
           prop?.img_?.url || prop?.img_translation_?.url
         }`}

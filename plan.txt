@@ -6,9 +6,7 @@ https://tstu.uz/blog/456
 https://tstu.uz/blog/457
 
 
-edit new cart
 structure
-lazy load to blog
 techer appeal
 techer blog, portfolio, ..
 Blog page last date, edit cart

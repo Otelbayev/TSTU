@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import Image from "../../Image";
 
 const KafedraCart = ({ prop, dataAos, $slider, onClick, arrow, fac }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Content data-aos={dataAos} onClick={onClick} $slider={$slider}>

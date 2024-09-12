@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Center, Content, Flex, Grid, Layout } from "./style";
 import NewsItem from "../../components/News/NewsItem";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ const Blog = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { data, page, setPage, query, setQuery } = useBlog(cat, false, true);
+  const newsRef = useRef(null);
 
   const getCategory = async () => {
     const res = await axios.get(
@@ -52,6 +53,8 @@ const Blog = () => {
 
   const radioChange = (e) => {
     setCat(e.target.value);
+    setPage(1);
+    queryParams.set("page", 1);
     queryParams.set("category", e.target.value);
     const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
     window.history.replaceState(null, null, newUrl);
@@ -63,8 +66,15 @@ const Blog = () => {
   }, [i18n.language]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    newsRef.current?.scrollIntoView({
+      behavior: "smooth",
+      inline: "start",
+    });
   }, [page]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const pageChange = (a, b) => {
     setPage(a);
@@ -80,21 +90,23 @@ const Blog = () => {
       <div className="root-wrapper">
         <Content>
           <div className="title">{t("news.u")}</div>
-          <Layout>
-            <Layout.Item data-aos="fade-right">
-              <NewsItem
-                onClick={() =>
-                  navigate(
-                    `/${i18n.language}/blog/${
-                      i18n.language === "uz"
-                        ? top?.list[0]?.id
-                        : top?.list[0]?.blog_id
-                    }`
-                  )
-                }
-                prop={top?.list?.length ? top?.list[0] : []}
-              />
-              <Layout.Second>
+          <div className="ccontent">
+            <div className="ccontent__item" data-aos="fade-right">
+              <div className="ccontent__item__banner">
+                <NewsItem
+                  onClick={() =>
+                    navigate(
+                      `/${i18n.language}/blog/${
+                        i18n.language === "uz"
+                          ? top?.list[0]?.id
+                          : top?.list[0]?.blog_id
+                      }`
+                    )
+                  }
+                  prop={top?.list?.length ? top?.list[0] : []}
+                />
+              </div>
+              <div className="ccontent__item__box">
                 {top?.list?.slice(1, 5).map((item) => (
                   <MiniItem
                     key={item.id}
@@ -108,22 +120,24 @@ const Blog = () => {
                     }
                   />
                 ))}
-              </Layout.Second>
-            </Layout.Item>
-            <Layout.Item data-aos="fade-left">
-              <NewsItem
-                onClick={() =>
-                  navigate(
-                    `/${i18n.language}/blog/${
-                      i18n.language === "uz"
-                        ? top?.list[6]?.id
-                        : top?.list[6]?.blog_id
-                    }`
-                  )
-                }
-                prop={top?.list?.length ? top?.list[6] : []}
-              />
-              <Layout.Second>
+              </div>
+            </div>
+            <div className="ccontent__item" data-aos="fade-left">
+              <div className="ccontent__item__banner">
+                <NewsItem
+                  onClick={() =>
+                    navigate(
+                      `/${i18n.language}/blog/${
+                        i18n.language === "uz"
+                          ? top?.list[6]?.id
+                          : top?.list[6]?.blog_id
+                      }`
+                    )
+                  }
+                  prop={top?.list?.length ? top?.list[6] : []}
+                />
+              </div>
+              <div className="ccontent__item__box">
                 {top?.list?.slice(7, 11).map((item) => (
                   <MiniItem
                     key={item.id}
@@ -137,9 +151,9 @@ const Blog = () => {
                     }
                   />
                 ))}
-              </Layout.Second>
-            </Layout.Item>
-          </Layout>
+              </div>
+            </div>
+          </div>
           <Center>
             <Radio.Group value={cat} onChange={radioChange}>
               <Radio value="all" checked={"all" === cat}>
@@ -159,7 +173,7 @@ const Blog = () => {
             </Radio.Group>
           </Center>
           {data?.list?.length ? (
-            <Grid>
+            <Grid ref={newsRef}>
               {data?.list.map((e) => (
                 <NewsCart
                   dataAos="zoom-in"
@@ -188,7 +202,7 @@ const Blog = () => {
               style={{ textAlign: "center", marginBottom: "20px" }}
             />
           ) : null}
-          <Title title={t("news.t")} component={""}>
+          {/* <Title title={t("news.t")} component={""}>
             <Flex>
               <iframe
                 width="100%"
@@ -211,7 +225,7 @@ const Blog = () => {
                 allowfullscreen
               ></iframe>
             </Flex>
-          </Title>
+          </Title> */}
         </Content>
       </div>
     </div>

@@ -2,10 +2,13 @@ import styled from "styled-components";
 
 export const Large = styled.div`
   background: ${({ $img }) => `url(${$img})`};
+  overflow: hidden;
+  max-height: 600px;
   transition: 0.3s;
   border-radius: 1px;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   width: 100%;
   min-height: 460px;
   height: 100%;

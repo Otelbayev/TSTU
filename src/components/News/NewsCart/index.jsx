@@ -1,16 +1,20 @@
 import React from "react";
 import { Content } from "./style";
 import { getDate } from "../../../utils/month";
+import Image from "../../../components/Image";
+import news from "../../../assets/images/news.jpg";
 
 const NewsCart = ({ prop, onClick, dataAos }) => {
   return (
     <Content onClick={onClick} data-aos={dataAos}>
-      <img
-        loading="lazy"
-        src={`${import.meta.env.VITE_BASE_URL_IMG}${
+      <Image
+        src={
           prop?.img_?.url || prop?.img_translation_?.url
-        }`}
-        alt=""
+            ? `${import.meta.env.VITE_BASE_URL_IMG}${
+                prop?.img_?.url || prop?.img_translation_?.url
+              }`
+            : news
+        }
       />
       <div className="news-cart-bottom">
         <div className="news-cart-bottom__mintitle">

@@ -3,6 +3,42 @@ import styled from "styled-components";
 export const Content = styled.div`
   padding: 50px 0 20px;
   position: relative;
+  .ccontent {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    &__item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      &__banner {
+        width: 60%;
+        height: 100%;
+      }
+      &__box {
+        width: 40%;
+      }
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    .ccontent {
+      flex-direction: column;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    .ccontent {
+      &__item {
+        flex-direction: column;
+        &__banner {
+          width: 100%;
+        }
+        &__box {
+          width: 100%;
+        }
+      }
+    }
+  }
 `;
 
 export const Layout = styled.div`

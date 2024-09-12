@@ -5,14 +5,12 @@ export const Content = styled.div`
   border: 1px solid var(--borderCart);
   overflow: hidden;
   cursor: pointer;
+  transition: ease-out 0.2s;
   img {
     width: 100%;
     height: 248px;
     transition: transform 0.3s;
     object-fit: cover;
-    &:hover {
-      transform: scale(1.08);
-    }
   }
   .news-cart-bottom {
     background-color: #fff;
@@ -39,7 +37,9 @@ export const Content = styled.div`
     }
   }
   &:hover {
-    transition: ease-out 0.2s;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    img {
+      transform: scale(1.1) !important;
+    }
   }
 `;

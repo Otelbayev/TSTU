@@ -123,18 +123,18 @@ export const admin = () => {
       icon: "nav-icon fa-solid fa-ranking-star",
     },
     {
-      id: 13,
-      path: "portfolio",
-      title: "Portfolio",
-      roles: ["teacher"],
-      icon: "nav-icon fas fa-briefcase",
-    },
-    {
       id: 14,
       path: "experience",
       title: "Tadjribasi",
       roles: ["teacher"],
       icon: "nav-icon fa fa-history",
+    },
+    {
+      id: 13,
+      path: "portfolio",
+      title: "Portfolio",
+      roles: ["teacher"],
+      icon: "nav-icon fas fa-briefcase",
     },
     {
       id: 15,
@@ -146,9 +146,16 @@ export const admin = () => {
     {
       id: 16,
       path: "scientific-activity",
-      title: "Mehnat faoliyati",
+      title: "Ilmiy faoliyati",
       roles: ["teacher"],
       icon: "nav-icon fas fa-edit",
+    },
+    {
+      id: 17,
+      path: "appeal-to-teacher",
+      title: "Murojaatlar",
+      roles: ["teacher"],
+      icon: "nav-icon fa fa-users",
     },
   ];
 };

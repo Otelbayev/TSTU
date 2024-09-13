@@ -3,12 +3,12 @@ import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
 import "datatables.net-bs5";
 import "datatables.net";
 import $ from "jquery";
-import { styled } from "styled-components";
 import Cookies from "js-cookie";
+import { styled } from "styled-components";
 import useAxios from "../../../hooks/useAxios";
 import { useNavigate, useLocation } from "react-router-dom";
-import loadingGif from "../../../assets/icons/loading.gif";
 import { useTranslation } from "react-i18next";
+import loadingGif from "../../../assets/icons/loading.gif";
 
 const Div = styled.div`
   td:last-child {
@@ -35,9 +35,9 @@ const DataTable = ({
 }) => {
   const { sendRequest } = useAxios();
   const navigate = useNavigate();
-  const location = useLocation();
   const { i18n } = useTranslation();
   const role = Cookies.get("role");
+  const location = useLocation();
 
   useEffect(() => {
     if (data?.length) {
@@ -120,6 +120,7 @@ const DataTable = ({
       };
     }
   }, [data, location.search]);
+
   const handleEdit = (id) => {
     navigate(`/${i18n.language}/admin/${edit}/${id}`);
   };

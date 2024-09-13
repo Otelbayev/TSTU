@@ -1,6 +1,7 @@
 import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import { useId } from "../../hooks/useId";
+import Appeal from "../pages/Teacher/appeal";
 
 // Lazy load all components
 const Home = lazy(() => import("../pages/Home"));
@@ -143,8 +144,13 @@ const Teacher110 = lazy(() => import("../pages/Crud/Crud110/all-teacher"));
 const Teacher110ID = lazy(() => import("../pages/Crud/Crud110/all-teacher-id"));
 const TeacherPortfolio = lazy(() => import("../pages/Teacher/portfolio"));
 const TeacherBlog = lazy(() => import("../pages/Teacher/portfolio"));
-const TeacherEx = lazy(() => import("../pages/Teacher/portfolio"));
+const TeacherExCreate = lazy(() =>
+  import("../pages/Teacher/experience-create")
+);
+const TeacherExEdit = lazy(() => import("../pages/Teacher/experience-edit"));
+const TeacherEx = lazy(() => import("../pages/Teacher/experience"));
 const TeacherSa = lazy(() => import("../pages/Teacher/portfolio"));
+const AppealTeacher = lazy(() => import("../pages/Teacher/appeal"));
 
 const Mudir = lazy(() => import("../pages/Mudir/mudir"));
 const ConfirmTeacher = lazy(() => import("../pages/Mudir/confirm"));
@@ -790,8 +796,26 @@ export const routes = [
   },
   {
     id: useId(),
+    path: "experience/create",
+    element: <TeacherExCreate />,
+    roles: ["teacher"],
+  },
+  {
+    id: useId(),
+    path: "experience/edit/:id",
+    element: <TeacherExEdit />,
+    roles: ["teacher"],
+  },
+  {
+    id: useId(),
     path: "scientific-activity",
     element: <TeacherSa />,
+    roles: ["teacher"],
+  },
+  {
+    id: useId(),
+    path: "appeal-to-teacher",
+    element: <AppealTeacher />,
     roles: ["teacher"],
   },
 ];

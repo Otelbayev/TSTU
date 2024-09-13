@@ -10,7 +10,7 @@ export const Container = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  filter: ${({ isLoaded }) => (isLoaded ? "blur(0px)" : "blur(5px)")};
+  filter: ${({ isLoaded }) => (isLoaded ? "blur(0px)" : "blur(2px)")};
   transition: filter 0.5s ease-in-out;
   z-index: -1;
 

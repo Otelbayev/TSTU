@@ -39,7 +39,6 @@ const Bdirections = () => {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setDep(
           res?.filter(
             (e) =>
@@ -51,7 +50,6 @@ const Bdirections = () => {
       });
   }, [value]);
 
-  console.log(data);
 
   return (
     <Content>

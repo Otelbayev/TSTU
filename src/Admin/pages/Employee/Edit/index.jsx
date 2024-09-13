@@ -107,8 +107,6 @@ const Edit = () => {
           setRus(res?.data?.languages_ru);
         }
 
-        console.log(res.data.scientific_title);
-
         setName(
           res?.data?.persons_?.firstName ||
             res?.data?.persons_translation_?.firstName

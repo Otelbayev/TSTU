@@ -179,7 +179,7 @@ const Wrapper = ({
                               id="refresh"
                               style={{ width: "100%" }}
                             >
-                              Update table
+                              Jadvalni yangilash
                             </button>
                           </div>
                         </div>

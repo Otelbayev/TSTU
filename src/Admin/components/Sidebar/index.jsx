@@ -22,7 +22,6 @@ const Sidebar = () => {
   const role = Cookies.get("role");
   const userData = JSON.parse(Cookies.get("_userDetails"));
 
-  console.log(userData);
 
   // const getName = (role) => {
   //   switch (role) {

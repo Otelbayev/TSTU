@@ -83,7 +83,7 @@ const Mudir = () => {
                         {
                           title: "FISH",
                           render: function (data, type, row) {
-                            console.log(row);
+                          
                             return `${row?.firstName} ${row?.fathers_name}`;
                           },
                         },

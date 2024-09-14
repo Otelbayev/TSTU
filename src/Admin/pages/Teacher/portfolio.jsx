@@ -1,60 +1,55 @@
-import React, { useRef } from "react";
-import Wrapper from "../../components/Wrapper";
-import { Editor, Input } from "../../components/Generics";
-import axios from "axios";
-import { message } from "antd";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import DataTable from "../../components/DataTable";
+import Wrapper from "../../components/Wrapper";
+import useAxios from "../../../hooks/useAxios";
 
 const Portfolio = () => {
-  const editorRef = useRef();
-  const titleRef = useRef();
-  const descRef = useRef();
+  const { sendRequest, loading, error } = useAxios();
+  const [data, setData] = useState([]);
+  const [isDelete, setIsDelete] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const _userDetails = JSON.parse(Cookies.get("_userDetails"));
+
+  const getData = async () => {
     try {
-      message.loading({ key: "key", content: "Loading..." });
-      const res = await axios.post(
-        `${
+      const response = await sendRequest({
+        method: "get",
+        url: `${
           import.meta.env.VITE_BASE_URL_API
-        }/personportfolio/createpersonportfolio`,
-        {
-          title: titleRef?.current?.value,
-          description: descRef?.current?.value,
-          text: $(editorRef.current)?.summernote("code"),
+        }/personportfolio/getallpersonportfoliosite?person_data_id=${
+          _userDetails.id
+        }`,
+        headers: {
+          Authorization: `Bearer ${Cookies.get("_token")}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies("_token")}`,
-          },
-        }
-      );
-      res.status === 200 &&
-        message.success({ key: "key", content: "Muvaffaqiyatli!" });
-    } catch (err) {
-      message.error({ key: "key", content: "Xatolik" });
-    }
+      });
+      setData(response?.data.sort((a, b) => a.id - b.id));
+    } catch (error) {}
   };
 
+  useEffect(() => {
+    getData();
+  }, [isDelete]);
+
   return (
-    <Wrapper title="Portfolio">
-      <div className="form-group">
-        <form onSubmit={handleSubmit} className="row">
-          <Input ref={titleRef} className="form-group col-md-4" label="Title" />
-          <Input
-            ref={descRef}
-            className="form-group col-md-4"
-            label="Description"
-          />
-          <Editor ref={editorRef} className="col-md-4" />
-          <div className="col-md-12">
-            <button className="btn btn-success" type="submit">
-              Create
-            </button>
-          </div>
-        </form>
-        <div className="col-md-12 mt-3"></div>
-      </div>
+    <Wrapper title="Portfolio" create={true}>
+      <DataTable
+        data={data}
+        loading={loading}
+        error={error}
+        del={`${
+          import.meta.env.VITE_BASE_URL_API
+        }/personportfolio/deletepersonportfolio`}
+        edit={"portfolio/edit"}
+        setIsDelete={setIsDelete}
+        col={[
+          { data: "id", title: "# " },
+          { data: "title", title: "Title" },
+          { data: "description", title: "description" },
+          { data: "status_.name", title: "status" },
+        ]}
+      />
     </Wrapper>
   );
 };

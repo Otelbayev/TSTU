@@ -32,8 +32,6 @@ const Experiance = () => {
     getData();
   }, [isDelete]);
 
-  console.log(data);
-
   return (
     <Wrapper title="Tadjriba" create={true}>
       <DataTable
@@ -56,6 +54,7 @@ const Experiance = () => {
           },
           { data: "whom", title: "whom" },
           { data: "where", title: "where" },
+          { data: "status_.name", title: "status" },
         ]}
       />
     </Wrapper>

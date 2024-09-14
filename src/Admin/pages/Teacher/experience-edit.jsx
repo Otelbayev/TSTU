@@ -1,18 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Input } from "../../components/Generics";
+import { Input, Select } from "../../components/Generics";
 import LanguageSelect from "../../components/Generics/LanguageSelect";
 import { useLanguageContext } from "../../..//context/LanguageContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Wrapper from "../../components/Wrapper";
 import { message } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEdit } from "../../hooks/useEdit";
+import { useStatusContext } from "../../context/Status";
 
 const Edit = () => {
   const [value, setValue] = useState("uz");
   const [isCreate, setIsCreate] = useState(false);
   const [transId, setTransId] = useState(null);
+  const [status, setStatus] = useState(null);
 
   const startRef = useRef();
   const endRef = useRef();
@@ -20,6 +22,7 @@ const Edit = () => {
   const whereRef = useRef();
 
   const { options } = useLanguageContext();
+  const { statusData, getStatus } = useStatusContext();
   const { id } = useParams();
 
   const language_id = options.find((option) => option.code === value)?.id;
@@ -43,10 +46,11 @@ const Edit = () => {
       id,
       transId,
       {
-        since_when: 0,
-        until_when: 0,
-        whom: "string",
-        where: "string",
+        since_when: Number(startRef.current?.value),
+        until_when: Number(endRef.current?.value),
+        whom: whomRef.current?.value,
+        where: whereRef.current?.value,
+        status_id: status,
       },
       `${
         import.meta.env.VITE_BASE_URL_API
@@ -54,16 +58,29 @@ const Edit = () => {
       `${
         import.meta.env.VITE_BASE_URL_API
       }/personscientificactivity/updatepersonscientificactivitytranslation`,
-      [{ language_id, person_scientific_activity_id: id }],
-      {},
+      [
+        {
+          person_scientific_activity_id: Number(id),
+        },
+        { status_translation_id: status },
+        { language_id },
+      ],
+      ["status_id"],
       `${
         import.meta.env.VITE_BASE_URL_API
       }/personscientificactivity/createpersonscientificactivitytranslation`,
-      [{ language_id, person_scientific_activity_id: id }],
-      `${
-        import.meta.env.VITE_BASE_URL_API
-      }/personscientificactivity/deletepersonscientificactivity`
+      [
+        {
+          person_scientific_activity_id: Number(id),
+        },
+        { language_id },
+      ],
+      ["status_id"]
     );
+
+    if (res?.data?.statusCode === 200) {
+      setIsCreate(false);
+    }
   };
 
   const getData = async (id, value) => {
@@ -89,10 +106,9 @@ const Edit = () => {
       endRef.current.value = res?.data?.until_when;
       whomRef.current.value = res?.data?.whom;
       whereRef.current.value = res?.data?.where;
+      setStatus(res?.data?.status_?.id);
     } else {
       setIsCreate(true);
-      startRef.current.value = null;
-      endRef.current.value = null;
       whomRef.current.value = "";
       whereRef.current.value = "";
     }
@@ -100,7 +116,8 @@ const Edit = () => {
 
   useEffect(() => {
     getData(id, value);
-  }, [value]);
+    getStatus(value);
+  }, [value, isCreate]);
 
   return (
     <Wrapper title="Yaratish">
@@ -121,14 +138,21 @@ const Edit = () => {
           ref={endRef}
         />
         <Input
-          className="form-group col-md-3"
+          className="form-group col-md-2"
           ref={whomRef}
           label={`Title (${value})`}
         />
         <Input
-          className="form-group col-md-5"
+          className="form-group col-md-4"
           ref={whereRef}
           label={`Title (${value})`}
+        />
+        <Select
+          label={"Status"}
+          options={statusData}
+          onChange={(e) => setStatus(e)}
+          value={status}
+          className={"form-group col-md-2"}
         />
         <div className="form-group mt-3 col-md-12">
           <div className="col-sm-12">

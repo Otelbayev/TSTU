@@ -143,12 +143,20 @@ const Edit110 = lazy(() => import("../pages/Crud/Crud110/Edit110"));
 const Teacher110 = lazy(() => import("../pages/Crud/Crud110/all-teacher"));
 const Teacher110ID = lazy(() => import("../pages/Crud/Crud110/all-teacher-id"));
 const TeacherPortfolio = lazy(() => import("../pages/Teacher/portfolio"));
+const TeacherPortfolioCreate = lazy(() =>
+  import("../pages/Teacher/portfolio-create")
+);
+const TeacherPortfolioEdit = lazy(() =>
+  import("../pages/Teacher/portfolio-edit")
+);
 const TeacherBlog = lazy(() => import("../pages/Teacher/portfolio"));
+
 const TeacherExCreate = lazy(() =>
   import("../pages/Teacher/experience-create")
 );
 const TeacherExEdit = lazy(() => import("../pages/Teacher/experience-edit"));
 const TeacherEx = lazy(() => import("../pages/Teacher/experience"));
+
 const TeacherSa = lazy(() => import("../pages/Teacher/portfolio"));
 const AppealTeacher = lazy(() => import("../pages/Teacher/appeal"));
 
@@ -780,6 +788,18 @@ export const routes = [
     id: useId(),
     path: "portfolio",
     element: <TeacherPortfolio />,
+    roles: ["teacher"],
+  },
+  {
+    id: useId(),
+    path: "portfolio/create",
+    element: <TeacherPortfolioCreate />,
+    roles: ["teacher"],
+  },
+  {
+    id: useId(),
+    path: "portfolio/edit/:id",
+    element: <TeacherPortfolioEdit />,
     roles: ["teacher"],
   },
   {

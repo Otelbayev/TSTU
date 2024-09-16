@@ -36,7 +36,7 @@ import Image from "../Image";
 const Header = ({ uni }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const setNavigate = (type, id, link) => {
     switch (type) {
@@ -77,8 +77,6 @@ const Header = ({ uni }) => {
         return "/";
     }
   };
-
-  const { t } = useTranslation();
 
   const [data, setData] = useState([]);
   const [topMenu, setTopMenu] = useState([]);
@@ -290,6 +288,9 @@ const Header = ({ uni }) => {
               </Left>
               <Right>
                 <div className="item-desktop">
+                  <Link to={`${i18n.language}/page/191`}>
+                    {t("header.sym")}
+                  </Link>
                   <Link
                     target="_blank"
                     to="https://student.tstu.uz/dashboard/login"

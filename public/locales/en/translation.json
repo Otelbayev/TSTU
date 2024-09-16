@@ -4,9 +4,10 @@
   "header": {
     "talaba": "Student",
     "xodim": "Staff",
-    "kutubxona": "Electronic Library",
+    "kutubxona": "Library",
     "alumni": "Alumni",
-    "qidiruv": "Search"
+    "qidiruv": "Search",
+    "sym": "State symbols"
   },
   "news": {
     "title": "University News",

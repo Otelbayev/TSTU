@@ -89,10 +89,30 @@ const File = () => {
     });
   }
 
+  const downloadTableAsWord = () => {
+    const tableContent = document.getElementById("myTable").outerHTML;
+    const header =
+      "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
+      "xmlns:w='urn:schemas-microsoft-com:office:word' " +
+      "xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'></head><body>";
+    const footer = "</body></html>";
+    const sourceHTML = header + tableContent + footer;
+
+    const source =
+      "data:application/vnd.ms-word;charset=utf-8," +
+      encodeURIComponent(sourceHTML);
+    const fileDownload = document.createElement("a");
+    document.body.appendChild(fileDownload);
+    fileDownload.href = source;
+    fileDownload.download = `appeal${id}.doc`;
+    fileDownload.click();
+    document.body.removeChild(fileDownload);
+  };
+
   return (
     <div className="body A4" ref={contentRef}>
       <section className="sheet padding-10mm">
-        <table border={0} style={{ width: "100%" }}>
+        <table border={0} id="myTable" style={{ width: "100%" }}>
           <tbody>
             <tr className="b-o">
               <td className="b-o" colSpan={2} style={{ width: "45%" }}>
@@ -247,7 +267,7 @@ const File = () => {
               </button>
               <br />
               <br />
-              <NavLink href="#" onClick={downloadWebPageAsWord}>
+              <NavLink href="#" onClick={downloadTableAsWord}>
                 Yuklab olish
               </NavLink>
             </center>

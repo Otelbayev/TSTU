@@ -7,7 +7,6 @@ import useAxios from "./../../../../hooks/useAxios";
 import { message } from "antd";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import { saveAs } from "file-saver";
 
 const File = () => {
   const { id } = useParams();
@@ -63,32 +62,6 @@ const File = () => {
 
   const contentRef = useRef(null);
 
-  function downloadWebPageAsWord(e) {
-    e.preventDefault();
-    document.querySelectorAll(".no_dw").forEach((element) => {
-      element.style.display = "none";
-    });
-    // Get the HTML content of the web page
-    var htmlContent = document.documentElement.outerHTML;
-
-    // Create a new HTML element to hold the resized images
-    var tempContainer = document.createElement("div");
-    tempContainer.innerHTML = htmlContent;
-
-    // Get the updated HTML content with resized images
-    var updatedHtmlContent = tempContainer.innerHTML;
-
-    // Create a Blob object with the updated HTML content
-    var blob = new Blob([updatedHtmlContent], { type: "application/msword" });
-
-    // Save the Blob object as a Word file
-    saveAs(blob, `appeal-RV${id}.doc`);
-
-    document.querySelectorAll(".no_dw").forEach((element) => {
-      element.style.display = "block";
-    });
-  }
-
   const downloadTableAsWord = () => {
     const tableContent = document.getElementById("myTable").outerHTML;
     const header =
@@ -112,7 +85,11 @@ const File = () => {
   return (
     <div className="body A4" ref={contentRef}>
       <section className="sheet padding-10mm">
-        <table border={0} id="myTable" style={{ width: "100%" }}>
+        <table
+          border={1}
+          id="myTable"
+          style={{ width: "100%", borderCollapse: "collapse" }}
+        >
           <tbody>
             <tr className="b-o">
               <td className="b-o" colSpan={2} style={{ width: "45%" }}>

@@ -14,7 +14,6 @@ const Edit = () => {
   const [value, setValue] = useState("uz");
   const [isCreate, setIsCreate] = useState(false);
   const [transId, setTransId] = useState(null);
-  const [status, setStatus] = useState(null);
 
   const startRef = useRef();
   const endRef = useRef();
@@ -22,7 +21,6 @@ const Edit = () => {
   const whereRef = useRef();
 
   const { options } = useLanguageContext();
-  const { statusData, getStatus } = useStatusContext();
   const { id } = useParams();
 
   const language_id = options.find((option) => option.code === value)?.id;
@@ -50,7 +48,7 @@ const Edit = () => {
         until_when: Number(endRef.current?.value),
         whom: whomRef.current?.value,
         where: whereRef.current?.value,
-        status_id: status,
+        status_id: 1,
       },
       `${
         import.meta.env.VITE_BASE_URL_API
@@ -106,7 +104,6 @@ const Edit = () => {
       endRef.current.value = res?.data?.until_when;
       whomRef.current.value = res?.data?.whom;
       whereRef.current.value = res?.data?.where;
-      setStatus(res?.data?.status_?.id);
     } else {
       setIsCreate(true);
       whomRef.current.value = "";
@@ -116,7 +113,6 @@ const Edit = () => {
 
   useEffect(() => {
     getData(id, value);
-    getStatus(value);
   }, [value, isCreate]);
 
   return (
@@ -138,21 +134,14 @@ const Edit = () => {
           ref={endRef}
         />
         <Input
-          className="form-group col-md-2"
+          className="form-group col-md-3"
           ref={whomRef}
           label={`Title (${value})`}
         />
         <Input
-          className="form-group col-md-4"
+          className="form-group col-md-5"
           ref={whereRef}
           label={`Title (${value})`}
-        />
-        <Select
-          label={"Status"}
-          options={statusData}
-          onChange={(e) => setStatus(e)}
-          value={status}
-          className={"form-group col-md-2"}
         />
         <div className="form-group mt-3 col-md-12">
           <div className="col-sm-12">

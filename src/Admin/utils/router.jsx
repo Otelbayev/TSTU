@@ -142,14 +142,18 @@ const Edit110 = lazy(() => import("../pages/Crud/Crud110/Edit110"));
 
 const Teacher110 = lazy(() => import("../pages/Crud/Crud110/all-teacher"));
 const Teacher110ID = lazy(() => import("../pages/Crud/Crud110/all-teacher-id"));
-const TeacherPortfolio = lazy(() => import("../pages/Teacher/portfolio"));
+
+const TeacherPortfolio = lazy(() => import("../pages/Teacher/Portfolio"));
 const TeacherPortfolioCreate = lazy(() =>
-  import("../pages/Teacher/portfolio-create")
+  import("../pages/Teacher/Portfolio/create")
 );
 const TeacherPortfolioEdit = lazy(() =>
-  import("../pages/Teacher/portfolio-edit")
+  import("../pages/Teacher/Portfolio/edit")
 );
-const TeacherBlog = lazy(() => import("../pages/Teacher/portfolio"));
+
+const TeacherBlog = lazy(() => import("../pages/Teacher/Blog"));
+const TeacherBlogCreate = lazy(() => import("../pages/Teacher/Blog/create"));
+const TeacherBlogEdit = lazy(() => import("../pages/Teacher/Blog/edit"));
 
 const TeacherExCreate = lazy(() =>
   import("../pages/Teacher/experience-create")
@@ -157,7 +161,10 @@ const TeacherExCreate = lazy(() =>
 const TeacherExEdit = lazy(() => import("../pages/Teacher/experience-edit"));
 const TeacherEx = lazy(() => import("../pages/Teacher/experience"));
 
-const TeacherSa = lazy(() => import("../pages/Teacher/portfolio"));
+const TeacherSa = lazy(() => import("../pages/Teacher/Science"));
+const TeacherSaCreate = lazy(() => import("../pages/Teacher/Science/create"));
+const TeacherSaEdit = lazy(() => import("../pages/Teacher/Science/edit"));
+
 const AppealTeacher = lazy(() => import("../pages/Teacher/appeal"));
 
 const Mudir = lazy(() => import("../pages/Mudir/mudir"));
@@ -810,6 +817,18 @@ export const routes = [
   },
   {
     id: useId(),
+    path: "blog/create",
+    element: <TeacherBlogCreate />,
+    roles: ["teacher"],
+  },
+  {
+    id: useId(),
+    path: "blog/edit/:id",
+    element: <TeacherBlogEdit />,
+    roles: ["teacher"],
+  },
+  {
+    id: useId(),
     path: "experience",
     element: <TeacherEx />,
     roles: ["teacher"],
@@ -830,6 +849,18 @@ export const routes = [
     id: useId(),
     path: "scientific-activity",
     element: <TeacherSa />,
+    roles: ["teacher"],
+  },
+  {
+    id: useId(),
+    path: "scientific-activity/create",
+    element: <TeacherSaCreate />,
+    roles: ["teacher"],
+  },
+  {
+    id: useId(),
+    path: "scientific-activity/edit/:id",
+    element: <TeacherSaEdit />,
     roles: ["teacher"],
   },
   {

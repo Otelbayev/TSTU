@@ -54,7 +54,6 @@ const Experiance = () => {
           },
           { data: "whom", title: "whom" },
           { data: "where", title: "where" },
-          { data: "status_.name", title: "status" },
         ]}
       />
     </Wrapper>

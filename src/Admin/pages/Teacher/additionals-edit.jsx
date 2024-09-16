@@ -8,7 +8,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const PortfolioCreate = () => {
+const AdditionalsEdit = ({
+  title,
+  updUrl,
+  updUrlTrans,
+  byId,
+  byIdTrans,
+  createTrans,
+}) => {
   const [value, setValue] = useState("uz");
   const [isCreate, setIsCreate] = useState(false);
   const [transId, setTransId] = useState(null);
@@ -36,17 +43,11 @@ const PortfolioCreate = () => {
         text: $(editorRef.current).summernote("code"),
         status_id: 1,
       },
-      `${
-        import.meta.env.VITE_BASE_URL_API
-      }/personportfolio/updatepersonportfolio`,
-      `${
-        import.meta.env.VITE_BASE_URL_API
-      }/personportfolio/updatepersonportfoliotranslation`,
+      `${import.meta.env.VITE_BASE_URL_API}${updUrl}`,
+      `${import.meta.env.VITE_BASE_URL_API}${updUrlTrans}`,
       [{ person_portfolio_id: Number(id) }, { language_id }],
       [],
-      `${
-        import.meta.env.VITE_BASE_URL_API
-      }/personportfolio/createpersonportfoliotranslation`,
+      `${import.meta.env.VITE_BASE_URL_API}${createTrans}`,
       [{ person_portfolio_id: Number(id) }, { language_id }]
     );
 
@@ -58,12 +59,10 @@ const PortfolioCreate = () => {
   const getData = async (id, value) => {
     const res = await axios.get(
       value === "uz"
-        ? `${
-            import.meta.env.VITE_BASE_URL_API
-          }/personportfolio/getbyidpersonportfolio/${id}`
+        ? `${import.meta.env.VITE_BASE_URL_API}${byId}/${id}`
         : `${
             import.meta.env.VITE_BASE_URL_API
-          }/personportfolio/getbyidpersonportfoliotranslationuzid/${id}?language_code=${value}`,
+          }${byIdTrans}/${id}?language_code=${value}`,
       {
         headers: {
           Authorization: `Bearer ${Cookies.get("_token")}`,
@@ -91,7 +90,7 @@ const PortfolioCreate = () => {
   }, [value, isCreate]);
 
   return (
-    <Wrapper title="Yaratish">
+    <Wrapper title={title}>
       <form className="form-horizontal row" onSubmit={handleSubmit}>
         <div className="col-md-12">
           <LanguageSelect onChange={(e) => setValue(e)} />
@@ -125,4 +124,4 @@ const PortfolioCreate = () => {
   );
 };
 
-export default PortfolioCreate;
+export default AdditionalsEdit;

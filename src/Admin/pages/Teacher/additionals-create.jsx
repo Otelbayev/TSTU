@@ -6,7 +6,13 @@ import LanguageSelect from "../../components/Generics/LanguageSelect";
 import { useCreate } from "./../../hooks/useCreate";
 import { useNavigate } from "react-router-dom";
 
-const PortfolioCreate = () => {
+const AdditionalsCreate = ({
+  title,
+  createUrl,
+  createUrlTrans,
+  transId,
+  path,
+}) => {
   const [value, setValue] = useState("uz");
   const editorRef = useRef();
   const titleRef = useRef();
@@ -27,26 +33,22 @@ const PortfolioCreate = () => {
         description: descRef.current?.value,
         text: $(editorRef.current)?.summernote("code")?.trim(),
       },
-      `${
-        import.meta.env.VITE_BASE_URL_API
-      }/personportfolio/createpersonportfolio`,
+      `${import.meta.env.VITE_BASE_URL_API}${createUrl}`,
       `
-        ${
-          import.meta.env.VITE_BASE_URL_API
-        }/personportfolio/createpersonportfoliotranslation
+        ${import.meta.env.VITE_BASE_URL_API}${createUrlTrans}
       `,
-      "person_portfolio_id",
+      transId,
       [{ language_id }]
     );
 
     if (res.statusCode === 200) {
       value === "uz"
-        ? navigate(`/admin/portfolio/edit/${res.id}`)
-        : navigate("/admin/portfolio");
+        ? navigate(`/admin/${path}/edit/${res.id}`)
+        : navigate(`/admin/${path}`);
     }
   };
   return (
-    <Wrapper title="Yaratish">
+    <Wrapper title={title}>
       <form className="form-horizontal row" onSubmit={handleSubmit}>
         <div className="col-md-12">
           <LanguageSelect onChange={(e) => setValue(e)} />
@@ -74,4 +76,4 @@ const PortfolioCreate = () => {
   );
 };
 
-export default PortfolioCreate;
+export default AdditionalsCreate;

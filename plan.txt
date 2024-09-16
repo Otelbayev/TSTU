@@ -1,13 +1,2 @@
-
-https://tstu.uz/dep_page/385
-https://tstu.uz/blog/459
-https://tstu.uz/blog/463
-https://tstu.uz/blog/456
-https://tstu.uz/blog/457
-
-
 structure
-techer appeal
-techer blog, portfolio, ..
-appeal download docx
 employee id

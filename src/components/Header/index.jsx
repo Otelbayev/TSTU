@@ -10,7 +10,7 @@ import eye from "../../assets/icons/eye.svg";
 import { Menu as Antmenu } from "antd";
 import { Lang } from "../Generics";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import { useTranslation } from "react-i18next";
 import {
@@ -37,6 +37,7 @@ const Header = ({ uni }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { i18n, t } = useTranslation();
+  const navigate = useNavigate();
 
   const setNavigate = (type, id, link) => {
     switch (type) {
@@ -237,8 +238,17 @@ const Header = ({ uni }) => {
   };
 
   useEffect(() => {
-    setIsSearchOpen(false);
+    // setIsSearchOpen(false);
   }, [window.location.pathname]);
+
+  const [searchParams] = useSearchParams();
+
+  const handleChage = (e) => {
+    navigate(`${i18n.language}/search?query=${e}`);
+    if (!searchParams.get("query")) {
+      searchParams.delete("query");
+    }
+  };
 
   return (
     <div style={{ position: "relative" }}>
@@ -329,7 +339,11 @@ const Header = ({ uni }) => {
         <SearchBox $isopen={isSearchOpen.toString()}>
           <div className="root-container">
             <div className="root-wrapper">
-              <input type="text" placeholder={`${t("header.qidiruv")}...`} />
+              <input
+                onChange={(e) => handleChage(e.target.value)}
+                type="text"
+                placeholder={`${t("header.qidiruv")}...`}
+              />
             </div>
           </div>
         </SearchBox>

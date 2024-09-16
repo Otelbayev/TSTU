@@ -5,6 +5,7 @@ const Blog = lazy(() => import("../pages/Blog"));
 const BlogId = lazy(() => import("../pages/BlogID"));
 const Announcements = lazy(() => import("../pages/Announcements"));
 const Education = lazy(() => import("../pages/Education"));
+const Search = lazy(() => import("../pages/Search"));
 
 const Department = lazy(() => import("../pages/Department"));
 const DepartmentID = lazy(() => import("../pages/DepartmentID"));
@@ -242,6 +243,12 @@ export const noshowcase = [
     id: useId(),
     path: "kafedra",
     element: <Kafedra />,
+    isPrivate: false,
+  },
+  {
+    id: useId(),
+    path: "search",
+    element: <Search />,
     isPrivate: false,
   },
 ];

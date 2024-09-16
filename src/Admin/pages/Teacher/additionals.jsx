@@ -4,7 +4,7 @@ import DataTable from "../../components/DataTable";
 import Wrapper from "../../components/Wrapper";
 import useAxios from "../../../hooks/useAxios";
 
-const Portfolio = () => {
+const Additionals = ({ title, get, del, edit }) => {
   const { sendRequest, loading, error } = useAxios();
   const [data, setData] = useState([]);
   const [isDelete, setIsDelete] = useState(false);
@@ -15,9 +15,7 @@ const Portfolio = () => {
     try {
       const response = await sendRequest({
         method: "get",
-        url: `${
-          import.meta.env.VITE_BASE_URL_API
-        }/personportfolio/getallpersonportfoliosite?person_data_id=${
+        url: `${import.meta.env.VITE_BASE_URL_API}${get}?person_data_id=${
           _userDetails.id
         }`,
         headers: {
@@ -33,25 +31,22 @@ const Portfolio = () => {
   }, [isDelete]);
 
   return (
-    <Wrapper title="Portfolio" create={true}>
+    <Wrapper title={title} create={true}>
       <DataTable
         data={data}
         loading={loading}
         error={error}
-        del={`${
-          import.meta.env.VITE_BASE_URL_API
-        }/personportfolio/deletepersonportfolio`}
-        edit={"portfolio/edit"}
+        del={`${import.meta.env.VITE_BASE_URL_API}${del}`}
+        edit={edit}
         setIsDelete={setIsDelete}
         col={[
           { data: "id", title: "# " },
           { data: "title", title: "Title" },
           { data: "description", title: "description" },
-          { data: "status_.name", title: "status" },
         ]}
       />
     </Wrapper>
   );
 };
 
-export default Portfolio;
+export default Additionals;

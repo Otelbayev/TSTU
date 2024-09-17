@@ -26,7 +26,7 @@ const SearchComponent = ({ inputRef }) => {
   };
 
   useEffect(() => {
-    if (inputRef?.current) {
+    if (inputRef?.current && path === "search") {
       inputRef?.current?.focus();
     }
   }, []);

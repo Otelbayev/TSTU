@@ -237,7 +237,4 @@ export const SearchBox = styled.div`
     border-radius: 4px;
     border: 1px solid var(--titleDark);
   }
-  @media (max-width: 1000px) {
-    display: none;
-  }
 `;

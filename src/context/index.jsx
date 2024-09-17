@@ -1,7 +1,12 @@
 import LanguageContexProvider from "./LanguageContext";
+import SearchContextProvider from "./SearchContext";
 
 const Context = ({ children }) => {
-  return <LanguageContexProvider>{children}</LanguageContexProvider>;
+  return (
+    <LanguageContexProvider>
+      <SearchContextProvider>{children}</SearchContextProvider>
+    </LanguageContexProvider>
+  );
 };
 
 export default Context;

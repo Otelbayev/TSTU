@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import logo1 from "../../assets/icons/logo1.png";
 import logo2 from "../../assets/icons/logo2.png";
 import logo3 from "../../assets/icons/logo3.png";
@@ -10,12 +10,11 @@ import eye from "../../assets/icons/eye.svg";
 import { Menu as Antmenu } from "antd";
 import { Lang } from "../Generics";
 import axios from "axios";
-import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import { useTranslation } from "react-i18next";
 import {
   Div,
-  Img,
   Left,
   Container,
   Wrapper,
@@ -29,15 +28,18 @@ import {
   Mobile,
   Line,
   Desktop,
-  SearchBox,
 } from "./style";
 import Image from "../Image";
+import SearchComponent from "./search-box";
+import { useSearchContext } from "../../context/SearchContext";
 
 const Header = ({ uni }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { isOpen: isSearchOpen, setIsOpen: setIsSearchOpen } =
+    useSearchContext();
   const { i18n, t } = useTranslation();
   const navigate = useNavigate();
+  const inputRef = useRef();
 
   const setNavigate = (type, id, link) => {
     switch (type) {
@@ -103,100 +105,120 @@ const Header = ({ uni }) => {
     getData("true").then((res) => setTopMenu(res));
   }, [i18n.language]);
 
-  const items = topMenu.map((item) => {
-    return {
-      key: item.id,
-      label: !item?.link_ ? (
-        item.title
-      ) : (
-        <NavLink to={`/${i18n.language}/${item?.link_}`}>{item.title}</NavLink>
+  const items = [
+    ...topMenu.map((item) => {
+      return {
+        key: item.id,
+        label: !item?.link_ ? (
+          item.title
+        ) : (
+          <NavLink to={`/${i18n.language}/${item?.link_}`}>
+            {item.title}
+          </NavLink>
+        ),
+        children:
+          !item?.link_ &&
+          data
+            .filter((i) => i.parent_id === item.id)
+            .map((i) => {
+              return {
+                key: i.id,
+                label: i.high_menu ? (
+                  i.title
+                ) : (
+                  <NavLink
+                    onClick={() => setIsOpen(false)}
+                    // to={
+                    //   i.path
+                    //     ? `/${i18n.language}/${i.path}`
+                    //     : `/${i18n.language}/${
+                    //         i?.menu_type_?.title?.toLowerCase() ||
+                    //         i?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
+                    //       }/${i.id}`
+                    // }
+                    to={setNavigate(
+                      i?.menu_type_?.title ||
+                        i?.menu_type_translation_?.menu_type_?.title,
+                      i?.blog_?.id ||
+                        i?.blog_translation_?.blog_id ||
+                        i?.departament_?.id ||
+                        i?.departament_translation_?.departament_id ||
+                        i?.page_?.id ||
+                        i?.page_translation_?.page_id,
+                      i?.link_
+                    )}
+                    target={
+                      (i?.link_ && i?.menu_type_?.title === "Link") ||
+                      i?.menu_type_?.title === "Link" ||
+                      i?.menu_type_?.title === "Havola" ||
+                      i?.menu_type_?.title === "Havola"
+                        ? "_blank"
+                        : "_self"
+                    }
+                  >
+                    {i.title}
+                  </NavLink>
+                ),
+                children: i.high_menu
+                  ? data
+                      .filter((f) => f.parent_id === i.id)
+                      .map((h) => {
+                        return {
+                          key: h.id,
+                          label: (
+                            <NavLink
+                              onClick={() => setIsOpen(false)}
+                              // to={`/${i18n.language}/${
+                              //   h?.menu_type_?.title?.toLowerCase() ||
+                              //   h?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
+                              // }/${h.id}`}
+                              to={setNavigate(
+                                h?.menu_type_?.title ||
+                                  h?.menu_type_translation_?.menu_type_?.title,
+                                h?.blog_?.id ||
+                                  h?.blog_translation_?.blog_id ||
+                                  h?.departament_?.id ||
+                                  h?.departament_translation_?.departament_id ||
+                                  h?.page_?.id ||
+                                  h?.page_translation_?.page_id,
+                                h?.link_
+                              )}
+                              target={
+                                (h?.link_ && h?.menu_type_?.title === "Link") ||
+                                h?.menu_type_?.title === "Link" ||
+                                h?.menu_type_?.title === "Havola" ||
+                                h?.menu_type_?.title === "Havola"
+                                  ? "_blank"
+                                  : "_self"
+                              }
+                            >
+                              {h.title}
+                            </NavLink>
+                          ),
+                        };
+                      })
+                  : null,
+              };
+            }),
+      };
+    }),
+    {
+      key: "search",
+      label: (
+        <NavLink
+          className="d-flex align-items-center justify-content-between px-3"
+          onClick={() => {
+            setIsOpen(false);
+            setIsSearchOpen(true);
+            inputRef?.current?.focus();
+          }}
+        >
+          <span>Search</span> <img src={search} alt="" />
+        </NavLink>
       ),
-      children:
-        !item?.link_ &&
-        data
-          .filter((i) => i.parent_id === item.id)
-          .map((i) => {
-            return {
-              key: i.id,
-              label: i.high_menu ? (
-                i.title
-              ) : (
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  // to={
-                  //   i.path
-                  //     ? `/${i18n.language}/${i.path}`
-                  //     : `/${i18n.language}/${
-                  //         i?.menu_type_?.title?.toLowerCase() ||
-                  //         i?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
-                  //       }/${i.id}`
-                  // }
-                  to={setNavigate(
-                    i?.menu_type_?.title ||
-                      i?.menu_type_translation_?.menu_type_?.title,
-                    i?.blog_?.id ||
-                      i?.blog_translation_?.blog_id ||
-                      i?.departament_?.id ||
-                      i?.departament_translation_?.departament_id ||
-                      i?.page_?.id ||
-                      i?.page_translation_?.page_id,
-                    i?.link_
-                  )}
-                  target={
-                    (i?.link_ && i?.menu_type_?.title === "Link") ||
-                    i?.menu_type_?.title === "Link" ||
-                    i?.menu_type_?.title === "Havola" ||
-                    i?.menu_type_?.title === "Havola"
-                      ? "_blank"
-                      : "_self"
-                  }
-                >
-                  {i.title}
-                </NavLink>
-              ),
-              children: i.high_menu
-                ? data
-                    .filter((f) => f.parent_id === i.id)
-                    .map((h) => {
-                      return {
-                        key: h.id,
-                        label: (
-                          <NavLink
-                            onClick={() => setIsOpen(false)}
-                            // to={`/${i18n.language}/${
-                            //   h?.menu_type_?.title?.toLowerCase() ||
-                            //   h?.menu_type_translation_?.menu_type_?.title?.toLowerCase()
-                            // }/${h.id}`}
-                            to={setNavigate(
-                              h?.menu_type_?.title ||
-                                h?.menu_type_translation_?.menu_type_?.title,
-                              h?.blog_?.id ||
-                                h?.blog_translation_?.blog_id ||
-                                h?.departament_?.id ||
-                                h?.departament_translation_?.departament_id ||
-                                h?.page_?.id ||
-                                h?.page_translation_?.page_id,
-                              h?.link_
-                            )}
-                            target={
-                              (h?.link_ && h?.menu_type_?.title === "Link") ||
-                              h?.menu_type_?.title === "Link" ||
-                              h?.menu_type_?.title === "Havola" ||
-                              h?.menu_type_?.title === "Havola"
-                                ? "_blank"
-                                : "_self"
-                            }
-                          >
-                            {h.title}
-                          </NavLink>
-                        ),
-                      };
-                    })
-                : null,
-            };
-          }),
-    };
-  });
+      children: null,
+    },
+  ];
 
   const getLevelKeys = (items1) => {
     const key = {};
@@ -237,19 +259,6 @@ const Header = ({ uni }) => {
     }
   };
 
-  useEffect(() => {
-    // setIsSearchOpen(false);
-  }, [window.location.pathname]);
-
-  const [searchParams] = useSearchParams();
-
-  const handleChage = (e) => {
-    navigate(`${i18n.language}/search?query=${e}`);
-    if (!searchParams.get("query")) {
-      searchParams.delete("query");
-    }
-  };
-
   return (
     <div style={{ position: "relative" }}>
       <Container $uni={uni}>
@@ -263,6 +272,7 @@ const Header = ({ uni }) => {
                   onClick={() => {
                     setIsOpen(!isOpen);
                     setStateOpenKeys([]);
+                    setIsSearchOpen(false);
                   }}
                 />
               </Menus>
@@ -336,17 +346,7 @@ const Header = ({ uni }) => {
             </Desktop>
           </div>
         </div>
-        <SearchBox $isopen={isSearchOpen.toString()}>
-          <div className="root-container">
-            <div className="root-wrapper">
-              <input
-                onChange={(e) => handleChage(e.target.value)}
-                type="text"
-                placeholder={`${t("header.qidiruv")}...`}
-              />
-            </div>
-          </div>
-        </SearchBox>
+        <SearchComponent inputRef={inputRef} />
       </Container>
       <Mobile $isopen={isOpen.toString()}>
         <Antmenu

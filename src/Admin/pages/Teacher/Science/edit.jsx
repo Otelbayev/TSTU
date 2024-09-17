@@ -1,4 +1,4 @@
-import Additionals from "../additionals-create";
+import Additionals from "../additionals-edit";
 
 const Create = () => (
   <Additionals
@@ -8,6 +8,7 @@ const Create = () => (
     createTrans="/personexperience/createpersonexperiencetranslation"
     byId="/personexperience/getbyidpersonexperience"
     byIdTrans="/personexperience/getbyidpersonexperiencetranslationuzid"
+    uzId="person_experience_id"
   />
 );
 

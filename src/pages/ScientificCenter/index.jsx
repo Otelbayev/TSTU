@@ -27,7 +27,7 @@ const ScientificCenter = () => {
       <div className="root-container">
         <div className="root-wrapper">
           <Content data-aos="fade-up">
-            {data?.map((e) => (
+            {data?.list?.map((e) => (
               <IlmiyMarkazCart
                 key={e.id}
                 $border={`var(--borderCart)`}

@@ -8,6 +8,7 @@ const Edit = () => (
     createTrans="/personblog/createpersonblogtranslation"
     byId="/personblog/getbyidpersonblog"
     byIdTrans="/personblog/getbyidpersonblogtranslationuzid"
+    uzId="person_blog_id"
   />
 );
 

@@ -97,7 +97,6 @@ const Study = () => {
     }
   }, [old_year, kafId]);
 
-  // Sync fakId and kafId to the URL as query parameters
   useEffect(() => {
     setSearchParams({ faculty_id: fakId, kafedra_id: kafId });
   }, [fakId, kafId]);
@@ -161,7 +160,7 @@ const Study = () => {
                             return `${row?.firstName} ${row?.fathers_name}`;
                           },
                         },
-                        { data: "id", title: "Ball" },
+                        { data: "summ_score", title: "Ball" },
                       ]}
                       appeal={true}
                       edit={"study-department"}

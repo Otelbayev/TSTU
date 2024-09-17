@@ -8,6 +8,7 @@ const Edit = () => (
     createTrans="/personportfolio/createpersonportfoliotranslation"
     byId="/personportfolio/getbyidpersonportfolio"
     byIdTrans="/personportfolio/getbyidpersonportfoliotranslationuzid"
+    uzId="person_portfolio_id"
   />
 );
 

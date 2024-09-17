@@ -15,6 +15,7 @@ const AdditionalsEdit = ({
   byId,
   byIdTrans,
   createTrans,
+  uzId,
 }) => {
   const [value, setValue] = useState("uz");
   const [isCreate, setIsCreate] = useState(false);
@@ -22,7 +23,6 @@ const AdditionalsEdit = ({
   const editorRef = useRef();
   const titleRef = useRef();
   const descRef = useRef();
-  const navigate = useNavigate();
   const { id } = useParams();
 
   const { options } = useLanguageContext();
@@ -45,13 +45,13 @@ const AdditionalsEdit = ({
       },
       `${import.meta.env.VITE_BASE_URL_API}${updUrl}`,
       `${import.meta.env.VITE_BASE_URL_API}${updUrlTrans}`,
-      [{ person_portfolio_id: Number(id) }, { language_id }],
+      [{ [uzId]: Number(id) }, { language_id }],
       [],
       `${import.meta.env.VITE_BASE_URL_API}${createTrans}`,
-      [{ person_portfolio_id: Number(id) }, { language_id }]
+      [{ [uzId]: Number(id) }, { language_id }]
     );
 
-    if (res.status === 200) {
+    if (res?.status === 200) {
       setIsCreate(false);
     }
   };

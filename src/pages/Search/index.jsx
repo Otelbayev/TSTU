@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import { useSearchContext } from "./../../context/SearchContext/index";
 import { useTranslation } from "react-i18next";
 import useAxios from "./../../hooks/useAxios";
@@ -10,32 +10,38 @@ const Search = () => {
   const { value, setIsOpen } = useSearchContext();
   const { i18n, t } = useTranslation();
   const [data, setData] = useState([]);
+  const [isPending, startTransition] = useTransition();
 
-  const { loading, error, sendRequest } = useAxios();
+  const { error, sendRequest } = useAxios();
 
   const getData = async (value) => {
     if (!value.trim()) {
       return;
     }
     try {
-      const res = await sendRequest({
-        method: "get",
-        url:
-          i18n.language === "uz"
-            ? `${
-                import.meta.env.VITE_BASE_URL_API
-              }/Search/search?search_text=${value}`
-            : `${import.meta.env.VITE_BASE_URL_API}/Search/search/${
-                i18n.language
-              }?search_text=${value}`,
-        headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_CAPCHA_TOKEN}`,
-        },
+      startTransition(async () => {
+        if (value) {
+          const res = await sendRequest({
+            method: "get",
+            url:
+              i18n.language === "uz"
+                ? `${
+                    import.meta.env.VITE_BASE_URL_API
+                  }/Search/search?search_text=${value}`
+                : `${import.meta.env.VITE_BASE_URL_API}/Search/search/${
+                    i18n.language
+                  }?search_text=${value}`,
+            headers: {
+              Authorization: `Bearer ${import.meta.env.VITE_CAPCHA_TOKEN}`,
+            },
+          });
+          if (res.status === 200) {
+            setData(res.data);
+          }
+        } else {
+          setData([]);
+        }
       });
-
-      if (res.status === 200) {
-        setData(res.data);
-      }
     } catch (err) {
       console.log(err);
     }
@@ -45,7 +51,9 @@ const Search = () => {
     getData(value);
   }, [value, i18n.language]);
 
-  if (loading) {
+  console.log(data);
+
+  if (isPending) {
     return (
       <div className="mt-5">
         <Loading2 />

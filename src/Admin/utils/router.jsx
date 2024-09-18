@@ -177,6 +177,8 @@ const FacultyCouncilID = lazy(() =>
   import("../pages/FacultyCouncil/concil-id")
 );
 
+const Rector = lazy(() => import("../pages/Rector"));
+
 export const routes = [
   {
     id: useId(),
@@ -868,5 +870,11 @@ export const routes = [
     path: "appeal-to-teacher",
     element: <AppealTeacher />,
     roles: ["teacher"],
+  },
+  {
+    id: useId(),
+    path: "rector",
+    element: <Rector />,
+    roles: ["moderatorcontent"],
   },
 ];

@@ -157,5 +157,12 @@ export const admin = () => {
       roles: ["teacher"],
       icon: "nav-icon fa fa-users",
     },
+    {
+      id: 18,
+      title: "Boshqaruv",
+      roles: ["moderatorcontent"],
+      icon: "nav-icon fa fa-cog",
+      data: [{ id: 1, title: "Rektor", path: "rector" }],
+    },
   ];
 };

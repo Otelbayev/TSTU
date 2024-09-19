@@ -20,7 +20,6 @@ const Rector = () => {
 
   const { options } = useLanguageContext();
   const language_id = options.find((e) => e.code === value)?.id;
-  const { id } = useParams();
 
   const { genderData, getGender } = useGenderContext();
 
@@ -135,17 +134,17 @@ const Rector = () => {
       birthday: date ? `${date}T16:38:51.281Z` : "2000-01-01T11:38:51Z",
       degree: degree,
       experience_year: Number(experience),
-      phone_number1: tel1,
-      phone_number2: tel2,
-      orchid: orcid,
-      scopus_id: scopus,
-      address: address,
-      languages_uz: Number(uzbek),
-      languages_en: Number(ingiliz),
-      languages_ru: Number(rus),
-      languages_any_title: other,
+      phone_number1: tel1 || "",
+      phone_number2: tel2 || "",
+      orchid: orcid || "",
+      scopus_id: scopus || "",
+      address: address || "",
+      languages_uz: Number(uzbek) || "",
+      languages_en: Number(ingiliz) || "",
+      languages_ru: Number(rus) || "",
+      languages_any_title: other || "",
       languages_any: Number(other2),
-      scientific_title,
+      scientific_title: scientific_title || "",
       language_id,
     };
 
@@ -185,27 +184,28 @@ const Rector = () => {
     try {
       message.loading({ key: "key", content: "Loading!" });
 
-      if (value === "uz") {
-        const res = await axios.put(
-          `${
-            import.meta.env.VITE_BASE_URL_API
-          }/persondata/updatepersondata/${id}`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${Cookies.get("_token")}`,
-            },
-          }
-        );
-        res.status === 200 &&
-          message.success({
-            key: "key",
-            content: "Muvaffaqiyatli o'zgartirildi!",
-          });
-      } else {
-      }
+      const res = await axios.put(
+        value === "uz"
+          ? `${
+              import.meta.env.VITE_BASE_URL_API
+            }/RectorGivenUpdated/updaterectordata/1`
+          : `${
+              import.meta.env.VITE_BASE_URL_API
+            }/RectorGivenUpdated/updaterectordata/${value}`,
+        value === "uz" ? formData : obj,
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("_token")}`,
+          },
+        }
+      );
+      res.status === 200 &&
+        message.success({
+          key: "key",
+          content: "Muvaffaqiyatli o'zgartirildi!",
+        });
     } catch (err) {
-      message.error({ key: "key", content: "Somthing went wrong!" });
+      message.error({ key: "key", content: "Xatolik yuz berdi!" });
     }
   };
 

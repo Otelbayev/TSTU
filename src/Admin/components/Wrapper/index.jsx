@@ -19,17 +19,29 @@ const Wrapper = ({
 
   const role = Cookies.get("role");
 
-  function getCurrentDate() {
+  function getCurrentDate(prop) {
     const date = new Date();
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
 
-    return `${year}-${month}-${day}`;
+    if (prop === "now") {
+      // Current date
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const day = date.getDate().toString().padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    } else if (prop === "old") {
+      // Subtract 1 month
+      date.setMonth(date.getMonth() - 1);
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const day = date.getDate().toString().padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    } else {
+      return "Invalid prop";
+    }
   }
 
-  const [start, setStart] = useState("2020-01-01");
-  const [end, setEnd] = useState(getCurrentDate());
+  const [start, setStart] = useState(getCurrentDate("old"));
+  const [end, setEnd] = useState(getCurrentDate("now"));
 
   const getData = async () => {
     const response = await sendRequest({

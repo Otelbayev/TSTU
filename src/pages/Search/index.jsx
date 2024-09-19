@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useCallback, useEffect, useState, useTransition } from "react";
 import { useSearchContext } from "./../../context/SearchContext/index";
 import { useTranslation } from "react-i18next";
 import useAxios from "./../../hooks/useAxios";
 import Loading2 from "../../components/Loading2";
 import { Result } from "antd";
 import { NavLink } from "react-router-dom";
+import debounce from "lodash.debounce";
 
 const Search = () => {
   const { value, setIsOpen } = useSearchContext();
@@ -14,44 +15,78 @@ const Search = () => {
 
   const { error, sendRequest } = useAxios();
 
-  const getData = async (value) => {
-    if (!value.trim()) {
-      return;
-    }
-    try {
-      startTransition(async () => {
-        if (value) {
+  const getData = useCallback(
+    debounce(async (value) => {
+      if (!value.trim()) return;
+
+      try {
+        startTransition(async () => {
+          const url =
+            i18n.language === "uz"
+              ? `${
+                  import.meta.env.VITE_BASE_URL_API
+                }/Search/search?search_text=${value}`
+              : `${import.meta.env.VITE_BASE_URL_API}/Search/search/${
+                  i18n.language
+                }?search_text=${value}`;
+
           const res = await sendRequest({
             method: "get",
-            url:
-              i18n.language === "uz"
-                ? `${
-                    import.meta.env.VITE_BASE_URL_API
-                  }/Search/search?search_text=${value}`
-                : `${import.meta.env.VITE_BASE_URL_API}/Search/search/${
-                    i18n.language
-                  }?search_text=${value}`,
+            url,
             headers: {
               Authorization: `Bearer ${import.meta.env.VITE_CAPCHA_TOKEN}`,
             },
           });
+
           if (res.status === 200) {
             setData(res.data);
+          } else {
+            setData([]);
           }
-        } else {
-          setData([]);
-        }
-      });
-    } catch (err) {
-      console.log(err);
-    }
+        });
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      }
+    }, 500),
+    [i18n.language] // Adding i18n.language as a dependency
+  );
+
+  useEffect(() => {
+    return () => {
+      getData.cancel(); // Cancel any pending debounce calls
+    };
+  }, [getData]);
+
+  const getTitle = (type, lang) => {
+    const titles = {
+      Blogs: {
+        uz: "Bloglar",
+        en: "Blogs",
+        ru: "Блоги",
+      },
+      Pages: {
+        uz: "Sahifalar",
+        en: "Pages",
+        ru: "Страницы",
+      },
+      Employees: {
+        uz: "Xodimlar",
+        en: "Employees",
+        ru: "Сотрудники",
+      },
+      Departaments: {
+        uz: "Bo'limlar",
+        en: "Departments",
+        ru: "Отделы",
+      },
+    };
+
+    return titles[type]?.[lang] || type;
   };
 
   useEffect(() => {
     getData(value);
-  }, [value, i18n.language]);
-
-  console.log(data);
+  }, [value, i18n.language, getData]);
 
   if (isPending) {
     return (
@@ -131,33 +166,54 @@ const Search = () => {
     <div className="root-container">
       <div className="root-wrapper mt-3">
         <div className="mt-5">
-          {data.map((e, index) => {
-            return (
-              <div key={index}>
-                {e?.length !== 0 ? <div className="title">{e?.type}</div> : ""}
-                {e?.query_list?.map((item) => (
-                  <div
-                    key={item?.id}
-                    className="mx-3 d-flex justify-content-between border border-left-0 border-right-0 p-2"
-                  >
-                    <div>
-                      {item?.title
-                        ? item?.title
-                        : `${item?.persons_?.fathers_name} ${item?.persons_?.firstName} ${item?.persons_?.lastName}`}
+          {data.length ? (
+            data.map((e, index) => {
+              return (
+                <div key={index}>
+                  {e?.length !== 0 ? (
+                    <div className="title">
+                      {getTitle(e?.type, i18n.language)}
                     </div>
-                    {toNavigate(
-                      e.type,
-                      item?.id,
-                      item?.blog_id,
-                      item?.departament_id,
-                      item?.persons_data_id,
-                      item?.page_id
-                    )}
-                  </div>
-                ))}
-              </div>
-            );
-          })}
+                  ) : (
+                    ""
+                  )}
+                  {e?.query_list?.map((item) => (
+                    <div
+                      key={item?.id}
+                      className="mx-3 d-flex justify-content-between border border-left-0 border-right-0 p-2"
+                    >
+                      <div>
+                        {item?.title
+                          ? item?.title
+                          : `${
+                              item?.persons_?.fathers_name ||
+                              item?.persons_translation_?.fathers_name
+                            } ${
+                              item?.persons_?.firstName ||
+                              item?.persons_translation_?.firstName
+                            } ${
+                              item?.persons_?.lastName ||
+                              item?.persons_translation_?.lastName
+                            }`}
+                      </div>
+                      {toNavigate(
+                        e.type,
+                        item?.id,
+                        item?.blog_id,
+                        item?.departament_id,
+                        item?.persons_data_id,
+                        item?.page_id
+                      )}
+                    </div>
+                  ))}
+                </div>
+              );
+            })
+          ) : (
+            <div className="mt-5">
+              <Loading2 />
+            </div>
+          )}
         </div>
       </div>
     </div>

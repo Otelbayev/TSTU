@@ -177,7 +177,9 @@ const FacultyCouncilID = lazy(() =>
   import("../pages/FacultyCouncil/concil-id")
 );
 
-const Rector = lazy(() => import("../pages/Rector"));
+const Rectorat = lazy(() => import("../pages/Rectorat"));
+const RectoratCreate = lazy(() => import("../pages/Rectorat/create"));
+const RectoratEdit = lazy(() => import("../pages/Rectorat/edit"));
 
 export const routes = [
   {
@@ -873,8 +875,20 @@ export const routes = [
   },
   {
     id: useId(),
-    path: "rector",
-    element: <Rector />,
+    path: "rectorat",
+    element: <Rectorat />,
+    roles: ["moderatorcontent"],
+  },
+  {
+    id: useId(),
+    path: "rectorat/create",
+    element: <RectoratCreate />,
+    roles: ["moderatorcontent"],
+  },
+  {
+    id: useId(),
+    path: "rectorat/edit/:id",
+    element: <RectoratEdit />,
     roles: ["moderatorcontent"],
   },
 ];

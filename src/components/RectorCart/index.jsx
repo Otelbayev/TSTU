@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const RectorCart = ({ data }) => {
   const { i18n } = useTranslation();
-
+  console.log(data);
   return (
     <Container>
       <Content className="content">
@@ -22,7 +22,8 @@ const RectorCart = ({ data }) => {
           />
           <div className="position">
             {data?.persons_?.employee_type_?.title ||
-              data?.persons_translation_?.persons_?.employee_type_?.title}{" "}
+              data?.persons_translation_?.employee_type_translation_
+                ?.title}{" "}
             , {data?.degree}
           </div>
           <div className="name">
@@ -53,7 +54,8 @@ const RectorCart = ({ data }) => {
           />
           <div className="position">
             {data?.persons_?.employee_type_?.title ||
-              data?.persons_translation_?.persons_?.employee_type_?.title}{" "}
+              data?.persons_translation_?.employee_type_translation_
+                ?.title}{" "}
             , {data?.degree}
           </div>
           <div className="name">

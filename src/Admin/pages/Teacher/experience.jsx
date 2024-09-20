@@ -9,17 +9,13 @@ const Experiance = () => {
   const [data, setData] = useState([]);
   const [isDelete, setIsDelete] = useState(false);
 
-  const _userDetails = JSON.parse(Cookies.get("_userDetails"));
-
   const getData = async () => {
     try {
       const response = await sendRequest({
         method: "get",
         url: `${
           import.meta.env.VITE_BASE_URL_API
-        }/personscientificactivity/getallpersonscientificactivitysite?person_data_id=${
-          _userDetails.id
-        }`,
+        }/personscientificactivity/getallpersonscientificactivitysite`,
         headers: {
           Authorization: `Bearer ${Cookies.get("_token")}`,
         },

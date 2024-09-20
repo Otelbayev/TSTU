@@ -22,7 +22,6 @@ const Sidebar = () => {
   const role = Cookies.get("role");
   const userData = JSON.parse(Cookies.get("_userDetails"));
 
-
   // const getName = (role) => {
   //   switch (role) {
   //     case "admin":
@@ -111,6 +110,12 @@ const Sidebar = () => {
               })}
 
               {/* Uni */}
+              <li className="nav-item">
+                <NavLink to="my-data" className="nav-link">
+                  <i className="nav-icon fas fa-database" />
+                  <p>Ma'lumotlarim</p>
+                </NavLink>
+              </li>
               <li className="nav-item">
                 <NavLink to="profile" className="nav-link">
                   <i className="nav-icon fas fa-user" />

@@ -112,25 +112,25 @@ const Profile = () => {
                           className="form-horizontal"
                         >
                           <Input
-                            label="Name"
+                            label="Ism"
                             className="form-group"
                             value={name || ""}
                             onChange={(e) => setName(e.target.value)}
                           />
                           <Input
-                            label="Surname"
+                            label="Familiya"
                             className="form-group"
                             value={surname || ""}
                             onChange={(e) => setSurname(e.target.value)}
                           />
                           <Input
-                            label="Father name"
+                            label="Otasining ismi"
                             className="form-group"
                             value={father || ""}
                             onChange={(e) => setFather(e.target.value)}
                           />
                           <Input
-                            label="Icon"
+                            label="Rasm"
                             className="form-group"
                             type="file"
                             ref={iconRef || ""}
@@ -148,14 +148,14 @@ const Profile = () => {
                             onChange={(e) => setLogin(e.target.value)}
                           />
                           <Input
-                            label="Current password"
+                            label="Hozirgi parol"
                             className="form-group"
                             value={oldPassword || ""}
                             type="password"
                             onChange={(e) => setOldPassword(e.target.value)}
                           />
                           <Input
-                            label="New password"
+                            label="Yangi parol"
                             className="form-group"
                             value={password || ""}
                             type="password"

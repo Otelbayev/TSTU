@@ -40,7 +40,7 @@ const Create = () => {
   const [passportNumber, setPassportNumber] = useState("");
   const [departent, setDepartent] = useState(null);
   const [employee, setEmployee] = useState(null);
-  const [date, setDate] = useState("2000-01-01");
+  const [date, setDate] = useState("");
   const [degree, setDegree] = useState("");
   const [scientific_title, setScientific_title] = useState("");
   const [experience, setExperience] = useState("");

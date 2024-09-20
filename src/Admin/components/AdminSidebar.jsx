@@ -151,11 +151,11 @@ export const admin = () => {
       icon: "nav-icon fas fa-edit",
     },
     {
-      id: 17,
-      path: "appeal-to-teacher",
-      title: "Murojaatlar",
-      roles: ["teacher"],
-      icon: "nav-icon fa fa-users",
+      id: 18,
+      title: "Boshqaruv",
+      roles: ["moderatorcontent"],
+      icon: "nav-icon fa fa-cog",
+      data: [{ id: 1, title: "Rektorat", path: "rectorat" }],
     },
     {
       id: 18,

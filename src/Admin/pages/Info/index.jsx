@@ -9,20 +9,18 @@ import {
 import LanguageSelect from "../../components/Generics/LanguageSelect";
 import { useLanguageContext } from "../../../context/LanguageContext";
 import { useGenderContext } from "../../context/GenderContext";
-import { useParams } from "react-router-dom";
 import Wrapper from "../../components/Wrapper";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { message } from "antd";
 
-const Edit = () => {
+const Info = () => {
   const [value, setValue] = useState("uz");
 
   const { options } = useLanguageContext();
   const language_id = options.find((e) => e.code === value)?.id;
 
   const { genderData, getGender } = useGenderContext();
-  const { id } = useParams();
 
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -49,20 +47,18 @@ const Edit = () => {
   const [img, setImg] = useState(null);
   const [src, setSrc] = useState(null);
 
-  const [transId, setTransId] = useState(null);
-
   const bioRef = useRef();
 
-  const getDataId = async (id, value) => {
+  const getDataId = async (value) => {
     try {
       const res = await axios.get(
         value === "uz"
           ? `${
               import.meta.env.VITE_BASE_URL_API
-            }/rectoratupdated/getbyidrectoratdata/${id}`
+            }/persondata/getbyidpersondataprofile`
           : `${
               import.meta.env.VITE_BASE_URL_API
-            }/rectoratupdated/getbyidrectoratdatatranslation/${id}?language_code=${value}`,
+            }/persondata/getbyidpersondatatranslationprofile/${value}`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("_token")}`,
@@ -108,7 +104,6 @@ const Edit = () => {
         setScientific_title(res?.data?.scientific_title);
         setOther(res?.data?.languages_any_title);
         setOther2(res?.data?.languages_any);
-        setTransId(res.data.id);
       } else {
         throw new Error();
       }
@@ -121,7 +116,6 @@ const Edit = () => {
       setScientific_title("");
       setOther("");
       $(bioRef.current)?.summernote("code", "");
-      setTransId(null);
     }
   };
 
@@ -167,7 +161,10 @@ const Edit = () => {
       "biography_json",
       $(bioRef.current)?.summernote("code") || ""
     );
-    formData.append("birthday", date ? `${date}T16:38:51.281Z` : "");
+    formData.append(
+      "birthday",
+      date ? `${date}T16:38:51.281Z` : ""
+    );
     formData.append("degree", degree || "");
     formData.append("experience_year", experience || "");
     formData.append("phone_number1", tel1 || "");
@@ -190,10 +187,10 @@ const Edit = () => {
         value === "uz"
           ? `${
               import.meta.env.VITE_BASE_URL_API
-            }/persondata/updatepersondataprofile`
+            }/RectorGivenUpdated/updaterectordata/1`
           : `${
               import.meta.env.VITE_BASE_URL_API
-            }/persondata/updatepersondatatranslationprofile/${value}`,
+            }/RectorGivenUpdated/updaterectordata/${value}`,
         value === "uz" ? formData : obj,
         {
           headers: {
@@ -213,11 +210,11 @@ const Edit = () => {
 
   useEffect(() => {
     getGender(value);
-    getDataId(id, value);
+    getDataId(value);
   }, [value]);
 
   return (
-    <Wrapper title={"Edit Person"}>
+    <Wrapper>
       <form onSubmit={onHandleSubmit} className="form-horizontal row">
         <div className="col-md-12">
           <LanguageSelect onChange={(e) => setValue(e)} />
@@ -482,4 +479,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default Info;

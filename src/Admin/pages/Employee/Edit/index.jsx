@@ -17,7 +17,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { message } from "antd";
 import { useStatusContext } from "./../../../context/Status/index";
-import Experience from "../Create/experience";
 
 const Edit = () => {
   const [value, setValue] = useState("uz");
@@ -181,7 +180,7 @@ const Edit = () => {
         },
         persons_data_id: transId,
         biography_json: $(bioRef.current)?.summernote("code"),
-        birthday: date ? `${date}T16:38:51.281Z` : "2000-01-01T11:38:51Z",
+        birthday: date ? `${date}T16:38:51.281Z` : "",
         degree: degree,
         experience_year: Number(experience),
         phone_number1: tel1,
@@ -216,7 +215,7 @@ const Edit = () => {
         );
         formData.append(
           "birthday",
-          date ? `${date}T16:38:51.281Z` : "2000-01-01T11:38:51Z"
+          date ? `${date}T16:38:51.281Z` : ""
         );
         formData.append("degree", degree || "");
         formData.append("experience_year", experience || "");

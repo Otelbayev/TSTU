@@ -9,15 +9,13 @@ const Additionals = ({ title, get, del, edit }) => {
   const [data, setData] = useState([]);
   const [isDelete, setIsDelete] = useState(false);
 
-  const _userDetails = JSON.parse(Cookies.get("_userDetails"));
+  console;
 
   const getData = async () => {
     try {
       const response = await sendRequest({
         method: "get",
-        url: `${import.meta.env.VITE_BASE_URL_API}${get}?person_data_id=${
-          _userDetails.id
-        }`,
+        url: `${import.meta.env.VITE_BASE_URL_API}${get}`,
         headers: {
           Authorization: `Bearer ${Cookies.get("_token")}`,
         },

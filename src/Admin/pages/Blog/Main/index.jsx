@@ -8,7 +8,6 @@ import Cookies from "js-cookie";
 const Pages = () => {
   const role = Cookies.get("role");
 
-
   const { sendRequest, loading, error } = useAxios();
   const [data, setData] = useState([]);
   const [isDelete, setIsDelete] = useState(false);
@@ -52,8 +51,6 @@ const Pages = () => {
   }
 
   const fdata = filterData(type);
-
-
 
   return (
     <Wrapper

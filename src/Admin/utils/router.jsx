@@ -1,7 +1,6 @@
 import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import { useId } from "../../hooks/useId";
-import Appeal from "../pages/Teacher/appeal";
 
 // Lazy load all components
 const Home = lazy(() => import("../pages/Home"));
@@ -178,7 +177,6 @@ const FacultyCouncilID = lazy(() =>
 );
 
 const Rectorat = lazy(() => import("../pages/Rectorat"));
-const RectoratCreate = lazy(() => import("../pages/Rectorat/create"));
 const RectoratEdit = lazy(() => import("../pages/Rectorat/edit"));
 
 export const routes = [
@@ -879,12 +877,7 @@ export const routes = [
     element: <Rectorat />,
     roles: ["moderatorcontent"],
   },
-  {
-    id: useId(),
-    path: "rectorat/create",
-    element: <RectoratCreate />,
-    roles: ["moderatorcontent"],
-  },
+
   {
     id: useId(),
     path: "rectorat/edit/:id",

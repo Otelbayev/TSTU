@@ -159,7 +159,7 @@ const Wrapper = ({
                                   to={`/${i18n.language}/admin/blogs/create`}
                                   className="btn btn-primary"
                                 >
-                                  Create
+                                  Yaratish
                                 </NavLink>
                               )}
                             </div>
@@ -203,7 +203,7 @@ const Wrapper = ({
                             to={path ? path : "create"}
                             className="btn btn-primary"
                           >
-                            Create
+                            Yaratish
                           </NavLink>
                         )}
                         {back && (

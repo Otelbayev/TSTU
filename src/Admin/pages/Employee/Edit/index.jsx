@@ -181,13 +181,13 @@ const Edit = () => {
         persons_data_id: transId,
         biography_json: $(bioRef.current)?.summernote("code"),
         birthday: date ? `${date}T16:38:51.281Z` : "",
-        degree: degree,
+        degree: degree || "",
         experience_year: Number(experience),
-        phone_number1: tel1,
-        phone_number2: tel2,
-        orchid: orcid,
-        scopus_id: scopus,
-        address: address,
+        phone_number1: tel1 || "",
+        phone_number2: tel2 || "",
+        orchid: orcid || "",
+        scopus_id: scopus || "",
+        address: address || "",
         languages_uz: Number(uzbek),
         languages_en: Number(ingiliz),
         languages_ru: Number(rus),
@@ -213,10 +213,7 @@ const Edit = () => {
           "biography_json",
           $(bioRef.current)?.summernote("code") || ""
         );
-        formData.append(
-          "birthday",
-          date ? `${date}T16:38:51.281Z` : ""
-        );
+        formData.append("birthday", date ? `${date}T16:38:51.281Z` : "");
         formData.append("degree", degree || "");
         formData.append("experience_year", experience || "");
         formData.append("phone_number1", tel1 || "");
@@ -232,7 +229,7 @@ const Edit = () => {
         formData.append("img_up", img);
         formData.append("status_id", status || "");
         formData.append("login", login || "");
-        formData.append("password", pwRef.current?.value || null);
+        formData.append("password", pwRef.current?.value || "");
         formData.append("scientific_title", scientific_title);
 
         const res = await axios.put(
@@ -252,7 +249,7 @@ const Edit = () => {
             content: "Muvaffaqiyatli o'zgartirildi!",
           });
       } else if (value !== "uz" && !isCreate) {
-        obj.persons_data_id = id;
+        obj.persons_data_id = Number(id);
         const res = await axios.put(
           `${
             import.meta.env.VITE_BASE_URL_API

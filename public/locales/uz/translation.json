@@ -70,7 +70,7 @@
     "title": "Transport Universiteti haqida",
     "desc": " Respublika transport sohasi uchun yuqori malakali kadrlarni tayyorlash tizimini ilgʻor xorijiy tajriba va xalqaro standartlar asosida tubdan takomillashtirish, oʻquv jarayoniga oʻqitishning innovatsion shakl va metodlari hamda zamonaviy pedagogik va axborot texnologiyalarini keng joriy etish, shuningdek, tarmoq taʼlim muassasalarining moddiy-texnika bazasini mustahkamlash va ilmiy salohiyatini yanada oshirish maqsadida tashkil etilgan.",
     "talaba": "Talabalar soni",
-    "professor": "Professorlar",
+    "professor": "Professor-o’qituvchilar",
     "doktarant": "Doktorantlar",
     "yonalish": "Ta'lim yonalishlari",
     "qoshimcha": "Qoshimcha ta'lim",
@@ -129,7 +129,7 @@
   },
   "employee": {
     "bio": "Biografiya",
-    "fio": "F.I.O.",
+    "fio": "F.I.O",
     "birth": "Tavallud kuni",
     "deg": "Darajasi",
     "ex": "Tajriba",
@@ -141,7 +141,12 @@
     "ru": "Rus tili",
     "ilm": "ILMIY FAOLIYAT",
     "portfolio": "Portfolio",
-    "appeal": "Murojaat yuboring"
+    "appeal": "Murojaat yuboring",
+    "name": "Ismingiz",
+    "email": "Email",
+    "subject": "Kasbingiz",
+    "message": "Xabaringiz",
+    "bottom": "Barcha huquqlar himoyalangan 2024"
   },
   "login": {
     "title": "Tizimga kirish!",

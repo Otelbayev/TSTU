@@ -70,7 +70,7 @@
     "title": "About Transport University",
     "desc": "The system for training highly qualified personnel for the republic's transport sector has been fundamentally improved based on advanced foreign experience and international standards, by widely introducing innovative teaching methods and modern pedagogical and information technologies into the educational process, as well as strengthening the material and technical base and increasing the scientific potential of sectoral educational institutions.",
     "talaba": "Number of students",
-    "professor": "Professors",
+    "professor": "Professors and teachers",
     "doktarant": "Doctorants",
     "yonalish": "Specialities",
     "qoshimcha": "Additional education",
@@ -126,6 +126,27 @@
       "link1": "About the department",
       "link2": "Programs"
     }
+  },
+  "employee": {
+    "bio": "Biography",
+    "fio": "Full Name",
+    "birth": "Date of Birth",
+    "deg": "Degree",
+    "ex": "Experience",
+    "tel": "Phone",
+    "address": "Address",
+    "lang": "Languages",
+    "uz": "Uzbek",
+    "en": "English",
+    "ru": "Russian",
+    "ilm": "SCIENTIFIC ACTIVITY",
+    "portfolio": "Portfolio",
+    "appeal": "Submit an Appeal",
+    "name": "Your Name",
+    "email": "Email",
+    "subject": "Your Profession",
+    "message": "Your Message",
+    "bottom": "All Rights Reserved 2024"
   },
   "login": {
     "title": "Log in!",

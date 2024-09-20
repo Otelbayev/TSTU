@@ -45,6 +45,11 @@
   box-sizing: border-box;
 }
 
+.no-data {
+  font-family: "Source Sans Pro", sans-serif !important;
+  font-size: 16px !important;
+}
+
 html {
   font-family: "Source Sans Pro", sans-serif;
   line-height: 1.15;
@@ -9607,7 +9612,7 @@ button.bg-dark:focus {
 
 .langu {
   font-size: 20px !important;
-  font-family: "Source Sans Pro", sans-serif!important;
+  font-family: "Source Sans Pro", sans-serif !important;
 }
 
 a.text-primary:hover,

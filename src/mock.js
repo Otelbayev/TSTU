@@ -5,7 +5,7 @@ import img4 from "../src/assets/brm/4.jpg";
 import img5 from "../src/assets/brm/5.jpg";
 import img6 from "../src/assets/brm/6.jpg";
 import img7 from "../src/assets/brm/7.jpg";
-import img8 from "../src/assets/brm/5.jpg";
+import img8 from "../src/assets/brm/8.jpg";
 import img9 from "../src/assets/brm/9.jpg";
 import img10 from "../src/assets/brm/10.jpg";
 import img11 from "../src/assets/brm/11.jpg";

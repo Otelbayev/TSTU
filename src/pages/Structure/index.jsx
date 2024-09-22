@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Container } from "./styler";
 import logo from "../../../public/logo2.png";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { createTree } from "./create-tree";
+import TreeNode from "./tree-node";
 
 const Structure = () => {
   const { t, i18n } = useTranslation();
   const [data, setData] = useState([]);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(
@@ -26,6 +25,8 @@ const Structure = () => {
       .then((res) => setData(res.filter((e) => !Number(e.title))));
   }, [i18n.language]);
 
+  const treeData = createTree(data);
+
   return (
     <Container className="root-container">
       <div className="root-wrapper">
@@ -33,15 +34,9 @@ const Structure = () => {
           <img loading="lazy" src={logo} className="structure-top__logo" />
           <div className="structure-top__title">{t("structure")}</div>
         </div>
-        <div className="str">
-          {data.map((e) => (
-            <div
-              className="str-item"
-              onClick={() => navigate(`/${i18n.language}/department/${e.id}`)}
-              key={e.id}
-            >
-              {e.title}
-            </div>
+        <div className="mt-3">
+          {treeData.map((node) => (
+            <TreeNode key={node.id} node={node} />
           ))}
         </div>
       </div>

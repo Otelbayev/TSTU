@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import loadingGif from "../../../assets/icons/loading.gif";
 import useAxios from "../../../hooks/useAxios";
 
-const Upload = ({ id, old_year, new_year, upd }) => {
+const Upload = ({ id, old_year, new_year, upd, max_score }) => {
   const commentRef = useRef();
   const editFileRef = useRef();
   const fileRef = useRef();
@@ -15,6 +15,7 @@ const Upload = ({ id, old_year, new_year, upd }) => {
 
   const [isEdit, setIsEdit] = useState(false);
   const [data, setData] = useState([]);
+  const [sum_score, setSum_score] = useState(0);
 
   const { sendRequest, loading, error } = useAxios();
 
@@ -32,7 +33,16 @@ const Upload = ({ id, old_year, new_year, upd }) => {
         newYear: Number(old_year) + 1,
       },
     });
-    res.status === 200 && setData(res?.data);
+
+    if (res.status === 200) {
+      setData(res?.data);
+      setSum_score(
+        res.data.reduce(
+          (accumulator, currentValue) => accumulator + currentValue.score,
+          0
+        )
+      );
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -147,19 +157,21 @@ const Upload = ({ id, old_year, new_year, upd }) => {
 
   return (
     <div>
-      <form className="row" onSubmit={handleSubmit}>
-        <Input
-          ref={textRef}
-          placeholder="Izoh"
-          className="form-group col-md-5"
-        />
-        <ChooseFile ref={fileRef} className="form-group col-md-5" />
-        <div className="col-md-2">
-          <button className="btn btn-primary w-100" type="submit">
-            Yulash
-          </button>
-        </div>
-      </form>
+      {max_score > sum_score && (
+        <form className="row" onSubmit={handleSubmit}>
+          <Input
+            ref={textRef}
+            placeholder="Izoh"
+            className="form-group col-md-5"
+          />
+          <ChooseFile ref={fileRef} className="form-group col-md-5" />
+          <div className="col-md-2">
+            <button className="btn btn-primary w-100" type="submit">
+              Yulash
+            </button>
+          </div>
+        </form>
+      )}
 
       {data?.length ? (
         <table

@@ -111,12 +111,6 @@ const Sidebar = () => {
 
               {/* Uni */}
               <li className="nav-item">
-                <NavLink to="my-data" className="nav-link">
-                  <i className="nav-icon fas fa-database" />
-                  <p>Ma'lumotlarim</p>
-                </NavLink>
-              </li>
-              <li className="nav-item">
                 <NavLink to="profile" className="nav-link">
                   <i className="nav-icon fas fa-user" />
                   <p>Profil</p>

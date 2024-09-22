@@ -112,6 +112,7 @@ const FileImport = () => {
             new_year={Number(old_year) + 1}
             id={item.id}
             upd={updateData}
+            max_score={item?.max_score}
           />
         )}
       </Panel>

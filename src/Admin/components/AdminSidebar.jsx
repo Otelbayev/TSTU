@@ -157,5 +157,12 @@ export const admin = () => {
       icon: "nav-icon fa fa-cog",
       data: [{ id: 1, title: "Rektorat", path: "rectorat" }],
     },
+    {
+      id: 19,
+      title: "Ma'lumotlarim",
+      path: "my-data",
+      roles: ["headdepartment", "teacher"],
+      icon: "nav-icon fas fa-database",
+    },
   ];
 };

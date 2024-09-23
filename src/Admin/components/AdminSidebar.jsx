@@ -70,7 +70,10 @@ export const admin = () => {
       title: "Depaerment",
       roles: ["admin"],
       icon: "nav-icon fas fa-building",
-      data: sidebarDepartment,
+      data: [
+        { label: "Department Type", path: "departmenttype" },
+        ...sidebarDepartment,
+      ],
     },
     {
       id: 6,

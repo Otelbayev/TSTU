@@ -30,7 +30,7 @@ const Info = () => {
   const [jshir, setJshir] = useState("");
   const [passportSerial, setPassportSerial] = useState("");
   const [passportNumber, setPassportNumber] = useState("");
-  const [date, setDate] = useState("2000-01-01");
+  const [date, setDate] = useState(null);
   const [degree, setDegree] = useState("");
   const [scientific_title, setScientific_title] = useState("");
   const [experience, setExperience] = useState("");
@@ -130,7 +130,7 @@ const Info = () => {
         gender_id: genderData.find((e) => e.parent === gender)?.value,
       },
       biography_json: $(bioRef.current)?.summernote("code"),
-      birthday: date ? `${date}T16:38:51.281Z` : "",
+      birthday: date ? `${date}T16:38:51.281Z` : null,
       degree: degree,
       experience_year: Number(experience),
       phone_number1: tel1 || "",
@@ -138,9 +138,9 @@ const Info = () => {
       orchid: orcid || "",
       scopus_id: scopus || "",
       address: address || "",
-      languages_uz: Number(uzbek) || "",
-      languages_en: Number(ingiliz) || "",
-      languages_ru: Number(rus) || "",
+      languages_uz: Number(uzbek),
+      languages_en: Number(ingiliz),
+      languages_ru: Number(rus),
       languages_any_title: other || "",
       languages_any: Number(other2),
       scientific_title: scientific_title || "",
@@ -161,10 +161,7 @@ const Info = () => {
       "biography_json",
       $(bioRef.current)?.summernote("code") || ""
     );
-    formData.append(
-      "birthday",
-      date ? `${date}T16:38:51.281Z` : ""
-    );
+    formData.append("birthday", date ? `${date}T16:38:51.281Z` : "");
     formData.append("degree", degree || "");
     formData.append("experience_year", experience || "");
     formData.append("phone_number1", tel1 || "");
@@ -187,10 +184,10 @@ const Info = () => {
         value === "uz"
           ? `${
               import.meta.env.VITE_BASE_URL_API
-            }/RectorGivenUpdated/updaterectordata/1`
+            }/persondata/updatepersondataprofile`
           : `${
               import.meta.env.VITE_BASE_URL_API
-            }/RectorGivenUpdated/updaterectordata/${value}`,
+            }/persondata/updatepersondatatranslationprofile/${value}`,
         value === "uz" ? formData : obj,
         {
           headers: {

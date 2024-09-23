@@ -42,7 +42,7 @@ const Edit = () => {
   const [passportNumber, setPassportNumber] = useState("");
   const [departent, setDepartent] = useState(null);
   const [employee, setEmployee] = useState(null);
-  const [date, setDate] = useState("2000-01-01");
+  const [date, setDate] = useState(null);
   const [degree, setDegree] = useState("");
   const [scientific_title, setScientific_title] = useState("");
   const [experience, setExperience] = useState("");
@@ -180,7 +180,7 @@ const Edit = () => {
         },
         persons_data_id: transId,
         biography_json: $(bioRef.current)?.summernote("code"),
-        birthday: date ? `${date}T16:38:51.281Z` : "",
+        birthday: date ? `${date}T16:38:51.281Z` : null,
         degree: degree || "",
         experience_year: Number(experience),
         phone_number1: tel1 || "",
@@ -221,11 +221,11 @@ const Edit = () => {
         formData.append("orchid", orcid || "");
         formData.append("scopus_id", scopus || "");
         formData.append("address", address || "");
-        formData.append("languages_uz", uzbek || "");
-        formData.append("languages_en", ingiliz || "");
-        formData.append("languages_ru", rus || "");
+        formData.append("languages_uz", uzbek);
+        formData.append("languages_en", ingiliz);
+        formData.append("languages_ru", rus);
         formData.append("languages_any_title", other || "");
-        formData.append("languages_any", other2 || "");
+        formData.append("languages_any", other2);
         formData.append("img_up", img);
         formData.append("status_id", status || "");
         formData.append("login", login || "");

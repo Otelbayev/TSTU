@@ -136,7 +136,7 @@ const Edit = () => {
         gender_id: genderData.find((e) => e.parent === gender)?.value,
       },
       biography_json: $(bioRef.current)?.summernote("code"),
-      birthday: date ? `${date}T16:38:51.281Z` : "",
+      birthday: date ? `${date}T16:38:51.281Z` : null,
       degree: degree,
       experience_year: Number(experience),
       phone_number1: tel1 || "",
@@ -144,9 +144,9 @@ const Edit = () => {
       orchid: orcid || "",
       scopus_id: scopus || "",
       address: address || "",
-      languages_uz: Number(uzbek) || "",
-      languages_en: Number(ingiliz) || "",
-      languages_ru: Number(rus) || "",
+      languages_uz: Number(uzbek),
+      languages_en: Number(ingiliz),
+      languages_ru: Number(rus),
       languages_any_title: other || "",
       languages_any: Number(other2),
       scientific_title: scientific_title || "",
@@ -175,11 +175,11 @@ const Edit = () => {
     formData.append("orchid", orcid || "");
     formData.append("scopus_id", scopus || "");
     formData.append("address", address || "");
-    formData.append("languages_uz", uzbek || "");
-    formData.append("languages_en", ingiliz || "");
-    formData.append("languages_ru", rus || "");
+    formData.append("languages_uz", uzbek);
+    formData.append("languages_en", ingiliz);
+    formData.append("languages_ru", rus);
     formData.append("languages_any_title", other || "");
-    formData.append("languages_any", other2 || "");
+    formData.append("languages_any", other2);
     formData.append("img_up", img);
     formData.append("scientific_title", scientific_title);
 
@@ -190,10 +190,10 @@ const Edit = () => {
         value === "uz"
           ? `${
               import.meta.env.VITE_BASE_URL_API
-            }/persondata/updatepersondataprofile`
+            }/rectoratupdated/updaterectoratdata/${id}`
           : `${
               import.meta.env.VITE_BASE_URL_API
-            }/persondata/updatepersondatatranslationprofile/${value}`,
+            }/rectoratupdated/updatepersondatatranslation/${transId}`,
         value === "uz" ? formData : obj,
         {
           headers: {

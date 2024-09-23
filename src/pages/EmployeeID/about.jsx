@@ -61,10 +61,12 @@ const About = ({ data, t }) => {
                 {data?.phone_number1}
               </div>
             )}
-            {data?.persons_?.email && (
+            {(data?.persons_?.email ||
+              data?.persons_translation_?.persons_?.email) && (
               <div className="col-sm-6 py-1">
                 <h5 className="d-inline text-primary">Email: {"  "}</h5>
-                {data?.persons_?.email}
+                {data?.persons_?.email ||
+                  data?.persons_translation_?.persons_?.email}
               </div>
             )}
             {data?.orchid && (

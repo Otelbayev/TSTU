@@ -144,11 +144,11 @@ const Edit = () => {
       orchid: orcid || "",
       scopus_id: scopus || "",
       address: address || "",
-      languages_uz: Number(uzbek),
-      languages_en: Number(ingiliz),
-      languages_ru: Number(rus),
-      languages_any_title: other || "",
-      languages_any: Number(other2),
+      languages_uz: Number(uzbek) || 0,
+      languages_en: Number(ingiliz) || 0,
+      languages_ru: Number(rus) || 0,
+      languages_any_title: other,
+      languages_any: Number(other2) || 0,
       scientific_title: scientific_title || "",
       language_id,
     };
@@ -175,11 +175,11 @@ const Edit = () => {
     formData.append("orchid", orcid || "");
     formData.append("scopus_id", scopus || "");
     formData.append("address", address || "");
-    formData.append("languages_uz", uzbek);
-    formData.append("languages_en", ingiliz);
-    formData.append("languages_ru", rus);
+    formData.append("languages_uz", uzbek || 0);
+    formData.append("languages_en", ingiliz || 0);
+    formData.append("languages_ru", rus || 0);
     formData.append("languages_any_title", other || "");
-    formData.append("languages_any", other2);
+    formData.append("languages_any", other2 || 0);
     formData.append("img_up", img);
     formData.append("scientific_title", scientific_title);
 

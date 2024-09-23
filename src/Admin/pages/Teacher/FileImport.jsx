@@ -52,11 +52,13 @@ const FileImport = () => {
 
   let all = 0;
 
-  const getData = async () => {
+  const getData = async (old_year) => {
     const res = await axios.get(
       `${
         import.meta.env.VITE_BASE_URL_API
-      }/documentteacher110controller/getalldocumentteacher110`,
+      }/documentteacher110controller/getalldocumentteacher110?old_year=${old_year}&new_year=${
+        Number(old_year) + 1
+      }`,
       {
         headers: {
           Authorization: `Bearer ${Cookies.get("_token")}`,
@@ -67,12 +69,12 @@ const FileImport = () => {
     res.status === 200 && setRawData(res.data);
   };
 
-  const getBall = async () => {
+  const getBall = async (old_year) => {
     const res2 = await axios.get(
       `${
         import.meta.env.VITE_BASE_URL_API
       }/documentteacher110setcontroller/getteacherdocumentscore?oldYear=${old_year}&newYear=${
-        old_year + 1
+        Number(old_year) + 1
       }`,
       {
         headers: {
@@ -84,12 +86,9 @@ const FileImport = () => {
   };
 
   useEffect(() => {
-    getBall();
+    getBall(old_year);
+    getData(old_year);
   }, [old_year]);
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const buildPanels = (items) => {
     return items.map((item) => (
@@ -99,7 +98,12 @@ const FileImport = () => {
           <Space $italic={item.indicator} id={item.parent_id}>
             <div className="panel-title">{item.title}</div>
             <div className="ball">
-              {item.max_score ? `${item.max_score} ball` : ""}
+              {/* {item.max_score ? `${item.max_score} ball` : ""} */}
+              <span className="text-success p-1 rounded">
+                {item.max_score}
+              </span>{" "}
+              / <span className="text-primary p-1 rounded">{item.score}</span>{" "}
+              ball
             </div>
           </Space>
         }
@@ -157,7 +161,7 @@ const FileImport = () => {
                   <div className="card-header pl-4">
                     <div className="row">
                       <div className="col row">
-                        <h5 className="col-5 py-2">O'quv yili:</h5>
+                        <h3 className="col-5 py-2">O'quv yili:</h3>
                         <Select
                           value={old_year}
                           options={studyYears}
@@ -168,14 +172,18 @@ const FileImport = () => {
                           }}
                         />
                       </div>
-                      <h5 className="col py-2">
+                      <h3 className="col py-2">
                         Maksimal Ball :{" "}
-                        <span className="bg-success p-1 rounded">{all}</span>
-                      </h5>
-                      <h5 className="col py-2">
+                        <h2 className="text-success p-1 rounded d-inline">
+                          {all}
+                        </h2>
+                      </h3>
+                      <h3 className="col py-2">
                         To'plangan Ball :{" "}
-                        <span className="bg-warning p-1 rounded">{count}</span>
-                      </h5>
+                        <h2 className="text-primary p-1 rounded d-inline">
+                          {count}
+                        </h2>
+                      </h3>
                     </div>
                   </div>
                   <div className="card-body">

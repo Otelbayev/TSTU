@@ -42,7 +42,7 @@ const Mudir = () => {
           <section className="content-header">
             <div className="container-fluid">
               <div className="row mb-2">
-                <div className="col-sm-6">
+                <div className="col-sm-12">
                   <h1>
                     Pedagog xodimlarning o‘quv yilidagi faoliyatini baholash
                   </h1>

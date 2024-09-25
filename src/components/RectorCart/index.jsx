@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const RectorCart = ({ data }) => {
   const { i18n } = useTranslation();
-  console.log(data);
+
   return (
     <Container>
       <Content className="content">

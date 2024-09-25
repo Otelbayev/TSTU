@@ -90,37 +90,78 @@ const FileImport = () => {
     getData(old_year);
   }, [old_year]);
 
-  const buildPanels = (items) => {
-    console.log(items);
-    return items.map((item) => (
-      <Panel
-        key={item.id}
-        header={
-          <Space $italic={item.indicator} id={item.parent_id}>
-            <div className="panel-title">{item.title}</div>
-            <div className="ball">
-              <span className="text-success p-1 rounded">{item.max_score}</span>{" "}
-              / <span className="text-primary p-1 rounded">{item.score}</span>{" "}
-              ball
-            </div>
-          </Space>
-        }
-      >
-        {item.children?.length ? (
-          <Collapse>{buildPanels(item.children)}</Collapse>
-        ) : (
-          <Upload
-            old_year={old_year}
-            new_year={Number(old_year) + 1}
-            id={item.id}
-            upd={updateData}
-            max_score={item?.max_score}
-            score={item?.score}
-            author={item.avtor}
-          />
-        )}
-      </Panel>
-    ));
+  // const buildPanels = (items) => {
+  //   return items.map((item) => (
+  //     <Panel
+  //       key={item.id}
+  //       header={
+  //         <Space $italic={item.indicator} id={item.parent_id}>
+  //           <div className="panel-title">{item.title}</div>
+  //           <div className="ball">
+  //             <span className="text-success p-1 rounded">{item.max_score}</span>{" "}
+  //             / <span className="text-primary p-1 rounded">{item.score}</span>{" "}
+  //             ball
+  //           </div>
+  //         </Space>
+  //       }
+  //     >
+  //       {item.children?.length ? (
+  //         <Collapse>{buildPanels(item.children)}</Collapse>
+  //       ) : (
+  //         <Upload
+  //           old_year={old_year}
+  //           new_year={Number(old_year) + 1}
+  //           id={item.id}
+  //           upd={updateData}
+  //           max_score={item?.max_score}
+  //           score={item?.score}
+  //           author={item?.avtor}
+  //         />
+  //       )}
+  //     </Panel>
+  //   ));
+  // };
+
+  const buildPanels = (items, parentNumber = "") => {
+    return items.map((item, index) => {
+      const currentNumber = parentNumber
+        ? `${parentNumber}.${index + 1}`
+        : `${index + 1}`;
+
+      return (
+        <Panel
+          key={item.id}
+          header={
+            <Space $italic={item.indicator} id={item.parent_id}>
+              <div className="panel-title">
+                {currentNumber} - {item.title}
+              </div>
+              <div className="ball">
+                <span className="text-success p-1 rounded">
+                  {item.max_score}
+                </span>{" "}
+                / <span className="text-primary p-1 rounded">{item.score}</span>{" "}
+                ball
+              </div>
+            </Space>
+          }
+        >
+          {item.children?.length ? (
+            <Collapse>{buildPanels(item.children, currentNumber)}</Collapse>
+          ) : (
+            <Upload
+              old_year={old_year}
+              new_year={Number(old_year) + 1}
+              id={item.id}
+              upd={updateData}
+              max_score={item?.max_score}
+              score={item?.score}
+              author={item?.avtor}
+            />
+          )}
+        </Panel>
+      );
+    });
   };
 
   const buildNestedItems = (data, parentId) => {
@@ -146,7 +187,7 @@ const FileImport = () => {
           <section className="content-header">
             <div className="container-fluid">
               <div className="row mb-2">
-                <div className="col-sm-6">
+                <div className="col-sm-12">
                   <h1>
                     Pedagog xodimlarning o‘quv yilidagi faoliyatini baholash
                   </h1>

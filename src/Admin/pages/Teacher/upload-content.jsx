@@ -8,12 +8,15 @@ import loadingGif from "../../../assets/icons/loading.gif";
 import useAxios from "../../../hooks/useAxios";
 
 const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
-  const commentRef = useRef();
-  const editFileRef = useRef();
-  const fileRef = useRef();
   const textRef = useRef();
+  const fileRef = useRef();
   const dateRef = useRef();
   const countRef = useRef();
+
+  const editTextRef = useRef();
+  const editFileRef = useRef();
+  const editDateRef = useRef();
+  const editCountRef = useRef();
 
   const [isEdit, setIsEdit] = useState(false);
   const [data, setData] = useState([]);
@@ -48,14 +51,14 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
     }
 
     try {
-      message.loading({ key: "form", content: "Loading.." });
+      message.loading({ key: "form", content: "Yuklanmoqda.." });
       const formData = new FormData();
       formData.append("old_year", old_year);
       formData.append("new_year", new_year);
       formData.append("document_id", id);
       formData.append("comment", textRef?.current?.value);
-      formData.append("fixed_date", dateRef.current.value);
-      formData.append("number_authors", Number(countRef.current.value));
+      formData.append("fixed_date", dateRef?.current?.value);
+      formData.append("number_authors", Number(countRef?.current?.value) || 0);
       formData.append("file_up", fileRef?.current?.files[0]);
 
       const res = await axios.post(
@@ -72,26 +75,25 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
             new_year,
             document_id: id,
             comment: textRef?.current?.value,
-            fixed_date: dateRef.current.value,
-            number_authors: countRef.current.value,
+            fixed_date: dateRef?.current?.value,
+            number_authors: countRef?.current?.value,
           },
         }
       );
 
       if (res.status === 200) {
-        message.success({ key: "form", content: "Succesfully uploaded!" });
+        message.success({ key: "form", content: "Muvofaqiyatli yuklandi!" });
         textRef.current.value = "";
         fileRef.current.value = "";
         getData(id);
       }
     } catch (err) {
-      message.error({ key: "form", content: err?.response?.data });
-      console.log(err);
+      message.error({ key: "form", content: "Xatolik!" });
     }
   };
 
   const onSave = async (key) => {
-    if (!commentRef.current?.value) {
+    if (!editTextRef.current?.value) {
       message.error("All files are required");
       return;
     }
@@ -102,8 +104,13 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
       formData.append("old_year", Number(old_year));
       formData.append("new_year", Number(new_year));
       formData.append("document_id", Number(id));
-      formData.append("comment", commentRef.current.value);
-      formData.append("file_up", editFileRef?.current?.files[0] || "null");
+      formData.append("comment", editTextRef?.current?.value);
+      formData.append("fixed_date", editDateRef?.current?.value);
+      formData.append(
+        "number_authors",
+        Number(editCountRef?.current?.value) || 0
+      );
+      formData.append("file_up", editFileRef?.current?.files[0]);
 
       const res = await axios.put(
         `${
@@ -118,14 +125,19 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
             old_year,
             new_year,
             document_id: id,
-            comment: commentRef.current?.value,
+            comment: editTextRef?.current?.value,
+            fixed_date: editDateRef?.current?.value,
+            number_authors: editCountRef?.current?.value,
           },
         }
       );
 
       if (res.status === 200) {
         setIsEdit(false);
-        message.success({ key: "error", content: "Succesfully updated!" });
+        message.success({
+          key: "error",
+          content: "Muvofaqiyatli o'zgartirildi!",
+        });
         getData(id);
       }
     } catch (err) {
@@ -197,6 +209,8 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
               <th className="py-2">Tarif</th>
               <th className="py-2">Holati</th>
               <th className="py-2">Ball</th>
+              <th className="py-2">Sana</th>
+              {author && <th className="py-2">Mualliflar soni</th>}
               <th className="py-2">Tahrirlash</th>
             </tr>
           </thead>
@@ -204,10 +218,10 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
             {data
               .sort((a, b) => a.id - b.id)
               .map((item) => (
-                <tr key={item.id}>
+                <tr key={item?.id}>
                   <td>
                     {item.id === isEdit ? (
-                      <Input defaultValue={item.comment} ref={commentRef} />
+                      <Input defaultValue={item.comment} ref={editTextRef} />
                     ) : (
                       item.comment
                     )}
@@ -216,9 +230,8 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
                     <td colSpan={2}>
                       <ChooseFile ref={editFileRef} />
                     </td>
-                  ) : null}
-                  {item.id !== isEdit ? (
-                    <td>
+                  ) : (
+                    <td style={{ width: "20%" }}>
                       {item.score ? (
                         <p className="text-success">Tasdiqlangan</p>
                       ) : item.rejection ? (
@@ -235,53 +248,35 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
                       ) : (
                         <p className="text-primary">Jarayonda</p>
                       )}
-                      <div
-                        className="modal fade"
-                        id={`exampleModal${item.id}`}
-                        tabIndex="-1"
-                        role="dialog"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true"
-                      >
-                        <div className="modal-dialog" role="document">
-                          <div className="modal-content">
-                            <div className="modal-header">
-                              <h5
-                                className="modal-title"
-                                id="exampleModalLabel"
-                              >
-                                Rad edilgan
-                              </h5>
-                              <button
-                                type="button"
-                                className="close"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                              >
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div className="modal-body">
-                              {item.reason_for_rejection || "Rad etilgan"}
-                            </div>
-                            <div className="modal-footer">
-                              <button
-                                type="button"
-                                className="btn btn-secondary"
-                                data-dismiss="modal"
-                              >
-                                Yopish
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </td>
-                  ) : null}
-                  {item.id !== isEdit ? (
-                    <td>{item.score ? `${item.score} ball` : ""} </td>
-                  ) : null}
-                  <td>
+                  )}
+                  {item.id !== isEdit && (
+                    <td style={{ width: "10%" }}>{item?.score}</td>
+                  )}
+                  <td style={{ width: "15%" }}>
+                    {item.id === isEdit ? (
+                      <Input
+                        ref={editDateRef}
+                        defaultValue={item.fixed_date?.split("T")[0]}
+                        type="date"
+                      />
+                    ) : (
+                      item.fixed_date?.split("T")[0]
+                    )}
+                  </td>
+                  {author && (
+                    <td style={{ width: "15%" }}>
+                      {item.id === isEdit ? (
+                        <Input
+                          defaultValue={item.number_authors}
+                          ref={editCountRef}
+                        />
+                      ) : (
+                        item.number_authors
+                      )}
+                    </td>
+                  )}
+                  <td style={{ width: "15%" }}>
                     {isEdit === item.id && (
                       <button
                         onClick={() => onSave(item.id)}
@@ -359,3 +354,44 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
 };
 
 export default Upload;
+
+{
+  /* <div
+className="modal fade"
+id={`exampleModal${item.id}`}
+tabIndex="-1"
+role="dialog"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div className="modal-dialog" role="document">
+  <div className="modal-content">
+    <div className="modal-header">
+      <h5 className="modal-title" id="exampleModalLabel">
+        Rad edilgan
+      </h5>
+      <button
+        type="button"
+        className="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div className="modal-body">
+      {item.reason_for_rejection || "Rad etilgan"}
+    </div>
+    <div className="modal-footer">
+      <button
+        type="button"
+        className="btn btn-secondary"
+        data-dismiss="modal"
+      >
+        Yopish
+      </button>
+    </div>
+  </div>
+</div>
+</div> */
+}

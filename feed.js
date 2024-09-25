@@ -42,7 +42,6 @@ const buildXML = async () => {
     // Write XML to file
     fs.writeFileSync("public/feed.xml", xml, "utf8");
 
-    console.log("RSS feed generated successfully!");
   } catch (error) {
     console.error("Error generating RSS feed:", error);
   }

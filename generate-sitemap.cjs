@@ -49,4 +49,3 @@ ${urls.map((url) => `<sitemap><loc>${url}</loc></sitemap>`).join("\n")}
 
 fs.writeFileSync(path.join(__dirname, "public", "sitemap.xml"), sitemapContent);
 
-console.log("Sitemap generated successfully!");

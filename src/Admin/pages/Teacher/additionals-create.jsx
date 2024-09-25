@@ -42,7 +42,7 @@ const AdditionalsCreate = ({
     );
 
     if (res.statusCode === 200) {
-      value === "uz"
+      value !== "uz"
         ? navigate(`/admin/${path}/edit/${res.id}`)
         : navigate(`/admin/${path}`);
     }

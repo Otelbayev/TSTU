@@ -102,7 +102,7 @@ export const admin = () => {
       path: "confirm-teacher-110",
       title: "O'qituvchi 110 tasdiqlash",
       roles: ["headdepartment"],
-      icon: "nav-icon fa fa-check",
+      icon: "nav-icon fa-solid fa-user-check",
     },
     {
       id: 10,
@@ -162,6 +162,18 @@ export const admin = () => {
     },
     {
       id: 19,
+      title: "O'qituvchilarni faoliyatini tasdiqlash",
+      roles: ["headdepartment", "teacher"],
+      icon: "nav-icon fa-solid fa-check-to-slot",
+      data: [
+        { id: 1, title: "Portfolio", path: "confirm-portfolio" },
+        { id: 2, title: "Blog", path: "confirm-blog" },
+        { id: 3, title: "Tadjriba", path: "confirm-exprience" },
+        { id: 4, title: "Ilmiy Faoliyari", path: "confirm-science" },
+      ],
+    },
+    {
+      id: 20,
       title: "Ma'lumotlarim",
       path: "my-data",
       roles: ["headdepartment", "teacher"],

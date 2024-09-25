@@ -7,7 +7,7 @@ const Accardion = ({ title, data, icon }) => {
     <li className={open ? "nav-item menu-open" : "nav-item"}>
       <a onClick={() => setOpen(!open)} href="#" className="nav-link">
         <i className={icon} />
-        <p>
+        <p className="px-2">
           {title}
           <i className="right fas fa-angle-left" />
         </p>

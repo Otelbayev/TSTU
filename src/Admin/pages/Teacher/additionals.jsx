@@ -28,6 +28,8 @@ const Additionals = ({ title, get, del, edit }) => {
     getData();
   }, [isDelete]);
 
+  console.log(data);
+
   return (
     <Wrapper title={title} create={true}>
       <DataTable
@@ -41,6 +43,19 @@ const Additionals = ({ title, get, del, edit }) => {
           { data: "id", title: "# " },
           { data: "title", title: "Title" },
           { data: "description", title: "description" },
+          {
+            data: "confirmed",
+            title: "Status",
+            render: (data) => {
+              const obj = {
+                0: "<div class='text-primary'>Jarayonda</div>",
+                1: "<div class='text-success'>Tasdiqlangan </div>",
+                2: "<div class='text-danger'>Rad etilgan </div>",
+              };
+
+              return obj[data];
+            },
+          },
         ]}
       />
     </Wrapper>

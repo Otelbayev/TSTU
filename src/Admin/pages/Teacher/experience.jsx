@@ -15,7 +15,7 @@ const Experiance = () => {
         method: "get",
         url: `${
           import.meta.env.VITE_BASE_URL_API
-        }/personscientificactivity/getallpersonscientificactivitysite`,
+        }/personscientificactivity/getallpersonscientificactivityprofil`,
         headers: {
           Authorization: `Bearer ${Cookies.get("_token")}`,
         },
@@ -50,6 +50,19 @@ const Experiance = () => {
           },
           { data: "whom", title: "whom" },
           { data: "where", title: "where" },
+          {
+            data: "confirmed",
+            title: "Status",
+            render: (data) => {
+              const obj = {
+                0: "<div class='text-primary'>Jarayonda</div>",
+                1: "<div class='text-success'>Tasdiqlangan </div>",
+                2: "<div class='text-danger'>Rad etilgan </div>",
+              };
+
+              return obj[data];
+            },
+          },
         ]}
       />
     </Wrapper>

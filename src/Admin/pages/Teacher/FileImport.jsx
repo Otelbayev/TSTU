@@ -91,6 +91,7 @@ const FileImport = () => {
   }, [old_year]);
 
   const buildPanels = (items) => {
+    console.log(items);
     return items.map((item) => (
       <Panel
         key={item.id}
@@ -98,10 +99,7 @@ const FileImport = () => {
           <Space $italic={item.indicator} id={item.parent_id}>
             <div className="panel-title">{item.title}</div>
             <div className="ball">
-              {/* {item.max_score ? `${item.max_score} ball` : ""} */}
-              <span className="text-success p-1 rounded">
-                {item.max_score}
-              </span>{" "}
+              <span className="text-success p-1 rounded">{item.max_score}</span>{" "}
               / <span className="text-primary p-1 rounded">{item.score}</span>{" "}
               ball
             </div>
@@ -117,6 +115,8 @@ const FileImport = () => {
             id={item.id}
             upd={updateData}
             max_score={item?.max_score}
+            score={item?.score}
+            author={item.avtor}
           />
         )}
       </Panel>

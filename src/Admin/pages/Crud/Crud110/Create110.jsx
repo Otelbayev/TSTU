@@ -15,6 +15,7 @@ const Create110 = () => {
   const [desc, setDesc] = useState("");
   const [score, setScore] = useState(null);
   const [ind1, setInd1] = useState(true);
+  const [author, setAuthor] = useState(true);
 
   const [mock, setMock] = useState([
     {
@@ -54,6 +55,7 @@ const Create110 = () => {
           max_score: score,
           description: desc,
           document_sequence: mock,
+          avtor: author,
         },
         {
           headers: {
@@ -69,6 +71,7 @@ const Create110 = () => {
         setParent(parentOptions[0].value);
         setScore(null);
         setInd1(true);
+        setAuthor(true);
         setMock([
           {
             sequence_number: 1,
@@ -122,7 +125,7 @@ const Create110 = () => {
           onChange={(e) => setDesc(e.target.value)}
         />
         <Select
-          className="form-group col-md-4"
+          className="form-group col-md-3"
           label="Parent"
           options={[{ label: "Parent", value: 0 }, ...parentOptions]}
           value={parent}
@@ -130,7 +133,7 @@ const Create110 = () => {
           showSearch={true}
         />
         <Input
-          className="form-group col-md-4"
+          className="form-group col-md-3"
           type="number"
           value={score}
           onChange={(e) => setScore(e.target.value)}
@@ -138,8 +141,15 @@ const Create110 = () => {
         />
 
         <Select
-          className="form-group col-md-4"
+          className="form-group col-md-3"
           label="Indicator 1"
+          options={bool}
+          value={author}
+          onChange={(e) => setAuthor(e)}
+        />
+        <Select
+          className="form-group col-md-3"
+          label="Avtor"
           options={bool}
           value={ind1}
           onChange={(e) => setInd1(e)}

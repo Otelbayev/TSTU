@@ -31,7 +31,7 @@ const Input = forwardRef(
         <div className="col-sm-12">
           <input
             ref={ref}
-            className="form-control px-2"
+            className="form-control"
             id={id}
             name={name}
             placeholder={placeholder}

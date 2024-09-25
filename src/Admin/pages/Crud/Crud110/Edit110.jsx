@@ -19,6 +19,7 @@ const Edit110 = () => {
   const [desc, setDesc] = useState("");
   const [score, setScore] = useState(null);
   const [ind1, setInd1] = useState(true);
+  const [author, setAuthor] = useState(true);
   const [status, setStatus] = useState(0);
 
   const [mock, setMock] = useState([
@@ -59,6 +60,7 @@ const Edit110 = () => {
           max_score: score,
           description: desc,
           document_sequence: mock,
+          avtor: author,
           status_id: status,
         },
         {
@@ -116,6 +118,7 @@ documentteacher110controller/getbyiddocumentteacher110admin/${id}`,
         setInd1(res.indicator);
         setMock(res.document_sequence);
         setStatus(res.status_?.id);
+        setAuthor(res.avtor);
       });
   }, []);
 
@@ -123,13 +126,13 @@ documentteacher110controller/getbyiddocumentteacher110admin/${id}`,
     <Wrapper title="Edit Teacher 110">
       <form className="form-horizontal row" onSubmit={handleSubmit}>
         <Input
-          className="form-group col-md-6"
+          className="form-group col-md-4"
           label="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <Input
-          className="form-group col-md-6"
+          className="form-group col-md-4"
           label="Description"
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
@@ -143,26 +146,34 @@ documentteacher110controller/getbyiddocumentteacher110admin/${id}`,
           showSearch={true}
         />
         <Input
-          className="form-group col-md-4"
+          className="form-group col-md-3"
           type="number"
           value={score}
           onChange={(e) => setScore(e.target.value)}
           label="Ball"
         />
         <Select
-          className="form-group col-md-4"
+          className="form-group col-md-3"
           label="Indicator 1"
           options={bool}
           value={ind1}
           onChange={(e) => setInd1(e)}
         />
         <Select
-          className="form-group col-md-4"
+          className="form-group col-md-3"
+          label="Avtor"
+          options={bool}
+          value={author} 
+          onChange={(e) => setAuthor(e)}
+        />
+        <Select
+          className="form-group col-md-3"
           label="Status"
           options={statusData}
           value={status}
           onChange={(e) => setStatus(e)}
         />
+
         <div className="row col-md-11">
           {mock.map((e, index) => (
             <div className="row col-md-12" key={index}>

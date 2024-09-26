@@ -205,6 +205,8 @@ const RectoratEdit = lazy(() => import("../pages/Rectorat/edit"));
 
 const Info = lazy(() => import("../pages/Info"));
 
+const ProfileDep = lazy(() => import("../pages/ProfileDep"));
+
 export const routes = [
   {
     id: useId(),
@@ -963,5 +965,11 @@ export const routes = [
     path: "confirm-science/:id",
     element: <ScienceTable />,
     roles: ["headdepartment"],
+  },
+  {
+    id: useId(),
+    path: "department",
+    element: <ProfileDep />,
+    roles: ["dean", "deputydean", "headdepartment", "director"],
   },
 ];

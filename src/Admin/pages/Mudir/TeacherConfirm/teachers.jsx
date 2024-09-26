@@ -23,8 +23,6 @@ const Teachers = ({ title, url, edit }) => {
     getData();
   }, []);
 
- 
-
   return (
     <Wrapper title={title}>
       <DataTable
@@ -43,7 +41,6 @@ const Teachers = ({ title, url, edit }) => {
         ]}
         appeal={true}
         edit={edit}
-        
       />
     </Wrapper>
   );

@@ -28,7 +28,7 @@ const Additionals = ({ title, get, del, edit }) => {
     getData();
   }, [isDelete]);
 
-  console.log(data);
+
 
   return (
     <Wrapper title={title} create={true}>

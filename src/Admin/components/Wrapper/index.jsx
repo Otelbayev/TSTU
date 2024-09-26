@@ -18,6 +18,7 @@ const Wrapper = ({
   const { i18n } = useTranslation();
 
   const role = Cookies.get("role");
+  const navigate = useNavigate();
 
   function getCurrentDate(prop) {
     const date = new Date();
@@ -71,17 +72,13 @@ const Wrapper = ({
     getData();
   }
 
-  const navigate = useNavigate();
-
   return (
     <div>
       <div className="content-wrapper wrapper-min-height">
         <section className="content-header">
           <div className="container-fluid">
             <div className="row mb-2">
-              <div className="col-sm-6">
-                <h1>{title}</h1>
-              </div>
+              <h1>{title}</h1>
             </div>
           </div>
         </section>
@@ -91,64 +88,6 @@ const Wrapper = ({
               <div className="col-md-12">
                 <div className="card">
                   <div className="card-header">
-                    {/* {create && (
-                      {date ? (
-                        <div className="row">
-                          <div className="col-sm-3">
-                            <div className="card-title">
-                              <NavLink
-                                to={`/${i18n.language}/admin/blogs/create`}
-                                className="btn btn-primary"
-                              >
-                                Create
-                              </NavLink>
-                            </div>
-                          </div>
-                          <div className="col-sm-3">
-                            <input
-                              type="date"
-                              className="form-control"
-                              name="subday"
-                              id="subday"
-                              value={start}
-                              onChange={(e) => setStart(e.target.value)}
-                            />
-                          </div>
-                          <div className="col-sm-3">
-                            <input
-                              type="date"
-                              className="form-control"
-                              name="today"
-                              id="today"
-                              value={end}
-                              onChange={(e) => setEnd(e.target.value)}
-                            />
-                          </div>
-                          <div className="col-sm-3">
-                            <button
-                              type="submit"
-                              className="btn btn-primary"
-                              id="refresh"
-                              style={{ width: "100%" }}
-                              onClick={onClick}
-                            >
-                              Update table
-                            </button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="card-title">
-                          <NavLink
-                            to={path ? path : "create"}
-                            className="btn btn-primary"
-                          >
-                            Create
-                          </NavLink>
-                        </div>
-                      )}
-                    </div>
-                  )} */}
-
                     {date ? (
                       <form onSubmit={handleClick} action="">
                         <div className="row">

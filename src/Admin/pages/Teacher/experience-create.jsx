@@ -54,7 +54,7 @@ const Create = () => {
       ]
     );
     if (res.statusCode === 200) {
-      value !== "uz"
+      value === "uz"
         ? navigate(`/admin/experience/edit/${res.id}`)
         : navigate("/admin/experience");
     }

@@ -8,7 +8,6 @@ import { message } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEdit } from "../../hooks/useEdit";
-import { useStatusContext } from "../../context/Status";
 
 const Edit = () => {
   const [value, setValue] = useState("uz");
@@ -85,10 +84,10 @@ const Edit = () => {
       value === "uz"
         ? `${
             import.meta.env.VITE_BASE_URL_API
-          }/personscientificactivity/getbyidpersonscientificactivity/${id}`
+          }/personscientificactivity/getbyidpersonscientificactivityprofil/${id}`
         : `${
             import.meta.env.VITE_BASE_URL_API
-          }/personscientificactivity/getbyidpersonscientificactivitytranslationuzid/${id}?language_code=${value}`,
+          }/personscientificactivity/getbyidpersonscientificactivitytranslationuzidprofil/${id}?language_code=${value}`,
       {
         headers: {
           Authorization: `Bearer ${Cookies.get("_token")}`,

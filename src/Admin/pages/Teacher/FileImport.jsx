@@ -90,41 +90,10 @@ const FileImport = () => {
     getData(old_year);
   }, [old_year]);
 
-  // const buildPanels = (items) => {
-  //   return items.map((item) => (
-  //     <Panel
-  //       key={item.id}
-  //       header={
-  //         <Space $italic={item.indicator} id={item.parent_id}>
-  //           <div className="panel-title">{item.title}</div>
-  //           <div className="ball">
-  //             <span className="text-success p-1 rounded">{item.max_score}</span>{" "}
-  //             / <span className="text-primary p-1 rounded">{item.score}</span>{" "}
-  //             ball
-  //           </div>
-  //         </Space>
-  //       }
-  //     >
-  //       {item.children?.length ? (
-  //         <Collapse>{buildPanels(item.children)}</Collapse>
-  //       ) : (
-  //         <Upload
-  //           old_year={old_year}
-  //           new_year={Number(old_year) + 1}
-  //           id={item.id}
-  //           upd={updateData}
-  //           max_score={item?.max_score}
-  //           score={item?.score}
-  //           author={item?.avtor}
-  //         />
-  //       )}
-  //     </Panel>
-  //   ));
-  // };
-
   const buildPanels = (items) => {
-    return items.map((item) => {
-      return (
+    return items
+      .sort((a, b) => a.id - b.id)
+      .map((item) => (
         <Panel
           key={item.id}
           header={
@@ -154,8 +123,7 @@ const FileImport = () => {
             />
           )}
         </Panel>
-      );
-    });
+      ));
   };
 
   const buildNestedItems = (data, parentId) => {

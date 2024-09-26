@@ -41,7 +41,6 @@ const AdditionalsEdit = ({
         title: titleRef.current.value,
         description: descRef.current.value,
         text: $(editorRef.current).summernote("code"),
-        status_id: 1,
       },
       `${import.meta.env.VITE_BASE_URL_API}${updUrl}`,
       `${import.meta.env.VITE_BASE_URL_API}${updUrlTrans}`,

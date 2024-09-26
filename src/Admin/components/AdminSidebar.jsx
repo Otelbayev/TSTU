@@ -163,7 +163,7 @@ export const admin = () => {
     {
       id: 19,
       title: "O'qituvchilarni faoliyatini tasdiqlash",
-      roles: ["headdepartment", "teacher"],
+      roles: ["headdepartment"],
       icon: "nav-icon fa-solid fa-check-to-slot",
       data: [
         { id: 1, title: "Portfolio", path: "confirm-portfolio" },

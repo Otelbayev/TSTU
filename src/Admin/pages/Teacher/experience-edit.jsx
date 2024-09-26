@@ -48,7 +48,6 @@ const Edit = () => {
         until_when: Number(endRef.current?.value),
         whom: whomRef.current?.value,
         where: whereRef.current?.value,
-        status_id: 1,
       },
       `${
         import.meta.env.VITE_BASE_URL_API

@@ -144,15 +144,15 @@ const Create110 = () => {
           className="form-group col-md-3"
           label="Indicator 1"
           options={bool}
-          value={author}
-          onChange={(e) => setAuthor(e)}
+          value={ind1}
+          onChange={(e) => setInd1(e)}
         />
         <Select
           className="form-group col-md-3"
           label="Avtor"
           options={bool}
-          value={ind1}
-          onChange={(e) => setInd1(e)}
+          value={author}
+          onChange={(e) => setAuthor(e)}
         />
         <div className="row col-md-11">
           {mock.map((e, index) => (

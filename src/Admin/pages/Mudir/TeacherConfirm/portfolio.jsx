@@ -1,8 +1,14 @@
 import React from "react";
-import ConfirmComponent from "./conform-component";
+import Teachers from "./teachers";
 
 const PortfolioConfirm = () => {
-  return <ConfirmComponent />;
+  return (
+    <Teachers
+      title="O'qituvchilarni Portfoliolarini tasdiqlash."
+      url="/personportfolio/getallpersondatadepartment"
+      edit="confirm-portfolio"
+    />
+  );
 };
 
 export default PortfolioConfirm;

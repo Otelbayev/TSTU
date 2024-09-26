@@ -1,8 +1,14 @@
 import React from "react";
-import ConfirmComponent from "./conform-component";
+import Teachers from "./teachers";
 
 const ScienceConfirm = () => {
-  return <ConfirmComponent />;
+  return (
+    <Teachers
+      title="O'qituvchilarni Ilmiy faoliyatini tasdiqlash."
+      url="/personscientificactivity/getallpersondatadepartment"
+      edit="confirm-science"
+    />
+  );
 };
 
 export default ScienceConfirm;

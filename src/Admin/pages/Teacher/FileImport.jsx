@@ -122,20 +122,14 @@ const FileImport = () => {
   //   ));
   // };
 
-  const buildPanels = (items, parentNumber = "") => {
-    return items.map((item, index) => {
-      const currentNumber = parentNumber
-        ? `${parentNumber}.${index + 1}`
-        : `${index + 1}`;
-
+  const buildPanels = (items) => {
+    return items.map((item) => {
       return (
         <Panel
           key={item.id}
           header={
             <Space $italic={item.indicator} id={item.parent_id}>
-              <div className="panel-title">
-                {currentNumber} - {item.title}
-              </div>
+              <div className="panel-title">{item.title}</div>
               <div className="ball">
                 <span className="text-success p-1 rounded">
                   {item.max_score}
@@ -147,7 +141,7 @@ const FileImport = () => {
           }
         >
           {item.children?.length ? (
-            <Collapse>{buildPanels(item.children, currentNumber)}</Collapse>
+            <Collapse>{buildPanels(item.children)}</Collapse>
           ) : (
             <Upload
               old_year={old_year}

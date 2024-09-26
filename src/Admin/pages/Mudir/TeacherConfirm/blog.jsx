@@ -1,10 +1,14 @@
-import React from 'react'
-import ConfirmComponent from './conform-component'
+import React from "react";
+import Teachers from "./teachers";
 
 const BlogConfirm = () => {
   return (
-    <ConfirmComponent/>
-  )
-}
+    <Teachers
+      title="O'qituvchilarni Bloglarini tasdiqlash."
+      url="/personblog/getallpersondatadepartment"
+      edit="confirm-blog"
+    />
+  );
+};
 
-export default BlogConfirm
+export default BlogConfirm;

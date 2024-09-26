@@ -32,6 +32,9 @@ const DataTable = ({
   loading,
   error,
   appeal,
+  confirm,
+  rejectTeacher,
+  resolveTeacher,
 }) => {
   const { sendRequest } = useAxios();
   const navigate = useNavigate();
@@ -53,6 +56,14 @@ const DataTable = ({
             title: "Actions",
             orderable: false,
             render: function (data) {
+              if (confirm) {
+                return `<div style="display: flex; gap:5px"><button class="btn btn-outline-success resolve-teacher" data-id="${data?.id}">
+                    <i class="fa fa-check"></i>
+                  </button>
+                  <button class="btn btn-outline-danger reject-teacher" data-id="${data?.id}">
+                    <i class="fa fa-x"></i>
+                  </button></div>`;
+              }
               return appeal
                 ? `<button class="btn btn-outline-primary edit-btn" data-id="${data?.id}">
                     <i class="fa fa-eye"></i>
@@ -108,9 +119,21 @@ const DataTable = ({
         const id = $(this).data("id");
         handleEdit(id);
       });
+      $("#example tbody").on("click", ".edit-btn", function () {
+        const id = $(this).data("id");
+        handleEdit(id);
+      });
       $("#example tbody").on("click", ".delete-btn", function () {
         const id = $(this).data("id");
         handleDelete(id);
+      });
+      $("#example tbody").on("click", ".reject-teacher", function () {
+        const id = $(this).data("id");
+        rejectTeacher(id);
+      });
+      $("#example tbody").on("click", ".resolve-teacher", function () {
+        const id = $(this).data("id");
+        resolveTeacher(id);
       });
 
       return () => {

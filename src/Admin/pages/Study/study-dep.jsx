@@ -30,6 +30,7 @@ const StudyDep = () => {
   const location = useLocation();
   const { id } = useParams();
   const { old_year } = useDateContext();
+  const [updateData, setUpdateData] = useState(null);
 
   const [data, setDate] = useState([]);
 
@@ -54,7 +55,7 @@ const StudyDep = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [updateData]);
 
   useEffect(() => {
     if (data?.documents_teacher_?.length) {
@@ -98,10 +99,22 @@ const StudyDep = () => {
             title: "Tahrirlash",
             orderable: false,
             render: function (data) {
+              if (data.document_?.id !== 89) {
+                return `<div style="display: flex; gap:5px"> 
+                <button class="btn btn-primary show" data-id="${data?.id}">
+                              <i class="fa fa-eye"></i>
+                      </button>      
+                  </div> `;
+              }
               return `<div style="display: flex; gap:5px"> 
-              <button class="btn btn-outline-primary show" data-id="${data?.id}">
+               <button class="btn btn-outline-primary" data-toggle="modal"
+                            data-target="#exampleModal" data-id="${data?.id}">
+                            <i class="fa fa-edit"></i>
+                    </button>    
+              <button class="btn btn-primary show" data-id="${data?.id}">
                             <i class="fa fa-eye"></i>
-                    </button>      
+                    </button>    
+
                 </div> `;
             },
           },
@@ -143,6 +156,7 @@ const StudyDep = () => {
       title={`${data.person_?.lastName} ${data.person_?.firstName} ${data.person_?.fathers_name}`}
       back={true}
       additional={true}
+      setUpdateData={setUpdateData}
     >
       {data.documents_teacher_?.length ? (
         <Div>

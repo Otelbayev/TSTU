@@ -19,6 +19,7 @@ const Wrapper = ({
   url,
   back,
   additional,
+  setUpdateData,
 }) => {
   const { i18n } = useTranslation();
 
@@ -121,9 +122,15 @@ const Wrapper = ({
 
       if (response.status === 200) {
         message.success({ key: "uin", content: "Yaratildi!" });
-
+        setUpdateData({ name: "Jasurbek" });
         getData();
         $("#exampleModal").modal("hide");
+        commentRef.current.value = "";
+        setOldYear(2024);
+        authorRef.current.value = null;
+        ballRef.current.value = null;
+        fileRef.current = null;
+        dateRef.current = null;
       }
     } catch (err) {
       console.log(err);

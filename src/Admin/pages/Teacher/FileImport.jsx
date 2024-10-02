@@ -7,6 +7,7 @@ import Upload from "./upload-content";
 import { Select } from "../../components/Generics";
 import { useDateContext } from "../../context/DateContext";
 import { studyYears } from "../../utils/mock";
+import DownloadFile from "../../components/file-download";
 
 const getSize = (id, $italic) => {
   if (!$italic) {
@@ -187,6 +188,9 @@ const FileImport = () => {
                           {count}
                         </h2>
                       </h3>
+                      <div className="text-right col-md-4">
+                        <DownloadFile />
+                      </div>
                     </div>
                   </div>
                   <div className="card-body">

@@ -51,7 +51,6 @@ const FileImport = () => {
   const [updateData, setUpdateData] = useState(false);
   const [count, setCount] = useState(0);
 
-  let all = 0;
 
   const getData = async (old_year) => {
     const res = await axios.get(
@@ -131,9 +130,7 @@ const FileImport = () => {
     return data
       .filter((item) => item.parent_id === parentId)
       .map((item) => {
-        if (item.parent_id === 0) {
-          all += item.max_score;
-        }
+       
         return {
           ...item,
           children: buildNestedItems(data, item.id),
@@ -179,7 +176,7 @@ const FileImport = () => {
                       <h3 className="col py-2">
                         Maksimal Ball :{" "}
                         <h2 className="text-success p-1 rounded d-inline">
-                          {all}
+                          110
                         </h2>
                       </h3>
                       <h3 className="col py-2">

@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { Input, Select } from "../Generics";
+import { studyYears } from "../../utils/mock";
+import { message } from "antd";
+import axios from "axios";
 
 const Wrapper = ({
   children,
@@ -14,8 +18,16 @@ const Wrapper = ({
   isDelete,
   url,
   back,
+  additional,
 }) => {
   const { i18n } = useTranslation();
+
+  const commentRef = useRef();
+  const [oldYear, setOldYear] = useState(2024);
+  const dateRef = useRef();
+  const authorRef = useRef();
+  const ballRef = useRef();
+  const fileRef = useRef();
 
   const role = Cookies.get("role");
   const navigate = useNavigate();
@@ -45,7 +57,7 @@ const Wrapper = ({
   const [end, setEnd] = useState(getCurrentDate("now"));
 
   const getData = async () => {
-    const response = await sendRequest({
+    const response = await axios({
       method: "get",
       url: `${
         import.meta.env.VITE_BASE_URL_API
@@ -71,6 +83,51 @@ const Wrapper = ({
     e.preventDefault();
     getData();
   }
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    formData.append("person_id", 63);
+    formData.append("old_year", Number(oldYear));
+    formData.append("new_year", Number(oldYear) + 1);
+    formData.append("document_id", 89);
+    formData.append("comment", commentRef?.current?.value);
+    formData.append("fixed_date", dateRef?.current?.value);
+    formData.append("number_authors", Number(authorRef?.current?.value));
+    formData.append("score", Number(ballRef?.current?.value));
+    formData.append("file_up", fileRef?.current?.files[0] || null);
+
+    try {
+      message.loading({ key: "uin", content: "Yuborilmoqda!" });
+      const response = await axios({
+        method: "post",
+        url: `${
+          import.meta.env.VITE_BASE_URL_API
+        }/documentteacher110setcontroller/createdocumentteacher110setstudydep`,
+        data: formData,
+        headers: {
+          Authorization: `Bearer ${Cookies.get("_token")}`,
+        },
+        params: {
+          person_id: 63,
+          old_year: oldYear,
+          new_year: oldYear + 1,
+          document_id: 89,
+          comment: commentRef?.current?.value,
+          fixed_date: dateRef?.current?.value,
+          number_authors: Number(authorRef?.current?.value),
+          score: Number(ballRef?.current?.value),
+        },
+      });
+
+      if (response.status === 200) {
+        message.success({ key: "uin", content: "Yaratildi!" });
+        getData();
+      }
+    } catch (err) {
+      console.log(err);
+      message.error({ key: "uin", content: err?.response?.data });
+    }
+  };
 
   return (
     <div>
@@ -147,15 +204,110 @@ const Wrapper = ({
                         )}
                         {back && (
                           <NavLink
-                            onClick={() => navigate(-1)}
+                            onClick={() => navigate(-2)}
                             className="btn btn-primary"
                           >
                             Orqaga
                           </NavLink>
                         )}
+                        {additional && (
+                          <button
+                            data-toggle="modal"
+                            data-target="#exampleModal"
+                            className="btn btn-outline-primary mx-2"
+                          >
+                            Qo'shimcha ball
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
+                  <div>
+                    <div
+                      className="modal fade "
+                      id="exampleModal"
+                      tabIndex={-1}
+                      role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div className="modal-dialog modal-lg" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
+                              Qo'shimcha ball qoshish
+                            </h5>
+                            <button
+                              type="button"
+                              className="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div className="modal-body">
+                            <form className="row" onSubmit={handleSubmit}>
+                              <Input
+                                className="col-md-6"
+                                ref={commentRef}
+                                label="Tarif"
+                              />
+                              <Select
+                                className={"col-md-6"}
+                                label={"O'quv yili"}
+                                options={studyYears}
+                                value={oldYear}
+                                onChange={(e) => setOldYear(e)}
+                              />
+                              <Input
+                                className="col-md-6"
+                                type="date"
+                                label="Sana"
+                                ref={dateRef}
+                              />
+                              <Input
+                                className="col-md-6"
+                                type="number"
+                                label="Avtorlar soni"
+                                ref={authorRef}
+                              />
+                              <Input
+                                className="col-md-6"
+                                type="number"
+                                label="Ball"
+                                ref={ballRef}
+                              />
+                              <Input
+                                className="col-md-6"
+                                type="file"
+                                label="Fayl"
+                                ref={fileRef}
+                              />
+                            </form>
+                          </div>
+                          <div className="modal-footer">
+                            <button
+                              type="button"
+                              id="closeBtn"
+                              className="btn btn-secondary"
+                              data-dismiss="modal"
+                            >
+                              Yopish
+                            </button>
+                            <button
+                              type="button"
+                              onClick={handleSubmit}
+                              className="btn btn-primary"
+                            >
+                              Qo'shish
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="card-body">{children}</div>
                   <div className="card-footer clearfix">
                     <ul className="pagination pagination-sm m-0 float-right"></ul>

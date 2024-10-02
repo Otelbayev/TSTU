@@ -86,7 +86,11 @@ const StudyDep = () => {
               if (!row?.score) {
                 return "";
               }
-              return `<div class="text-center"><h4>${row?.score}</h4> (${row?.assessor_?.person_?.firstName} ${row?.assessor_?.person_?.lastName} ${row?.assessor_?.person_?.fathers_name})</div>`;
+              return `<div class="text-center"><h4>${row?.score}</h4> ${
+                row?.assessor_?.person_?.firstName || ""
+              } ${row?.assessor_?.person_?.lastName || ""} ${
+                row?.assessor_?.person_?.fathers_name || ""
+              }</div>`;
             },
           },
           {
@@ -138,6 +142,7 @@ const StudyDep = () => {
     <Wrapper
       title={`${data.person_?.lastName} ${data.person_?.firstName} ${data.person_?.fathers_name}`}
       back={true}
+      additional={true}
     >
       {data.documents_teacher_?.length ? (
         <Div>

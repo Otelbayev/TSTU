@@ -168,7 +168,7 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
 
   return (
     <div>
-      {max_score > score && (
+      {max_score > score && id !== 89 && (
         <form className="row" onSubmit={handleSubmit}>
           <Input
             ref={textRef}

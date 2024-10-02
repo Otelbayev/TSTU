@@ -121,7 +121,9 @@ const Wrapper = ({
 
       if (response.status === 200) {
         message.success({ key: "uin", content: "Yaratildi!" });
+
         getData();
+        $("#exampleModal").modal("hide");
       }
     } catch (err) {
       console.log(err);
@@ -216,7 +218,7 @@ const Wrapper = ({
                             data-target="#exampleModal"
                             className="btn btn-outline-primary mx-2"
                           >
-                            Qo'shimcha ball
+                            Maqsadli parametr
                           </button>
                         )}
                       </div>
@@ -235,7 +237,7 @@ const Wrapper = ({
                         <div className="modal-content">
                           <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">
-                              Qo'shimcha ball qoshish
+                              Maqsadli parametr
                             </h5>
                             <button
                               type="button"

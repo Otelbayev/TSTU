@@ -51,7 +51,6 @@ const FileImport = () => {
   const [updateData, setUpdateData] = useState(false);
   const [count, setCount] = useState(0);
 
-
   const getData = async (old_year) => {
     const res = await axios.get(
       `${
@@ -101,9 +100,9 @@ const FileImport = () => {
               <div className="panel-title">{item.title}</div>
               <div className="ball">
                 <span className="text-success p-1 rounded">
-                  {item.max_score}
+                  {item.id === 89 ? null : item.max_score + " /"}
                 </span>{" "}
-                / <span className="text-primary p-1 rounded">{item.score}</span>{" "}
+                <span className="text-primary p-1 rounded">{item.score}</span>{" "}
                 ball
               </div>
             </Space>
@@ -130,7 +129,6 @@ const FileImport = () => {
     return data
       .filter((item) => item.parent_id === parentId)
       .map((item) => {
-       
         return {
           ...item,
           children: buildNestedItems(data, item.id),

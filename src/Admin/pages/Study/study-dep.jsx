@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Wrapper from "../../components/Wrapper";
 import useAxios from "../../../hooks/useAxios";
 import Cookies from "js-cookie";

@@ -32,7 +32,7 @@ const DataTable = ({
   loading,
   error,
   appeal,
-  confirm,
+  confirm: confirmed,
   rejectTeacher,
   resolveTeacher,
 }) => {
@@ -56,7 +56,7 @@ const DataTable = ({
             title: "Actions",
             orderable: false,
             render: function (data) {
-              if (confirm) {
+              if (confirmed) {
                 return `<div style="display: flex; gap:5px"><button class="btn btn-outline-success resolve-teacher" data-id="${data?.id}">
                     <i class="fa fa-check"></i>
                   </button>

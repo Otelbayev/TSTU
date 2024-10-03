@@ -21,31 +21,6 @@ const Div = styled.div`
   }
 `;
 
-{
-  /* <DataTable
-        data={data}
-        error={error}
-        loading={loading}
-        appeal={true}
-        edit={"appeals"}
-        actions={true}
-        col={[
-          { data: "id", title: "#" },
-          { data: "full_name", title: "FISH" },
-          { data: "email", title: "Email" },
-          { data: "subject", title: "Bandligi" },
-          {
-            data: null,
-            title: "Sana",
-            render: function (data, type, row) {
-              return row?.created_at?.slice(0, 10);
-            },
-          },
-          { data: "message", title: "Murojaat" },
-        ]}
-      /> */
-}
-
 const Appeal = () => {
   const { sendRequest, error, loading } = useAxios();
   const location = useLocation();

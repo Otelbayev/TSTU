@@ -9,8 +9,6 @@ const Additionals = ({ title, get, del, edit }) => {
   const [data, setData] = useState([]);
   const [isDelete, setIsDelete] = useState(false);
 
-  console;
-
   const getData = async () => {
     try {
       const response = await sendRequest({

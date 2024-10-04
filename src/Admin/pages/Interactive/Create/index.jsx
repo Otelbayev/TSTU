@@ -36,8 +36,12 @@ const Create = () => {
       value,
       "formData",
       formData,
-      `${import.meta.env.VITE_BASE_URL_API}/interactiveservices/createinteractiveservices`,
-      `${import.meta.env.VITE_BASE_URL_API}/interactiveservices/createinteractiveservicestranslation`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/interactiveservices/createinteractiveservices`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/interactiveservices/createinteractiveservicestranslation`,
       "interactive_services_id",
       [{ language_id }]
     );
@@ -66,7 +70,7 @@ const Create = () => {
             ]}
           />
           <div className="col-md-12 mt-4 ml-2">
-            <button className="btn btn-success">Create</button>
+            <button className="btn btn-success">Yaratish</button>
           </div>
         </div>
       </form>

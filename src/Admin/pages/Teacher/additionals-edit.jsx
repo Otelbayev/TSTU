@@ -102,7 +102,7 @@ const AdditionalsEdit = ({
         <Input
           ref={descRef}
           className="form-group col-md-2"
-          label={`Tarif (${value})`}
+          label={`Izoh (${value})`}
         />
         <Editor ref={editorRef} className="form-group col-md-8" />
         <div className="form-group mt-3 col-md-12">

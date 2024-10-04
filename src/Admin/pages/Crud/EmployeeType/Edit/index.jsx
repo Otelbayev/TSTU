@@ -45,10 +45,14 @@ const Edit = () => {
         status_id: status,
       },
       `${import.meta.env.VITE_BASE_URL_API}/employeetype/updateemployeetype`,
-      `${import.meta.env.VITE_BASE_URL_API}/employeetype/updateemployeetypetranslation`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/employeetype/updateemployeetypetranslation`,
       [{ employee_id: id }, { language_id }, { status_translation_id: status }],
       ["status_id", "id"],
-      `${import.meta.env.VITE_BASE_URL_API}/employeetype/createemployeetypetranslation`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/employeetype/createemployeetypetranslation`,
       [{ language_id }, { employee_id: id }],
       ["status_id", "id"]
     );
@@ -112,9 +116,9 @@ const Edit = () => {
         )}
         <div className="form-group col-md-2">
           {isCreate ? (
-            <button className="btn btn-success w-100">Create</button>
+            <button className="btn btn-success w-100">Yaratish</button>
           ) : (
-            <button className="btn btn-primary w-100">Update</button>
+            <button className="btn btn-primary w-100">Yangilash</button>
           )}
         </div>
       </form>

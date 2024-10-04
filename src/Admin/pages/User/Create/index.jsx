@@ -102,7 +102,7 @@ const Create = () => {
             ]}
           />
           <div className="col-md-3 m-2">
-            <button className="btn btn-success w-100">Create</button>
+            <button className="btn btn-success w-100">Yaratish</button>
           </div>
         </div>
       </form>

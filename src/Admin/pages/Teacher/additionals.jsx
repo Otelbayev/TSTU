@@ -26,8 +26,6 @@ const Additionals = ({ title, get, del, edit }) => {
     getData();
   }, [isDelete]);
 
-
-
   return (
     <Wrapper title={title} create={true}>
       <DataTable
@@ -39,8 +37,8 @@ const Additionals = ({ title, get, del, edit }) => {
         setIsDelete={setIsDelete}
         col={[
           { data: "id", title: "# " },
-          { data: "title", title: "Title" },
-          { data: "description", title: "description" },
+          { data: "title", title: "Mavzu" },
+          { data: "description", title: "Izoh" },
           {
             data: "confirmed",
             title: "Status",

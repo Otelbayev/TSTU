@@ -78,7 +78,7 @@ const StudyDep = () => {
         data: data.documents_teacher_.sort((a, b) => a.id - b.id),
         columns: [
           { data: "id", title: "#" },
-          { data: "comment", title: "Tarif" },
+          { data: "comment", title: "Izoh" },
           { data: "document_.title", title: "Hujjat" },
           {
             title: "Holati",
@@ -393,7 +393,7 @@ const StudyDep = () => {
               </div>
               <div className="modal-body">
                 <form className="row" onSubmit={handleSubmit}>
-                  <Input className="col-md-12" ref={commentRef} label="Tarif" />
+                  <Input className="col-md-12" ref={commentRef} label="Izoh" />
                   <Select
                     className={"col-md-6"}
                     label={"O'quv yili"}

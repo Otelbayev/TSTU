@@ -91,7 +91,7 @@ const ConfirmComponent = ({ title, url, con, col }) => {
           : [
               { data: "id", title: "#" },
               { data: "title", title: "Nomi" },
-              { data: "description", title: "Tarif" },
+              { data: "description", title: "Izoh" },
               { data: "text", title: "Text" },
               {
                 data: null,
@@ -196,7 +196,7 @@ const ConfirmComponent = ({ title, url, con, col }) => {
   }
 
   return (
-    <Wrapper title={title}>
+    <Wrapper title={title} back={true}>
       <div
         className="modal fade bd-example-modal-sm modal1"
         tabIndex="-1"

@@ -71,7 +71,7 @@ const ConfirmTeacher = () => {
         data: data?.documents_teacher_.sort((a, b) => a.id - b.id),
         columns: [
           { data: "id", title: "#" },
-          { data: "comment", title: "Tarif" },
+          { data: "comment", title: "Izoh" },
           { data: "document_.title", title: "Hujjat" },
           {
             data: null,

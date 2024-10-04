@@ -48,8 +48,8 @@ const Experiance = () => {
               return `${data.since_when} - ${data.until_when}`;
             },
           },
-          { data: "whom", title: "whom" },
-          { data: "where", title: "where" },
+          { data: "whom", title: "Lavozim" },
+          { data: "where", title: "Qayerda" },
           {
             data: "confirmed",
             title: "Status",

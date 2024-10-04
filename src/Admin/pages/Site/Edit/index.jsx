@@ -144,9 +144,9 @@ const Edit = () => {
           )}
           <div className="form-group col-md-3 m-2">
             {isCreate ? (
-              <button className="btn btn-success w-100">Create</button>
+              <button className="btn btn-success w-100">Yaratish</button>
             ) : (
-              <button className="btn btn-primary w-100">Update</button>
+              <button className="btn btn-primary w-100">Yangilash</button>
             )}
           </div>
         </div>

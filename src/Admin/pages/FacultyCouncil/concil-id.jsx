@@ -72,7 +72,7 @@ const Concil = () => {
         data: data?.documents_teacher_.sort((a, b) => a.id - b.id),
         columns: [
           { data: "id", title: "#" },
-          { data: "comment", title: "Tarif" },
+          { data: "comment", title: "Izoh" },
           { data: "document_.title", title: "Hujjat" },
           { data: "score", title: "Ball" },
           {
@@ -96,7 +96,7 @@ const Concil = () => {
             title: "Ko'rish",
             orderable: false,
             render: function (data) {
-              if (data.sequence_status === 3) {
+              if (data.sequence_status === 3 && !data.rejection) {
                 return `<div style="display: flex; gap:5px"> 
                 <button class="btn btn-outline-primary show" data-id="${data?.id}">
                 <i class="fa fa-eye"></i>

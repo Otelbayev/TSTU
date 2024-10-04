@@ -35,8 +35,12 @@ const Create = () => {
       value,
       "formData",
       formData,
-      `${import.meta.env.VITE_BASE_URL_API}/statisticalnumbers/createstatisticalnumbers`,
-      `${import.meta.env.VITE_BASE_URL_API}/statisticalnumbers/createstatisticalnumberstranslation`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/statisticalnumbers/createstatisticalnumbers`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/statisticalnumbers/createstatisticalnumberstranslation`,
       "statistical_numbers_id",
       [{ language_id }]
     );
@@ -54,7 +58,7 @@ const Create = () => {
           <Input label="Numbers" className="col-md-6" ref={numbersRef} />
           <ChooseFile label="Icon" className="col-md-6" ref={iconRef} />
           <div className="col-md-2 mt-3 ml-2">
-            <button className="btn btn-primary w-100">Create</button>
+            <button className="btn btn-primary w-100">Yaratish</button>
           </div>
         </div>
       </form>

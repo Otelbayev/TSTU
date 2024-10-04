@@ -29,7 +29,9 @@ const Create = () => {
       "obj",
       { title },
       `${import.meta.env.VITE_BASE_URL_API}/employeetype/createemployeetype`,
-      `${import.meta.env.VITE_BASE_URL_API}/employeetype/createemployeetypetranslation`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/employeetype/createemployeetypetranslation`,
       "employee_id",
       [{ language_id }]
     );
@@ -50,7 +52,7 @@ const Create = () => {
           onFocus={() => setInputStyle({})}
         />
         <div className="form-group col-md-2">
-          <button className="btn btn-primary w-100">Create</button>
+          <button className="btn btn-primary w-100">Yaratish</button>
         </div>
       </form>
     </Wrapper>

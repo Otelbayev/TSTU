@@ -177,9 +177,9 @@ const Edit = () => {
           )}
           <div className="col-md-12 mt-4 ml-2">
             {isCreate ? (
-              <button className="btn btn-success">Create</button>
+              <button className="btn btn-success">Yaratish</button>
             ) : (
-              <button className="btn btn-primary">Update</button>
+              <button className="btn btn-primary">Yangilash</button>
             )}
           </div>
         </div>

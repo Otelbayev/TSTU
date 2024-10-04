@@ -61,7 +61,9 @@ const Edit = () => {
       transId,
       formData,
       `${import.meta.env.VITE_BASE_URL_API}/sitedetail/updatesitedetail`,
-      `${import.meta.env.VITE_BASE_URL_API}/sitedetail/updatesitedetailtranslation`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/sitedetail/updatesitedetailtranslation`,
       [
         { site_detail_id: id },
         { language_id },
@@ -69,7 +71,9 @@ const Edit = () => {
         { status_translation_id: status },
       ],
       ["site_id", "status_id"],
-      `${import.meta.env.VITE_BASE_URL_API}/sitedetail/createsitedetailtranslation`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/sitedetail/createsitedetailtranslation`,
       [
         { language_id },
         { site_detail_id: id },
@@ -190,9 +194,9 @@ const Edit = () => {
           )}
           <div className="col-md-3 m-2">
             {isCreate ? (
-              <button className="btn btn-success w-100">Create</button>
+              <button className="btn btn-success w-100">Yaratish</button>
             ) : (
-              <button className="btn btn-primary w-100">Update</button>
+              <button className="btn btn-primary w-100">Yangilash</button>
             )}
           </div>
         </div>

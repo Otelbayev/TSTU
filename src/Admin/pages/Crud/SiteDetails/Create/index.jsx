@@ -51,7 +51,9 @@ const Create = () => {
       "formData",
       formData,
       `${import.meta.env.VITE_BASE_URL_API}/sitedetail/createsitedetail`,
-      `${import.meta.env.VITE_BASE_URL_API}/sitedetail/createsitedetailtranslation`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/sitedetail/createsitedetailtranslation`,
       "site_detail_id",
       [{ language_id }, { site_translation_id: siteId }],
       ["site_id"]
@@ -120,7 +122,7 @@ const Create = () => {
             ref={faviconRef}
           />
           <div className="col-md-3 m-2">
-            <button className="btn btn-primary w-100">Create</button>
+            <button className="btn btn-primary w-100">Yaratish</button>
           </div>
         </div>
       </form>

@@ -89,15 +89,21 @@ const Edit = () => {
       id,
       transId,
       formData,
-      `${import.meta.env.VITE_BASE_URL_API}/statisticalnumbers/updatestatisticalnumbers`,
-      `${import.meta.env.VITE_BASE_URL_API}/statisticalnumbers/updatestatisticalnumberstranslation`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/statisticalnumbers/updatestatisticalnumbers`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/statisticalnumbers/updatestatisticalnumberstranslation`,
       [
         { statistical_numbers_id: id },
         { language_id },
         { status_translation_id: status },
       ],
       ["status_id"],
-      `${import.meta.env.VITE_BASE_URL_API}/statisticalnumbers/createstatisticalnumberstranslation`,
+      `${
+        import.meta.env.VITE_BASE_URL_API
+      }/statisticalnumbers/createstatisticalnumberstranslation`,
       [{ statistical_numbers_id: id }, { language_id }],
       ["status_id"]
     );
@@ -145,9 +151,9 @@ const Edit = () => {
           {!isCreate && <Image img={icon} className="col-md-3" />}
           <div className="col-md-2 mt-3 ml-2">
             {isCreate ? (
-              <button className="btn btn-success w-100">Create</button>
+              <button className="btn btn-success w-100">Yaratish</button>
             ) : (
-              <button className="btn btn-primary w-100">Update</button>
+              <button className="btn btn-primary w-100">Yangilash</button>
             )}
           </div>
         </div>

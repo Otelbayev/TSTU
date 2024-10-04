@@ -147,7 +147,7 @@ const Edit = () => {
             onChange={(e) => setStatus(e)}
           />
           <div className="col-md-12 m-2">
-            <button className="btn btn-primary">Update</button>
+            <button className="btn btn-primary">Yangilash</button>
           </div>
         </div>
       </form>

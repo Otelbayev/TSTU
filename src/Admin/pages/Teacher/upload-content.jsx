@@ -206,7 +206,7 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
         >
           <thead>
             <tr>
-              <th className="py-2">Tarif</th>
+              <th className="py-2">Izoh</th>
               <th className="py-2">Holati</th>
               <th className="py-2">Ball</th>
               <th className="py-2">Sana</th>

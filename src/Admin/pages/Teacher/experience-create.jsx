@@ -81,12 +81,12 @@ const Create = () => {
         <Input
           className="form-group col-md-3"
           ref={whomRef}
-          label={`Title (${value})`}
+          label={`Lavozim (${value})`}
         />
         <Input
           className="form-group col-md-5"
           ref={whereRef}
-          label={`Title (${value})`}
+          label={`Qayerda (${value})`}
         />
         <div className="form-group mt-3 col-md-12">
           <div className="col-sm-12">

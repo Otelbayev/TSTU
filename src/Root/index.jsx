@@ -19,9 +19,9 @@ const Root = () => {
     if (paths.includes("admission")) {
       window.location.href = `http://sayt.tstu.uz/admission`;
     }
-    if (paths.includes("admission_foreign")) {
-      window.location.href = `http://sayt.tstu.uz/admission_foreign`;
-    }
+    // if (paths.includes("admission_foreign")) {
+    //   window.location.href = `http://sayt.tstu.uz/admission_foreign`;
+    // }
     if (paths.includes("rentapartment")) {
       window.location.href = `http://sayt.tstu.uz/rentapartment`;
     }

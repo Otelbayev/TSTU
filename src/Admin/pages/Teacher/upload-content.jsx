@@ -218,110 +218,150 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
             {data
               .sort((a, b) => a.id - b.id)
               .map((item) => (
-                <tr key={item?.id}>
-                  <td>
-                    {item.id === isEdit ? (
-                      <Input defaultValue={item.comment} ref={editTextRef} />
-                    ) : (
-                      item.comment
-                    )}
-                  </td>
-                  {item.id === isEdit ? (
-                    <td colSpan={2}>
-                      <ChooseFile ref={editFileRef} />
-                    </td>
-                  ) : (
-                    <td style={{ width: "20%" }}>
-                      {item.score ? (
-                        <p className="text-success">Tasdiqlangan</p>
-                      ) : item.rejection ? (
-                        <div class="d-flex justify-content-center align-items-center">
-                          <p class="text-danger my-0 mx-3">Rad etildi</p>
-                          <a
-                            className="btn btn-outline-primary py-1 px-2"
-                            data-toggle="modal"
-                            data-target={`#exampleModal${item.id}`}
-                          >
-                            Izoh...
-                          </a>
-                        </div>
+                <>
+                  <tr key={item?.id}>
+                    <td>
+                      {item.id === isEdit ? (
+                        <Input defaultValue={item.comment} ref={editTextRef} />
                       ) : (
-                        <p className="text-primary">Jarayonda</p>
+                        item.comment
                       )}
                     </td>
-                  )}
-                  {item.id !== isEdit && (
-                    <td style={{ width: "10%" }}>{item?.score}</td>
-                  )}
-                  <td style={{ width: "15%" }}>
                     {item.id === isEdit ? (
-                      <Input
-                        ref={editDateRef}
-                        defaultValue={item.fixed_date?.split("T")[0]}
-                        type="date"
-                      />
+                      <td colSpan={2}>
+                        <ChooseFile ref={editFileRef} />
+                      </td>
                     ) : (
-                      item.fixed_date?.split("T")[0]
+                      <td style={{ width: "20%" }}>
+                        {item.score ? (
+                          <p className="text-success">Tasdiqlangan</p>
+                        ) : item.rejection ? (
+                          <div class="d-flex justify-content-center align-items-center">
+                            <p class="text-danger my-0 mx-3">Rad etildi</p>
+                            <a
+                              className="btn btn-outline-primary py-1 px-2"
+                              data-toggle="modal"
+                              data-target={`#exampleModal${item.id}`}
+                            >
+                              Izoh...
+                            </a>
+                          </div>
+                        ) : (
+                          <p className="text-primary">Jarayonda</p>
+                        )}
+                      </td>
                     )}
-                  </td>
-                  {author && (
+                    {item.id !== isEdit && (
+                      <td style={{ width: "10%" }}>{item?.score}</td>
+                    )}
                     <td style={{ width: "15%" }}>
                       {item.id === isEdit ? (
                         <Input
-                          defaultValue={item.number_authors}
-                          ref={editCountRef}
+                          ref={editDateRef}
+                          defaultValue={item.fixed_date?.split("T")[0]}
+                          type="date"
                         />
                       ) : (
-                        item.number_authors
+                        item.fixed_date?.split("T")[0]
                       )}
                     </td>
-                  )}
-                  <td style={{ width: "15%" }}>
-                    {isEdit === item.id && (
-                      <button
-                        onClick={() => onSave(item.id)}
-                        className="btn btn-success m-1"
-                      >
-                        <i className="fa-solid fa-check"></i>
-                      </button>
+                    {author && (
+                      <td style={{ width: "15%" }}>
+                        {item.id === isEdit ? (
+                          <Input
+                            defaultValue={item.number_authors}
+                            ref={editCountRef}
+                          />
+                        ) : (
+                          item.number_authors
+                        )}
+                      </td>
                     )}
-                    {isEdit === item.id && (
-                      <button
-                        onClick={() => setIsEdit(null)}
-                        className="btn btn-danger m-1"
-                      >
-                        <i className="fa-solid fa-x"></i>
-                      </button>
-                    )}
-                    {item.id !== isEdit && (
-                      <NavLink
-                        target="_blank"
-                        to={`${import.meta.env.VITE_BASE_URL_IMG}${
-                          item?.file_?.url
-                        }`}
-                        className={"btn btn-secondary my-1"}
-                      >
-                        <i className="fa-solid fa-file"></i>
-                      </NavLink>
-                    )}
-                    {item.id !== isEdit && !item.score && (
-                      <button
-                        onClick={() => setIsEdit(item.id)}
-                        className="btn btn-primary m-1"
-                      >
-                        <i className="fa-solid fa-edit"></i>
-                      </button>
-                    )}
-                    {item.id !== isEdit && !item.score && (
-                      <button
-                        onClick={() => onDel(item.id)}
-                        className="btn btn-danger"
-                      >
-                        <i className="fa-solid fa-trash"></i>
-                      </button>
-                    )}
-                  </td>
-                </tr>
+                    <td style={{ width: "15%" }}>
+                      {isEdit === item.id && (
+                        <button
+                          onClick={() => onSave(item.id)}
+                          className="btn btn-success m-1"
+                        >
+                          <i className="fa-solid fa-check"></i>
+                        </button>
+                      )}
+                      {isEdit === item.id && (
+                        <button
+                          onClick={() => setIsEdit(null)}
+                          className="btn btn-danger m-1"
+                        >
+                          <i className="fa-solid fa-x"></i>
+                        </button>
+                      )}
+                      {item.id !== isEdit && (
+                        <NavLink
+                          target="_blank"
+                          to={`${import.meta.env.VITE_BASE_URL_IMG}${
+                            item?.file_?.url
+                          }`}
+                          className={"btn btn-secondary my-1"}
+                        >
+                          <i className="fa-solid fa-file"></i>
+                        </NavLink>
+                      )}
+                      {item.id !== isEdit && !item.score && (
+                        <button
+                          onClick={() => setIsEdit(item.id)}
+                          className="btn btn-primary m-1"
+                        >
+                          <i className="fa-solid fa-edit"></i>
+                        </button>
+                      )}
+                      {item.id !== isEdit && !item.score && (
+                        <button
+                          onClick={() => onDel(item.id)}
+                          className="btn btn-danger"
+                        >
+                          <i className="fa-solid fa-trash"></i>
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                  <div
+                    className="modal fade"
+                    id={`exampleModal${item.id}`}
+                    tabIndex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div className="modal-dialog" role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title" id="exampleModalLabel">
+                            Rad edilgan
+                          </h5>
+                          <button
+                            type="button"
+                            className="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div className="modal-body">
+                          {item.reason_for_rejection || "Rad etilgan"}
+                        </div>
+                        <div className="modal-footer">
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            data-dismiss="modal"
+                          >
+                            Yopish
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
               ))}
           </tbody>
         </table>
@@ -354,44 +394,3 @@ const Upload = ({ id, old_year, new_year, upd, max_score, score, author }) => {
 };
 
 export default Upload;
-
-{
-  /* <div
-className="modal fade"
-id={`exampleModal${item.id}`}
-tabIndex="-1"
-role="dialog"
-aria-labelledby="exampleModalLabel"
-aria-hidden="true"
->
-<div className="modal-dialog" role="document">
-  <div className="modal-content">
-    <div className="modal-header">
-      <h5 className="modal-title" id="exampleModalLabel">
-        Rad edilgan
-      </h5>
-      <button
-        type="button"
-        className="close"
-        data-dismiss="modal"
-        aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div className="modal-body">
-      {item.reason_for_rejection || "Rad etilgan"}
-    </div>
-    <div className="modal-footer">
-      <button
-        type="button"
-        className="btn btn-secondary"
-        data-dismiss="modal"
-      >
-        Yopish
-      </button>
-    </div>
-  </div>
-</div>
-</div> */
-}

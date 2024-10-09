@@ -14,7 +14,6 @@ const Search = () => {
   const [isPending, startTransition] = useTransition();
 
   const { error, sendRequest } = useAxios();
-  console.log(data);
 
   const getData = useCallback(
     debounce(async (value) => {

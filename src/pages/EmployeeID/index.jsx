@@ -35,6 +35,8 @@ const EmployeeID = () => {
       .then((res) => setData(res));
   }, [i18n.language]);
 
+  console.log(data);
+
   return (
     <div className="body">
       <div className="wrapper">
@@ -64,7 +66,8 @@ const EmployeeID = () => {
             <div className="mb-4" style={{ height: 22 }}>
               <div>
                 {data?.persons_?.employee_type_?.title ||
-                  data?.persons_?.employee_type_translation?.title}{" "}
+                  data?.persons_translation_?.employee_type_translation_
+                    ?.title}{" "}
                 {data?.degree}
               </div>
             </div>
@@ -123,7 +126,7 @@ const EmployeeID = () => {
                   {t("employee.portfolio")}
                 </h2>
               </div>
-               <div
+              <div
                 className="col-12"
                 dangerouslySetInnerHTML={{
                   __html: data?.portfolio_json

@@ -758,7 +758,7 @@ export const routes = [
     id: useId(),
     path: "import-doc",
     element: <TeacherDoc />,
-    roles: ["teacher"],
+    roles: ["teacher", "headdepartment"],
   },
   {
     id: useId(),

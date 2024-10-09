@@ -87,7 +87,7 @@ const StudyDep = () => {
                 return `<p class="text-danger">Rad etilgan</p>`;
               }
               if (row.sequence_status === 4) {
-                return `<p class="text-success">Tastiqlangan</p>`;
+                return `<p class="text-success">Tasdiqlangan</p>`;
               } else {
                 return `<p class="text-primary">Jarayonda</p>`;
               }

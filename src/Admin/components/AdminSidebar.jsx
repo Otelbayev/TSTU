@@ -94,7 +94,7 @@ export const admin = () => {
       id: 8,
       path: "import-doc",
       title: "110 ball",
-      roles: ["teacher"],
+      roles: ["teacher", "headdepartment"],
       icon: "nav-icon fa fa-file-import",
     },
     {

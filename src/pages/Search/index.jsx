@@ -111,13 +111,25 @@ const Search = () => {
     );
   }
 
+  const toDepartmen = (type, id) => {
+    switch (type) {
+      case "Fakultet":
+        return `/${i18n.language}/faculty/${id}`;
+      case "Kafedra":
+        return `/${i18n.language}/kafedra/${id}`;
+      default:
+        return `/${i18n.language}/department/${id}`;
+    }
+  };
+
   const toNavigate = (
     type,
     id,
     blog_id,
-    departament_id,
     persons_data_id,
-    page_id
+    page_id,
+    department_type,
+    departament_id
   ) => {
     if (type === "Bloglar" || type === "Blogs") {
       return (
@@ -131,9 +143,10 @@ const Search = () => {
     } else if (type === "Departaments" || type === "Bo'limlar") {
       return (
         <NavLink
-          to={`/${i18n.language}/department/${
+          to={toDepartmen(
+            department_type,
             i18n.language === "uz" ? id : departament_id
-          }`}
+          )}
           onClick={() => setIsOpen(false)}
         >
           {t("Bdirections.btn")}
@@ -200,9 +213,12 @@ const Search = () => {
                         e.type,
                         item?.id,
                         item?.blog_id,
-                        item?.departament_id,
                         item?.persons_data_id,
-                        item?.page_id
+                        item?.page_id,
+                        item?.departament_type_?.type ||
+                          item?.departament_type_translation_?.departament_type_
+                            ?.type,
+                        item?.departament_id
                       )}
                     </div>
                   ))}

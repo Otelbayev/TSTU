@@ -29,14 +29,18 @@ const Dekans = ({ data }) => {
           <Dekan.User />
           <div>{data?.degree}</div>
         </Dekan.Contact>
-        <Dekan.Contact>
-          <Dekan.Phone />
-          <div>{data?.phone_number1}</div>
-        </Dekan.Contact>
-        <Dekan.Contact>
-          <Dekan.Email />
-          <div>{data?.persons_?.email}</div>
-        </Dekan.Contact>
+        {data?.phone_number1 && (
+          <Dekan.Contact>
+            <Dekan.Phone />
+            <div>{data?.phone_number1}</div>
+          </Dekan.Contact>
+        )}
+        {data?.persons_?.email && (
+          <Dekan.Contact>
+            <Dekan.Email />
+            <div>{data?.persons_?.email}</div>
+          </Dekan.Contact>
+        )}
         <div dangerouslySetInnerHTML={{ __html: data?.experience_json }} />
         {/* <Dekan.Ul>
           {data?.experience_json?.split(";").map((e, index) => (

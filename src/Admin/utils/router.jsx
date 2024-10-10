@@ -819,13 +819,13 @@ export const routes = [
     id: useId(),
     path: "faculty-council",
     element: <FacultyCouncil />,
-    roles: ["facultycouncil"],
+    roles: ["facultycouncil", "dean"],
   },
   {
     id: useId(),
     path: "faculty-council/:id",
     element: <FacultyCouncilID />,
-    roles: ["facultycouncil"],
+    roles: ["facultycouncil", "dean"],
   },
   {
     id: useId(),

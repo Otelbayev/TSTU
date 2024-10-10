@@ -122,7 +122,7 @@ export const admin = () => {
       id: 12,
       path: "faculty-council",
       title: "O'qituvchilarni baholash",
-      roles: ["facultycouncil"],
+      roles: ["facultycouncil", "dean"],
       icon: "nav-icon fa-solid fa-ranking-star",
     },
     {

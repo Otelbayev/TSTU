@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const Dekans = ({ data }) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const naviagte = useNavigate();
   return (
@@ -58,7 +58,7 @@ const Dekans = ({ data }) => {
             )
           }
         >
-          Batafsil
+          {t("Bdirections.btn")}
         </Dekan.Btn>
       </Dekan.Right>
     </Dekan>

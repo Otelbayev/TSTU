@@ -151,7 +151,7 @@ const EmployeeID = () => {
               />
             </div>
           </div>
-          <Form t={t} id={id} />
+          {/* <Form t={t} id={id} /> */}
           <Footer t={t} />
         </div>
       </div>

@@ -20,73 +20,89 @@ const About = ({ data, t }) => {
           />
           <div className="row">
             <div className="col-sm-6 py-1">
-              <h5 className="d-inline text-primary">
-                {t("employee.fio")}: {"  "}
+              <h5>
+                <span className="text-primary mr-2">{t("employee.fio")}:</span>
+                {data?.persons_?.firstName ||
+                  data?.persons_translation_?.firstName}{" "}
+                {data?.persons_?.lastName ||
+                  data?.persons_translation_?.lastName}{" "}
+                {data?.persons_?.fathers_name ||
+                  data?.persons_translation_?.fathers_name}
               </h5>
-              {data?.persons_?.firstName ||
-                data?.persons_translation_?.firstName}{" "}
-              {data?.persons_?.lastName || data?.persons_translation_?.lastName}{" "}
-              {data?.persons_?.fathers_name ||
-                data?.persons_translation_?.fathers_name}
             </div>
             {data?.birthday && (
               <div className="col-sm-6 py-1">
-                <h5 className="d-inline text-primary">
-                  {t("employee.birth")}: {"  "}
+                <h5>
+                  <span className="text-primary mr-2">
+                    {t("employee.birth")}:
+                  </span>
+                  {data?.birthday?.split("T")[0]}
                 </h5>
-                {data?.birthday?.split("T")[0]}
               </div>
             )}
             {data?.degree && (
               <div className="col-sm-6 py-1">
-                <h5 className="d-inline text-primary">
-                  {t("employee.deg")}: {"  "}
+                <h5>
+                  <span className="text-primary mr-2">
+                    {t("employee.deg")}:
+                  </span>
+                  {data?.degree}
                 </h5>
-                {data?.degree}
               </div>
             )}
             {data?.expericence_year && (
               <div className="col-sm-6 py-1">
-                <h5 className="d-inline text-primary">
-                  {t("employee.ex")}: {"  "}
+                <h5>
+                  <span className="text-primary mr-2">{t("employee.ex")}:</span>
+                  {data?.expericence_year}
                 </h5>
-                {data?.expericence_year}
               </div>
             )}
             {data?.phone_number1 && (
               <div className="col-sm-6 py-1">
-                <h5 className="d-inline text-primary">
-                  {t("employee.tel")}: {"  "}
+                <h5>
+                  <span className="text-primary mr-2">
+                    {t("employee.tel")}:
+                  </span>
+                  {data?.phone_number1}
                 </h5>
-                {data?.phone_number1}
               </div>
             )}
             {(data?.persons_?.email ||
               data?.persons_translation_?.persons_?.email) && (
               <div className="col-sm-6 py-1">
-                <h5 className="d-inline text-primary">Email: {"  "}</h5>
-                {data?.persons_?.email ||
-                  data?.persons_translation_?.persons_?.email}
+                <h5>
+                  <span className="text-primary mr-2">Email:</span>
+                  {data?.persons_?.email ||
+                    data?.persons_translation_?.persons_?.email}
+                </h5>
               </div>
             )}
             {data?.orchid && (
               <div className="col-sm-6 py-1">
-                <h5 className="d-inline text-primary">ORCID: {"  "}</h5>
-                {data?.orchid}
+                <h5>
+                  <span className="text-primary mr-2">ORCID:</span>
+                  {data?.orchid}
+                </h5>
               </div>
             )}
             {data?.scopus_id && (
               <div className="col-sm-6 py-1">
-                <h5 className="d-inline text-primary">Scopus ID: {"  "}</h5>
-                {data?.scopus_id}
+                <h5>
+                  <span className="text-primary mr-2">Scopus ID:</span>
+
+                  {data?.scopus_id}
+                </h5>
               </div>
             )}
             {data?.address && (
               <div className="col-sm-12 py-1">
-                <h5 className="d-inline text-primary">
-                  {t("employee.address")}:
+                <h5>
+                  <span className="text-primary mr-2">
+                    {t("employee.address")}:
+                  </span>
+                  {data?.address}
                 </h5>
-                {data?.address}
               </div>
             )}
           </div>

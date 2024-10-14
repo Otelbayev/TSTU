@@ -6,6 +6,7 @@ import noimg from "../../../assets/images/no.jpg";
 const DekanCart = ({ data }) => {
   const naviagte = useNavigate();
   const { i18n } = useTranslation();
+  console.log(data);
   return (
     <Content data-aos="zoom-in">
       <Content.Img
@@ -36,8 +37,8 @@ const DekanCart = ({ data }) => {
           data?.persons_translation_?.fathers_name}
       </Content.Name>
       <Content.Position>
-        {data?.persons_translation_?.employee_type_?.title ||
-          data?.persons_translation_?.employee_type_translation_?.title}
+        {data.persons_?.employee_type_?.title ||
+          data.persons_translation_?.employee_type_translation_?.title}
       </Content.Position>
       <Content.Media>
         <NavLink>

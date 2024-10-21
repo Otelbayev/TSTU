@@ -95,7 +95,7 @@ const SignIn = () => {
 
   const redierectToHemis = () => {
     window.location.href =
-      "https://univer.hemis.uz/oauth/authorize?response_type=code&client_id=8&redirect_uri=http://localhost:5173/callback";
+      "https://hemis.tstu.uz/oauth/authorize?response_type=code&client_id=8&redirect_uri=http://localhost:5173/callback";
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import signin from "../../assets/images/signin.png";
-import { Content, Div, Icons } from "./style";
+import { Content, Div } from "./style";
 import useAxios from "../../hooks/useAxios";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -93,13 +93,17 @@ const SignIn = () => {
     }
   };
 
+  const redierectToHemis = () => {
+    window.location.href =
+      "https://univer.hemis.uz/oauth/authorize?response_type=code&client_id=8&redirect_uri=http://localhost:5173/callback";
+  };
+
   return (
     <div className="root-container">
       <div className="root-wrapper">
         <Content data-aos="fade-up">
           <Content.Left>
             <Content.Title>{t("login.title")}</Content.Title>
-            {/* <Content.SubTitle>Meet the good taste today</Content.SubTitle> */}
             <Content.Form onSubmit={onFormSubmit}>
               <Div>
                 <Content.Label>{t("login.login")}</Content.Label>
@@ -140,25 +144,25 @@ const SignIn = () => {
                 <Content.Forgot>{t("login.forgot")}</Content.Forgot>
               </Div>
               <Div>
-                <Content.Button
+                <button
                   disabled={loading}
                   $loading={loading.toString()}
+                  className="btn btn-primary w-100 py-2"
+                  type="submit"
                 >
                   {loading ? "loading..." : t("login.btn")}
-                </Content.Button>
+                </button>
+                <br />
+                <br />
+                <button
+                  className="btn btn-outline-primary w-100 py-2 rounded-0"
+                  type="button"
+                  onClick={redierectToHemis}
+                >
+                  Hemis orqali kirish
+                </button>
               </Div>
             </Content.Form>
-            {/* <Div>
-              <Content.Other>or do it via other accounts</Content.Other>
-              <Content.Media>
-                <Icons.Google />
-                <Icons.Apple />
-                <Icons.Facebook />
-              </Content.Media>
-              <Content.Next>
-                Don’t have an account? <NavLink to="/signup">Sign Up</NavLink>
-              </Content.Next>
-            </Div> */}
           </Content.Left>
           <Content.Right>
             <Content.Img loading="lazy" src={signin} />

@@ -1,45 +1,35 @@
-import React, { useEffect, useState } from "react";
-import bg from "../../assets/images/image.png";
-import mobi from "../../assets/images/mbg.png";
+import React from "react";
 import title from "../../assets/images/title.png";
 import mobile from "../../assets/images/mobiletitle.png";
-import { Container, Wrapper, Title, TitleImg } from "./style";
 import { useTranslation } from "react-i18next";
 
 const Showcase = () => {
   const { t, i18n } = useTranslation();
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    const img = new Image();
-    img.src = bg; // Load the desktop image
-    img.onload = () => {
-      setIsLoaded(true); // Set state to true when the image is fully loaded
-    };
-  }, [bg]);
   return (
-    <Container $bg={bg} $bgmob={mobi} isLoaded={isLoaded}>
-      <Wrapper>
+    <div className="c-showcase">
+      <div className="c-wrapper">
         {i18n.language === "uz" ? (
           <>
-            <TitleImg
-              data-aos="zoom-in"
-              loading="lazy"
+            <img
               src={title}
-              display="desktop"
-            />
-            <TitleImg
+              alt="TSTU"
+              className="c-desktop-title c-title"
               data-aos="zoom-in"
               loading="lazy"
+            />
+            <img
               src={mobile}
-              display="mobile"
+              alt="TSTU"
+              className="c-mobile-title c-title"
+              data-aos="zoom-in"
+              loading="lazy"
             />
           </>
         ) : (
-          <Title>{t("name")}</Title>
+          <h1 className="c-title">{t("name")}</h1>
         )}
-      </Wrapper>
-    </Container>
+      </div>
+    </div>
   );
 };
 

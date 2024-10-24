@@ -106,6 +106,12 @@ const Info = () => {
         setScientific_title(res?.data?.scientific_title);
         setOther(res?.data?.languages_any_title);
         setOther2(res?.data?.languages_any);
+
+        if (res?.data?.persons_translation_ === null) {
+          setIsCreate(true);
+        } else {
+          setIsCreate(false);
+        }
       } else {
         throw new Error();
       }
@@ -182,7 +188,29 @@ const Info = () => {
 
     try {
       message.loading({ key: "key", content: "Loading!" });
+      if (isCreate) {
+        const res = await axios.post(
+          `${
+            import.meta.env.VITE_BASE_URL_API
+          }/persondata/createpersondatatranslationprofile`,
+          obj,
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("_token")}`,
+            },
+          }
+        );
 
+        if (res.status === 200) {
+          getDataId(value);
+          message.success({
+            key: "key",
+            content: "Muvaffaqiyatli yaratildi!",
+          });
+        }
+
+        return;
+      }
       const res = await axios.put(
         value === "uz"
           ? `${

@@ -111,13 +111,13 @@ export const admin = () => {
       roles: ["studydepartment"],
       icon: "nav-icon fa-solid fa-ranking-star",
     },
-    {
-      id: 11,
-      path: "appeals",
-      title: "Murojaatlar",
-      roles: ["virtualreception", "admin"],
-      icon: "nav-icon fa-solid fa-users",
-    },
+    // {
+    //   id: 11,
+    //   path: "appeals",
+    //   title: "Murojaatlar",
+    //   roles: ["virtualreception", "admin"],
+    //   icon: "nav-icon fa-solid fa-users",
+    // },
     {
       id: 12,
       path: "faculty-council",

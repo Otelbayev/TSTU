@@ -5,6 +5,7 @@ import Oferma from "./Oferma";
 import Check from "./Check";
 import Form from "./Form";
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
 
 const Rector = () => {
   const [send, setSend] = useState(true);
@@ -34,60 +35,68 @@ const Rector = () => {
   };
 
   return (
-    <div className="root-container">
-      <div className="root-wrapper">
-        <Content data-aos="fade-up">
-          <div className="content">
-            <div className="content__left">
-              <div className="content__left__title">
-                {t("appeal.title1")}{" "}
-                <span className="content__left__title__span">
-                  {t("appeal.title2")}{" "}
-                </span>
-                {t("appeal.title3")}
+    <div>
+      <Helmet>
+        <title>
+          {t("appeal.title1")} {t("appeal.title2")}
+          {t("appeal.title3")}
+        </title>
+      </Helmet>
+      <div className="root-container">
+        <div className="root-wrapper">
+          <Content data-aos="fade-up">
+            <div className="content">
+              <div className="content__left">
+                <div className="content__left__title">
+                  {t("appeal.title1")}{" "}
+                  <span className="content__left__title__span">
+                    {t("appeal.title2")}{" "}
+                  </span>
+                  {t("appeal.title3")}
+                </div>
+                <div className="content__left__img">
+                  <img loading="lazy" src={callCenter} alt="" />
+                </div>
               </div>
-              <div className="content__left__img">
-                <img loading="lazy" src={callCenter} alt="" />
+              <div className="content__right">
+                <div className="content__right__top">
+                  <Item
+                    type={send.toString()}
+                    className="content__right__top__item"
+                    onClick={onItemClick}
+                    id={"send"}
+                  >
+                    {t("appeal.btn1")}
+                  </Item>
+                  <Item
+                    type={check.toString()}
+                    className="content__right__top__item"
+                    onClick={onItemClick}
+                    id={"check"}
+                  >
+                    {t("appeal.btn2")}
+                  </Item>
+                  <Item
+                    type={oferma.toString()}
+                    className="content__right__top__item"
+                    onClick={onItemClick}
+                    id={"oferma"}
+                  >
+                    {t("appeal.btn3")}
+                  </Item>
+                </div>
+                <div className="content__right__desc">
+                  {send && t("appeal.desc")}
+                  {check && t("appeal.email")}
+                  {oferma && ""}
+                </div>
+                {send && <Form />}
+                {check && <Check />}
+                {oferma && <Oferma />}
               </div>
             </div>
-            <div className="content__right">
-              <div className="content__right__top">
-                <Item
-                  type={send.toString()}
-                  className="content__right__top__item"
-                  onClick={onItemClick}
-                  id={"send"}
-                >
-                  {t("appeal.btn1")}
-                </Item>
-                <Item
-                  type={check.toString()}
-                  className="content__right__top__item"
-                  onClick={onItemClick}
-                  id={"check"}
-                >
-                  {t("appeal.btn2")}
-                </Item>
-                <Item
-                  type={oferma.toString()}
-                  className="content__right__top__item"
-                  onClick={onItemClick}
-                  id={"oferma"}
-                >
-                  {t("appeal.btn3")}
-                </Item>
-              </div>
-              <div className="content__right__desc">
-                {send && t("appeal.desc")}
-                {check && t("appeal.email")}
-                {oferma && ""}
-              </div>
-              {send && <Form />}
-              {check && <Check />}
-              {oferma && <Oferma />}
-            </div>
-          </div>
-        </Content>
+          </Content>
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import logo from "../../../public/logo2.png";
 import { useTranslation } from "react-i18next";
 import { createTree } from "./create-tree";
 import TreeNode from "./tree-node";
+import { Helmet } from "react-helmet";
 
 const Structure = () => {
   const { t, i18n } = useTranslation();
@@ -28,19 +29,24 @@ const Structure = () => {
   const treeData = createTree(data);
 
   return (
-    <Container className="root-container">
-      <div className="root-wrapper">
-        <div className="structure-top">
-          <img loading="lazy" src={logo} className="structure-top__logo" />
-          <div className="structure-top__title">{t("structure")}</div>
+    <div>
+      <Helmet>
+        <title>{t("structure")}</title>
+      </Helmet>
+      <Container className="root-container">
+        <div className="root-wrapper">
+          <div className="structure-top">
+            <img loading="lazy" src={logo} className="structure-top__logo" />
+            <div className="structure-top__title">{t("structure")}</div>
+          </div>
+          <div className="mt-3">
+            {treeData.map((node) => (
+              <TreeNode key={node.id} node={node} />
+            ))}
+          </div>
         </div>
-        <div className="mt-3">
-          {treeData.map((node) => (
-            <TreeNode key={node.id} node={node} />
-          ))}
-        </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

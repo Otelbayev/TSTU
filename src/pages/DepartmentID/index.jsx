@@ -3,6 +3,7 @@ import UniShowcase from "./../../components/UniShowcase/index";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
 
 const DepartmentID = () => {
   const [data, setData] = useState({});
@@ -39,6 +40,10 @@ const DepartmentID = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{data?.title}</title>
+        <meta name="description" content={data?.description} />
+      </Helmet>
       <UniShowcase
         title={Number(data?.title) ? data?.description : data?.title}
       />

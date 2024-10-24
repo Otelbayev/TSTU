@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import UniShowcase from "../UniShowcase";
 import { Pagination } from "antd";
+import { Helmet } from "react-helmet";
 
 const BlogPage = ({ title, data, page, setPage }) => {
   const { i18n, t } = useTranslation();
@@ -22,6 +23,9 @@ const BlogPage = ({ title, data, page, setPage }) => {
 
   return (
     <div>
+      <Helmet>
+        <title>{t(title)}</title>
+      </Helmet>
       <UniShowcase title={t(title)} />
       <div className="root-container my-4">
         <div className="root-wrapper">
@@ -42,7 +46,7 @@ const BlogPage = ({ title, data, page, setPage }) => {
               />
             ))}
           </Grid>
-          <div className="text-center">
+          <div className="d-flex justify-content-center">
             <Pagination
               total={data?.length}
               current={page}

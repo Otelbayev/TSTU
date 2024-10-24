@@ -16,11 +16,15 @@ import {
 } from "../../components/HomeElements";
 import PageID from "../PageID";
 import { oldPages } from "../../mock";
+import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 
 const HomePage = () => {
   const url = window.location.href;
   const urlObject = new URL(url);
   const params = new URLSearchParams(urlObject.search);
+
+  const { t } = useTranslation();
 
   if (params.get("p")) {
     return (
@@ -33,6 +37,9 @@ const HomePage = () => {
   }
   return (
     <div style={{ overflow: "hidden" }}>
+      <Helmet>
+        <title>{t("head")}</title>
+      </Helmet>
       <Header />
       <Showcase />
       <About />

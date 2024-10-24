@@ -5,6 +5,7 @@ import UniShowcase from "./../../components/UniShowcase/index";
 import { useTranslation } from "react-i18next";
 import { useDepartment } from "../../hooks/useDepartment";
 import Loading2 from "../../components/Loading2";
+import { Helmet } from "react-helmet";
 
 const ScientificCenter = () => {
   const { t, i18n } = useTranslation();
@@ -23,6 +24,9 @@ const ScientificCenter = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{t("centers.title")}</title>
+      </Helmet>
       <UniShowcase title={t("centers.title")} />
       <div className="root-container">
         <div className="root-wrapper">

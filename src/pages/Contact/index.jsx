@@ -4,6 +4,7 @@ import { Select } from "../../components/Generics";
 import { useTranslation } from "react-i18next";
 import emailjs from "emailjs-com";
 import { message } from "antd";
+import { Helmet } from "react-helmet";
 
 const Contact = () => {
   useEffect(() => {
@@ -69,48 +70,54 @@ const Contact = () => {
   };
 
   return (
-    <div className="root-container">
-      <div className="root-wrapper">
-        <Content data-aos="fade-up">
-          <Left>
-            <Left.Title>{t("contact.title")}</Left.Title>
-            <Left.Desc>{t("contact.desc")}</Left.Desc>
-            <Left.Form onSubmit={handleSubmit}>
-              <Select
-                height={46}
-                options={employemnt}
-                defaultValue={"Bandligi"}
-                value={emp}
-                onChange={(e) => setEmp(e)}
-              />
-              <Left.Div>
-                <Inputs
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your name"
+    <div>
+      <Helmet>
+        <title>{t("contact.title")}</title>
+        <meta name="description" content={t("contact.desc")} />
+      </Helmet>
+      <div className="root-container">
+        <div className="root-wrapper">
+          <Content data-aos="fade-up">
+            <Left>
+              <Left.Title>{t("contact.title")}</Left.Title>
+              <Left.Desc>{t("contact.desc")}</Left.Desc>
+              <Left.Form onSubmit={handleSubmit}>
+                <Select
+                  height={46}
+                  options={employemnt}
+                  defaultValue={"Bandligi"}
+                  value={emp}
+                  onChange={(e) => setEmp(e)}
                 />
+                <Left.Div>
+                  <Inputs
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your name"
+                  />
+                  <Inputs
+                    value={email}
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                  />
+                </Left.Div>
                 <Inputs
-                  value={email}
-                  type="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email"
+                  value={desc}
+                  onChange={(e) => setDesc(e.target.value)}
+                  placeholder="Description (optional)"
                 />
-              </Left.Div>
-              <Inputs
-                value={desc}
-                onChange={(e) => setDesc(e.target.value)}
-                placeholder="Description (optional)"
-              />
-              <Btn type={"primary"}>{t("contact.btn")}</Btn>
-            </Left.Form>
-          </Left>
-          <Right>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11993.81247292006!2d69.2820477!3d41.2772419!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8aac316ee659%3A0xc5be678c10cbba9b!2z0KLQsNGI0LrQtdC90YLRgdC60LjQuSDQk9C-0YHRg9C00LDRgNGB0YLQstC10L3QvdGL0Lkg0KLRgNCw0L3RgdC_0L7RgNGC0L3Ri9C5INCj0L3QuNCy0LXRgNGB0LjRgtC10YI!5e0!3m2!1sru!2s!4v1711655518141!5m2!1sru!2s"
-              loading="lazy"
-            ></iframe>
-          </Right>
-        </Content>
+                <Btn type={"primary"}>{t("contact.btn")}</Btn>
+              </Left.Form>
+            </Left>
+            <Right>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11993.81247292006!2d69.2820477!3d41.2772419!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8aac316ee659%3A0xc5be678c10cbba9b!2z0KLQsNGI0LrQtdC90YLRgdC60LjQuSDQk9C-0YHRg9C00LDRgNGB0YLQstC10L3QvdGL0Lkg0KLRgNCw0L3RgdC_0L7RgNGC0L3Ri9C5INCj0L3QuNCy0LXRgNGB0LjRgtC10YI!5e0!3m2!1sru!2s!4v1711655518141!5m2!1sru!2s"
+                loading="lazy"
+              ></iframe>
+            </Right>
+          </Content>
+        </div>
       </div>
     </div>
   );

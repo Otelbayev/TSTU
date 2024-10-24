@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Content, Item } from "./style";
 import { useNavigate } from "react-router-dom";
 import { useEmployee } from "./../../hooks/useEmployee";
+import { Helmet } from "react-helmet";
 
 const Honory = () => {
   const { t, i18n } = useTranslation();
@@ -16,6 +17,9 @@ const Honory = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{t("honory.title")}</title>
+      </Helmet>
       <UniShowcase title={t("honory.title")} />
       <div className="root-container">
         <div className="root-wrapper">

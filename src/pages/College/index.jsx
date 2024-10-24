@@ -7,6 +7,7 @@ import { Content } from "../Faculties/style";
 import FacultyCart from "../../components/Faculties/FacultyCart";
 import Loading2 from "../../components/Loading2";
 import { Pagination } from "antd";
+import { Helmet } from "react-helmet";
 
 const College = () => {
   const { data, loading, error, page, setPage } = useDepartment(
@@ -36,6 +37,9 @@ const College = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{t("Collage.title")}</title>
+      </Helmet>
       <UniShowcase title={t("College.title")} />
       <div className="root-container">
         <div className="root-wrapper">
@@ -60,7 +64,7 @@ const College = () => {
                 );
               })}
             </Content.Body>
-            <div className="text-center mt-4">
+            <div className="d-flex justify-content-center mt-4">
               <Pagination
                 total={data?.length}
                 current={page}

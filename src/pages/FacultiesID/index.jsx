@@ -16,13 +16,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import DekanCart from "../../components/Faculties/DekanCart";
 import Dekans from "../../components/Faculties/Dekan";
 import Footer from "../../components/Footer";
-import FackBottom from "../../components/Faculties/FakBottom";
-import FakNews from "../../components/Faculties/FakNews";
 import Yonalishlar from "../../components/Faculties/Yonalishlar";
 import { Title } from "../../components/Generics";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useHandleScroll } from "../../hooks/useHandleScroll";
+import { Helmet } from "react-helmet";
 
 const FacultiesID = () => {
   const naviagte = useNavigate();
@@ -187,36 +186,50 @@ const FacultiesID = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  console.log(data);
+
   return (
-    <div className="overflow-hidden">
-      <Header links={links} />
-      <Showcase
-        bg={`${import.meta.env.VITE_BASE_URL_IMG}${data?.img_?.url}`}
-        title={getTitle(data?.title, i18n.language)}
-        button={t("facultet.btn")}
-        onClick={() => useHandleScroll(aboutRef)}
-      ></Showcase>
-      <div className="root-container">
-        <div className="root-wrapper">
-          <Wrap>
-            <div ref={aboutRef}>
-              <Title title={t("facultet.about")} $border={"none"} />
-              <div
-                dangerouslySetInnerHTML={{ __html: data?.text }}
-                data-aos="fade-up"
-                className="text"
-              />
-            </div>
-            <Title title={t("facultet.dekan")} $border={"none"} />
-            <Dekans img={dekan} data={dekan} />
-            <Title title={t("facultet.orin")} $border={"none"} />
-            <Orinbosar>
-              {orinbosar.map((e) => (
-                <DekanCart key={e?.id} data={e} />
-              ))}
-            </Orinbosar>
-            {/* <Title title="Fakultet e’lon va  yangiliklari" $border={"none"} /> */}
-            {/* <News ref={talimRef}>
+    <div>
+      <Helmet>
+        <title>{data?.title}</title>
+        <meta
+          name="description"
+          content={getTitle(data?.title, i18n.language)}
+        />
+        <link
+          rel="icon"
+          href={`${import.meta.env.VITE_BASE_URL_API}${data?.img_icon_?.url}`}
+        />
+      </Helmet>
+      <div className="overflow-hidden">
+        <Header links={links} />
+        <Showcase
+          bg={`${import.meta.env.VITE_BASE_URL_IMG}${data?.img_?.url}`}
+          title={getTitle(data?.title, i18n.language)}
+          button={t("facultet.btn")}
+          onClick={() => useHandleScroll(aboutRef)}
+        ></Showcase>
+        <div className="root-container">
+          <div className="root-wrapper">
+            <Wrap>
+              <div ref={aboutRef}>
+                <Title title={t("facultet.about")} $border={"none"} />
+                <div
+                  dangerouslySetInnerHTML={{ __html: data?.text }}
+                  data-aos="fade-up"
+                  className="text"
+                />
+              </div>
+              <Title title={t("facultet.dekan")} $border={"none"} />
+              <Dekans img={dekan} data={dekan} />
+              <Title title={t("facultet.orin")} $border={"none"} />
+              <Orinbosar>
+                {orinbosar.map((e) => (
+                  <DekanCart key={e?.id} data={e} />
+                ))}
+              </Orinbosar>
+              {/* <Title title="Fakultet e’lon va  yangiliklari" $border={"none"} /> */}
+              {/* <News ref={talimRef}>
               <News.Left data-aos="fade-right">
                 <FakNews data={fakNewsData} />
                 <FakNews data={fakNewsData} />
@@ -242,88 +255,91 @@ const FacultiesID = () => {
                 <FakNews data={fakNewsData1} />
               </News.Right>
             </News> */}
-            <div ref={kafedraRef}>
-              <Title title={t("facultet.kafedra")} $border={"none"} />
-              <KafedraWrap>
-                <Kafedra>
-                  {kafedra?.map((e) => (
-                    <Kafedra.Item
-                      data-aos="zoom-in"
-                      onClick={() =>
-                        naviagte(
-                          `/${i18n.language}/kafedra/${
-                            i18n.language === "uz" ? e?.id : e?.departament_?.id
-                          }`
-                        )
-                      }
-                      $bg={`${import.meta.env.VITE_BASE_URL_IMG}${
-                        e?.img_?.url
-                      }`}
-                      key={e.id}
-                    >
-                      <Kafedra.Content>
-                        {e?.title}
-                        <Kafedra.Arrow />
-                      </Kafedra.Content>
-                    </Kafedra.Item>
-                  ))}
-                </Kafedra>
-              </KafedraWrap>
-            </div>
-            <div>
-              <Title title={t("lab")} $border={"none"} />
-              <IlmiyMarkaz>
-                {lab?.length ? (
-                  lab?.map((e) => (
-                    <IlmiyMarkazCart
-                      key={e?.id}
-                      to={`department/${
-                        i18n.language === "uz" ? e?.id : e?.departament_?.id
-                      }`}
-                      $border={"#CECECE"}
-                      dataAos="zoom-in"
-                      item={e}
-                    />
-                  ))
-                ) : (
-                  <div data-aos="fade-right">Ma'lumot mavjud emas!</div>
-                )}
-              </IlmiyMarkaz>
-            </div>
-            <div ref={centerRef}>
-              <Title title={t("facultet.markaz")} $border={"none"} />
-              <IlmiyMarkaz>
-                {scientific?.length ? (
-                  scientific?.map((e) => (
-                    <IlmiyMarkazCart
-                      key={e?.id}
-                      to={`department/${
-                        i18n.language === "uz" ? e?.id : e?.departament_?.id
-                      }`}
-                      $border={"#CECECE"}
-                      dataAos="zoom-in"
-                      item={e}
-                    />
-                  ))
-                ) : (
-                  <div data-aos="fade-right">Ma'lumot mavjud emas!</div>
-                )}
-              </IlmiyMarkaz>
-            </div>
-            <Yonalish>
-              <Yonalish.Left data-aos="fade-right">
-                <Yonalish.Title>{t("facultet.bakalavr")}</Yonalish.Title>
-                <Yonalishlar data={bakalavr} />
-              </Yonalish.Left>
-              <Yonalish.Right data-aos="fade-left">
-                <Yonalish.Title>{t("facultet.magistr")}</Yonalish.Title>
-                <Yonalishlar data={magistr} />
-              </Yonalish.Right>
-            </Yonalish>
-          </Wrap>
+              <div ref={kafedraRef}>
+                <Title title={t("facultet.kafedra")} $border={"none"} />
+                <KafedraWrap>
+                  <Kafedra>
+                    {kafedra?.map((e) => (
+                      <Kafedra.Item
+                        data-aos="zoom-in"
+                        onClick={() =>
+                          naviagte(
+                            `/${i18n.language}/kafedra/${
+                              i18n.language === "uz"
+                                ? e?.id
+                                : e?.departament_?.id
+                            }`
+                          )
+                        }
+                        $bg={`${import.meta.env.VITE_BASE_URL_IMG}${
+                          e?.img_?.url
+                        }`}
+                        key={e.id}
+                      >
+                        <Kafedra.Content>
+                          {e?.title}
+                          <Kafedra.Arrow />
+                        </Kafedra.Content>
+                      </Kafedra.Item>
+                    ))}
+                  </Kafedra>
+                </KafedraWrap>
+              </div>
+              <div>
+                <Title title={t("lab")} $border={"none"} />
+                <IlmiyMarkaz>
+                  {lab?.length ? (
+                    lab?.map((e) => (
+                      <IlmiyMarkazCart
+                        key={e?.id}
+                        to={`department/${
+                          i18n.language === "uz" ? e?.id : e?.departament_?.id
+                        }`}
+                        $border={"#CECECE"}
+                        dataAos="zoom-in"
+                        item={e}
+                      />
+                    ))
+                  ) : (
+                    <div data-aos="fade-right">Ma'lumot mavjud emas!</div>
+                  )}
+                </IlmiyMarkaz>
+              </div>
+              <div ref={centerRef}>
+                <Title title={t("facultet.markaz")} $border={"none"} />
+                <IlmiyMarkaz>
+                  {scientific?.length ? (
+                    scientific?.map((e) => (
+                      <IlmiyMarkazCart
+                        key={e?.id}
+                        to={`department/${
+                          i18n.language === "uz" ? e?.id : e?.departament_?.id
+                        }`}
+                        $border={"#CECECE"}
+                        dataAos="zoom-in"
+                        item={e}
+                      />
+                    ))
+                  ) : (
+                    <div data-aos="fade-right">Ma'lumot mavjud emas!</div>
+                  )}
+                </IlmiyMarkaz>
+              </div>
+              <Yonalish>
+                <Yonalish.Left data-aos="fade-right">
+                  <Yonalish.Title>{t("facultet.bakalavr")}</Yonalish.Title>
+                  <Yonalishlar data={bakalavr} />
+                </Yonalish.Left>
+                <Yonalish.Right data-aos="fade-left">
+                  <Yonalish.Title>{t("facultet.magistr")}</Yonalish.Title>
+                  <Yonalishlar data={magistr} />
+                </Yonalish.Right>
+              </Yonalish>
+            </Wrap>
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };

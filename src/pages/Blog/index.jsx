@@ -193,39 +193,17 @@ const Blog = () => {
             <Empty data-aos="zoom-in" />
           )}
           {data?.length ? (
-            <Pagination
-              total={data?.length}
-              className="my-3"
-              current={page}
-              pageSize={query}
-              onChange={pageChange}
-              style={{ textAlign: "center", marginBottom: "20px" }}
-            />
+            <div className="d-flex justify-content-center">
+              <Pagination
+                total={data?.length}
+                className="my-3"
+                current={page}
+                pageSize={query}
+                onChange={pageChange}
+                style={{ textAlign: "center", marginBottom: "20px" }}
+              />
+            </div>
           ) : null}
-          {/* <Title title={t("news.t")} component={""}>
-            <Flex>
-              <iframe
-                width="100%"
-                height="300px"
-                src="https://www.youtube.com/embed/lQf1Xgr9kgk?si=I7Dyn1grGAkWS4T0"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-              <iframe
-                width="100%"
-                height="300px"
-                src="https://www.youtube.com/embed/UoG4D2vDEXE?si=rPdgPPgwFPQZGvzM"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-            </Flex>
-          </Title> */}
         </Content>
       </div>
     </div>

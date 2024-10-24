@@ -6,6 +6,7 @@ import NewsCart from "../../components/News/NewsCart";
 import { useNavigate } from "react-router-dom";
 import { useBlog } from "./../../hooks/useBog";
 import Loading2 from "../../components/Loading2";
+import { Helmet } from "react-helmet";
 
 const StudentLife = () => {
   const { i18n, t } = useTranslation();
@@ -27,6 +28,9 @@ const StudentLife = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{t("student.title")}</title>
+      </Helmet>
       <UniShowcase title={t("student.title")} />
       <div className="root-container">
         <div className="root-wrapper">

@@ -6,6 +6,7 @@ import Loading2 from "../../components/Loading2";
 import { Result } from "antd";
 import { NavLink } from "react-router-dom";
 import debounce from "lodash.debounce";
+import { Helmet } from "react-helmet";
 
 const Search = () => {
   const { value, setIsOpen } = useSearchContext();
@@ -176,60 +177,65 @@ const Search = () => {
   };
 
   return (
-    <div className="root-container">
-      <div className="root-wrapper mt-3">
-        <div className="mt-5">
-          {data.length ? (
-            data.map((e, index) => {
-              return (
-                <div key={index}>
-                  {e?.length !== 0 ? (
-                    <div className="title">
-                      {getTitle(e?.type, i18n.language)}
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                  {e?.query_list?.map((item) => (
-                    <div
-                      key={item?.id}
-                      className="mx-3 d-flex justify-content-between border border-left-0 border-right-0 p-2"
-                    >
-                      <div>
-                        {item?.title
-                          ? item?.title
-                          : `${
-                              item?.persons_?.fathers_name ||
-                              item?.persons_translation_?.fathers_name
-                            } ${
-                              item?.persons_?.firstName ||
-                              item?.persons_translation_?.firstName
-                            } ${
-                              item?.persons_?.lastName ||
-                              item?.persons_translation_?.lastName
-                            }`}
+    <div>
+      <Helmet>
+        <title>{t("Qidiruv...")}</title>
+      </Helmet>
+      <div className="root-container">
+        <div className="root-wrapper mt-3">
+          <div className="mt-5">
+            {data.length ? (
+              data.map((e, index) => {
+                return (
+                  <div key={index}>
+                    {e?.length !== 0 ? (
+                      <div className="title">
+                        {getTitle(e?.type, i18n.language)}
                       </div>
-                      {toNavigate(
-                        e.type,
-                        item?.id,
-                        item?.blog_id,
-                        item?.persons_data_id,
-                        item?.page_id,
-                        item?.departament_type_?.type ||
-                          item?.departament_type_translation_?.departament_type_
-                            ?.type,
-                        item?.departament_id
-                      )}
-                    </div>
-                  ))}
-                </div>
-              );
-            })
-          ) : (
-            <div className="mt-5">
-              <Loading2 />
-            </div>
-          )}
+                    ) : (
+                      ""
+                    )}
+                    {e?.query_list?.map((item) => (
+                      <div
+                        key={item?.id}
+                        className="mx-3 d-flex justify-content-between border border-left-0 border-right-0 p-2"
+                      >
+                        <div>
+                          {item?.title
+                            ? item?.title
+                            : `${
+                                item?.persons_?.fathers_name ||
+                                item?.persons_translation_?.fathers_name
+                              } ${
+                                item?.persons_?.firstName ||
+                                item?.persons_translation_?.firstName
+                              } ${
+                                item?.persons_?.lastName ||
+                                item?.persons_translation_?.lastName
+                              }`}
+                        </div>
+                        {toNavigate(
+                          e.type,
+                          item?.id,
+                          item?.blog_id,
+                          item?.persons_data_id,
+                          item?.page_id,
+                          item?.departament_type_?.type ||
+                            item?.departament_type_translation_
+                              ?.departament_type_?.type,
+                          item?.departament_id
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                );
+              })
+            ) : (
+              <div className="mt-5">
+                <Loading2 />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

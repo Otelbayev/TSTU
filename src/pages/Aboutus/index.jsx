@@ -5,6 +5,7 @@ import styled from "styled-components";
 import img1 from "../../assets/images/about1.png";
 import img2 from "../../assets/images/about2.png";
 import { useDepartment } from "../../hooks/useDepartment";
+import { Helmet } from "react-helmet";
 
 const Content = styled.div`
   display: flex;
@@ -35,6 +36,10 @@ const Aboutus = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{t("Aboutus.title")}</title>
+        <meta name="description" content={t("Aboutus.desc")} />
+      </Helmet>
       <UniShowcase title={t("Aboutus.title")} />
       <div className="root-container">
         <div className="root-wrapper py-3">

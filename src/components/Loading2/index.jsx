@@ -8,6 +8,8 @@ const Loading2 = () => {
         <Skeleton active />
         <Skeleton active />
         <Skeleton active />
+        <Skeleton active />
+        <Skeleton active />
       </div>
     </div>
   );

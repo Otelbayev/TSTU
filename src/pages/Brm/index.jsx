@@ -34,6 +34,9 @@ const Brm = () => {
   const { t, i18n } = useTranslation();
   return (
     <div>
+      <Helmet>
+        <title>{t("Brm.title")}</title>
+      </Helmet>
       <UniShowcase title={t("Brm.title")} />
       <div className="root-container">
         <div className="root-wrapper py-2">

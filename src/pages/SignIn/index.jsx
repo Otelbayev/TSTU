@@ -6,6 +6,7 @@ import useAxios from "../../hooks/useAxios";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
 
 const SignIn = () => {
   const { loading, sendRequest } = useAxios();
@@ -99,75 +100,80 @@ const SignIn = () => {
   };
 
   return (
-    <div className="root-container">
-      <div className="root-wrapper">
-        <Content data-aos="fade-up">
-          <Content.Left>
-            <Content.Title>{t("login.title")}</Content.Title>
-            <Content.Form onSubmit={onFormSubmit}>
-              <Div>
-                <Content.Label>{t("login.login")}</Content.Label>
-                <Content.Input
-                  placeholder={t("login.login")}
-                  type="text"
-                  id="email"
-                  name="email"
-                  autoComplete="current-email"
-                  ref={emailRef}
-                  $error={error.toString()}
-                  required
-                  aria-required="true"
-                  aria-label="Enter your email address"
-                />
-              </Div>
-              <Div>
-                <Content.Label>{t("login.pw")}</Content.Label>
-                <Content.Input
-                  placeholder={t("login.pw")}
-                  type="password"
-                  id="password"
-                  name="password"
-                  autoComplete="current-password"
-                  ref={pwRef}
-                  $error={error.toString()}
-                  required
-                  aria-required="true"
-                  aria-label="Enter your password"
-                />
-                <br />
-                <Content.Input
-                  type="text"
-                  value={capchaText}
-                  onChange={(e) => setCapchaText(e.target.value)}
-                  placeholder={`${capcha?.num1} + ${capcha?.num2}`}
-                />
-                <Content.Forgot>{t("login.forgot")}</Content.Forgot>
-              </Div>
-              <Div>
-                <button
-                  disabled={loading}
-                  $loading={loading.toString()}
-                  className="btn btn-primary w-100 py-2"
-                  type="submit"
-                >
-                  {loading ? "loading..." : t("login.btn")}
-                </button>
-                <br />
-                <br />
-                <button
-                  className="btn btn-outline-primary w-100 py-2 rounded-0"
-                  type="button"
-                  onClick={redierectToHemis}
-                >
-                  Hemis orqali kirish
-                </button>
-              </Div>
-            </Content.Form>
-          </Content.Left>
-          <Content.Right>
-            <Content.Img loading="lazy" src={signin} />
-          </Content.Right>
-        </Content>
+    <div>
+      <Helmet>
+        <title>{t("login.title")}</title>
+      </Helmet>
+      <div className="root-container">
+        <div className="root-wrapper">
+          <Content data-aos="fade-up">
+            <Content.Left>
+              <Content.Title>{t("login.title")}</Content.Title>
+              <Content.Form onSubmit={onFormSubmit}>
+                <Div>
+                  <Content.Label>{t("login.login")}</Content.Label>
+                  <Content.Input
+                    placeholder={t("login.login")}
+                    type="text"
+                    id="email"
+                    name="email"
+                    autoComplete="current-email"
+                    ref={emailRef}
+                    $error={error.toString()}
+                    required
+                    aria-required="true"
+                    aria-label="Enter your email address"
+                  />
+                </Div>
+                <Div>
+                  <Content.Label>{t("login.pw")}</Content.Label>
+                  <Content.Input
+                    placeholder={t("login.pw")}
+                    type="password"
+                    id="password"
+                    name="password"
+                    autoComplete="current-password"
+                    ref={pwRef}
+                    $error={error.toString()}
+                    required
+                    aria-required="true"
+                    aria-label="Enter your password"
+                  />
+                  <br />
+                  <Content.Input
+                    type="text"
+                    value={capchaText}
+                    onChange={(e) => setCapchaText(e.target.value)}
+                    placeholder={`${capcha?.num1} + ${capcha?.num2}`}
+                  />
+                  <Content.Forgot>{t("login.forgot")}</Content.Forgot>
+                </Div>
+                <Div>
+                  <button
+                    disabled={loading}
+                    $loading={loading.toString()}
+                    className="btn btn-primary w-100 py-2"
+                    type="submit"
+                  >
+                    {loading ? "loading..." : t("login.btn")}
+                  </button>
+                  <br />
+                  <br />
+                  <button
+                    className="btn btn-outline-primary w-100 py-2 rounded-0"
+                    type="button"
+                    onClick={redierectToHemis}
+                  >
+                    Hemis orqali kirish
+                  </button>
+                </Div>
+              </Content.Form>
+            </Content.Left>
+            <Content.Right>
+              <Content.Img loading="lazy" src={signin} />
+            </Content.Right>
+          </Content>
+        </div>
       </div>
     </div>
   );

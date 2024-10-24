@@ -9,6 +9,7 @@ import Footer from "./footer";
 import About from "./about";
 import Skills from "./skills";
 import Education from "./education";
+import { Helmet } from "react-helmet";
 
 const EmployeeID = () => {
   const { id } = useParams();
@@ -35,44 +36,64 @@ const EmployeeID = () => {
       .then((res) => setData(res));
   }, [i18n.language]);
 
-  console.log(data);
-
   return (
-    <div className="body">
-      <div className="wrapper">
-        <div className="sidebar">
-          <div className="sidebar-text d-flex flex-column h-100 justify-content-center text-center">
-            <img
-              className="w-100 img-fluid mb-4"
-              src={
-                data?.persons_?.img_?.url ||
-                data?.persons_translation_?.persons_?.img_?.url
-                  ? `${import.meta.env.VITE_BASE_URL_IMG}${
-                      data?.persons_?.img_?.url ||
-                      data?.persons_translation_?.persons_?.img_?.url
-                    }`
-                  : noimg
-              }
-              alt="Image"
-            />
-            <h2 className="mt-2">
-              {" "}
-              {data?.persons_?.firstName ||
-                data?.persons_translation_?.firstName}{" "}
-              {data?.persons_?.lastName || data?.persons_translation_?.lastName}{" "}
-              {data?.persons_?.fathers_name ||
-                data?.persons_translation_?.fathers_name}
-            </h2>
-            <div className="mb-4" style={{ height: 22 }}>
-              <div>
-                {data?.persons_?.employee_type_?.title ||
-                  data?.persons_translation_?.employee_type_translation_
-                    ?.title}{" "}
-                {data?.degree}
+    <div>
+      <Helmet>
+        <title>
+          {data?.persons_?.firstName || data?.persons_translation_?.firstName}{" "}
+          {data?.persons_?.lastName || data?.persons_translation_?.lastName}{" "}
+          {data?.persons_?.fathers_name ||
+            data?.persons_translation_?.fathers_name}
+        </title>
+        <meta
+          name="description"
+          content={`${
+            data?.persons_?.employee_type_?.title ||
+            data?.persons_translation_?.employee_type_translation_?.title ||
+            ""
+          }  ${data?.degree || ""} ${data?.phone_number1 || ""} ${
+            data?.persons_?.email ||
+            data?.persons_translation_?.persons_?.email ||
+            ""
+          }  ${data?.address || ""}`}
+        />
+      </Helmet>
+      <div className="body">
+        <div className="wrapper">
+          <div className="sidebar">
+            <div className="sidebar-text d-flex flex-column h-100 justify-content-center text-center">
+              <img
+                className="w-100 img-fluid mb-4"
+                src={
+                  data?.persons_?.img_?.url ||
+                  data?.persons_translation_?.persons_?.img_?.url
+                    ? `${import.meta.env.VITE_BASE_URL_IMG}${
+                        data?.persons_?.img_?.url ||
+                        data?.persons_translation_?.persons_?.img_?.url
+                      }`
+                    : noimg
+                }
+                alt="Image"
+              />
+              <h2 className="mt-2">
+                {" "}
+                {data?.persons_?.firstName ||
+                  data?.persons_translation_?.firstName}{" "}
+                {data?.persons_?.lastName ||
+                  data?.persons_translation_?.lastName}{" "}
+                {data?.persons_?.fathers_name ||
+                  data?.persons_translation_?.fathers_name}
+              </h2>
+              <div className="mb-4" style={{ height: 22 }}>
+                <div>
+                  {data?.persons_?.employee_type_?.title ||
+                    data?.persons_translation_?.employee_type_translation_
+                      ?.title}{" "}
+                  {data?.degree}
+                </div>
               </div>
-            </div>
-            <div className="d-flex justify-content-center mt-auto mb-3">
-              {/* <a className="mx-2" href title="Telegram">
+              <div className="d-flex justify-content-center mt-auto mb-3">
+                {/* <a className="mx-2" href title="Telegram">
                 <i className="fab fa-telegram" />
               </a>
               <a className="mx-2" href title="Facebook">
@@ -87,77 +108,78 @@ const EmployeeID = () => {
               <a className="mx-2" href>
                 <i className="fab fa-youtube" title="Youtube" />
               </a> */}
+              </div>
+              <div className="d-flex align-items-end justify-content-between">
+                <Lang mode="light" width={"100%"} />
+              </div>
             </div>
-            <div className="d-flex align-items-end justify-content-between">
-              <Lang mode="light" width={"100%"} />
+            <div className="sidebar-icon d-flex flex-column h-100 justify-content-center text-right">
+              <i className="fas fa-2x fa-angle-double-right text-primary" />
             </div>
           </div>
-          <div className="sidebar-icon d-flex flex-column h-100 justify-content-center text-right">
-            <i className="fas fa-2x fa-angle-double-right text-primary" />
+          <div className="content">
+            <About data={data} t={t} />
+            <Skills data={data} t={t} />
+            <Education data={data} t={t} />
+          </div>
+          <div className="content">
+            <div className="container bg-white pt-5 pb-3">
+              <div className="row px-3">
+                <div className="col-12">
+                  <h2 className="title position-relative pb-2 mb-4">
+                    {t("employee.ilm")}
+                  </h2>
+                </div>
+                <div
+                  className="col-12"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.scientific_activity_json
+                      ? data?.scientific_activity_json
+                      : "<p class='no-data'>Ma'lumotlar yo'q</p>",
+                  }}
+                />
+              </div>
+            </div>
+            <div className="container bg-white pt-5 pb-3">
+              <div className="row px-3">
+                <div className="col-12">
+                  <h2 className="title position-relative pb-2 mb-4">
+                    {t("employee.portfolio")}
+                  </h2>
+                </div>
+                <div
+                  className="col-12"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.portfolio_json
+                      ? data?.portfolio_json
+                      : "<p class='no-data'>Ma'lumotlar yo'q</p>",
+                  }}
+                />
+              </div>
+            </div>
+            <div className="container bg-white py-5">
+              <div className="row px-3">
+                <div className="col-12">
+                  <h2 className="title position-relative pb-2 mb-4">Blog</h2>
+                </div>
+                <div
+                  className="col-12"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.blog_json
+                      ? data?.blog_json
+                      : "<p class='no-data'>Ma'lumotlar yo'q</p>",
+                  }}
+                />
+              </div>
+            </div>
+            {/* <Form t={t} id={id} /> */}
+            <Footer t={t} />
           </div>
         </div>
-        <div className="content">
-          <About data={data} t={t} />
-          <Skills data={data} t={t} />
-          <Education data={data} t={t} />
-        </div>
-        <div className="content">
-          <div className="container bg-white pt-5 pb-3">
-            <div className="row px-3">
-              <div className="col-12">
-                <h2 className="title position-relative pb-2 mb-4">
-                  {t("employee.ilm")}
-                </h2>
-              </div>
-              <div
-                className="col-12"
-                dangerouslySetInnerHTML={{
-                  __html: data?.scientific_activity_json
-                    ? data?.scientific_activity_json
-                    : "<p class='no-data'>Ma'lumotlar yo'q</p>",
-                }}
-              />
-            </div>
-          </div>
-          <div className="container bg-white pt-5 pb-3">
-            <div className="row px-3">
-              <div className="col-12">
-                <h2 className="title position-relative pb-2 mb-4">
-                  {t("employee.portfolio")}
-                </h2>
-              </div>
-              <div
-                className="col-12"
-                dangerouslySetInnerHTML={{
-                  __html: data?.portfolio_json
-                    ? data?.portfolio_json
-                    : "<p class='no-data'>Ma'lumotlar yo'q</p>",
-                }}
-              />
-            </div>
-          </div>
-          <div className="container bg-white py-5">
-            <div className="row px-3">
-              <div className="col-12">
-                <h2 className="title position-relative pb-2 mb-4">Blog</h2>
-              </div>
-              <div
-                className="col-12"
-                dangerouslySetInnerHTML={{
-                  __html: data?.blog_json
-                    ? data?.blog_json
-                    : "<p class='no-data'>Ma'lumotlar yo'q</p>",
-                }}
-              />
-            </div>
-          </div>
-          {/* <Form t={t} id={id} /> */}
-          <Footer t={t} />
-        </div>
+        <a href="#" className="back-to-top">
+          <i className="fa fa-angle-double-up" />
+        </a>
       </div>
-      <a href="#" className="back-to-top">
-        <i className="fa fa-angle-double-up" />
-      </a>
     </div>
   );
 };

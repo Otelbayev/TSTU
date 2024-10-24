@@ -7,7 +7,9 @@ const MiniItem = ({ prop, onClick }) => {
     <Container>
       <div>
         <div className="mini-item-title" onClick={onClick}>
-          {prop?.title}
+          {prop?.title?.split(" ")?.length < 7
+            ? prop.title
+            : prop?.title?.split(" ")?.slice(0, 7)?.join(" ") + "..."}
         </div>
         <div className="mini-item-date">
           <span>

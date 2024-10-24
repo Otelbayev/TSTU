@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Content } from "./style";
 import { Collapse } from "antd";
+import { Helmet } from "react-helmet";
 
 const Faq = () => {
   useEffect(() => {
@@ -52,30 +53,35 @@ const Faq = () => {
     },
   ];
   return (
-    <div className="root-container">
-      <div className="root-wrapper">
-        <Content data-aos="fade-up">
-          <div className="title">FAQ</div>
-          <div className="content">
-            <div className="content__left">
-              <Collapse ghost items={items} />
-            </div>
-            <div className="content__right">
-              <div className="content__right__title">
-                Lorem Lorem Lorem Lorem Lorem Lorem
+    <div>
+      <Helmet>
+        <title>FAQ</title>
+      </Helmet>
+      <div className="root-container">
+        <div className="root-wrapper">
+          <Content data-aos="fade-up">
+            <div className="title">FAQ</div>
+            <div className="content">
+              <div className="content__left">
+                <Collapse ghost items={items} />
               </div>
-              <div className="content__right__p">
-                Lorem imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
-                imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
-                imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
-                imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
-                imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
-                imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
-                imsunLorem imsunLorem imsun
+              <div className="content__right">
+                <div className="content__right__title">
+                  Lorem Lorem Lorem Lorem Lorem Lorem
+                </div>
+                <div className="content__right__p">
+                  Lorem imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
+                  imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
+                  imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
+                  imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
+                  imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
+                  imsunLorem imsunLorem imsunLorem imsunLorem imsunLorem
+                  imsunLorem imsunLorem imsun
+                </div>
               </div>
             </div>
-          </div>
-        </Content>
+          </Content>
+        </div>
       </div>
     </div>
   );

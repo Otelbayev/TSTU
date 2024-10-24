@@ -6,6 +6,7 @@ import UniShowcase from "./../../components/UniShowcase/index";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import img from "../../assets/images/noimg.jpg";
+import { Helmet } from "react-helmet";
 
 const PageID = ({ oldID }) => {
   const { sendRequest, loading } = useAxios();
@@ -40,6 +41,10 @@ const PageID = ({ oldID }) => {
 
   return (
     <div>
+      <Helmet>
+        <title>{data?.title}</title>
+        <meta name="description" content={data?.title} />
+      </Helmet>
       <UniShowcase title={data?.title} />
       <Container className="root-container my-5">
         <div className="root-wrapper">

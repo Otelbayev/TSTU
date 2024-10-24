@@ -31,37 +31,43 @@ const Department = () => {
   }
 
   return (
-    <div className="root-container">
-      <div className="root-wrapper">
-        <Title title={t("department.b")} $border="none" />
-        <Content data-aos="fade-up">
-          {data?.list?.map((e) => (
-            <Content.Item
-              key={e.id}
-              onClick={() =>
-                naviagte(
-                  `/${i18n.language}/department/${
-                    i18n.language === "uz" ? e?.id : e?.departament_?.id
-                  }`
-                )
-              }
-            >
-              <Content.Img
-                loading="lazy"
-                src={`${import.meta.env.VITE_BASE_URL_IMG}${
-                  e?.img_?.url || e?.img_translation_?.url
-                }`}
-              />
-              <Content.Title>{e?.title}</Content.Title>
-            </Content.Item>
-          ))}
-        </Content>
-        <div className="text-center my-4">
-          <Pagination
-            current={page}
-            onChange={pageChange}
-            total={data?.length}
-          />
+    <div>
+      <Helmet>
+        <title>{t("department.b")}</title>
+        <meta name="description" content={t("department.b")} />
+      </Helmet>
+      <div className="root-container">
+        <div className="root-wrapper">
+          <Title title={t("department.b")} $border="none" />
+          <Content data-aos="fade-up">
+            {data?.list?.map((e) => (
+              <Content.Item
+                key={e.id}
+                onClick={() =>
+                  naviagte(
+                    `/${i18n.language}/department/${
+                      i18n.language === "uz" ? e?.id : e?.departament_?.id
+                    }`
+                  )
+                }
+              >
+                <Content.Img
+                  loading="lazy"
+                  src={`${import.meta.env.VITE_BASE_URL_IMG}${
+                    e?.img_?.url || e?.img_translation_?.url
+                  }`}
+                />
+                <Content.Title>{e?.title}</Content.Title>
+              </Content.Item>
+            ))}
+          </Content>
+          <div className="d-flex justify-content-center my-4">
+            <Pagination
+              current={page}
+              onChange={pageChange}
+              total={data?.length}
+            />
+          </div>
         </div>
       </div>
     </div>

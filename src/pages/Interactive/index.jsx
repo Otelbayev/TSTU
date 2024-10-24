@@ -4,6 +4,7 @@ import { InteractiveCart } from "../../components/HomeElements";
 import axios from "axios";
 import UniShowcase from "./../../components/UniShowcase/index";
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
 
 const InteractiveServices = () => {
   const { t, i18n } = useTranslation();
@@ -39,6 +40,9 @@ const InteractiveServices = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{t("interactive.title")}</title>
+      </Helmet>
       <UniShowcase title={t("interactive.title")} />
       <div className="root-container">
         <div className="root-wrapper">

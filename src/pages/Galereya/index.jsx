@@ -38,6 +38,7 @@ import { NavLink } from "react-router-dom";
 import { Lang, Title } from "../../components/Generics";
 import { useTranslation } from "react-i18next";
 import { Pagination } from "antd";
+import { Helmet } from "react-helmet";
 
 const Galereya = () => {
   const categoryRef = useRef();
@@ -51,546 +52,560 @@ const Galereya = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <Container>
-      <div
-        className="root-container"
-        style={{ background: "var(--white)", padding: "20px 0" }}
-      >
-        <div className="root-wrapper">
-          <Header data-aos="fade-down">
-            <NavLink to={`/${i18n.language}`}>
-              <img loading="lazy" src={logo} alt="logo tstu" className="logo" />
-            </NavLink>
-            <Header.Right>
-              <Header.Link onClick={() => categoryRef.current.scrollIntoView()}>
-                {t("galereya.link1")}
-              </Header.Link>
-              <Header.Link onClick={() => galereyRef.current.scrollIntoView()}>
-                {t("galereya.link2")}
-              </Header.Link>
-              <Header.Link onClick={() => tadbirRef.current.scrollIntoView()}>
-                {t("galereya.link3")}
-              </Header.Link>
-              <Header.Link onClick={() => umumiyRef.current.scrollIntoView()}>
-                {t("galereya.link4")}
-              </Header.Link>
-              <Header.Link>
-                <Lang mode="light" />
-              </Header.Link>
-            </Header.Right>
-          </Header>
-          <Showcase data-aos="fade-up">
-            <Absolute>
-              <Absolute.Title>{t("galereya.title")}</Absolute.Title>
-              <Absolute.Desc>{t("galereya.desc")}</Absolute.Desc>
-              <Absolute.Btn
-                onClick={() => umumiyRef.current.scrollIntoView()}
-                type="primary"
+    <div>
+      <Helmet>
+        <title>{t("galereya.title")}</title>
+      </Helmet>
+      <Container>
+        <div
+          className="root-container"
+          style={{ background: "var(--white)", padding: "20px 0" }}
+        >
+          <div className="root-wrapper">
+            <Header data-aos="fade-down">
+              <NavLink to={`/${i18n.language}`}>
+                <img
+                  loading="lazy"
+                  src={logo}
+                  alt="logo tstu"
+                  className="logo"
+                />
+              </NavLink>
+              <Header.Right>
+                <Header.Link
+                  onClick={() => categoryRef.current.scrollIntoView()}
+                >
+                  {t("galereya.link1")}
+                </Header.Link>
+                <Header.Link
+                  onClick={() => galereyRef.current.scrollIntoView()}
+                >
+                  {t("galereya.link2")}
+                </Header.Link>
+                <Header.Link onClick={() => tadbirRef.current.scrollIntoView()}>
+                  {t("galereya.link3")}
+                </Header.Link>
+                <Header.Link onClick={() => umumiyRef.current.scrollIntoView()}>
+                  {t("galereya.link4")}
+                </Header.Link>
+                <Header.Link>
+                  <Lang mode="light" />
+                </Header.Link>
+              </Header.Right>
+            </Header>
+            <Showcase data-aos="fade-up">
+              <Absolute>
+                <Absolute.Title>{t("galereya.title")}</Absolute.Title>
+                <Absolute.Desc>{t("galereya.desc")}</Absolute.Desc>
+                <Absolute.Btn
+                  onClick={() => umumiyRef.current.scrollIntoView()}
+                  type="primary"
+                >
+                  <img src={icon} alt="" />
+                  {t("galereya.btn")}
+                </Absolute.Btn>
+              </Absolute>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gridTemplateRows: "repeat(4, 200px)",
+                  gap: "10px",
+                }}
               >
-                <img src={icon} alt="" />
-                {t("galereya.btn")}
-              </Absolute.Btn>
-            </Absolute>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gridTemplateRows: "repeat(4, 200px)",
-                gap: "10px",
-              }}
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img1}
+                  style={{ gridColumn: "4/5", gridRow: "1/2" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img2}
+                  style={{ gridColumn: "4/5", gridRow: "2/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img3}
+                  style={{ gridColumn: "4/5", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img4}
+                  style={{ gridColumn: "3/4", gridRow: "2/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img5}
+                  style={{ gridColumn: "2/3", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img8}
+                  style={{ gridColumn: "1/2", gridRow: "4/5" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img7}
+                  style={{ gridColumn: "2/3", gridRow: "4/5" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img6}
+                  style={{ gridColumn: "3/5", gridRow: "4/5" }}
+                />
+              </div>
+            </Showcase>
+            <Title
+              ref={categoryRef}
+              title={t("galereya.t1")}
+              // button="Barchasini ko‘rish"
             >
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img1}
-                style={{ gridColumn: "4/5", gridRow: "1/2" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img2}
-                style={{ gridColumn: "4/5", gridRow: "2/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img3}
-                style={{ gridColumn: "4/5", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img4}
-                style={{ gridColumn: "3/4", gridRow: "2/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img5}
-                style={{ gridColumn: "2/3", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img8}
-                style={{ gridColumn: "1/2", gridRow: "4/5" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img7}
-                style={{ gridColumn: "2/3", gridRow: "4/5" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img6}
-                style={{ gridColumn: "3/5", gridRow: "4/5" }}
-              />
-            </div>
-          </Showcase>
-          <Title
-            ref={categoryRef}
-            title={t("galereya.t1")}
-            // button="Barchasini ko‘rish"
-          >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gridTemplateRows: "repeat(4, 200px)",
-                gap: "10px",
-              }}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gridTemplateRows: "repeat(4, 200px)",
+                  gap: "10px",
+                }}
+              >
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img6}
+                  style={{ gridColumn: "1/3", gridRow: "1/2" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img21}
+                  style={{ gridColumn: "3/4", gridRow: "1/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img22}
+                  style={{ gridColumn: "4/5", gridRow: "1/2" }}
+                />
+
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img23}
+                  style={{ gridColumn: "1/2", gridRow: "2/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img24}
+                  style={{ gridColumn: "2/3", gridRow: "2/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img25}
+                  style={{ gridColumn: "4/5", gridRow: "2/3" }}
+                />
+
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img26}
+                  style={{ gridColumn: "1/2", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img27}
+                  style={{ gridColumn: "2/3", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img28}
+                  style={{ gridColumn: "3/5", gridRow: "3/4" }}
+                />
+              </div>
+            </Title>
+            <Title
+              ref={galereyRef}
+              title={t("galereya.t1")}
+              // button="Barchasini ko‘rish"
             >
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img6}
-                style={{ gridColumn: "1/3", gridRow: "1/2" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img21}
-                style={{ gridColumn: "3/4", gridRow: "1/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img22}
-                style={{ gridColumn: "4/5", gridRow: "1/2" }}
-              />
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gridTemplateRows: "repeat(5, 200px)",
+                  gap: "10px",
+                }}
+              >
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img9}
+                  style={{ gridColumn: "1/2", gridRow: "1/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img10}
+                  style={{ gridColumn: "2/3", gridRow: "1/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img11}
+                  style={{ gridColumn: "3/4", gridRow: "1/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img12}
+                  style={{ gridColumn: "4/5", gridRow: "1/4" }}
+                />
 
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img23}
-                style={{ gridColumn: "1/2", gridRow: "2/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img24}
-                style={{ gridColumn: "2/3", gridRow: "2/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img25}
-                style={{ gridColumn: "4/5", gridRow: "2/3" }}
-              />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img13}
+                  style={{ gridColumn: "1/2", gridRow: "4/5" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img14}
+                  style={{ gridColumn: "2/3", gridRow: "4/5" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img15}
+                  style={{ gridColumn: "3/5", gridRow: "4/5" }}
+                />
 
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img26}
-                style={{ gridColumn: "1/2", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img27}
-                style={{ gridColumn: "2/3", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img28}
-                style={{ gridColumn: "3/5", gridRow: "3/4" }}
-              />
-            </div>
-          </Title>
-          <Title
-            ref={galereyRef}
-            title={t("galereya.t1")}
-            // button="Barchasini ko‘rish"
-          >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gridTemplateRows: "repeat(5, 200px)",
-                gap: "10px",
-              }}
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img16}
+                  style={{ gridColumn: "1/3", gridRow: "5/6" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img17}
+                  style={{ gridColumn: "3/4", gridRow: "5/6" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img18}
+                  style={{ gridColumn: "4/5", gridRow: "5/6" }}
+                />
+              </div>
+            </Title>
+            <Title
+              title={t("galereya.t2")}
+              // button="Barchasini ko‘rish"
             >
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img9}
-                style={{ gridColumn: "1/2", gridRow: "1/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img10}
-                style={{ gridColumn: "2/3", gridRow: "1/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img11}
-                style={{ gridColumn: "3/4", gridRow: "1/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img12}
-                style={{ gridColumn: "4/5", gridRow: "1/4" }}
-              />
-
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img13}
-                style={{ gridColumn: "1/2", gridRow: "4/5" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img14}
-                style={{ gridColumn: "2/3", gridRow: "4/5" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img15}
-                style={{ gridColumn: "3/5", gridRow: "4/5" }}
-              />
-
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img16}
-                style={{ gridColumn: "1/3", gridRow: "5/6" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img17}
-                style={{ gridColumn: "3/4", gridRow: "5/6" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img18}
-                style={{ gridColumn: "4/5", gridRow: "5/6" }}
-              />
-            </div>
-          </Title>
-          <Title
-            title={t("galereya.t2")}
-            // button="Barchasini ko‘rish"
-          >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gridTemplateRows: "repeat(3, 200px)",
-                gap: "10px",
-              }}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gridTemplateRows: "repeat(3, 200px)",
+                  gap: "10px",
+                }}
+              >
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img41}
+                  style={{ gridColumn: "1/5", gridRow: "1/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img42}
+                  style={{ gridColumn: "1/2", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img42}
+                  style={{ gridColumn: "2/3", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img42}
+                  style={{ gridColumn: "3/4", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img42}
+                  style={{ gridColumn: "4/5", gridRow: "3/4" }}
+                />
+              </div>
+            </Title>
+            <Pagination
+              current={1}
+              style={{ textAlign: "center", margin: "25px 0" }}
+              total={30}
+            />
+            <Title
+              ref={tadbirRef}
+              title={t("galereya.t3")}
+              // button="Barchasini ko‘rish"
             >
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img41}
-                style={{ gridColumn: "1/5", gridRow: "1/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img42}
-                style={{ gridColumn: "1/2", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img42}
-                style={{ gridColumn: "2/3", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img42}
-                style={{ gridColumn: "3/4", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img42}
-                style={{ gridColumn: "4/5", gridRow: "3/4" }}
-              />
-            </div>
-          </Title>
-          <Pagination
-            current={1}
-            style={{ textAlign: "center", margin: "25px 0" }}
-            total={30}
-          />
-          <Title
-            ref={tadbirRef}
-            title={t("galereya.t3")}
-            // button="Barchasini ko‘rish"
-          >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gridTemplateRows: "repeat(2, 400px)",
-                gap: "10px",
-              }}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gridTemplateRows: "repeat(2, 400px)",
+                  gap: "10px",
+                }}
+              >
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img51}
+                  style={{ gridColumn: "1/3", gridRow: "1/2" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img52}
+                  style={{ gridColumn: "3/4", gridRow: "1/2" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img53}
+                  style={{ gridColumn: "1/2", gridRow: "2/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img54}
+                  style={{ gridColumn: "2/4", gridRow: "2/3" }}
+                />
+              </div>
+            </Title>
+            <Title
+              ref={umumiyRef}
+              title={t("galereya.t4")}
+              //button="Barchasini ko‘rish"
             >
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img51}
-                style={{ gridColumn: "1/3", gridRow: "1/2" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img52}
-                style={{ gridColumn: "3/4", gridRow: "1/2" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img53}
-                style={{ gridColumn: "1/2", gridRow: "2/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img54}
-                style={{ gridColumn: "2/4", gridRow: "2/3" }}
-              />
-            </div>
-          </Title>
-          <Title
-            ref={umumiyRef}
-            title={t("galereya.t4")}
-            //button="Barchasini ko‘rish"
-          >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gridTemplateRows: "repeat(3, 200px)",
-                gap: "10px",
-                margin: "10px 0",
-              }}
-            >
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img6}
-                style={{ gridColumn: "1/3", gridRow: "1/2" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img21}
-                style={{ gridColumn: "3/4", gridRow: "1/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img22}
-                style={{ gridColumn: "4/5", gridRow: "1/2" }}
-              />
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gridTemplateRows: "repeat(3, 200px)",
+                  gap: "10px",
+                  margin: "10px 0",
+                }}
+              >
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img6}
+                  style={{ gridColumn: "1/3", gridRow: "1/2" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img21}
+                  style={{ gridColumn: "3/4", gridRow: "1/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img22}
+                  style={{ gridColumn: "4/5", gridRow: "1/2" }}
+                />
 
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img23}
-                style={{ gridColumn: "1/2", gridRow: "2/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img24}
-                style={{ gridColumn: "2/3", gridRow: "2/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img25}
-                style={{ gridColumn: "4/5", gridRow: "2/3" }}
-              />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img23}
+                  style={{ gridColumn: "1/2", gridRow: "2/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img24}
+                  style={{ gridColumn: "2/3", gridRow: "2/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img25}
+                  style={{ gridColumn: "4/5", gridRow: "2/3" }}
+                />
 
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img26}
-                style={{ gridColumn: "1/2", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img27}
-                style={{ gridColumn: "2/3", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img28}
-                style={{ gridColumn: "3/5", gridRow: "3/4" }}
-              />
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gridTemplateRows: "repeat(3, 200px)",
-                gap: "10px",
-                margin: "10px 0",
-              }}
-            >
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img6}
-                style={{ gridColumn: "1/3", gridRow: "1/2" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img21}
-                style={{ gridColumn: "3/4", gridRow: "1/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img22}
-                style={{ gridColumn: "4/5", gridRow: "1/2" }}
-              />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img26}
+                  style={{ gridColumn: "1/2", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img27}
+                  style={{ gridColumn: "2/3", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img28}
+                  style={{ gridColumn: "3/5", gridRow: "3/4" }}
+                />
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gridTemplateRows: "repeat(3, 200px)",
+                  gap: "10px",
+                  margin: "10px 0",
+                }}
+              >
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img6}
+                  style={{ gridColumn: "1/3", gridRow: "1/2" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img21}
+                  style={{ gridColumn: "3/4", gridRow: "1/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img22}
+                  style={{ gridColumn: "4/5", gridRow: "1/2" }}
+                />
 
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img23}
-                style={{ gridColumn: "1/2", gridRow: "2/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img24}
-                style={{ gridColumn: "2/3", gridRow: "2/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img25}
-                style={{ gridColumn: "4/5", gridRow: "2/3" }}
-              />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img23}
+                  style={{ gridColumn: "1/2", gridRow: "2/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img24}
+                  style={{ gridColumn: "2/3", gridRow: "2/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img25}
+                  style={{ gridColumn: "4/5", gridRow: "2/3" }}
+                />
 
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img26}
-                style={{ gridColumn: "1/2", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img27}
-                style={{ gridColumn: "2/3", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img28}
-                style={{ gridColumn: "3/5", gridRow: "3/4" }}
-              />
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gridTemplateRows: "repeat(3, 200px)",
-                gap: "10px",
-                margin: "10px 0",
-              }}
-            >
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img6}
-                style={{ gridColumn: "1/3", gridRow: "1/2" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img21}
-                style={{ gridColumn: "3/4", gridRow: "1/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img22}
-                style={{ gridColumn: "4/5", gridRow: "1/2" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img23}
-                style={{ gridColumn: "1/2", gridRow: "2/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img24}
-                style={{ gridColumn: "2/3", gridRow: "2/3" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img25}
-                style={{ gridColumn: "4/5", gridRow: "2/3" }}
-              />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img26}
+                  style={{ gridColumn: "1/2", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img27}
+                  style={{ gridColumn: "2/3", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img28}
+                  style={{ gridColumn: "3/5", gridRow: "3/4" }}
+                />
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gridTemplateRows: "repeat(3, 200px)",
+                  gap: "10px",
+                  margin: "10px 0",
+                }}
+              >
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img6}
+                  style={{ gridColumn: "1/3", gridRow: "1/2" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img21}
+                  style={{ gridColumn: "3/4", gridRow: "1/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img22}
+                  style={{ gridColumn: "4/5", gridRow: "1/2" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img23}
+                  style={{ gridColumn: "1/2", gridRow: "2/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img24}
+                  style={{ gridColumn: "2/3", gridRow: "2/3" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img25}
+                  style={{ gridColumn: "4/5", gridRow: "2/3" }}
+                />
 
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img26}
-                style={{ gridColumn: "1/2", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img27}
-                style={{ gridColumn: "2/3", gridRow: "3/4" }}
-              />
-              <img
-                data-aos="zoom-in"
-                loading="lazy"
-                src={img28}
-                style={{ gridColumn: "3/5", gridRow: "3/4" }}
-              />
-            </div>
-          </Title>
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img26}
+                  style={{ gridColumn: "1/2", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img27}
+                  style={{ gridColumn: "2/3", gridRow: "3/4" }}
+                />
+                <img
+                  data-aos="zoom-in"
+                  loading="lazy"
+                  src={img28}
+                  style={{ gridColumn: "3/5", gridRow: "3/4" }}
+                />
+              </div>
+            </Title>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ import noimg from "../../../assets/images/no.jpg";
 const DekanCart = ({ data }) => {
   const naviagte = useNavigate();
   const { i18n } = useTranslation();
-  console.log(data);
+  
   return (
     <Content data-aos="zoom-in">
       <Content.Img

@@ -13,6 +13,7 @@ import axios from "axios";
 import { useHandleScroll } from "../../hooks/useHandleScroll";
 import { useTranslation } from "react-i18next";
 import IlmiyMarkazCart from "../../components/IlmiyMarkazCart";
+import { Helmet } from "react-helmet";
 
 const KafedraID = () => {
   const { t } = useTranslation();
@@ -207,97 +208,114 @@ const KafedraID = () => {
   };
 
   return (
-    <div className="overflow-hidden">
-      <Header links={links} />
-      <Showcase
-        bg={`${import.meta.env.VITE_BASE_URL_IMG}${data?.img_?.url}`}
-        title={getTitle(data?.title, i18n.language)}
-        button={t("kafedra.btn")}
-        onClick={() => useHandleScroll(aboutRef)}
-      ></Showcase>
+    <div>
+      <Helmet>
+        <title>{data?.title}</title>
+        <meta
+          name="description"
+          content={getTitle(data?.title, i18n.language)}
+        />
+      </Helmet>
+      <div className="overflow-hidden">
+        <Header links={links} />
+        <Showcase
+          bg={`${import.meta.env.VITE_BASE_URL_IMG}${data?.img_?.url}`}
+          title={getTitle(data?.title, i18n.language)}
+          button={t("kafedra.btn")}
+          onClick={() => useHandleScroll(aboutRef)}
+        ></Showcase>
 
-      <div className="root-container">
-        <div className="root-wrapper">
-          <Wrap>
-            <Title ref={aboutRef} title={t("kafedra.about")} $border={"none"} />
-            <p
-              dangerouslySetInnerHTML={{ __html: data?.text }}
-              data-aos="fade-up"
-            />
-            <Title ref={mudirRef} title={t("kafedra.mudir")} $border={"none"} />
-            <Dekans data={mudir} />
-            <Title title={t("kafedra.teachers")} $border={"none"} />
-            <Orinbosar>
-              {professor.map((e) => (
-                <DekanCart key={id} data={e} />
-              ))}
-              {katta.map((e) => (
-                <DekanCart key={id} data={e} />
-              ))}
-              {dotsent.map((e) => (
-                <DekanCart key={id} data={e} />
-              ))}
-              {assistent.map((e) => (
-                <DekanCart key={id} data={e} />
-              ))}
-              {doktarant.map((e) => (
-                <DekanCart key={id} data={e} />
-              ))}
-            </Orinbosar>
-            <div>
-              <Title title={t("lab")} $border={"none"} />
-              <IlmiyMarkaz>
-                {lab?.length ? (
-                  lab?.map((e) => (
-                    <IlmiyMarkazCart
-                      key={e?.id}
-                      to={`department/${
-                        i18n.language === "uz" ? e?.id : e?.departament_?.id
-                      }`}
-                      $border={"#CECECE"}
-                      dataAos="zoom-in"
-                      item={e}
-                    />
-                  ))
-                ) : (
-                  <div data-aos="fade-right">Ma'lumot mavjud emas!</div>
-                )}
-              </IlmiyMarkaz>
-            </div>
-            <div>
-              <Title title={t("facultet.markaz")} $border={"none"} />
-              <IlmiyMarkaz>
-                {scientific?.length ? (
-                  scientific?.map((e) => (
-                    <IlmiyMarkazCart
-                      key={e?.id}
-                      to={`department/${
-                        i18n.language === "uz" ? e?.id : e?.departament_?.id
-                      }`}
-                      $border={"#CECECE"}
-                      dataAos="zoom-in"
-                      item={e}
-                    />
-                  ))
-                ) : (
-                  <div data-aos="fade-right">Ma'lumot mavjud emas!</div>
-                )}
-              </IlmiyMarkaz>
-            </div>
-            <Yonalish ref={yonalishRef}>
-              <Yonalish.Left data-aos="fade-right">
-                <Yonalish.Title>{t("kafedra.bakalavr")}</Yonalish.Title>
-                <Yonalishlar data={bakalavr} />
-              </Yonalish.Left>
-              <Yonalish.Right data-aos="fade-left">
-                <Yonalish.Title>{t("kafedra.magistr")}</Yonalish.Title>
-                <Yonalishlar data={magistr} />
-              </Yonalish.Right>
-            </Yonalish>
-          </Wrap>
+        <div className="root-container">
+          <div className="root-wrapper">
+            <Wrap>
+              <Title
+                ref={aboutRef}
+                title={t("kafedra.about")}
+                $border={"none"}
+              />
+              <p
+                dangerouslySetInnerHTML={{ __html: data?.text }}
+                data-aos="fade-up"
+              />
+              <Title
+                ref={mudirRef}
+                title={t("kafedra.mudir")}
+                $border={"none"}
+              />
+              <Dekans data={mudir} />
+              <Title title={t("kafedra.teachers")} $border={"none"} />
+              <Orinbosar>
+                {professor.map((e) => (
+                  <DekanCart key={id} data={e} />
+                ))}
+                {katta.map((e) => (
+                  <DekanCart key={id} data={e} />
+                ))}
+                {dotsent.map((e) => (
+                  <DekanCart key={id} data={e} />
+                ))}
+                {assistent.map((e) => (
+                  <DekanCart key={id} data={e} />
+                ))}
+                {doktarant.map((e) => (
+                  <DekanCart key={id} data={e} />
+                ))}
+              </Orinbosar>
+              <div>
+                <Title title={t("lab")} $border={"none"} />
+                <IlmiyMarkaz>
+                  {lab?.length ? (
+                    lab?.map((e) => (
+                      <IlmiyMarkazCart
+                        key={e?.id}
+                        to={`department/${
+                          i18n.language === "uz" ? e?.id : e?.departament_?.id
+                        }`}
+                        $border={"#CECECE"}
+                        dataAos="zoom-in"
+                        item={e}
+                      />
+                    ))
+                  ) : (
+                    <div data-aos="fade-right">Ma'lumot mavjud emas!</div>
+                  )}
+                </IlmiyMarkaz>
+              </div>
+              <div>
+                <Title title={t("facultet.markaz")} $border={"none"} />
+                <IlmiyMarkaz>
+                  {scientific?.length ? (
+                    scientific?.map((e) => (
+                      <IlmiyMarkazCart
+                        key={e?.id}
+                        to={`department/${
+                          i18n.language === "uz" ? e?.id : e?.departament_?.id
+                        }`}
+                        $border={"#CECECE"}
+                        dataAos="zoom-in"
+                        item={e}
+                      />
+                    ))
+                  ) : (
+                    <div data-aos="fade-right">Ma'lumot mavjud emas!</div>
+                  )}
+                </IlmiyMarkaz>
+              </div>
+              <Yonalish ref={yonalishRef}>
+                <Yonalish.Left data-aos="fade-right">
+                  <Yonalish.Title>{t("kafedra.bakalavr")}</Yonalish.Title>
+                  <Yonalishlar data={bakalavr} />
+                </Yonalish.Left>
+                <Yonalish.Right data-aos="fade-left">
+                  <Yonalish.Title>{t("kafedra.magistr")}</Yonalish.Title>
+                  <Yonalishlar data={magistr} />
+                </Yonalish.Right>
+              </Yonalish>
+            </Wrap>
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };

@@ -17,6 +17,8 @@ import { message } from "antd";
 const Info = () => {
   const [value, setValue] = useState("uz");
 
+  const [isCreate, setIsCreate] = useState(false);
+
   const { options } = useLanguageContext();
   const language_id = options.find((e) => e.code === value)?.id;
 
@@ -108,6 +110,7 @@ const Info = () => {
         throw new Error();
       }
     } catch (error) {
+      setIsCreate(true);
       setName("");
       setSurname("");
       setPatronymic("");
@@ -466,9 +469,15 @@ const Info = () => {
         )}
         <div className="form-group col-md-12">
           <div className="col-sm-2">
-            <button type="submit" className="btn btn-primary w-100">
-              Yangilash
-            </button>
+            {isCreate ? (
+              <button type="submit" className="btn btn-success w-100">
+                Yaratish
+              </button>
+            ) : (
+              <button type="submit" className="btn btn-primary w-100">
+                Yangilash
+              </button>
+            )}
           </div>
         </div>
       </form>

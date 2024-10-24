@@ -149,6 +149,14 @@ const SignIn = () => {
                   <Content.Forgot>{t("login.forgot")}</Content.Forgot>
                 </Div>
                 <Div>
+                  <Content.Button
+                    disabled={loading}
+                    $loading={loading.toString()}
+                  >
+                    {loading ? "loading..." : t("login.btn")}
+                  </Content.Button>
+                </Div>
+                {/* <Div>
                   <button
                     disabled={loading}
                     $loading={loading.toString()}
@@ -166,7 +174,7 @@ const SignIn = () => {
                   >
                     Hemis orqali kirish
                   </button>
-                </Div>
+                </Div> */}
               </Content.Form>
             </Content.Left>
             <Content.Right>

@@ -18,6 +18,7 @@ import PageID from "../PageID";
 import { oldPages } from "../../mock";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import Snowfall from "react-snowfall";
 
 const HomePage = () => {
   const url = window.location.href;
@@ -37,7 +38,7 @@ const HomePage = () => {
   }
   return (
     <div>
-      <Helmet>
+    <Helmet>
         <title>{t("head")}</title>
       </Helmet>
       <Header />

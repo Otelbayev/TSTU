@@ -11,6 +11,7 @@ import "./i18n";
 import "../public/lib/fontawesome/css/all.min.css";
 import { BrowserRouter } from "react-router-dom";
 import LanguageRedirectHandler from "./hooks/languageRedirectHandler";
+import SnowFall from "./components/Snowfall";
 
 AOS.init({
   duration: 800,
@@ -19,10 +20,12 @@ AOS.init({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Context>
-        <LanguageRedirectHandler />
-        <Root />
-      </Context>
+      <SnowFall>
+        <Context>
+          <LanguageRedirectHandler />
+          <Root />
+        </Context>
+      </SnowFall>
     </BrowserRouter>
   </React.StrictMode>
 );
